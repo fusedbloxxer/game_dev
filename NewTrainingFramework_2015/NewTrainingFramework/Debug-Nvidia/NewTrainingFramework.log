@@ -1,0 +1,14 @@
+﻿  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
+  stdafx.cpp
+  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
+  Shaders1.cpp
+  Shaders.cpp
+  NewTrainingFramework.cpp
+  Globals.cpp
+  Camera.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.cpp(19,36): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.cpp(27,36): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+  Generating Code...
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.cpp(35,36): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+Camera.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+  NewTrainingFramework.vcxproj -> C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\\BIN-Nvidia\NewTrainingFramework.exe
