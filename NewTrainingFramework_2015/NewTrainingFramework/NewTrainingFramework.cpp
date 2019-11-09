@@ -16,13 +16,15 @@
 #include <algorithm>
 #include <vector>
 
-GLuint vboId, vboId1, vboIdsModel[2];
+GLuint vboId, vboId1, vboIdsModel[3];
 Camera* camera;
 Shaders myShaders;
 Shaders1 lineShaders;
 ModelShader modelShader;
 std::pair<std::vector<Vertex_NFG>, std::vector<GLushort>> modelData;
+std::vector<GLushort> wireframe;
 GLuint id_texture;
+bool isWired = false;
 
 template<class Container>
 void printContainer(Container con)
@@ -30,14 +32,33 @@ void printContainer(Container con)
 	std::for_each(con.begin(), con.end(), [](const auto& x) { std::cout << x << '\n'; }); // Checker
 }
 
+std::vector<GLushort> getWired(const std::vector<GLushort>& indexes)
+{
+	std::vector<GLushort> wired;
+
+	for (int i = 0; i < indexes.size(); i += 3)
+	{
+		wired.push_back(indexes[i]);
+		wired.push_back(indexes[i + 1]);
+
+		wired.push_back(indexes[i + 1]);
+		wired.push_back(indexes[i + 2]);
+
+		wired.push_back(indexes[i + 2]);
+		wired.push_back(indexes[i]);
+	}
+
+	return wired;
+}
+
 int Init(ESContext* esContext)
 {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 	// Parse the document.
-	modelData = Parser::parseFile("..\\Resources\\Packet\\Models\\Croco.nfg");
+	modelData = Parser::parseFile("..\\Resources\\Packet\\Models\\bus.nfg");
 
-	glGenBuffers(2, vboIdsModel);
+	glGenBuffers(3, vboIdsModel);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vboIdsModel[0]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex_NFG) * modelData.first.size(), modelData.first.data(), GL_STATIC_DRAW);
@@ -45,16 +66,20 @@ int Init(ESContext* esContext)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboIdsModel[1]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * modelData.second.size(), modelData.second.data(), GL_STATIC_DRAW);
 
+	wireframe = getWired(modelData.second);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboIdsModel[2]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * wireframe.size(), wireframe.data(), GL_STATIC_DRAW);
+
 	// printContainer(modelData.first);
 	// printContainer(modelData.second);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	
+
 	// TEXTURE WORK
 	int width, height, bpp;
-	char* chr = LoadTGA("..\\Resources\\Packet\\Textures\\Croco.tga", &width, &height, &bpp);
-	
+	char* chr = LoadTGA("..\\Resources\\Packet\\Textures\\Bus.tga", &width, &height, &bpp);
+
 	glGenTextures(1, &id_texture); // Reserve a buffer name called id_texture;
 	glBindTexture(GL_TEXTURE_2D, id_texture); // Reserve buffer and bind it to that id;
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // Linear - blurr, Nearest - zoomed in pixels 
@@ -118,7 +143,10 @@ void Draw(ESContext* esContext)
 	glUseProgram(modelShader.program);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vboIdsModel[0]);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboIdsModel[1]);
+	if (!isWired)
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboIdsModel[1]);
+	else
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboIdsModel[2]);
 
 	if (modelShader.positionAttribute != -1)
 	{
@@ -146,7 +174,14 @@ void Draw(ESContext* esContext)
 		glUniform1i(modelShader.textureUniform, 0); // Id = 0 deoarece este implicit o singura textura.
 	}
 
-	glDrawElements(GL_TRIANGLES, modelData.second.size(), GL_UNSIGNED_SHORT, 0);
+	if (!isWired)
+	{
+		glDrawElements(GL_TRIANGLES, modelData.second.size(), GL_UNSIGNED_SHORT, 0);
+	}
+	else
+	{
+		glDrawElements(GL_LINES, wireframe.size(), GL_UNSIGNED_SHORT, 0);
+	}
 
 	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
 
@@ -264,6 +299,9 @@ void Key(ESContext* esContext, unsigned char key, bool bIsPressed)
 			break;
 		case 'Z':
 			camera->moveOy(-1);
+			break;
+		case 'I':
+			isWired = !isWired;
 			break;
 		default:
 			break;

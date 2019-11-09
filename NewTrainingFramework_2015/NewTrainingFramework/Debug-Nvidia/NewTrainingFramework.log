@@ -1,3 +1,4 @@
 ﻿  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
   NewTrainingFramework.cpp
+C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\NewTrainingFramework.cpp(39,20): warning C4018:  '<': signed/unsigned mismatch
   NewTrainingFramework.vcxproj -> C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\\BIN-Nvidia\NewTrainingFramework.exe
