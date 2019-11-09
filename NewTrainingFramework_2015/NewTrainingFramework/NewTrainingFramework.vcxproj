@@ -88,6 +88,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libEGL.lib;libGLESv2.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -165,6 +166,8 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="NewTrainingFramework.cpp" />
+    <ClCompile Include="NFG.cpp" />
+    <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="Shaders1.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -178,6 +181,8 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="NewTrainingFramework.h" />
+    <ClInclude Include="NFG.h" />
+    <ClInclude Include="Parser.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="Shaders1.h" />
     <ClInclude Include="stdafx.h" />
@@ -185,6 +190,23 @@
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Resources\NewResourcesPacket\Models\Bila.nfg" />
+    <None Include="..\Resources\NewResourcesPacket\Models\bus.nfg" />
+    <None Include="..\Resources\NewResourcesPacket\Models\Croco.nfg" />
+    <None Include="..\Resources\NewResourcesPacket\Models\fire.nfg" />
+    <None Include="..\Resources\NewResourcesPacket\Models\Goliath.nfg" />
+    <None Include="..\Resources\NewResourcesPacket\Models\House.nfg" />
+    <None Include="..\Resources\NewResourcesPacket\Models\Marine.nfg" />
+    <None Include="..\Resources\NewResourcesPacket\Models\Radar.nfg" />
+    <None Include="..\Resources\NewResourcesPacket\Models\SCV.nfg" />
+    <None Include="..\Resources\NewResourcesPacket\Models\SkyBox.nfg" />
+    <None Include="..\Resources\NewResourcesPacket\Models\Teran_Command_Center.nfg" />
+    <None Include="..\Resources\NewResourcesPacket\Models\Terrain.nfg" />
+    <None Include="..\Resources\NewResourcesPacket\Models\train.nfg" />
+    <None Include="..\Resources\NewResourcesPacket\Models\water.nfg" />
+    <None Include="..\Resources\NewResourcesPacket\Models\witch.nfg" />
+    <None Include="..\Resources\NewResourcesPacket\Models\Woman1.nfg" />
+    <None Include="..\Resources\NewResourcesPacket\Models\Woman2.nfg" />
     <None Include="..\Resources\Shaders\LineShaderFS.fs" />
     <None Include="..\Resources\Shaders\LineShaderVS.vs" />
     <None Include="..\Resources\Shaders\TriangleShaderFS.fs" />

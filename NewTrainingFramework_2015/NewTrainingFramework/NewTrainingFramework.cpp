@@ -6,8 +6,10 @@
 #include "Vertex.h"
 #include "Shaders.h"
 #include <conio.h>
+#include <iomanip>
 #include "Camera.h"
 #include "Shaders1.h"
+#include "Parser.h"
 
 GLuint vboId, vboId1;
 Camera* camera;
@@ -180,6 +182,11 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	if (Init(&esContext) != 0)
 		return 0;
+
+	auto pair = Parser::parseFile("..\\Resources\\Packet\\Models\\Woman1.nfg");
+	for (const auto& e : pair.second) {
+		std::cout << std::setprecision(6) << std::fixed << e << std::endl;
+	}
 
 	camera = new Camera(Vector3{ 0.0f, 0.0f, 1.0f });
 	glEnable(GL_DEPTH_TEST);
