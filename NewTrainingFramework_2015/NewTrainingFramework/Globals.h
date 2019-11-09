@@ -7,4 +7,6 @@ public:
 	static const int screenHeight = 720;
 	static GLfloat alpha;
 	static const GLfloat pas;
+	static constexpr GLfloat FRAME_LIMIT = 0.05f;
+	static GLfloat TIME;
 };

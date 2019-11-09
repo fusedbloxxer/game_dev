@@ -24,7 +24,7 @@ void fillContainer(std::vector<Type>& container, const char* format, std::ifstre
 		{
 			if (matches.size() > 0)
 			{
-				ss << matches[0];
+				ss << matches[0] << std::string(" ");
 			}
 			str = matches.suffix().str();
 		}
@@ -33,6 +33,7 @@ void fillContainer(std::vector<Type>& container, const char* format, std::ifstre
 		{
 			ss >> temp;
 			container.push_back(temp);
+			// std::cout << ss.str() << std::endl;
 		}
 		else
 		{
@@ -45,9 +46,9 @@ void fillContainer(std::vector<Type>& container, const char* format, std::ifstre
 }
 
 template<>
-void fillContainer<pos>(std::vector<pos>& container, const char* format, std::ifstream& fs, int lines)
+void fillContainer<GLushort>(std::vector<GLushort>& container, const char* format, std::ifstream& fs, int lines)
 {
-	pos temp;
+	GLushort temp;
 	bool ok = false;
 	std::string str;
 	std::stringstream ss;
@@ -88,7 +89,9 @@ void fillContainer<pos>(std::vector<pos>& container, const char* format, std::if
 
 		if (ok)
 		{
-			container.push_back({ x, y, z });
+			container.push_back(x);
+			container.push_back(y);
+			container.push_back(z);
 		}
 		else
 		{
@@ -98,7 +101,7 @@ void fillContainer<pos>(std::vector<pos>& container, const char* format, std::if
 	}
 }
 
-std::pair<std::vector<NFG>, std::vector<pos>> Parser::parseFile(const char* const filePath)
+std::pair<std::vector<Vertex_NFG>, std::vector<GLushort>> Parser::parseFile(const char* const filePath)
 {
 	std::ifstream input{ filePath };
 
@@ -109,7 +112,7 @@ std::pair<std::vector<NFG>, std::vector<pos>> Parser::parseFile(const char* cons
 		throw std::exception{ "Could not open file." };
 	}
 
-	std::vector<NFG> nfgs; std::vector<pos> indexes; NFG temp;
+	std::vector<Vertex_NFG> nfgs; std::vector<GLushort> indexes; 
 
 	std::string str; int lines; input >> str >> lines;
 	fillContainer(nfgs, "-{0,1}\\d{1,}\\.\\d{1,}", input, lines);

@@ -48,6 +48,12 @@
     <ClCompile Include="NFG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Vertex_NFG.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -78,6 +84,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NFG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex_NFG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -145,6 +157,12 @@
     </None>
     <None Include="..\Resources\NewResourcesPacket\Models\Woman2.nfg">
       <Filter>Resources\Packet</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\ModelShaderFS.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\ModelShaderVS.vs">
+      <Filter>Resources\Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

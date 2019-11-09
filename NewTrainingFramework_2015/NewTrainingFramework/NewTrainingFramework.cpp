@@ -10,21 +10,65 @@
 #include "Camera.h"
 #include "Shaders1.h"
 #include "Parser.h"
+#include <numeric>
+#include "Vertex_NFG.h"
+#include "ModelShader.h"
+#include <algorithm>
+#include <vector>
 
-GLuint vboId, vboId1;
+GLuint vboId, vboId1, vboIdsModel[2];
 Camera* camera;
 Shaders myShaders;
 Shaders1 lineShaders;
+ModelShader modelShader;
+std::pair<std::vector<Vertex_NFG>, std::vector<GLushort>> modelData;
+GLuint id_texture;
+
+template<class Container>
+void printContainer(Container con)
+{
+	std::for_each(con.begin(), con.end(), [](const auto& x) { std::cout << x << '\n'; }); // Checker
+}
 
 int Init(ESContext* esContext)
 {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
+	// Parse the document.
+	modelData = Parser::parseFile("..\\Resources\\Packet\\Models\\Croco.nfg");
+
+	glGenBuffers(2, vboIdsModel);
+
+	glBindBuffer(GL_ARRAY_BUFFER, vboIdsModel[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex_NFG) * modelData.first.size(), modelData.first.data(), GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboIdsModel[1]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * modelData.second.size(), modelData.second.data(), GL_STATIC_DRAW);
+
+	// printContainer(modelData.first);
+	// printContainer(modelData.second);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	
+	// TEXTURE WORK
+	int width, height, bpp;
+	char* chr = LoadTGA("..\\Resources\\Packet\\Textures\\Croco.tga", &width, &height, &bpp);
+	
+	glGenTextures(1, &id_texture); // Reserve a buffer name called id_texture;
+	glBindTexture(GL_TEXTURE_2D, id_texture); // Reserve buffer and bind it to that id;
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // Linear - blurr, Nearest - zoomed in pixels 
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // Wrap ? GL_REPEAT it repeats.
+	glTexImage2D(GL_TEXTURE_2D, 0, (bpp == 24) ? GL_RGB : GL_RGBA, width, height, 0, (bpp == 24) ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, chr);
+
+	return modelShader.Init("../Resources/Shaders/ModelShaderVS.vs", "../Resources/Shaders/ModelShaderFS.fs");
+
+	/*
+	// First triangle
 	//triangle data (heap)
 	Vertex verticesData[6];
 	Vertex lineVerticesData[2];
 
-	// First triangle
 	verticesData[0].pos.x = 0.5f;  verticesData[0].pos.y = 0.5f;  verticesData[0].pos.z = 0.0f;
 	verticesData[0].color.x = 1.0f;  verticesData[0].color.y = 0.0f;  verticesData[0].color.z = 0.0f;
 
@@ -60,16 +104,55 @@ int Init(ESContext* esContext)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(lineVerticesData), lineVerticesData, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	//creation of shaders and program 
+	//creation of shaders and program
 	return myShaders.Init("../Resources/Shaders/TriangleShaderVS.vs", "../Resources/Shaders/TriangleShaderFS.fs") |
 		lineShaders.Init("../Resources/Shaders/LineShaderVS.vs", "../Resources/Shaders/LineShaderFS.fs");
+
+	*/
 }
 
 void Draw(ESContext* esContext)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glUseProgram(myShaders.program);
+	glUseProgram(modelShader.program);
+
+	glBindBuffer(GL_ARRAY_BUFFER, vboIdsModel[0]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboIdsModel[1]);
+
+	if (modelShader.positionAttribute != -1)
+	{
+		glEnableVertexAttribArray(modelShader.positionAttribute);
+		glVertexAttribPointer(modelShader.positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex_NFG), 0);
+	}
+
+	if (modelShader.unifMatrix != -1)
+	{
+		glUniformMatrix4fv(modelShader.unifMatrix, 1, GL_FALSE, (float*)(camera->getViewMatrix() * camera->getProjMatrix()).m);
+	}
+
+	// TEXTURE WORK
+	glActiveTexture(GL_TEXTURE0); // Setat implicit pentru o textura.
+	glBindTexture(GL_TEXTURE_2D, id_texture);
+
+	if (modelShader.uvAttribute != -1)
+	{
+		glEnableVertexAttribArray(modelShader.uvAttribute);
+		glVertexAttribPointer(modelShader.uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex_NFG), (void*)(5 * sizeof(Vector3)));
+	}
+
+	if (modelShader.textureUniform != -1)
+	{
+		glUniform1i(modelShader.textureUniform, 0); // Id = 0 deoarece este implicit o singura textura.
+	}
+
+	glDrawElements(GL_TRIANGLES, modelData.second.size(), GL_UNSIGNED_SHORT, 0);
+
+	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
+
+	return;
+
+	/*glUseProgram(myShaders.program);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vboId);
 
@@ -94,7 +177,7 @@ void Draw(ESContext* esContext)
 
 	// For the white line.
 	glUseProgram(lineShaders.program);
-	
+
 	glBindBuffer(GL_ARRAY_BUFFER, vboId1);
 
 	if (lineShaders.positionAttribute != -1)
@@ -106,20 +189,44 @@ void Draw(ESContext* esContext)
 	glDrawArrays(GL_LINES, 0, 2);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
+	*/
 }
 
 void Update(ESContext* esContext, float deltaTime)
 {
-	Globals::alpha = (Globals::alpha > 2 * PI) ? 2 * PI - Globals::alpha : Globals::alpha + Globals::pas;
 	camera->setDeltaTime(deltaTime);
+
+	// Alegem o limita - constanta - globals
+	// Timp global care este zero initial
+	// Cand timpul global depaseste limita executam calculele. Scad limita cand = reset.
+	// Camera trebuie sa stie timpul real, atunci nu vrem ca miscarea sa fie sacadata si punem in afara ifului.
+
+	Globals::TIME += (Globals::TIME > Globals::FRAME_LIMIT) ? -Globals::FRAME_LIMIT : deltaTime;
+	if (Globals::TIME <= Globals::FRAME_LIMIT)
+	{
+		Globals::alpha = (Globals::alpha > 2 * PI) ? 2 * PI - Globals::alpha : Globals::alpha + Globals::pas;
+		// DO CALCULUS;
+		// Load tga
+
+		if ((GetKeyState(VK_LBUTTON) & 0x100) != 0)
+		{
+			// 0x100 sau 0x80 pentru MOUSE
+			POINT pct;
+			GetCursorPos(&pct); //coord pe ecran
+			ScreenToClient(esContext->hWnd, &pct); // pentru a obtine coord in fereastra
+			if (pct.x < esContext->width / 2) {
+				camera->rotateOz(1);
+			}
+			else {
+				camera->rotateOz(-1);
+			}
+		}
+	}
 }
 
 void Key(ESContext* esContext, unsigned char key, bool bIsPressed)
 {
 	if (bIsPressed) {
-
 		switch (key)
 		{
 		case 'W':
@@ -183,12 +290,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	if (Init(&esContext) != 0)
 		return 0;
 
-	auto pair = Parser::parseFile("..\\Resources\\Packet\\Models\\Woman1.nfg");
-	for (const auto& e : pair.second) {
-		std::cout << std::setprecision(6) << std::fixed << e << std::endl;
-	}
-
 	camera = new Camera(Vector3{ 0.0f, 0.0f, 1.0f });
+	camera->setMoveSpeed(1000.0f);
 	glEnable(GL_DEPTH_TEST);
 
 	esRegisterDrawFunc(&esContext, Draw);
