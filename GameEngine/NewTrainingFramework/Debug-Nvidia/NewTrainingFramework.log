@@ -1,0 +1,21 @@
+﻿Build started 10/27/2016 9:42:20 AM.
+     1>Project "D:\training gameloft\proiecte_training\proiect_2015\NewTrainingFramework_2015\NewTrainingFramework\NewTrainingFramework.vcxproj" on node 2 (Rebuild target(s)).
+     1>ClCompile:
+         D:\Program Files\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"D:\training gameloft\proiecte_training\proiect_2015\NewTrainingFramework_2015\\Include\Nvidia" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yc"stdafx.h" /Fp"Debug-Nvidia\NewTrainingFramework.pch" /Fo"Debug-Nvidia\\" /Fd"Debug-Nvidia\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         D:\Program Files\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"D:\training gameloft\proiecte_training\proiect_2015\NewTrainingFramework_2015\\Include\Nvidia" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug-Nvidia\NewTrainingFramework.pch" /Fo"Debug-Nvidia\\" /Fd"Debug-Nvidia\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt NewTrainingFramework.cpp Shaders.cpp
+         Shaders.cpp
+         NewTrainingFramework.cpp
+         Generating Code...
+       Link:
+         D:\Program Files\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\training gameloft\proiecte_training\proiect_2015\NewTrainingFramework_2015\\BIN-Nvidia\NewTrainingFramework.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\training gameloft\proiecte_training\proiect_2015\NewTrainingFramework_2015\\Lib\Nvidia" libEGL.lib libGLESv2.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\training gameloft\proiecte_training\proiect_2015\NewTrainingFramework_2015\\BIN-Nvidia\NewTrainingFramework.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\training gameloft\proiecte_training\proiect_2015\NewTrainingFramework_2015\\BIN-Nvidia\NewTrainingFramework.lib" /MACHINE:X86 /SAFESEH "Debug-Nvidia\NewTrainingFramework.obj"
+         "Debug-Nvidia\Shaders.obj"
+         "Debug-Nvidia\stdafx.obj"
+         "D:\training gameloft\proiecte_training\proiect_2015\NewTrainingFramework_2015\BIN-Nvidia\Utilities.lib"
+     1>NewTrainingFramework.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+         NewTrainingFramework.vcxproj -> D:\training gameloft\proiecte_training\proiect_2015\NewTrainingFramework_2015\\BIN-Nvidia\NewTrainingFramework.exe
+     1>Done Building Project "D:\training gameloft\proiecte_training\proiect_2015\NewTrainingFramework_2015\NewTrainingFramework\NewTrainingFramework.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.93

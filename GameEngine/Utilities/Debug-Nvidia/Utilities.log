@@ -1,0 +1,28 @@
+﻿Build started 10/27/2016 9:42:09 AM.
+     1>Project "D:\training gameloft\proiecte_training\proiect_2015\NewTrainingFramework_2015\Utilities\Utilities.vcxproj" on node 2 (Rebuild target(s)).
+     1>ClCompile:
+         D:\Program Files\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"D:\training gameloft\proiecte_training\proiect_2015\NewTrainingFramework_2015\\Include\Nvidia" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yc"stdafx.h" /Fp"Debug-Nvidia\Utilities.pch" /Fo"Debug-Nvidia\\" /Fd"Debug-Nvidia\Utilities.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         D:\Program Files\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"D:\training gameloft\proiecte_training\proiect_2015\NewTrainingFramework_2015\\Include\Nvidia" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug-Nvidia\Utilities.pch" /Fo"Debug-Nvidia\\" /Fd"Debug-Nvidia\Utilities.pdb" /Gd /TP /analyze- /errorReport:prompt esShader.cpp esUtil.cpp esUtil_win.cpp Math.cpp TGA.cpp
+         TGA.cpp
+         Math.cpp
+     1>d:\training gameloft\proiecte_training\proiect_2015\newtrainingframework_2015\utilities\math.cpp(10): warning C4244: 'return': conversion from 'double' to 'GLfloat', possible loss of data
+     1>d:\training gameloft\proiecte_training\proiect_2015\newtrainingframework_2015\utilities\math.cpp(104): warning C4244: 'return': conversion from 'double' to 'GLfloat', possible loss of data
+     1>d:\training gameloft\proiecte_training\proiect_2015\newtrainingframework_2015\utilities\math.cpp(208): warning C4244: 'return': conversion from 'double' to 'GLfloat', possible loss of data
+         esUtil_win.cpp
+         esUtil.cpp
+         esShader.cpp
+         Generating Code...
+       Lib:
+         D:\Program Files\Microsoft Visual Studio 14.0\VC\bin\Lib.exe /OUT:"D:\training gameloft\proiecte_training\proiect_2015\NewTrainingFramework_2015\\BIN-Nvidia\Utilities.lib" /NOLOGO "Debug-Nvidia\esShader.obj"
+         "Debug-Nvidia\esUtil.obj"
+         "Debug-Nvidia\esUtil_win.obj"
+         "Debug-Nvidia\Math.obj"
+         "Debug-Nvidia\stdafx.obj"
+         "Debug-Nvidia\TGA.obj"
+         Utilities.vcxproj -> D:\training gameloft\proiecte_training\proiect_2015\NewTrainingFramework_2015\\BIN-Nvidia\Utilities.lib
+     1>Done Building Project "D:\training gameloft\proiecte_training\proiect_2015\NewTrainingFramework_2015\Utilities\Utilities.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:09.87
