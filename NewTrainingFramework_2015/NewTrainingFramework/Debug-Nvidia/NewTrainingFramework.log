@@ -1,4 +1,39 @@
 ﻿  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
+  Skipping... (no relevant changes detected)
+  stdafx.cpp
+  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
+  Parser.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Parser.cpp(52,11): warning C4101:  'temp': unreferenced local variable
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\Utilities\rapidxml-1.13\rapidxml.hpp(420,1): error C2061:  syntax error: identifier 'memory'
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\Utilities\rapidxml-1.13\rapidxml.hpp(418): message :  while compiling class template member function 'rapidxml::xml_node<char> *rapidxml::memory_pool<Ch>::allocate_node(rapidxml::node_type,const Ch *,const Ch *,size_t,size_t)'
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\Utilities\rapidxml-1.13\rapidxml.hpp(418): message :         with
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\Utilities\rapidxml-1.13\rapidxml.hpp(418): message :         [
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\Utilities\rapidxml-1.13\rapidxml.hpp(418): message :             Ch=char
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\Utilities\rapidxml-1.13\rapidxml.hpp(418): message :         ]
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\Utilities\rapidxml-1.13\rapidxml.hpp(2040): message :  see reference to function template instantiation 'rapidxml::xml_node<char> *rapidxml::memory_pool<Ch>::allocate_node(rapidxml::node_type,const Ch *,const Ch *,size_t,size_t)' being compiled
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\Utilities\rapidxml-1.13\rapidxml.hpp(2040): message :         with
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\Utilities\rapidxml-1.13\rapidxml.hpp(2040): message :         [
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\Utilities\rapidxml-1.13\rapidxml.hpp(2040): message :             Ch=char
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\Utilities\rapidxml-1.13\rapidxml.hpp(2040): message :         ]
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\Utilities\rapidxml-1.13\rapidxml.hpp(1359): message :  see reference to class template instantiation 'rapidxml::memory_pool<Ch>' being compiled
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\Utilities\rapidxml-1.13\rapidxml.hpp(1359): message :         with
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\Utilities\rapidxml-1.13\rapidxml.hpp(1359): message :         [
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\Utilities\rapidxml-1.13\rapidxml.hpp(1359): message :             Ch=char
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\Utilities\rapidxml-1.13\rapidxml.hpp(1359): message :         ]
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Parser.cpp(175): message :  see reference to class template instantiation 'rapidxml::xml_document<Ch>' being compiled
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Parser.cpp(175): message :         with
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Parser.cpp(175): message :         [
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Parser.cpp(175): message :             Ch=char
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Parser.cpp(175): message :         ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\filesystem(2095): message :  see reference to class template instantiation 'std::chrono::time_point<std::filesystem::_File_time_clock,std::filesystem::_File_time_clock::duration>' being compiled
+  Generating Code...
+  Vertex_NFG.cpp
+  Shaders1.cpp
+  Shaders.cpp
   NewTrainingFramework.cpp
-C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\NewTrainingFramework.cpp(39,20): warning C4018:  '<': signed/unsigned mismatch
-  NewTrainingFramework.vcxproj -> C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\\BIN-Nvidia\NewTrainingFramework.exe
+  NFG.cpp
+  ModelShader.cpp
+  Globals.cpp
+  Camera.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(1757): message :  see reference to class template instantiation 'std::basic_string_view<wchar_t,std::char_traits<wchar_t>>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(1757): message : Skipping... (no relevant changes detected)

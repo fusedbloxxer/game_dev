@@ -56,7 +56,7 @@ int Init(ESContext* esContext)
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 	// Parse the document.
-	modelData = Parser::parseFile("..\\Resources\\Packet\\Models\\bus.nfg");
+	modelData = Parser::parseFile("..\\Resources\\Packet\\Models\\Croco.nfg");
 
 	glGenBuffers(3, vboIdsModel);
 
@@ -78,12 +78,12 @@ int Init(ESContext* esContext)
 
 	// TEXTURE WORK
 	int width, height, bpp;
-	char* chr = LoadTGA("..\\Resources\\Packet\\Textures\\Bus.tga", &width, &height, &bpp);
+	char* chr = LoadTGA("..\\Resources\\Packet\\Textures\\Croco.tga", &width, &height, &bpp);
 
 	glGenTextures(1, &id_texture); // Reserve a buffer name called id_texture;
 	glBindTexture(GL_TEXTURE_2D, id_texture); // Reserve buffer and bind it to that id;
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // Linear - blurr, Nearest - zoomed in pixels 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // Wrap ? GL_REPEAT it repeats.
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); // Linear - blurr, Nearest - zoomed in pixels 
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); // Wrap ? GL_REPEAT it repeats.
 	glTexImage2D(GL_TEXTURE_2D, 0, (bpp == 24) ? GL_RGB : GL_RGBA, width, height, 0, (bpp == 24) ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, chr);
 
 	return modelShader.Init("../Resources/Shaders/ModelShaderVS.vs", "../Resources/Shaders/ModelShaderFS.fs");
