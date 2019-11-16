@@ -15,6 +15,7 @@
 #include "ModelShader.h"
 #include <algorithm>
 #include <vector>
+#include "ResourceManager.h"
 
 GLuint vboId, vboId1, vboIdsModel[3];
 Camera* camera;
@@ -55,6 +56,14 @@ int Init(ESContext* esContext)
 {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
+	ResourceManager::getInstance()->Init();
+	ResourceManager::getInstance()->load<Model>(1);
+	ResourceManager::getInstance()->load<Shader>(3);
+	ResourceManager::getInstance()->load<Texture>(4);
+
+	return 0;
+
+	/* 
 	// Parse the document.
 	modelData = Parser::parseFile("..\\Resources\\Packet\\Models\\Croco.nfg");
 
@@ -87,6 +96,7 @@ int Init(ESContext* esContext)
 	glTexImage2D(GL_TEXTURE_2D, 0, (bpp == 24) ? GL_RGB : GL_RGBA, width, height, 0, (bpp == 24) ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, chr);
 
 	return modelShader.Init("../Resources/Shaders/ModelShaderVS.vs", "../Resources/Shaders/ModelShaderFS.fs");
+	*/
 
 	/*
 	// First triangle
@@ -140,6 +150,58 @@ void Draw(ESContext* esContext)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	// M1 S3 T4
+	auto texture = ResourceManager::getInstance()->load<Texture>(4);
+	auto shader = ResourceManager::getInstance()->load<Shader>(3);
+	auto model = ResourceManager::getInstance()->load<Model>(1);
+	glUseProgram(shader->getProgramId());
+
+	glBindBuffer(GL_ARRAY_BUFFER, model->getVboId());
+
+	if (!isWired)
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, model->getIboId());
+	else
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, model->getWiredboId());
+
+	if (shader->positionAttribute != -1)
+	{
+		glEnableVertexAttribArray(shader->positionAttribute);
+		glVertexAttribPointer(shader->positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex_NFG), 0);
+	}
+
+	if (shader->unifMatrix != -1)
+	{
+		glUniformMatrix4fv(shader->unifMatrix, 1, GL_FALSE, (float*)(camera->getViewMatrix() * camera->getProjMatrix()).m);
+	}
+
+	// TEXTURE WORK
+	glActiveTexture(GL_TEXTURE0); // Setat implicit pentru o textura.
+	glBindTexture(texture->getTextureResource()->type, texture->getTextureId());
+
+	if (shader->uvAttribute != -1)
+	{
+		glEnableVertexAttribArray(shader->uvAttribute);
+		glVertexAttribPointer(shader->uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex_NFG), (void*)(5 * sizeof(Vector3)));
+	}
+
+	if (shader->textureUniform != -1)
+	{
+		glUniform1i(shader->textureUniform, 0); // Id = 0 deoarece este implicit o singura textura.
+	}
+
+	if (!isWired)
+	{
+		glDrawElements(GL_TRIANGLES, model->getNoInd(), GL_UNSIGNED_SHORT, 0);
+	}
+	else
+	{
+		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
+	}
+
+	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
+	return;
+
+	/*
 	glUseProgram(modelShader.program);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vboIdsModel[0]);
@@ -186,6 +248,7 @@ void Draw(ESContext* esContext)
 	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
 
 	return;
+	*/
 
 	/*glUseProgram(myShaders.program);
 
@@ -331,7 +394,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	camera = new Camera(Vector3{ 0.0f, 0.0f, 1.0f });
 	camera->setMoveSpeed(1000.0f);
 	glEnable(GL_DEPTH_TEST);
-
 	esRegisterDrawFunc(&esContext, Draw);
 	esRegisterUpdateFunc(&esContext, Update);
 	esRegisterKeyFunc(&esContext, Key);

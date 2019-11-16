@@ -22,6 +22,9 @@
     <Filter Include="Resources\Packet">
       <UniqueIdentifier>{e28e9725-af61-40c8-a563-b20da7258aff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\XMLFiles">
+      <UniqueIdentifier>{4b5c693b-0fdc-4d23-9f68-1e42c177ee9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NewTrainingFramework.cpp">
@@ -52,6 +55,33 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ModelShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Loadable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelResource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderResource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureResource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -90,6 +120,33 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ModelShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Loadable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelResource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderResource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureResource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -164,5 +221,16 @@
     <None Include="..\Resources\Shaders\ModelShaderVS.vs">
       <Filter>Resources\Shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Resources\XMLFiles\exemplu_xml.xml">
+      <Filter>Resources\XMLFiles</Filter>
+    </Xml>
+    <Xml Include="..\Resources\XMLFiles\resourceManager.xml">
+      <Filter>Resources\XMLFiles</Filter>
+    </Xml>
+    <Xml Include="..\Resources\XMLFiles\sceneManager.xml">
+      <Filter>Resources\XMLFiles</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

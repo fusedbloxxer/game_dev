@@ -1,2 +1,12 @@
-﻿  ResourceManager.cpp
-  GameEngine.vcxproj -> C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngined\Debug\GameEngine.exe
+﻿  GameEngine.cpp
+  Loadable.cpp
+  Model.cpp
+  ModelResource.cpp
+  ResourceManager.cpp
+  Shader.cpp
+  ShaderResource.cpp
+  Texture.cpp
+  TextureResource.cpp
+  Generating Code...
+  LINK : C:\Users\fused\Desktop\game_dev\GameEngined\Debug\GameEngine.exe not found or not built by the last incremental link; performing full link
+  GameEngine.vcxproj -> C:\Users\fused\Desktop\game_dev\GameEngined\Debug\GameEngine.exe
