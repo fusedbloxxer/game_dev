@@ -20,10 +20,16 @@ class Model : public Loadable
 	// The number of indexes
 	GLuint noInd, noIndWired;
 
+	// Flag for resources
+	GLboolean holdsResources;
+
 public:
 
 	// Constructor
 	Model(std::shared_ptr<ModelResource> mr = nullptr);
+
+	// Initializer
+	Model& init(std::shared_ptr<ModelResource> mr);
 
 	// Destructor
 	virtual ~Model();
@@ -53,4 +59,7 @@ public:
 private:
 	// Get wired vector from indexes vector.
 	std::vector<GLushort> getWired(const std::vector<GLushort>& indexes);
+
+	// Inherited via Loadable
+	virtual void freeResources() override;
 };

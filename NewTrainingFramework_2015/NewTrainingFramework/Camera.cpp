@@ -7,8 +7,8 @@ std::ostream& operator<<(std::ostream& os, Vector3& vec) {
 	return os;
 }
 
-Camera::Camera(Vector3& position, Vector3& target, Vector3& up, GLfloat moveSpeed, GLfloat rotateSpeed, GLfloat nearP, GLfloat farP, GLfloat fov, GLfloat deltaTime)
-	:target{ target }, position{ position }, up{ up }, moveSpeed{ moveSpeed }, rotateSpeed{ rotateSpeed }, nearP{ nearP }, farP{ farP }, fov{ fov }, deltaTime{ deltaTime }
+Camera::Camera(GLint id, Vector3& position, Vector3& target, Vector3& up, GLfloat moveSpeed, GLfloat rotateSpeed, GLfloat nearP, GLfloat farP, GLfloat fov, GLfloat deltaTime, Type type)
+	:id{ id }, target{ target }, position{ position }, up{ up }, moveSpeed{ moveSpeed }, rotateSpeed{ rotateSpeed }, nearP{ nearP }, farP{ farP }, fov{ fov }, deltaTime{ deltaTime }, type{ type }
 {
 	projectionMatrix.SetPerspective(RAD(fov), (GLfloat)Globals::screenWidth / (GLfloat)Globals::screenHeight, nearP, farP);
 	refreshAxis();
@@ -205,6 +205,16 @@ GLfloat Camera::getFov() const
 void Camera::setFov(GLfloat fov)
 {
 	this->fov = fov;
+}
+
+Camera::Type Camera::getType() const
+{
+	return type;
+}
+
+void Camera::setType(Type type)
+{
+	this->type = type;
 }
 
 void Camera::refreshAxis()

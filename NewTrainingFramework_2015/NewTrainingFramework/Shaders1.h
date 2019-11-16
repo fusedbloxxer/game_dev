@@ -7,7 +7,7 @@ public:
 	GLuint program, vertexShader, fragmentShader;
 	GLint positionAttribute;
 
-	GLint Init(char * vertexShaderPath, char * fragmentShaderPath);
+	GLint init(char * vertexShaderPath, char * fragmentShaderPath);
 	~Shaders1();
 };
 

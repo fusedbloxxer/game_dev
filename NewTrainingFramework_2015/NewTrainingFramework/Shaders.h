@@ -11,6 +11,6 @@ public:
 	GLint colorAttribute;
 	GLint uniformMatrix;
 
-	int Init(char * fileVertexShader, char * fileFragmentShader);
+	int init(char * fileVertexShader, char * fileFragmentShader);
 	~Shaders();
 };

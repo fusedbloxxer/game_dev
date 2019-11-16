@@ -6,5 +6,6 @@ class Loadable
 {
 public:
 	virtual void load() = 0;
+	virtual void freeResources() = 0;
 	virtual ~Loadable();
 };

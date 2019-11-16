@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Shaders1.h"
 
-GLint Shaders1::Init(char * vertexShaderPath, char * fragmentShaderPath)
+GLint Shaders1::init(char * vertexShaderPath, char * fragmentShaderPath)
 {
 	vertexShader = esLoadShader(GL_VERTEX_SHADER, vertexShaderPath);
 

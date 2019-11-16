@@ -1,9 +1,10 @@
 ﻿  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
-  Texture.cpp
-  Shader.cpp
   SceneManager.cpp
-  Model.cpp
+C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.h(17,12): warning C4240:  nonstandard extension used: access to 'Camera::Type' now defined to be 'public', previously it was defined to be 'private'
+  NewTrainingFramework.cpp
+C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.h(8): message :  see declaration of 'Camera::Type'
+C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.h(17,12): warning C4240:  nonstandard extension used: access to 'Camera::Type' now defined to be 'public', previously it was defined to be 'private'
+C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.h(8): message :  see declaration of 'Camera::Type'
   Generating Code...
-C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Model.cpp(107,20): warning C4018:  '<': signed/unsigned mismatch
-Camera.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\NewTrainingFramework.cpp(40,20): warning C4018:  '<': signed/unsigned mismatch
   NewTrainingFramework.vcxproj -> C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\\BIN-Nvidia\NewTrainingFramework.exe

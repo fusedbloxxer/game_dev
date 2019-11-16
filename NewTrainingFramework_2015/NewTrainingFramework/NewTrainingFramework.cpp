@@ -52,11 +52,11 @@ std::vector<GLushort> getWired(const std::vector<GLushort>& indexes)
 	return wired;
 }
 
-int Init(ESContext* esContext)
+int init(ESContext* esContext)
 {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-	ResourceManager::getInstance()->Init();
+	ResourceManager::getInstance()->init();
 	ResourceManager::getInstance()->load<Model>(1);
 	ResourceManager::getInstance()->load<Shader>(3);
 	ResourceManager::getInstance()->load<Texture>(4);
@@ -95,7 +95,7 @@ int Init(ESContext* esContext)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); // Wrap ? GL_REPEAT it repeats.
 	glTexImage2D(GL_TEXTURE_2D, 0, (bpp == 24) ? GL_RGB : GL_RGBA, width, height, 0, (bpp == 24) ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, chr);
 
-	return modelShader.Init("../Resources/Shaders/ModelShaderVS.vs", "../Resources/Shaders/ModelShaderFS.fs");
+	return modelShader.init("../Resources/Shaders/ModelShaderVS.vs", "../Resources/Shaders/ModelShaderFS.fs");
 	*/
 
 	/*
@@ -140,8 +140,8 @@ int Init(ESContext* esContext)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	//creation of shaders and program
-	return myShaders.Init("../Resources/Shaders/TriangleShaderVS.vs", "../Resources/Shaders/TriangleShaderFS.fs") |
-		lineShaders.Init("../Resources/Shaders/LineShaderVS.vs", "../Resources/Shaders/LineShaderFS.fs");
+	return myShaders.init("../Resources/Shaders/TriangleShaderVS.vs", "../Resources/Shaders/TriangleShaderFS.fs") |
+		lineShaders.init("../Resources/Shaders/LineShaderVS.vs", "../Resources/Shaders/LineShaderFS.fs");
 
 	*/
 }
@@ -388,10 +388,10 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	esCreateWindow(&esContext, "Hello Triangle", Globals::screenWidth, Globals::screenHeight, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
 
-	if (Init(&esContext) != 0)
+	if (init(&esContext) != 0)
 		return 0;
 
-	camera = new Camera(Vector3{ 0.0f, 0.0f, 1.0f });
+	camera = new Camera(0, Vector3{ 0.0f, 0.0f, 1.0f });
 	camera->setMoveSpeed(1000.0f);
 	glEnable(GL_DEPTH_TEST);
 	esRegisterDrawFunc(&esContext, Draw);
@@ -403,6 +403,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	//releasing OpenGL resources
 	CleanUp();
 
+	delete ResourceManager::getInstance();
 	delete camera;
 	printf("Press any key...\n");
 	_getch();

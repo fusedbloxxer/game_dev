@@ -17,7 +17,7 @@ public:
 	GLint unifMatrix;
 	GLint textureUniform;
 
-	int Init(char* fileVertexShader, char* fileFragmentShader);
+	int init(char* fileVertexShader, char* fileFragmentShader);
 	~ModelShader();
 };
 

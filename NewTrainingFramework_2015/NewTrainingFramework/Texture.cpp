@@ -3,15 +3,21 @@
 #include <iostream>
 
 Texture::Texture(std::shared_ptr<TextureResource> tr)
-	:textureId{}, tr{ tr }
+	:textureId{}, tr{ tr }, holdsResources{ false }
 {
 	// TODO;
+}
+
+Texture& Texture::init(std::shared_ptr<TextureResource> tr)
+{
+	freeResources();
+	this->tr = tr;
+	return *this;
 }
 
 Texture::~Texture()
 {
 	std::cout << "Texture destructor with id " << tr->id << " was called." << std::endl;
-	glDeleteTextures(1, &textureId);
 }
 
 void Texture::load()
@@ -35,6 +41,15 @@ void Texture::load()
 	glTexImage2D(tr->type, 0, (bpp == 24) ? GL_RGB : GL_RGBA, width, height, 0, (bpp == 24) ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, chr);
 
 	std::cout << "Textures were loaded for id: " << tr->id << std::endl;
+	holdsResources = true;
+}
+
+void Texture::freeResources()
+{
+	if (holdsResources) {
+		glDeleteTextures(1, &textureId);
+		holdsResources = false;
+	}
 }
 
 GLuint Texture::getTextureId() const

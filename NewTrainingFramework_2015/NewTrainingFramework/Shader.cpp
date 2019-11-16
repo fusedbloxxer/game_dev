@@ -3,35 +3,27 @@
 #include <iostream>
 
 Shader::Shader(std::shared_ptr<ShaderResource> sr)
-	:programId{}, sr{ sr }
+	:programId{}, sr{ sr }, holdsResources{ false }
 {
 	// TODO;
+}
+
+Shader& Shader::init(std::shared_ptr<ShaderResource> sr)
+{
+	freeResources();
+	this->sr = sr;
+	return *this;
 }
 
 Shader::~Shader()
 {
 	std::cout << "Shader destructor with id " << sr->id << " was called." << std::endl;
-
-	// Current
-	GLint maxShaders;
-	glGetProgramiv(programId, GL_ATTACHED_SHADERS, &maxShaders);
-
-	// Fetch current shaders
-	GLsizei curentShaders; GLuint* shaders = new GLuint[maxShaders];
-	glGetAttachedShaders(programId, maxShaders, &curentShaders, shaders);
-
-	// Delete current shaders
-	for (GLsizei i{ 0 }; i < curentShaders; ++i) {
-		glDeleteShader(shaders[i]);
-	}
-
-	// Delete current program
-	glDeleteProgram(programId);
+	freeResources();
 }
 
 void Shader::load()
 {
-	GLuint vertexShader = esLoadShader(GL_VERTEX_SHADER, const_cast<char *>(sr->vsShader.c_str()));
+	GLuint vertexShader = esLoadShader(GL_VERTEX_SHADER, const_cast<char*>(sr->vsShader.c_str()));
 
 	if (vertexShader == 0) {
 		std::cerr << "Failed to compile vertex shader for id: " << sr->id << ", vs: " << sr->vsShader << std::endl;
@@ -67,6 +59,30 @@ void Shader::load()
 	unifMatrix = glGetUniformLocation(programId, "u_matrix");
 
 	std::cout << "Program was linked successfully for id: " << sr->id << std::endl;
+	holdsResources = true;
+}
+
+void Shader::freeResources()
+{
+	if (holdsResources) {
+		// Current
+		GLint maxShaders;
+		glGetProgramiv(programId, GL_ATTACHED_SHADERS, &maxShaders);
+
+		// Fetch current shaders
+		GLsizei curentShaders; GLuint* shaders = new GLuint[maxShaders];
+		glGetAttachedShaders(programId, maxShaders, &curentShaders, shaders);
+
+		// Delete current shaders
+		for (GLsizei i{ 0 }; i < curentShaders; ++i) {
+			glDeleteShader(shaders[i]);
+		}
+
+		// Delete current program
+		glDeleteProgram(programId);
+
+		holdsResources = false;
+	}
 }
 
 GLuint Shader::getProgramId() const

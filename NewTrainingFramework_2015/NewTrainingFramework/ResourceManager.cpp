@@ -24,7 +24,8 @@ void ResourceManager::freeResources()
 
 ResourceManager::~ResourceManager()
 {
-	// TODO;
+	std::cout << "Destructor was called for ResourceManager." << std::endl;
+	freeResources();
 }
 
 template<typename Type>
@@ -119,7 +120,7 @@ void ResourceManager::loadXML(rapidxml::xml_node<>* root) {
 	}
 }
 
-void ResourceManager::Init(const char* resourceManagerPath)
+void ResourceManager::init(const char* resourceManagerPath)
 {
 	std::ifstream input{ resourceManagerPath };
 

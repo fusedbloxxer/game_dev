@@ -31,7 +31,7 @@ class ResourceManager
 
 public:
 	// Load configuration file.
-	void Init(const char* resourceManagerPath = "..\\Resources\\XMLFiles\\resourceManager.xml");
+	void init(const char* resourceManagerPath = "..\\Resources\\XMLFiles\\resourceManager.xml");
 
 	// Free resources.
 	void freeResources();

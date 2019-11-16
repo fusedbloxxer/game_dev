@@ -11,11 +11,17 @@ class Shader : public Loadable
 	// Program Id
 	GLuint programId;
 
+	// Flag for resources
+	GLboolean holdsResources;
+
 public:
 	GLint binormAttribute, positionAttribute, normAttribute, tgtAttribute, uvAttribute, textureUniform, unifMatrix;
 
 	// Constructor
 	Shader(std::shared_ptr<ShaderResource> sr = nullptr);
+
+	// Initializer
+	Shader& init(std::shared_ptr<ShaderResource> sr);
 
 	// Destructor
 	virtual ~Shader();
@@ -29,4 +35,7 @@ public:
 
 	// Inherited via Loadable
 	virtual void load() override;
+
+	// Inherited via Loadable
+	virtual void freeResources() override;
 };

@@ -25,19 +25,26 @@ void Model::load()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * noIndWired, wireframe.data(), GL_STATIC_DRAW);
 
 	std::cout << "Model with id: " << mr->id << " was loaded successfully." << std::endl;
+	holdsResources = true;
 }
 
 Model::Model(std::shared_ptr<ModelResource> mr)
-	:mr{ mr }
+	:mr{ mr }, holdsResources{ false }
 {
 	// TODO;
+}
+
+Model& Model::init(std::shared_ptr<ModelResource> mr)
+{
+	freeResources();
+	this->mr = mr;
+	return *this;
 }
 
 Model::~Model()
 {
 	std::cout << "Model destructor with id " << mr->id << " was called." << std::endl;
-	
-	glDeleteBuffers(3, &iboId);
+	freeResources();
 }
 
 GLuint Model::getIboId() const
@@ -117,4 +124,12 @@ std::vector<GLushort> Model::getWired(const std::vector<GLushort>& indexes)
 	}
 
 	return wired;
+}
+
+void Model::freeResources()
+{
+	if (holdsResources) {
+		glDeleteBuffers(3, &iboId);
+		holdsResources = false;
+	}
 }
