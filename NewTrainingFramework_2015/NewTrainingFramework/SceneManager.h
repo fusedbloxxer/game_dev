@@ -15,14 +15,20 @@ class SceneManager
 	// Private Constructor
 	SceneManager();
 
-	// Loading XML Configuration File
-	// void loadXML()
+	// Loading XML Configurations
+	template<typename Config>
+	void loadXML(rapidxml::xml_node<>* root);
+	Vector3 loadXML(rapidxml::xml_node<>* root, const char* node, const char coord[6]) const;
 
 	// Game Name
 	std::string gameName;
 
 	// Dimensions
 	GLint width, height;
+	GLboolean isFullscreen;
+
+	// Active camera
+	GLint activeCameraId;
 
 	// Background color
 	Vector3 backgroundColor;
@@ -33,8 +39,7 @@ class SceneManager
 	// Camera mapping
 	std::unordered_map<GLint, std::shared_ptr<Camera>> cameraMap;
 
-	// Active camera
-	GLint activeCameraId;
+	friend std::ostream& operator<<(std::ostream& os, const SceneManager& sceneManager);
 
 public:
 	// Get Singleton Instance

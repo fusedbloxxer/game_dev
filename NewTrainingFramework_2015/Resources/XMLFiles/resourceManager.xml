@@ -41,8 +41,8 @@
 		<folder path="..\\Resources\\Packet\\Textures\\">
 			<texture id="4" type="2d">
 				<file>Croco.tga</file>			
-				<min_filter>LINEAR</min_filter>
-				<mag_filter>LINEAR</mag_filter>
+				<min_filter>NEAREST</min_filter>
+				<mag_filter>NEAREST</mag_filter>
 				<wrap_s>CLAMP_TO_EDGE</wrap_s>
 				<wrap_t>CLAMP_TO_EDGE</wrap_t>
 			</texture>

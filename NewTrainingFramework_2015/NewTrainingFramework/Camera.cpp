@@ -7,6 +7,20 @@ std::ostream& operator<<(std::ostream& os, Vector3& vec) {
 	return os;
 }
 
+Camera::Type Camera::atot(const char* str)
+{
+	if (strcmp(str, "firstPerson") == 0) {
+		return Camera::Type::FIRST_PERSON;
+	}
+	else if (strcmp(str, "thirdPerson") == 0) {
+		return Camera::Type::THIRD_PERSON;
+	}
+	else {
+		std::cerr << "INVALID STRING-CAMERA::TYPE CONVERSION: " << str << std::endl;
+		abort();
+	}
+}
+
 Camera::Camera(GLint id, Vector3& position, Vector3& target, Vector3& up, GLfloat moveSpeed, GLfloat rotateSpeed, GLfloat nearP, GLfloat farP, GLfloat fov, GLfloat deltaTime, Type type)
 	:id{ id }, target{ target }, position{ position }, up{ up }, moveSpeed{ moveSpeed }, rotateSpeed{ rotateSpeed }, nearP{ nearP }, farP{ farP }, fov{ fov }, deltaTime{ deltaTime }, type{ type }
 {
@@ -217,10 +231,30 @@ void Camera::setType(Type type)
 	this->type = type;
 }
 
+GLint Camera::getCameraId() const
+{
+	return id;
+}
+
 void Camera::refreshAxis()
 {
 	zAxis = -(target - position).Normalize();
 	yAxis = up.Normalize();
 	xAxis = zAxis.Cross(yAxis).Normalize();
 	updateWorldView();
+}
+
+std::ostream& operator<<(std::ostream& os, const Camera& camera)
+{
+	os << "Camera: [id = " << camera.id << ", type = " << camera.type << ", "
+		<< "position = (" << camera.position.x << ", " << camera.position.y << ", " << camera.position.z << "), "
+		<< "target = (" << camera.target.x << ", " << camera.target.y << ", " << camera.target.z << "), "
+		<< "up = (" << camera.up.x << ", " << camera.up.y << ", " << camera.up.z << "), "
+		<< "translationSpeed = " << camera.moveSpeed << ", "
+		<< "rotationSpeed = " << camera.rotateSpeed << ", "
+		<< "fov = " << camera.fov << ", "
+		<< "near = " << camera.nearP << ", "
+		<< "far = " << camera.farP << "]";
+
+	return os;
 }

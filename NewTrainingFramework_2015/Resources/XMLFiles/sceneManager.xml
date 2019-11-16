@@ -2,9 +2,9 @@
 <sceneManager>
 	<!-- IMPORTANT! toate tagurile si atributele de tip comment trebuie ignorate (nu le parsati)
 	le-am adaugat ca sa evit cazul de comentarii imbricate (imposibile in XML) -->
-	<gameName>My game engine</gameName>
+  <gameName>My game engine</gameName>
 	<defaultScreenSize>
-		<width>960</width>
+		<width>1000</width>
 		<height>720</height>
 		<!--
 		se mai poate pune si:
@@ -12,9 +12,9 @@
 		-->
 	</defaultScreenSize>
 	<backgroundColor>
-		<r>0.0</r>
-		<g>0.0</g>
-		<b>0.0</b>
+		<r>-34.0</r>
+		<g>0.4</g>
+		<b>22.5</b>
 	</backgroundColor>
 	<controls>
 		<control>
@@ -33,12 +33,12 @@
 			<comment>elemntul type este folosit doar in taskul optional cu tipurile de Camera </comment>
 			<type>firstPerson</type>
 			<position>
-				<x>0</x>
-				<y>0</y>
+				<x>0.35</x>
+				<y>1.220</y>
 				<z>1</z>
 			</position>
 			<target>
-				<x>0</x>
+				<x>0.3</x>
 				<y>0</y>
 				<z>-1</z>
 			</target>

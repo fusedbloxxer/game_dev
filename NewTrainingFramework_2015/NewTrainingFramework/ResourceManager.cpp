@@ -30,7 +30,7 @@ ResourceManager::~ResourceManager()
 
 template<typename Type>
 std::shared_ptr<Type> ResourceManager::load(GLint id) {
-	std::cout << " ------ ! No specialization was made for this. ! ------ ";
+	std::cerr << " ------ ! No specialization was made for this. ! ------ ";
 	abort();
 }
 
@@ -141,16 +141,16 @@ void ResourceManager::init(const char* resourceManagerPath)
 
 	loadXML(resDoc->first_node());
 
-	std::for_each(modelResMap.begin(), modelResMap.end(),
-		[](const auto& x) { std::cout << x.first << " = " << x.second->file << std::endl; });
+	// std::for_each(modelResMap.begin(), modelResMap.end(),
+		// [](const auto& x) { std::cout << x.first << " = " << x.second->file << std::endl; });
 
-	std::for_each(shaderResMap.begin(), shaderResMap.end(),
-		[](const auto& x) { std::cout << x.first << " = [" << x.second->vsShader << ", " << x.second->fsShader << "]" << std::endl; });
+	// std::for_each(shaderResMap.begin(), shaderResMap.end(),
+		// [](const auto& x) { std::cout << x.first << " = [" << x.second->vsShader << ", " << x.second->fsShader << "]" << std::endl; });
 
-	std::for_each(textureResMap.begin(), textureResMap.end(),
-		[](const auto& x) { std::cout << x.first << " = [" << x.second->type << ", " << x.second->file << ", "
-		<< x.second->minFilter << ", " << x.second->magFilter << ", " << x.second->wrapS
-		<< ", " << x.second->wrapT << "]\n"; });
+	// std::for_each(textureResMap.begin(), textureResMap.end(),
+		// [](const auto& x) { std::cout << x.first << " = [" << x.second->type << ", " << x.second->file << ", "
+		// << x.second->minFilter << ", " << x.second->magFilter << ", " << x.second->wrapS
+		// << ", " << x.second->wrapT << "]\n"; });
 }
 
 ResourceManager* ResourceManager::getInstance()

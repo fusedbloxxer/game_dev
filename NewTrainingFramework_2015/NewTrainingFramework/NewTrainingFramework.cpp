@@ -3,63 +3,37 @@
 
 #include "stdafx.h"
 #include "../Utilities/utilities.h" // if you use STL, please include this line AFTER all other include
-#include "Vertex.h"
+#include "ResourceManager.h"
+#include "SceneManager.h"
+#include "ModelShader.h"
+#include "Vertex_NFG.h"
+#include "Shaders1.h"
+#include <algorithm>
 #include "Shaders.h"
+#include "Camera.h"
+#include "Vertex.h"
+#include "Parser.h"
 #include <conio.h>
 #include <iomanip>
-#include "Camera.h"
-#include "Shaders1.h"
-#include "Parser.h"
 #include <numeric>
-#include "Vertex_NFG.h"
-#include "ModelShader.h"
-#include <algorithm>
 #include <vector>
-#include "ResourceManager.h"
 
-GLuint vboId, vboId1, vboIdsModel[3];
-Camera* camera;
-Shaders myShaders;
-Shaders1 lineShaders;
-ModelShader modelShader;
 std::pair<std::vector<Vertex_NFG>, std::vector<GLushort>> modelData;
+GLuint vboId, vboId1, vboIdsModel[3];
 std::vector<GLushort> wireframe;
-GLuint id_texture;
+ModelShader modelShader;
+Shaders1 lineShaders;
 bool isWired = false;
-
-template<class Container>
-void printContainer(Container con)
-{
-	std::for_each(con.begin(), con.end(), [](const auto& x) { std::cout << x << '\n'; }); // Checker
-}
-
-std::vector<GLushort> getWired(const std::vector<GLushort>& indexes)
-{
-	std::vector<GLushort> wired;
-
-	for (int i = 0; i < indexes.size(); i += 3)
-	{
-		wired.push_back(indexes[i]);
-		wired.push_back(indexes[i + 1]);
-
-		wired.push_back(indexes[i + 1]);
-		wired.push_back(indexes[i + 2]);
-
-		wired.push_back(indexes[i + 2]);
-		wired.push_back(indexes[i]);
-	}
-
-	return wired;
-}
+Shaders myShaders;
+GLuint id_texture;
+Camera* camera;
 
 int init(ESContext* esContext)
 {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 	ResourceManager::getInstance()->init();
-	ResourceManager::getInstance()->load<Model>(1);
-	ResourceManager::getInstance()->load<Shader>(3);
-	ResourceManager::getInstance()->load<Texture>(4);
+	SceneManager::getInstance()->init();
 
 	return 0;
 

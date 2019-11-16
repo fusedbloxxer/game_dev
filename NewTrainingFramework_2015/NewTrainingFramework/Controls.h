@@ -19,3 +19,5 @@ enum Controls
 	SCENE_WIREFRAME_TRUE,
 	SCENE_WIREFRAME_FALSE
 };
+
+Controls atoc(const char* str);

@@ -34,7 +34,6 @@ void fillContainer(std::vector<Type>& container, const char* format, std::ifstre
 		{
 			ss >> temp;
 			container.push_back(temp);
-			// std::cout << ss.str() << std::endl;
 		}
 		else
 		{
@@ -105,8 +104,6 @@ void fillContainer<GLushort>(std::vector<GLushort>& container, const char* forma
 std::pair<std::vector<Vertex_NFG>, std::vector<GLushort>> Parser::parseFile(const char* const filePath)
 {
 	std::ifstream input{ filePath };
-
-	std::cout << std::filesystem::current_path() << std::endl << filePath;
 
 	if (!input.is_open())
 	{

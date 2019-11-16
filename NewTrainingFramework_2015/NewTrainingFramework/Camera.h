@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "../Utilities/utilities.h" 
 #include "Globals.h"
+#include <ostream>
 
 class Camera
 {
@@ -12,8 +13,13 @@ class Camera
 	Matrix viewMatrix, worldMatrix, projectionMatrix;
 	GLfloat moveSpeed, rotateSpeed, nearP, farP, fov, deltaTime;
 
+	friend std::ostream& operator<<(std::ostream& os, const Camera& camera);
+
 public:
 
+	static Type atot(const char* str);
+
+	// Camera Type
 	enum Type {
 		FIRST_PERSON,
 		THIRD_PERSON
@@ -22,9 +28,12 @@ public:
 	// Has default values.
 	Camera(GLint id = 0, Vector3& position = Vector3{ 0.0f, 0.0f, 0.0f }, Vector3& target = Vector3{ 0.0f, 0.0f, 0.0f }, Vector3& up = Vector3{ 0.0f, 1.0f, 0.0f }, GLfloat moveSpeed = 3.0f, GLfloat rotateSpeed = 3.0f, GLfloat nearP = 0.2f, GLfloat farP = 10000.0f, GLfloat fov = 45.0f, GLfloat deltaTime = 0.0f, Type type = Type::FIRST_PERSON);
 
+	// Move functions
 	void moveOz(GLint directie);
 	void moveOx(GLint directie);
 	void moveOy(GLint directie);
+
+	// Rotate functions
 	void rotateOy(GLint directie);
 	void rotateOx(GLint directie);
 	void rotateOz(GLint directie);
@@ -36,6 +45,7 @@ public:
 	Matrix& getWorldMatrix();
 	Matrix& getProjMatrix();
 
+	// Getters and setters
 	Vector3 getTarget();
 	void setTarget(Vector3&);
 
@@ -65,6 +75,8 @@ public:
 
 	Type getType() const;
 	void setType(Type type);
+
+	GLint getCameraId() const;
 
 private:
 	void refreshAxis();
