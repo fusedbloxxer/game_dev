@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "..\Utilities\utilities.h"
 #include "Controls.h"
 #include <iostream>
 #include <string>
@@ -50,6 +51,29 @@ Controls atoc(const char* str)
 	}
 	else {
 		std::cerr << "INVALID STRING-CONTROL CONVERSION: " << str << std::endl;
+		abort();
+	}
+}
+
+unsigned char atok(const char* str)
+{
+	if (strcmp(str, "VK_LEFT") == 0) {
+		return VK_LEFT;
+	}
+	else if (strcmp(str, "VK_RIGHT") == 0) {
+		return VK_RIGHT;
+	}
+	else if (strcmp(str, "VK_UP") == 0) {
+		return VK_UP;
+	}
+	else if (strcmp(str, "VK_DOWN") == 0) {
+		return VK_DOWN;
+	}
+	else if (strlen(str) > 0) {
+		return str[0];
+	}
+	else {
+		std::cerr << "COULD NOT CONVERT STRING-KEY: " << str << std::endl;
 		abort();
 	}
 }

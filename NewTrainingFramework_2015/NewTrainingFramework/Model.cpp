@@ -31,7 +31,8 @@ void Model::load()
 Model::Model(std::shared_ptr<ModelResource> mr)
 	:mr{ mr }, holdsResources{ false }
 {
-	// TODO;
+	// 
+
 }
 
 Model& Model::init(std::shared_ptr<ModelResource> mr)

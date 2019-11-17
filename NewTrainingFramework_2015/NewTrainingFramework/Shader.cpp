@@ -5,7 +5,8 @@
 Shader::Shader(std::shared_ptr<ShaderResource> sr)
 	:programId{}, sr{ sr }, holdsResources{ false }
 {
-	// TODO;
+	// 
+
 }
 
 Shader& Shader::init(std::shared_ptr<ShaderResource> sr)
@@ -50,11 +51,13 @@ void Shader::load()
 	// Attributes
 	binormAttribute = glGetAttribLocation(programId, "a_binormL");
 	positionAttribute = glGetAttribLocation(programId, "a_posL");
+	colorAttribute = glGetAttribLocation(programId, "a_colorL");
 	normAttribute = glGetAttribLocation(programId, "a_normL");
 	tgtAttribute = glGetAttribLocation(programId, "a_tgtL");
 	uvAttribute = glGetAttribLocation(programId, "a_uvL");
 
 	// Uniforms
+	isTextureUniform = glGetUniformLocation(programId, "u_isTexture");
 	textureUniform = glGetUniformLocation(programId, "u_texture");
 	unifMatrix = glGetUniformLocation(programId, "u_matrix");
 

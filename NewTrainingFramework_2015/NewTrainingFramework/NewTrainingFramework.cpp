@@ -26,7 +26,7 @@ Shaders1 lineShaders;
 bool isWired = false;
 Shaders myShaders;
 GLuint id_texture;
-Camera* camera;
+// Camera* camera;
 
 int init(ESContext* esContext)
 {
@@ -37,7 +37,7 @@ int init(ESContext* esContext)
 
 	return 0;
 
-	/* 
+	/*
 	// Parse the document.
 	modelData = Parser::parseFile("..\\Resources\\Packet\\Models\\Croco.nfg");
 
@@ -65,7 +65,7 @@ int init(ESContext* esContext)
 
 	glGenTextures(1, &id_texture); // Reserve a buffer name called id_texture;
 	glBindTexture(GL_TEXTURE_2D, id_texture); // Reserve buffer and bind it to that id;
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); // Linear - blurr, Nearest - zoomed in pixels 
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); // Linear - blurr, Nearest - zoomed in pixels
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); // Wrap ? GL_REPEAT it repeats.
 	glTexImage2D(GL_TEXTURE_2D, 0, (bpp == 24) ? GL_RGB : GL_RGBA, width, height, 0, (bpp == 24) ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, chr);
 
@@ -124,6 +124,11 @@ void Draw(ESContext* esContext)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	SceneManager::getInstance()->draw();
+
+	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
+	return;
+	/*
 	// M1 S3 T4
 	auto texture = ResourceManager::getInstance()->load<Texture>(4);
 	auto shader = ResourceManager::getInstance()->load<Shader>(3);
@@ -266,8 +271,8 @@ void Draw(ESContext* esContext)
 
 void Update(ESContext* esContext, float deltaTime)
 {
+	auto camera = SceneManager::getInstance()->getActiveCamera();
 	camera->setDeltaTime(deltaTime);
-
 	// Alegem o limita - constanta - globals
 	// Timp global care este zero initial
 	// Cand timpul global depaseste limita executam calculele. Scad limita cand = reset.
@@ -298,47 +303,48 @@ void Update(ESContext* esContext, float deltaTime)
 
 void Key(ESContext* esContext, unsigned char key, bool bIsPressed)
 {
-	if (bIsPressed) {
-		switch (key)
+	auto controls = SceneManager::getInstance()->getControls();
+
+	if (bIsPressed && controls.find(key) != controls.end()) {
+		auto camera = SceneManager::getInstance()->getActiveCamera();
+
+		switch (controls[key])
 		{
-		case 'W':
-			camera->moveOz(-1);
-			break;
-		case 'A':
-			camera->moveOx(-1);
-			break;
-		case 'S':
-			camera->moveOz(1);
-			break;
-		case 'D':
+		case Controls::MOVE_CAMERA_POSITIVE_X:
 			camera->moveOx(1);
 			break;
-		case VK_RIGHT:
-			camera->rotateOy(-1);
+		case Controls::MOVE_CAMERA_NEGATIVE_X:
+			camera->moveOx(-1);
 			break;
-		case VK_LEFT:
-			camera->rotateOy(1);
-			break;
-		case VK_UP:
-			camera->rotateOx(1);
-			break;
-		case VK_DOWN:
-			camera->rotateOx(-1);
-			break;
-		case 'O':
-			camera->rotateOz(1);
-			break;
-		case 'P':
-			camera->rotateOz(-1);
-			break;
-		case 'X':
-			camera->moveOy(1);
-			break;
-		case 'Z':
+		case Controls::MOVE_CAMERA_POSITIVE_Y:
 			camera->moveOy(-1);
 			break;
-		case 'I':
-			isWired = !isWired;
+		case Controls::MOVE_CAMERA_NEGATIVE_Y:
+			camera->moveOy(1);
+			break;
+		case Controls::MOVE_CAMERA_POSITIVE_Z:
+			camera->moveOz(-1);
+			break;
+		case Controls::MOVE_CAMERA_NEGATIVE_Z:
+			camera->moveOz(1);
+			break;
+		case Controls::ROTATE_CAMERA_POSITIVE_X:
+			camera->rotateOx(1);
+			break;
+		case Controls::ROTATE_CAMERA_NEGATIVE_X:
+			camera->rotateOx(-1);
+			break;
+		case Controls::ROTATE_CAMERA_POSITIVE_Y:
+			camera->rotateOy(-1);
+			break;
+		case Controls::ROTATE_CAMERA_NEGATIVE_Y:
+			camera->rotateOy(1);
+			break;
+		case Controls::ROTATE_CAMERA_POSITIVE_Z:
+			camera->rotateOz(-1);
+			break;
+		case Controls::ROTATE_CAMERA_NEGATIVE_Z:
+			camera->rotateOz(1);
 			break;
 		default:
 			break;
@@ -355,32 +361,34 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	//identifying memory leaks
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
+	
+	/*
 	ESContext esContext;
 
 	esInitContext(&esContext);
 
 	esCreateWindow(&esContext, "Hello Triangle", Globals::screenWidth, Globals::screenHeight, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
+	*/
+	// if (init(&esContext) != 0)
+		// return 0;
 
-	if (init(&esContext) != 0)
-		return 0;
+	ResourceManager::getInstance()->init();
+	SceneManager::getInstance()->init();
 
-	camera = new Camera(0, Vector3{ 0.0f, 0.0f, 1.0f });
-	camera->setMoveSpeed(1000.0f);
 	glEnable(GL_DEPTH_TEST);
-	esRegisterDrawFunc(&esContext, Draw);
-	esRegisterUpdateFunc(&esContext, Update);
-	esRegisterKeyFunc(&esContext, Key);
 
-	esMainLoop(&esContext);
+	esRegisterDrawFunc(&SceneManager::getInstance()->getESContext(), Draw);
+	esRegisterUpdateFunc(&SceneManager::getInstance()->getESContext(), Update);
+	esRegisterKeyFunc(&SceneManager::getInstance()->getESContext(), Key);
 
-	//releasing OpenGL resources
+	esMainLoop(&SceneManager::getInstance()->getESContext());
+
+	// Releasing OpenGL resources
 	CleanUp();
 
+	delete SceneManager::getInstance();
 	delete ResourceManager::getInstance();
-	delete camera;
 	printf("Press any key...\n");
 	_getch();
 	return 0;
 }
-

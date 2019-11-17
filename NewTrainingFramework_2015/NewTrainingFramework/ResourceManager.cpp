@@ -46,7 +46,7 @@ std::shared_ptr<Model> ResourceManager::load<Model>(GLint id) {
 		return model;
 	}
 	else {
-		std::cout << "Invalid index was detected: " << id << std::endl;
+		std::cout << "Model invalid index was detected: " << id << std::endl;
 		abort();
 	}
 }
@@ -63,7 +63,7 @@ std::shared_ptr<Shader> ResourceManager::load<Shader>(GLint id) {
 		return shader;
 	}
 	else {
-		std::cout << "Invalid index was detected: " << id << std::endl;
+		std::cout << "Shader invalid index was detected: " << id << std::endl;
 		abort();
 	}
 }
@@ -80,7 +80,7 @@ std::shared_ptr<Texture> ResourceManager::load<Texture>(GLint id) {
 		return texture;
 	}
 	else {
-		std::cout << "Invalid index was detected: " << id << std::endl;
+		std::cout << "Texture invalid index was detected: " << id << std::endl;
 		abort();
 	}
 }

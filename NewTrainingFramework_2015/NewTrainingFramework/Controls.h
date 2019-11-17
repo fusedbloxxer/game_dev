@@ -21,3 +21,5 @@ enum Controls
 };
 
 Controls atoc(const char* str);
+
+unsigned char atok(const char* str);

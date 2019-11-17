@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceManager>
 	<models>
-		<folder path="..\\Resources\\Packet\\Models\\">
+		<folder path="..\Resources\Packet\Models\">
 			<model id="1">
 				<file>Croco.nfg</file>
 			</model>
@@ -19,26 +19,26 @@
 		-->
 		<!-- si aici se adauga toate modelele necesare -->
 	</models>
-	<shaders>
-		<folder path="..\\Resources\\Shaders\\">
-			<shader id="10">
-				<vs>modelShader.vs</vs>
-				<fs>modelShader.fs</fs>
-			</shader>
+  <shaders>
+    <folder path="..\Resources\Shaders\">
+      <shader id="10">
+        <vs>modelShader.vs</vs>
+        <fs>modelShader.fs</fs>
+      </shader>
       <shader id="3">
         <vs>ModelShaderVS.vs</vs>
         <fs>ModelShaderFS.fs</fs>
       </shader>
-			<shader id="4">
-				<vs>terrainShader.vs</vs>
-				<fs>terrainShader.fs</fs>
-			</shader>
-		<!-- si aici se adauga toate shaderele -->
-		</folder>
-		
-	</shaders>
+      <shader id="4">
+        <vs>terrainShader.vs</vs>
+        <fs>terrainShader.fs</fs>
+      </shader>
+      <!-- si aici se adauga toate shaderele -->
+    </folder>
+
+  </shaders>
 	<textures>
-		<folder path="..\\Resources\\Packet\\Textures\\">
+		<folder path="..\Resources\Packet\Textures\">
 			<texture id="4" type="2d">
 				<file>Croco.tga</file>			
 				<min_filter>NEAREST</min_filter>

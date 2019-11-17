@@ -15,7 +15,9 @@ class Shader : public Loadable
 	GLboolean holdsResources;
 
 public:
-	GLint binormAttribute, positionAttribute, normAttribute, tgtAttribute, uvAttribute, textureUniform, unifMatrix;
+	GLint binormAttribute, positionAttribute, normAttribute;
+	GLint tgtAttribute, uvAttribute, textureUniform, unifMatrix;
+	GLint colorAttribute, isTextureUniform;
 
 	// Constructor
 	Shader(std::shared_ptr<ShaderResource> sr = nullptr);

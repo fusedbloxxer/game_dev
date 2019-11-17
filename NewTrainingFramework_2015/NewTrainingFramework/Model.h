@@ -1,6 +1,7 @@
 #pragma once
 #include "ModelResource.h"
 #include "Loadable.h"
+#include <vector>
 #include <memory>
 
 class Model : public Loadable

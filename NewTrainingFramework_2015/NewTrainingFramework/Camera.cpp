@@ -21,10 +21,10 @@ Camera::Type Camera::atot(const char* str)
 	}
 }
 
-Camera::Camera(GLint id, Vector3& position, Vector3& target, Vector3& up, GLfloat moveSpeed, GLfloat rotateSpeed, GLfloat nearP, GLfloat farP, GLfloat fov, GLfloat deltaTime, Type type)
+Camera::Camera(GLfloat width, GLfloat height, GLint id, Vector3& position, Vector3& target, Vector3& up, GLfloat moveSpeed, GLfloat rotateSpeed, GLfloat nearP, GLfloat farP, GLfloat fov, GLfloat deltaTime, Type type)
 	:id{ id }, target{ target }, position{ position }, up{ up }, moveSpeed{ moveSpeed }, rotateSpeed{ rotateSpeed }, nearP{ nearP }, farP{ farP }, fov{ fov }, deltaTime{ deltaTime }, type{ type }
 {
-	projectionMatrix.SetPerspective(RAD(fov), (GLfloat)Globals::screenWidth / (GLfloat)Globals::screenHeight, nearP, farP);
+	projectionMatrix.SetPerspective(RAD(fov), (GLfloat)width / (GLfloat)height, nearP, farP);
 	refreshAxis();
 }
 
@@ -67,9 +67,6 @@ void Camera::rotateOx(GLint directie)
 {
 	Matrix mRotateOx; mRotateOx.SetRotationX(directie * rotateSpeed * deltaTime);
 
-	// In sistemul local al SAU !! sunt versorii practic.
-	// Up este in sistemul global.
-	// Deci rotesc in sistemul local si apoi schimb in sistemul global.
 	Vector4 rotatedLocalUp = Vector4(0.0f, 1.0f, 0.0f, 0.0f) * mRotateOx;
 	Vector4 resultUp = rotatedLocalUp * worldMatrix;
 	up = Vector3(resultUp.x, resultUp.y, resultUp.z);
@@ -103,11 +100,6 @@ void Camera::updateWorldView()
 	R.m[2][0] = zAxis.x; R.m[2][1] = zAxis.y; R.m[2][2] = zAxis.z; R.m[2][3] = 0;
 	R.m[3][0] = 0; R.m[3][1] = 0; R.m[3][2] = 0; R.m[3][3] = 1;
 
-	// R.m[0][0] = xAxis.x; R.m[0][1] = yAxis.x; R.m[0][2] = zAxis.x; R.m[0][3] = 0;
-	// R.m[1][0] = xAxis.y; R.m[1][1] = yAxis.y; R.m[1][2] = zAxis.y; R.m[1][3] = 0;
-	// R.m[2][0] = xAxis.z; R.m[2][1] = yAxis.z; R.m[2][2] = zAxis.z; R.m[2][3] = 0;
-	// R.m[3][0] = 0; R.m[3][1] = 0; R.m[3][2] = 0; R.m[3][3] = 1;
-
 	T.SetTranslation(position.x, position.y, position.z);
 
 	// M
@@ -139,6 +131,7 @@ Vector3 Camera::getTarget()
 void Camera::setTarget(Vector3& target)
 {
 	this->target = target;
+	refreshAxis();
 }
 
 Vector3 Camera::getPosition()
@@ -149,6 +142,7 @@ Vector3 Camera::getPosition()
 void Camera::setPosition(Vector3& position)
 {
 	this->position = position;
+	refreshAxis();
 }
 
 Vector3 Camera::getUp()
@@ -159,6 +153,7 @@ Vector3 Camera::getUp()
 void Camera::setUp(Vector3& up)
 {
 	this->up = up;
+	refreshAxis();
 }
 
 GLfloat Camera::getRotateSpeed() const

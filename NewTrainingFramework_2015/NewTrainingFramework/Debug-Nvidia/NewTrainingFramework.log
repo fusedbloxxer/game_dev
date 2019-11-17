@@ -1,13 +1,7 @@
 ﻿  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
-  SceneManager.cpp
+  NewTrainingFramework.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.h(41,12): warning C4240:  nonstandard extension used: access to 'SceneObject::Type' now defined to be 'public', previously it was defined to be 'private'
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.h(12): message :  see declaration of 'SceneObject::Type'
 C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.h(23,12): warning C4240:  nonstandard extension used: access to 'Camera::Type' now defined to be 'public', previously it was defined to be 'private'
 C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.h(9): message :  see declaration of 'Camera::Type'
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(44,12): warning C4244:  '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(49,12): warning C4244:  '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(54,12): warning C4244:  '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(99,32): warning C4244:  'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(104,34): warning C4244:  'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(109,26): warning C4244:  'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(114,27): warning C4244:  'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(119,26): warning C4244:  'argument': conversion from 'double' to 'GLfloat', possible loss of data
   NewTrainingFramework.vcxproj -> C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\\BIN-Nvidia\NewTrainingFramework.exe
