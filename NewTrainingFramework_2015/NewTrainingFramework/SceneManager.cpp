@@ -86,15 +86,15 @@ void SceneManager::loadXML<Camera>(rapidxml::xml_node<>* root)
 	for (auto camera = root->first_node("camera"); camera; camera = camera->next_sibling())
 	{
 		std::shared_ptr<Camera> cameraPtr = std::make_shared<Camera>(width, height, atoi(camera->first_attribute("id")->value()));
-		
+
 		if (auto type = camera->first_node("type"))
 		{
 			cameraPtr->setType(Camera::atot(type->value()));
 		}
 
-		 cameraPtr->setPosition(loadXML(camera, "position", "x", "y", "z"));
-		 cameraPtr->setTarget(loadXML(camera, "target", "x", "y", "z"));
-		 cameraPtr->setUp(loadXML(camera, "up", "x", "y", "z"));
+		cameraPtr->setPosition(loadXML(camera, "position", "x", "y", "z"));
+		cameraPtr->setTarget(loadXML(camera, "target", "x", "y", "z"));
+		cameraPtr->setUp(loadXML(camera, "up", "x", "y", "z"));
 
 		if (auto translationSpeed = camera->first_node("translationSpeed"))
 		{

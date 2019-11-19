@@ -81,6 +81,9 @@ void Shader::freeResources()
 			glDeleteShader(shaders[i]);
 		}
 
+		// Free array of indexes.
+		delete[] shaders;
+
 		// Delete current program
 		glDeleteProgram(programId);
 

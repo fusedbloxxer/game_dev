@@ -40,6 +40,9 @@ void Texture::load()
 	// Get 2D image
 	glTexImage2D(tr->type, 0, (bpp == 24) ? GL_RGB : GL_RGBA, width, height, 0, (bpp == 24) ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, chr);
 
+	// Free TGA memory
+	delete[] chr;
+
 	std::cout << "Textures were loaded for id: " << tr->id << std::endl;
 	holdsResources = true;
 }

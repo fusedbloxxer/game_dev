@@ -131,7 +131,7 @@
 		</object>
 		
 		<object id="8">
-			<model>generated</model>
+			<model>5</model>
 			<shader>3</shader>
 			<type>terrain</type>
 			<name>Teren</name>

@@ -18,6 +18,7 @@
 #include <numeric>
 #include <vector>
 
+
 std::pair<std::vector<Vertex_NFG>, std::vector<GLushort>> modelData;
 GLuint vboId, vboId1, vboIdsModel[3];
 std::vector<GLushort> wireframe;
@@ -371,10 +372,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	*/
 	// if (init(&esContext) != 0)
 		// return 0;
-
+	
 	ResourceManager::getInstance()->init();
 	SceneManager::getInstance()->init();
-
+	
 	glEnable(GL_DEPTH_TEST);
 
 	esRegisterDrawFunc(&SceneManager::getInstance()->getESContext(), Draw);
@@ -385,10 +386,10 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	// Releasing OpenGL resources
 	CleanUp();
-
+	
 	delete SceneManager::getInstance();
 	delete ResourceManager::getInstance();
 	printf("Press any key...\n");
-	_getch();
+	// _getch();
 	return 0;
 }
