@@ -99,6 +99,12 @@ GLfloat Vector2::Dot(Vector2 & vector)
 
 //Vector3
 
+std::ostream& operator<<(std::ostream& os, Vector3& vec)
+{
+	os << '(' << vec.x << ", " << vec.y << ", " << vec.z << ')';
+	return os;
+}
+
 GLfloat Vector3::Length()
 {
 	return sqrt(x*x + y*y + z*z);
@@ -318,6 +324,18 @@ Vector4 Vector4::operator * ( Matrix & m )
 
 
 //Matrix 4 X 4
+
+std::ostream& operator<<(std::ostream& os, Matrix& mat)
+{
+	constexpr GLsizei n = 4;
+	for (GLint i = 0; i < n; ++i) {
+		for (GLint j = 0; j < n; ++j) {
+			os << mat.m[j][i] << ' ';
+		}
+		os << std::endl;
+	}
+	return os;
+}
 
 Matrix::Matrix(GLfloat val)
 {

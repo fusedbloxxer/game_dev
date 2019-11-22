@@ -307,49 +307,7 @@ void Key(ESContext* esContext, unsigned char key, bool bIsPressed)
 	auto controls = SceneManager::getInstance()->getControls();
 
 	if (bIsPressed && controls.find(key) != controls.end()) {
-		auto camera = SceneManager::getInstance()->getActiveCamera();
-
-		switch (controls[key])
-		{
-		case Controls::MOVE_CAMERA_POSITIVE_X:
-			camera->moveOx(1);
-			break;
-		case Controls::MOVE_CAMERA_NEGATIVE_X:
-			camera->moveOx(-1);
-			break;
-		case Controls::MOVE_CAMERA_POSITIVE_Y:
-			camera->moveOy(-1);
-			break;
-		case Controls::MOVE_CAMERA_NEGATIVE_Y:
-			camera->moveOy(1);
-			break;
-		case Controls::MOVE_CAMERA_POSITIVE_Z:
-			camera->moveOz(-1);
-			break;
-		case Controls::MOVE_CAMERA_NEGATIVE_Z:
-			camera->moveOz(1);
-			break;
-		case Controls::ROTATE_CAMERA_POSITIVE_X:
-			camera->rotateOx(1);
-			break;
-		case Controls::ROTATE_CAMERA_NEGATIVE_X:
-			camera->rotateOx(-1);
-			break;
-		case Controls::ROTATE_CAMERA_POSITIVE_Y:
-			camera->rotateOy(-1);
-			break;
-		case Controls::ROTATE_CAMERA_NEGATIVE_Y:
-			camera->rotateOy(1);
-			break;
-		case Controls::ROTATE_CAMERA_POSITIVE_Z:
-			camera->rotateOz(-1);
-			break;
-		case Controls::ROTATE_CAMERA_NEGATIVE_Z:
-			camera->rotateOz(1);
-			break;
-		default:
-			break;
-		}
+		SceneManager::getInstance()->getActiveCamera()->execute(controls[key]);
 	}
 }
 

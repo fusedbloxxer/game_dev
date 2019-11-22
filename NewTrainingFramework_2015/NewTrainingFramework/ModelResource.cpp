@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ModelResource.h"
 
-ModelResource::ModelResource(int id, std::string file)
-	:id{ id }, file{ file }
+ModelResource::ModelResource(GLint id, std::string file)
+	:Resource{ id }, file{ file }
 {
 }

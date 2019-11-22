@@ -1,9 +1,9 @@
 #pragma once
+#include "Resource.h"
 #include <string>
 
-struct ShaderResource {
-	int id;
+struct ShaderResource : public Resource {
 	std::string vsShader, fsShader;
-	ShaderResource(int id, std::string vs, std::string fs);
+	ShaderResource(GLint id, std::string vs, std::string fs);
 };
 

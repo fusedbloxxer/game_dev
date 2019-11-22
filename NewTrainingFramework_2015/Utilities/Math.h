@@ -1,6 +1,7 @@
 #pragma once
 
 #include "esUtil.h"
+#include <iostream>
 
 //Vector2
 constexpr GLfloat PI = 3.1415926535897f;
@@ -44,6 +45,7 @@ public:
 
 class Vector3
 {
+	friend std::ostream& operator<<(std::ostream& os, Vector3& vec);
 public:
 	//Constructors
 	Vector3() : x(0.0f), y(0.0f), z(0.0f) {}
@@ -127,6 +129,7 @@ public:
 
 class Matrix
 {
+	friend std::ostream& operator<<(std::ostream& os, Matrix& mat);
 public:
 	//constructors
 	Matrix() {}

@@ -101,4 +101,3 @@ public:
 	ESContext& getESContext();
 	void setESContext(ESContext esContext);
 };
-

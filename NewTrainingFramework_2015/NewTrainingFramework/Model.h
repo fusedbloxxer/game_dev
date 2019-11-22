@@ -21,9 +21,6 @@ class Model : public Loadable
 	// The number of indexes
 	GLuint noInd, noIndWired;
 
-	// Flag for resources
-	GLboolean holdsResources;
-
 public:
 
 	// Constructor
@@ -57,10 +54,10 @@ public:
 	// Inherited via Loadable
 	virtual void load() override;
 
+	// Inherited via Loadable
+	virtual void freeResources() override;
+
 private:
 	// Get wired vector from indexes vector.
 	std::vector<GLushort> getWired(const std::vector<GLushort>& indexes);
-
-	// Inherited via Loadable
-	virtual void freeResources() override;
 };

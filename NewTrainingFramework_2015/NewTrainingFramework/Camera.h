@@ -37,6 +37,9 @@ public:
 	void rotateOy(GLint directie);
 	void rotateOx(GLint directie);
 	void rotateOz(GLint directie);
+	
+	// Execute control operations
+	void execute(GLubyte key);
 
 	// Getters and setters.
 	void updateWorldView();
@@ -44,8 +47,7 @@ public:
 	Matrix& getViewMatrix();
 	Matrix& getWorldMatrix();
 	Matrix& getProjMatrix();
-
-	// Getters and setters
+	
 	Vector3 getTarget();
 	void setTarget(Vector3&);
 
@@ -77,7 +79,6 @@ public:
 	void setType(Type type);
 
 	GLint getCameraId() const;
-
 
 private:
 	void refreshAxis();

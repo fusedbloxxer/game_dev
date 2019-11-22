@@ -1,6 +1,7 @@
 #pragma once
 #include "ShaderResource.h"
 #include "Loadable.h"
+#include "Fields.h"
 #include <memory>
 
 class Shader : public Loadable
@@ -8,16 +9,13 @@ class Shader : public Loadable
 	// Shader Resource Config
 	std::shared_ptr<ShaderResource> sr;
 
+	// File fields
+	Fields fields;
+
 	// Program Id
 	GLuint programId;
 
-	// Flag for resources
-	GLboolean holdsResources;
-
 public:
-	GLint binormAttribute, positionAttribute, normAttribute;
-	GLint tgtAttribute, uvAttribute, textureUniform, unifMatrix;
-	GLint colorAttribute, isTextureUniform;
 
 	// Constructor
 	Shader(std::shared_ptr<ShaderResource> sr = nullptr);
@@ -31,6 +29,8 @@ public:
 	// Getters and setters
 	GLuint getProgramId() const;
 	void setProgramId(GLuint programId);
+
+	Fields getFields() const;
 
 	std::shared_ptr<ShaderResource> getShaderResource();
 	void setShaderResource(std::shared_ptr<ShaderResource> shaderResource);

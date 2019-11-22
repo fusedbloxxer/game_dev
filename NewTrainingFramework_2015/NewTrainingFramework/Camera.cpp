@@ -1,11 +1,7 @@
 #include "stdafx.h"
+#include "Controls.h"
 #include "Camera.h"
 #include <iostream>
-
-std::ostream& operator<<(std::ostream& os, Vector3& vec) {
-	os << vec.x << ' ' << vec.y << ' ' << vec.z << '\n';
-	return os;
-}
 
 Camera::Type Camera::atot(const char* str)
 {
@@ -76,15 +72,15 @@ void Camera::rotateOx(GLint directie)
 	Vector4 rotateLocalTarget = localTarget * mRotateOx;
 	Vector4 result = rotateLocalTarget * worldMatrix;
 	target = Vector3(result.x, result.y, result.z);
-	
+
 	refreshAxis();
 }
 
 void Camera::rotateOz(GLint directie)
 {
 	Matrix mRotateOz; mRotateOz.SetRotationZ(directie * rotateSpeed * deltaTime);
-	
-	Vector4 rotateLocalUp = Vector4{ 0.0f, 1.0f, 0.0f, 0.0f } * mRotateOz;
+
+	Vector4 rotateLocalUp = Vector4{ 0.0f, 1.0f, 0.0f, 0.0f } *mRotateOz;
 	Vector4 resultUp = rotateLocalUp * worldMatrix;
 	up = Vector3(resultUp.x, resultUp.y, resultUp.z);
 
@@ -229,6 +225,51 @@ void Camera::setType(Type type)
 GLint Camera::getCameraId() const
 {
 	return id;
+}
+
+void Camera::execute(GLubyte key)
+{
+	switch (key)
+	{
+	case Controls::MOVE_CAMERA_POSITIVE_X:
+		this->moveOx(1);
+		break;
+	case Controls::MOVE_CAMERA_NEGATIVE_X:
+		this->moveOx(-1);
+		break;
+	case Controls::MOVE_CAMERA_POSITIVE_Y:
+		this->moveOy(-1);
+		break;
+	case Controls::MOVE_CAMERA_NEGATIVE_Y:
+		this->moveOy(1);
+		break;
+	case Controls::MOVE_CAMERA_POSITIVE_Z:
+		this->moveOz(-1);
+		break;
+	case Controls::MOVE_CAMERA_NEGATIVE_Z:
+		this->moveOz(1);
+		break;
+	case Controls::ROTATE_CAMERA_POSITIVE_X:
+		this->rotateOx(1);
+		break;
+	case Controls::ROTATE_CAMERA_NEGATIVE_X:
+		this->rotateOx(-1);
+		break;
+	case Controls::ROTATE_CAMERA_POSITIVE_Y:
+		this->rotateOy(-1);
+		break;
+	case Controls::ROTATE_CAMERA_NEGATIVE_Y:
+		this->rotateOy(1);
+		break;
+	case Controls::ROTATE_CAMERA_POSITIVE_Z:
+		this->rotateOz(-1);
+		break;
+	case Controls::ROTATE_CAMERA_NEGATIVE_Z:
+		this->rotateOz(1);
+		break;
+	default:
+		break;
+	}
 }
 
 void Camera::refreshAxis()

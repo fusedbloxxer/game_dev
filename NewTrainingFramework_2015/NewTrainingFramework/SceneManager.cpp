@@ -282,8 +282,9 @@ void SceneManager::init(const char* sceneManagerPath)
 void SceneManager::draw()
 {
 	/* TODO;
+
 		Draw(), care va face setarile generale pentru desenarea unui frame si apoi va itera prin
-		vectorul de obiecte, apeland Draw-ul lor
+		vectorul de obiecte, apeland Draw-ul lor.
 	*/
 	for (const auto& o : sceneObjects)
 	{
@@ -293,7 +294,13 @@ void SceneManager::draw()
 
 void SceneManager::update()
 {
-	// TODO;
+	/* TODO;
+
+		Update() - updatarea unor valori care nu tin in mod direct de desenarea scenei. Folosit
+		de exemplu pentru preluarea coordonatelor cursorului, ca sa se observe daca s-a facut
+		click pe un obiect din scena. In afara de asta, in cazul in care si obiectele au o functie de
+		Update va itera prin vectorul de obiecte si va apela Update-ul lor.
+	*/
 	for (const auto& o : sceneObjects)
 	{
 		o->update();

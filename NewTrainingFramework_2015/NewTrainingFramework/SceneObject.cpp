@@ -5,6 +5,8 @@
 #include <iostream>
 #include <algorithm>
 
+#define TO_RAD(x) ((x) * 0.0174533)
+
 SceneObject::SceneObject(GLint id)
 	:SceneObject{ id, Type::NORMAL }
 {
@@ -31,50 +33,50 @@ void SceneObject::draw()
 	else
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, model->getWiredboId());
 
-	if (shader->positionAttribute != -1)
+	// Get field attributes and uniforms
+	Fields fields = shader->getFields();
+
+	if (fields.positionAttribute != -1)
 	{
-		glEnableVertexAttribArray(shader->positionAttribute);
-		glVertexAttribPointer(shader->positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex_NFG), 0);
+		glEnableVertexAttribArray(fields.positionAttribute);
+		glVertexAttribPointer(fields.positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex_NFG), 0);
 	}
 
-	if (shader->unifMatrix != -1)
+	if (fields.unifMatrix != -1)
 	{
 		auto camera = SceneManager::getInstance()->getActiveCamera();
 		// TODO;
-		// Add rot, scale, position - matrices for object
-		glUniformMatrix4fv(shader->unifMatrix, 1, GL_FALSE, (float*)(camera->getViewMatrix() * camera->getProjMatrix()).m);
+		// Add rot, scale, position - matrices for object 
+		glUniformMatrix4fv(fields.unifMatrix, 1, GL_FALSE, (float*)(getModelMatrix() * camera->getViewMatrix() * camera->getProjMatrix()).m);
 	}
 
-	if (shader->isTextureUniform != -1)
+	if (fields.isTextureAttribute != -1)
 	{
-		glUniform1f(shader->isTextureUniform, (GLfloat) textures.size());
-
 		// TEXTURE/COLOR WORK
 		if (textures.size() > 0)
 		{
+			glVertexAttrib1f(fields.isTextureAttribute, 1.0f);
 			for (GLint index = 0; index < std::min<GLint>(32, textures.size()); ++index)
 			{
 				glActiveTexture(index + GL_TEXTURE0);
 				glBindTexture(textures[index]->getTextureResource()->type, textures[index]->getTextureId());
 
-				if (shader->uvAttribute != -1)
+				if (fields.uvAttribute != -1)
 				{
-					glEnableVertexAttribArray(shader->uvAttribute);
-					glVertexAttribPointer(shader->uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex_NFG), (void*)(5 * sizeof(Vector3)));
+					glEnableVertexAttribArray(fields.uvAttribute);
+					glVertexAttribPointer(fields.uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex_NFG), (void*)(5 * sizeof(Vector3)));
 				}
 
-				if (shader->textureUniform != -1)
+				if (fields.textureUniform != -1)
 				{
-					glUniform1i(shader->textureUniform, index); // Id = 0 deoarece este implicit o singura textura.
+					glUniform1i(fields.textureUniform, index); // Id = 0 deoarece este implicit o singura textura.
 				}
 			}
 		}
-		else if (shader->colorAttribute != -1)
+		else if (fields.colorAttribute != -1)
 		{
-			// GLfloat colors[] = { color.x, color.y, color.z };
-			// glDisableVertexAttribArray(shader->colorAttribute);
-			// glVertexAttrib3fv(shader->colorAttribute, colors);
-			// glVertexAttribPointer(shader->colorAttribute, 3, GL_FLOAT, GL_FALSE, 0, (float *)colors);
+			glVertexAttrib1f(fields.isTextureAttribute, 0.0f);
+			glVertexAttrib3f(fields.colorAttribute, color.x, color.y, color.z);
 		}
 	}
 
@@ -180,6 +182,22 @@ void SceneObject::setDepthTest(GLboolean depthTest)
 	this->depthTest = depthTest;
 }
 
+Matrix& SceneObject::getModelMatrix()
+{
+	// Lazy updates
+	if (modified) {
+		auto tran = modelMatrix.SetScale(scale);
+		tran = tran * modelMatrix.SetRotationX(rotation.x);
+		tran = tran * modelMatrix.SetRotationY(rotation.y);
+		tran = tran * modelMatrix.SetRotationZ(rotation.z);
+		tran = tran * modelMatrix.SetTranslation(position);
+		modelMatrix = tran;
+		modified = false;
+		// std::cout << modelMatrix << '\n'; // Checker
+	}
+	return modelMatrix;
+}
+
 Vector3& SceneObject::getPosition()
 {
 	return position;
@@ -188,6 +206,7 @@ Vector3& SceneObject::getPosition()
 void SceneObject::setPosition(Vector3& position)
 {
 	this->position = position;
+	modified = true;
 }
 
 Vector3& SceneObject::getRotation()
@@ -197,7 +216,10 @@ Vector3& SceneObject::getRotation()
 
 void SceneObject::setRotation(Vector3& rotation)
 {
-	this->rotation = rotation;
+	this->rotation.x = TO_RAD(rotation.x);
+	this->rotation.y = TO_RAD(rotation.y);
+	this->rotation.z = TO_RAD(rotation.z);
+	modified = true;
 }
 
 Vector3& SceneObject::getScale()
@@ -208,6 +230,7 @@ Vector3& SceneObject::getScale()
 void SceneObject::setScale(Vector3& scale)
 {
 	this->scale = scale;
+	modified = true;
 }
 
 Vector3& SceneObject::getColor()

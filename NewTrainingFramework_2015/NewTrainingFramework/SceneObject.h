@@ -20,6 +20,12 @@ class SceneObject
 	// Object name
 	std::string name;
 
+	// Modified lazily if 'modified' flag is true
+	Matrix modelMatrix;
+
+	// Flag stating if pos/rot/sca was modified
+	GLboolean modified;
+
 	// Pointer to its model
 	std::shared_ptr<Model> model;
 
@@ -31,6 +37,7 @@ class SceneObject
 
 	// Vector3 object properties
 	Vector3 position, rotation, scale, color;
+
 
 	// Pointer to its textures
 	std::vector<std::shared_ptr<Texture>> textures;
@@ -46,6 +53,12 @@ public:
 
 	// Constructors
 	SceneObject(GLint id);
+
+	// !TODO; Prevent code auto-generation
+	SceneObject(const SceneObject& copy) = delete;
+	SceneObject(SceneObject&& move) noexcept = delete;
+	SceneObject& operator=(const SceneObject& copy) = delete;
+	SceneObject& operator=(SceneObject&& move) noexcept = delete;
 
 	SceneObject(GLint id, Type type);
 
@@ -81,6 +94,8 @@ public:
 
 	GLboolean getDepthTest() const;
 	void setDepthTest(GLboolean depthTest);
+
+	Matrix& getModelMatrix();
 
 	Vector3& getPosition();
 	void setPosition(Vector3& position);

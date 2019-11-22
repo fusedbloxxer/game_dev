@@ -96,7 +96,7 @@ void ResourceManager::loadXML(rapidxml::xml_node<>* root) {
 
 				// For each element
 				for (auto element = folder->first_node(); element; element = element->next_sibling()) {
-					GLint id = std::atoi(element->first_attribute()->value());
+					GLint id = std::atoi(element->first_attribute("id")->value());
 
 					if (strcmp(type->name(), "models") == 0)
 					{

@@ -173,6 +173,7 @@
     <ClCompile Include="NewTrainingFramework.cpp" />
     <ClCompile Include="NFG.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneObject.cpp" />
@@ -203,10 +204,12 @@
     <ClInclude Include="NewTrainingFramework.h" />
     <ClInclude Include="NFG.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Fields.h" />
     <ClInclude Include="ShaderResource.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="Shaders1.h" />

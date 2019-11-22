@@ -1,34 +1,11 @@
 ﻿  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
-  Texture.cpp
-  SceneManager.cpp
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.h(41,12): warning C4240:  nonstandard extension used: access to 'SceneObject::Type' now defined to be 'public', previously it was defined to be 'private'
+  SceneObject.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.h(48,12): warning C4240:  nonstandard extension used: access to 'SceneObject::Type' now defined to be 'public', previously it was defined to be 'private'
 C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.h(12): message :  see declaration of 'SceneObject::Type'
 C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.h(23,12): warning C4240:  nonstandard extension used: access to 'Camera::Type' now defined to be 'public', previously it was defined to be 'private'
 C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.h(9): message :  see declaration of 'Camera::Type'
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(47,12): warning C4244:  '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(52,12): warning C4244:  '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(57,12): warning C4244:  '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(101,32): warning C4244:  'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(106,34): warning C4244:  'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(111,26): warning C4244:  'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(116,27): warning C4244:  'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(121,26): warning C4244:  'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1555,71): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1607): message :  see reference to function template instantiation 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<GLint&,GLint&,int>(GLint &,GLint &,int &&)' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1607): message :         with
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1607): message :         [
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1607): message :             _Ty=Camera
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1607): message :         ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1608): message :  see reference to function template instantiation 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<GLint&,GLint&,int>(GLint &,GLint &,int &&)' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1608): message :         with
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1608): message :         [
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1608): message :             _Ty=Camera
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1608): message :         ]
-  NewTrainingFramework.cpp
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(88): message :  see reference to function template instantiation 'std::shared_ptr<Camera> std::make_shared<Camera,GLint&,GLint&,int>(GLint &,GLint &,int &&)' being compiled
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.h(41,12): warning C4240:  nonstandard extension used: access to 'SceneObject::Type' now defined to be 'public', previously it was defined to be 'private'
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.h(12): message :  see declaration of 'SceneObject::Type'
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.h(23,12): warning C4240:  nonstandard extension used: access to 'Camera::Type' now defined to be 'public', previously it was defined to be 'private'
-  Generating Code...
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.h(9): message :  see declaration of 'Camera::Type'
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.cpp(219,21): warning C4244:  '=': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.cpp(220,21): warning C4244:  '=': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.cpp(221,21): warning C4244:  '=': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.cpp(118): warning C4715:  'SceneObject::atot': not all control paths return a value
   NewTrainingFramework.vcxproj -> C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\\BIN-Nvidia\NewTrainingFramework.exe

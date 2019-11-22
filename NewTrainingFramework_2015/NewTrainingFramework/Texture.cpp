@@ -3,7 +3,7 @@
 #include <iostream>
 
 Texture::Texture(std::shared_ptr<TextureResource> tr)
-	:textureId{}, tr{ tr }, holdsResources{ false }
+	:textureId{}, tr{ tr }
 {
 	// TODO;
 }

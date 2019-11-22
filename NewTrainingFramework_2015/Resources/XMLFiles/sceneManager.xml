@@ -87,23 +87,23 @@
 			</textures>
 			<position>
 				<x>0.0</x>
-				<y>0.0</y>
-				<z>0.0</z>
+				<y>-35.0</y>
+				<z>-235.0</z>
 			</position>
 			<rotation>
-				<x>0.5</x>
-				<y>1.4</y>
-				<z>1</z>
+				<x>0.0</x>
+				<y>225.0</y>
+				<z>0.0</z>
 			</rotation>
 			<scale>
-				<x>1.0</x>
-				<y>1.0</y>
-				<z>1.0</z>
+				<x>0.5</x>
+				<y>0.5</y>
+				<z>0.5</z>
 			</scale>
 		</object>
     
 		<object id="3">
-			<model>5</model>
+			<model>1</model>
 			<shader>3</shader>
 			<type>normal</type>
 			<name>Mesh_minge</name>
@@ -114,8 +114,8 @@
 				<b>0.0</b>
 			</color>
 			<position>
-				<x>3.5</x>
-				<y>0</y>
+				<x>0.0</x>
+				<y>0.0</y>
 				<z>0.0</z>
 			</position>
 			<rotation>
@@ -139,21 +139,21 @@
 				<texture id="14"/>
 				<texture id="15"/>
 			</textures>
-			<position>
-				<x>1.5</x>
-				<y>2.4</y>
-				<z>7</z>
-			</position>
-			<rotation>
-				<x>0.0</x>
-				<y>0.0</y>
-				<z>0.0</z>
-			</rotation>
-			<scale>
-				<x>1.0</x>
-				<y>1.0</y>
-				<z>1.0</z>
-			</scale>
+      <position>
+        <x>40.0</x>
+        <y>-45.0</y>
+        <z>-100.0</z>
+      </position>
+      <rotation>
+        <x>0.0</x>
+        <y>0.0</y>
+        <z>0.0</z>
+      </rotation>
+      <scale>
+        <x>0.25</x>
+        <y>0.25</y>
+        <z>0.25</z>
+      </scale>
 		</object>
 	</objects>
 </sceneManager>

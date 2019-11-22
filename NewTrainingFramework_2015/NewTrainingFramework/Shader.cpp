@@ -3,10 +3,9 @@
 #include <iostream>
 
 Shader::Shader(std::shared_ptr<ShaderResource> sr)
-	:programId{}, sr{ sr }, holdsResources{ false }
+	:programId{}, sr{ sr }
 {
-	// 
-
+	// TODO;
 }
 
 Shader& Shader::init(std::shared_ptr<ShaderResource> sr)
@@ -49,17 +48,17 @@ void Shader::load()
 	}
 
 	// Attributes
-	binormAttribute = glGetAttribLocation(programId, "a_binormL");
-	positionAttribute = glGetAttribLocation(programId, "a_posL");
-	colorAttribute = glGetAttribLocation(programId, "a_colorL");
-	normAttribute = glGetAttribLocation(programId, "a_normL");
-	tgtAttribute = glGetAttribLocation(programId, "a_tgtL");
-	uvAttribute = glGetAttribLocation(programId, "a_uvL");
+	fields.isTextureAttribute = glGetAttribLocation(programId, "a_isTextureL");
+	fields.binormAttribute = glGetAttribLocation(programId, "a_binormL");
+	fields.positionAttribute = glGetAttribLocation(programId, "a_posL");
+	fields.colorAttribute = glGetAttribLocation(programId, "a_colorL");
+	fields.normAttribute = glGetAttribLocation(programId, "a_normL");
+	fields.tgtAttribute = glGetAttribLocation(programId, "a_tgtL");
+	fields.uvAttribute = glGetAttribLocation(programId, "a_uvL");
 
 	// Uniforms
-	isTextureUniform = glGetUniformLocation(programId, "u_isTexture");
-	textureUniform = glGetUniformLocation(programId, "u_texture");
-	unifMatrix = glGetUniformLocation(programId, "u_matrix");
+	fields.textureUniform = glGetUniformLocation(programId, "u_texture");
+	fields.unifMatrix = glGetUniformLocation(programId, "u_matrix");
 
 	std::cout << "Program was linked successfully for id: " << sr->id << std::endl;
 	holdsResources = true;
@@ -99,6 +98,11 @@ GLuint Shader::getProgramId() const
 void Shader::setProgramId(GLuint programId)
 {
 	this->programId = programId;
+}
+
+Fields Shader::getFields() const
+{
+	return fields;
 }
 
 std::shared_ptr<ShaderResource> Shader::getShaderResource()

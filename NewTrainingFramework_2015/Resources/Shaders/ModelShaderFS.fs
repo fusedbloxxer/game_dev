@@ -1,14 +1,14 @@
 precision highp float;
 
 uniform sampler2D u_texture;
-uniform float u_isTexture;
+varying float v_isTexture;
 
 varying vec3 v_color;
 varying vec2 v_uv;
 
 void main()
 {
-	if (u_isTexture != 0.0)
+	if (v_isTexture != 0.0)
 	{
 		vec4 vecColor = texture2D(u_texture, v_uv);
 

@@ -29,9 +29,9 @@ void Model::load()
 }
 
 Model::Model(std::shared_ptr<ModelResource> mr)
-	:mr{ mr }, holdsResources{ false }
+	:mr{ mr }
 {
-	// 
+	// TODO;
 
 }
 
