@@ -5,15 +5,13 @@
 #include <iostream>
 #include <algorithm>
 
-#define TO_RAD(x) ((x) * 0.0174533)
-
 SceneObject::SceneObject(GLint id)
 	:SceneObject{ id, Type::NORMAL }
 {
 }
 
 SceneObject::SceneObject(GLint id, Type type)
-	: id{ id }, name{}, model{ nullptr }, shader{ nullptr }, textures{}, wiredFormat{ false }, depthTest{ false }, type{ type }
+	: id{ id }, name{}, model{ nullptr }, shader{ nullptr }, textures{}, wiredFormat{ false }, type{ type }
 {
 }
 
@@ -50,34 +48,31 @@ void SceneObject::draw()
 		glUniformMatrix4fv(fields.unifMatrix, 1, GL_FALSE, (float*)(getModelMatrix() * camera->getViewMatrix() * camera->getProjMatrix()).m);
 	}
 
-	if (fields.isTextureAttribute != -1)
+	// TEXTURE/COLOR WORK
+	if (fields.textureUniform != -1)
 	{
-		// TEXTURE/COLOR WORK
-		if (textures.size() > 0)
+		// In loc de 32 fa get si preia nr de texturi.
+		for (GLint index = 0; index < std::min<GLint>(32, textures.size()); ++index)
 		{
-			glVertexAttrib1f(fields.isTextureAttribute, 1.0f);
-			for (GLint index = 0; index < std::min<GLint>(32, textures.size()); ++index)
+			glActiveTexture(index + GL_TEXTURE0);
+			glBindTexture(textures[index]->getTextureResource()->type, textures[index]->getTextureId());
+
+			if (fields.uvAttribute != -1)
 			{
-				glActiveTexture(index + GL_TEXTURE0);
-				glBindTexture(textures[index]->getTextureResource()->type, textures[index]->getTextureId());
+				glEnableVertexAttribArray(fields.uvAttribute);
+				glVertexAttribPointer(fields.uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex_NFG), (void*)(5 * sizeof(Vector3)));
+			}
 
-				if (fields.uvAttribute != -1)
-				{
-					glEnableVertexAttribArray(fields.uvAttribute);
-					glVertexAttribPointer(fields.uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex_NFG), (void*)(5 * sizeof(Vector3)));
-				}
-
-				if (fields.textureUniform != -1)
-				{
-					glUniform1i(fields.textureUniform, index); // Id = 0 deoarece este implicit o singura textura.
-				}
+			if (fields.textureUniform != -1)
+			{
+				glUniform1i(fields.textureUniform, index); // Id = 0 deoarece este implicit o singura textura.
 			}
 		}
-		else if (fields.colorAttribute != -1)
-		{
-			glVertexAttrib1f(fields.isTextureAttribute, 0.0f);
-			glVertexAttrib3f(fields.colorAttribute, color.x, color.y, color.z);
-		}
+	}
+	
+	if (fields.colorAttribute != -1)
+	{
+		glVertexAttrib3f(fields.colorAttribute, color.x, color.y, color.z);
 	}
 
 	if (!wiredFormat)
@@ -170,16 +165,6 @@ GLboolean SceneObject::getWiredFormat() const
 void SceneObject::setWiredFormat(GLboolean wiredFormat)
 {
 	this->wiredFormat = wiredFormat;
-}
-
-GLboolean SceneObject::getDepthTest() const
-{
-	return depthTest;
-}
-
-void SceneObject::setDepthTest(GLboolean depthTest)
-{
-	this->depthTest = depthTest;
 }
 
 Matrix& SceneObject::getModelMatrix()

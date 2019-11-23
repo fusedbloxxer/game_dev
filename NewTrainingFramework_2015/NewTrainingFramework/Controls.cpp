@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-Controls atoc(const char* str)
+Controls::Type Controls::atoc(const char* str)
 {
 	if (strcmp(str, "MOVE_CAMERA_POSITIVE_X") == 0)
 	{
@@ -55,7 +55,7 @@ Controls atoc(const char* str)
 	}
 }
 
-unsigned char atok(const char* str)
+GLubyte Controls::atok(const char* str)
 {
 	if (strcmp(str, "VK_LEFT") == 0) {
 		return VK_LEFT;

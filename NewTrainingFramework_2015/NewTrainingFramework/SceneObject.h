@@ -9,6 +9,7 @@
 
 class SceneObject
 {
+protected:
 	enum Type;
 
 	// Object id
@@ -32,8 +33,8 @@ class SceneObject
 	// Pointer to its shader
 	std::shared_ptr<Shader> shader;
 
-	// Wiring and depth flags
-	GLboolean wiredFormat, depthTest;
+	// Wiring flag
+	GLboolean wiredFormat;
 
 	// Vector3 object properties
 	Vector3 position, rotation, scale, color;
@@ -91,9 +92,6 @@ public:
 
 	GLboolean getWiredFormat() const;
 	void setWiredFormat(GLboolean wiredFormat);
-
-	GLboolean getDepthTest() const;
-	void setDepthTest(GLboolean depthTest);
 
 	Matrix& getModelMatrix();
 

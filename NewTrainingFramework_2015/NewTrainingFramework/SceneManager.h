@@ -30,7 +30,7 @@ class SceneManager
 	GLboolean fullscreen;
 
 	// Window Context
-	ESContext esContext;
+	ESContext* esContext;
 
 	// Active camera
 	GLint activeCameraId;
@@ -38,8 +38,14 @@ class SceneManager
 	// Background color
 	Vector3 backgroundColor;
 
+	// Limit frames
+	GLfloat time, frameLimit;
+
+	// Map containing pressed keys
+	std::unordered_map<GLubyte, GLboolean> pressed;
+
 	// Key mapping
-	std::unordered_map<unsigned char, Controls> keyMap;
+	std::unordered_map<GLubyte, Controls::Type> keyMap;
 
 	// SceneObject mapping
 	std::vector<std::shared_ptr<SceneObject>> sceneObjects;
@@ -54,7 +60,7 @@ public:
 	static SceneManager* getInstance();
 
 	// Initializer
-	void init(const char* sceneManagerPath = "..\\Resources\\XMLFiles\\sceneManager.xml");
+	void init(ESContext* esContext, const char* sceneManagerPath = "..\\Resources\\XMLFiles\\sceneManager.xml");
 
 	// Draw Scene Objects
 	void draw();
@@ -67,6 +73,9 @@ public:
 
 	// Destructor
 	~SceneManager();
+
+	// Other methods
+	void pressKey(GLubyte key, GLboolean isPressed);
 
 	// Getters and setters
 	std::string getGameName() const;
@@ -89,8 +98,8 @@ public:
 
 	std::shared_ptr<Camera> getActiveCamera();
 
-	std::unordered_map<unsigned char, Controls>& getControls();
-	void setControls(std::unordered_map<unsigned char, Controls>& controls);
+	std::unordered_map<unsigned char, Controls::Type>& getControls();
+	void setControls(std::unordered_map<unsigned char, Controls::Type>& controls);
 
 	std::unordered_map<GLint, std::shared_ptr<Camera>>& getCameras();
 	void setCameras(std::unordered_map<GLint, std::shared_ptr<Camera>>& cameras);
@@ -98,6 +107,6 @@ public:
 	std::vector<std::shared_ptr<SceneObject>>& getSceneObjects();
 	void setSceneObjects(std::vector<std::shared_ptr<SceneObject>>& sceneObjects);
 
-	ESContext& getESContext();
-	void setESContext(ESContext esContext);
+	ESContext* getESContext();
+	void setESContext(ESContext* esContext);
 };

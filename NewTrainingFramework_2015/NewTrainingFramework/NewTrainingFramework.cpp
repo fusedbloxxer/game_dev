@@ -32,9 +32,10 @@ GLuint id_texture;
 int init(ESContext* esContext)
 {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glEnable(GL_DEPTH_TEST);
 
 	ResourceManager::getInstance()->init();
-	SceneManager::getInstance()->init();
+	SceneManager::getInstance()->init(esContext);
 
 	return 0;
 
@@ -284,7 +285,7 @@ void Update(ESContext* esContext, float deltaTime)
 	{
 		Globals::alpha = (Globals::alpha > 2 * PI) ? 2 * PI - Globals::alpha : Globals::alpha + Globals::pas;
 		// DO CALCULUS;
-		// Load tga
+		// Load tga;
 
 		if ((GetKeyState(VK_LBUTTON) & 0x100) != 0)
 		{
@@ -300,15 +301,12 @@ void Update(ESContext* esContext, float deltaTime)
 			}
 		}
 	}
+	SceneManager::getInstance()->update();
 }
 
 void Key(ESContext* esContext, unsigned char key, bool bIsPressed)
 {
-	auto controls = SceneManager::getInstance()->getControls();
-
-	if (bIsPressed && controls.find(key) != controls.end()) {
-		SceneManager::getInstance()->getActiveCamera()->execute(controls[key]);
-	}
+	SceneManager::getInstance()->pressKey(key, bIsPressed);
 }
 
 void CleanUp()
@@ -321,26 +319,20 @@ int _tmain(int argc, _TCHAR* argv[])
 	//identifying memory leaks
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	
-	/*
 	ESContext esContext;
 
 	esInitContext(&esContext);
 
-	esCreateWindow(&esContext, "Hello Triangle", Globals::screenWidth, Globals::screenHeight, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
-	*/
-	// if (init(&esContext) != 0)
-		// return 0;
+	esCreateWindow(&esContext, NULL, NULL, NULL, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
 	
-	ResourceManager::getInstance()->init();
-	SceneManager::getInstance()->init();
-	
-	glEnable(GL_DEPTH_TEST);
+	if (init(&esContext) != 0)
+		return 0;
 
-	esRegisterDrawFunc(&SceneManager::getInstance()->getESContext(), Draw);
-	esRegisterUpdateFunc(&SceneManager::getInstance()->getESContext(), Update);
-	esRegisterKeyFunc(&SceneManager::getInstance()->getESContext(), Key);
+	esRegisterDrawFunc(&esContext, Draw);
+	esRegisterUpdateFunc(&esContext, Update);
+	esRegisterKeyFunc(&esContext, Key);
 
-	esMainLoop(&SceneManager::getInstance()->getESContext());
+	esMainLoop(&esContext);
 
 	// Releasing OpenGL resources
 	CleanUp();

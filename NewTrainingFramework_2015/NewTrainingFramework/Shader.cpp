@@ -48,7 +48,6 @@ void Shader::load()
 	}
 
 	// Attributes
-	fields.isTextureAttribute = glGetAttribLocation(programId, "a_isTextureL");
 	fields.binormAttribute = glGetAttribLocation(programId, "a_binormL");
 	fields.positionAttribute = glGetAttribLocation(programId, "a_posL");
 	fields.colorAttribute = glGetAttribLocation(programId, "a_colorL");

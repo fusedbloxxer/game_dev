@@ -1,11 +1,7 @@
 ﻿  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
-  SceneObject.cpp
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.h(48,12): warning C4240:  nonstandard extension used: access to 'SceneObject::Type' now defined to be 'public', previously it was defined to be 'private'
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.h(12): message :  see declaration of 'SceneObject::Type'
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.h(23,12): warning C4240:  nonstandard extension used: access to 'Camera::Type' now defined to be 'public', previously it was defined to be 'private'
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.h(9): message :  see declaration of 'Camera::Type'
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.cpp(219,21): warning C4244:  '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.cpp(220,21): warning C4244:  '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.cpp(221,21): warning C4244:  '=': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.cpp(118): warning C4715:  'SceneObject::atot': not all control paths return a value
-  NewTrainingFramework.vcxproj -> C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\\BIN-Nvidia\NewTrainingFramework.exe
+  NewTrainingFramework.cpp
+C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.h(49,12): warning C4240:  nonstandard extension used: access to 'SceneObject::Type' now defined to be 'public', previously it was defined to be 'protected'
+C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.h(13): message :  see declaration of 'SceneObject::Type'
+C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.h(29,12): warning C4240:  nonstandard extension used: access to 'Camera::Type' now defined to be 'public', previously it was defined to be 'private'
+C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.h(9): message :  see declaration of 'Camera::Type'
+  NewTrainingFramework.vcxproj -> C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\\BIN-Nvidia\NewTrainingFramework.exe

@@ -8,6 +8,12 @@ class Camera
 {
 	enum Type;
 
+	// Flag if perspective was modified
+	GLboolean perspModified;
+
+	// Screen size
+	GLfloat width, height;
+
 	Type type; GLint id;
 	Vector3 target, position, up, xAxis, yAxis, zAxis;
 	Matrix viewMatrix, worldMatrix, projectionMatrix;

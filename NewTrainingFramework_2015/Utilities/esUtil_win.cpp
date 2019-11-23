@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <windows.h>
 #include "esUtil.h"
+#include <iostream>
 
 
 
@@ -17,7 +18,6 @@ LRESULT WINAPI ESWindowProc ( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
       case WM_PAINT:
          {
             ESContext *esContext = (ESContext*)(LONG_PTR) GetWindowLongPtr ( hWnd, GWL_USERDATA );
-            
             if ( esContext && esContext->drawFunc )
                esContext->drawFunc ( esContext );
             

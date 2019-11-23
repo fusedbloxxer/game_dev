@@ -18,9 +18,9 @@ Camera::Type Camera::atot(const char* str)
 }
 
 Camera::Camera(GLfloat width, GLfloat height, GLint id, Vector3& position, Vector3& target, Vector3& up, GLfloat moveSpeed, GLfloat rotateSpeed, GLfloat nearP, GLfloat farP, GLfloat fov, GLfloat deltaTime, Type type)
-	:id{ id }, target{ target }, position{ position }, up{ up }, moveSpeed{ moveSpeed }, rotateSpeed{ rotateSpeed }, nearP{ nearP }, farP{ farP }, fov{ fov }, deltaTime{ deltaTime }, type{ type }
+	:width{ width }, height{ height }, id{ id }, target{ target }, position{ position }, up{ up }, moveSpeed{ moveSpeed }, rotateSpeed{ rotateSpeed }, nearP{ nearP }, farP{ farP }, fov{ fov }, deltaTime{ deltaTime }, type{ type },
+	perspModified{ true }
 {
-	projectionMatrix.SetPerspective(RAD(fov), (GLfloat)width / (GLfloat)height, nearP, farP);
 	refreshAxis();
 }
 
@@ -52,7 +52,7 @@ void Camera::rotateOy(GLint directie)
 {
 	Matrix mRotateOy;
 	Vector4 localTarget = Vector4(0.0f, 0.0f, -(target - position).Length(), 1.0f);
-	Vector4 rotatedTarget = localTarget * mRotateOy.SetRotationY(directie * rotateSpeed * deltaTime);
+	Vector4 rotatedTarget = localTarget * mRotateOy.SetRotationY(TO_RAD(directie * rotateSpeed * deltaTime));
 	Vector4 result = rotatedTarget * worldMatrix;
 
 	target = Vector3(result.x, result.y, result.z);
@@ -61,7 +61,7 @@ void Camera::rotateOy(GLint directie)
 
 void Camera::rotateOx(GLint directie)
 {
-	Matrix mRotateOx; mRotateOx.SetRotationX(directie * rotateSpeed * deltaTime);
+	Matrix mRotateOx; mRotateOx.SetRotationX(TO_RAD(directie * rotateSpeed * deltaTime));
 
 	Vector4 rotatedLocalUp = Vector4(0.0f, 1.0f, 0.0f, 0.0f) * mRotateOx;
 	Vector4 resultUp = rotatedLocalUp * worldMatrix;
@@ -78,7 +78,7 @@ void Camera::rotateOx(GLint directie)
 
 void Camera::rotateOz(GLint directie)
 {
-	Matrix mRotateOz; mRotateOz.SetRotationZ(directie * rotateSpeed * deltaTime);
+	Matrix mRotateOz; mRotateOz.SetRotationZ(TO_RAD(directie * rotateSpeed * deltaTime));
 
 	Vector4 rotateLocalUp = Vector4{ 0.0f, 1.0f, 0.0f, 0.0f } *mRotateOz;
 	Vector4 resultUp = rotateLocalUp * worldMatrix;
@@ -116,6 +116,11 @@ Matrix& Camera::getWorldMatrix()
 
 Matrix& Camera::getProjMatrix()
 {
+	if (perspModified) {
+		// std::cout << "PROJ: " << width << " " << height << '\n';
+		projectionMatrix.SetPerspective(TO_RAD(fov), (GLfloat)width / (GLfloat)height, nearP, farP);
+		perspModified = false;
+	}
 	return projectionMatrix;
 }
 
@@ -190,6 +195,7 @@ GLfloat Camera::getNear() const
 void Camera::setNear(GLfloat nearP)
 {
 	this->nearP = nearP;
+	perspModified = true;
 }
 
 GLfloat Camera::getFar() const
@@ -200,6 +206,7 @@ GLfloat Camera::getFar() const
 void Camera::setFar(GLfloat farP)
 {
 	this->farP = farP;
+	perspModified = true;
 }
 
 GLfloat Camera::getFov() const
@@ -210,6 +217,7 @@ GLfloat Camera::getFov() const
 void Camera::setFov(GLfloat fov)
 {
 	this->fov = fov;
+	perspModified = true;
 }
 
 Camera::Type Camera::getType() const
@@ -231,40 +239,40 @@ void Camera::execute(GLubyte key)
 {
 	switch (key)
 	{
-	case Controls::MOVE_CAMERA_POSITIVE_X:
+	case Controls::Type::MOVE_CAMERA_POSITIVE_X:
 		this->moveOx(1);
 		break;
-	case Controls::MOVE_CAMERA_NEGATIVE_X:
+	case Controls::Type::MOVE_CAMERA_NEGATIVE_X:
 		this->moveOx(-1);
 		break;
-	case Controls::MOVE_CAMERA_POSITIVE_Y:
+	case Controls::Type::MOVE_CAMERA_POSITIVE_Y:
 		this->moveOy(-1);
 		break;
-	case Controls::MOVE_CAMERA_NEGATIVE_Y:
+	case Controls::Type::MOVE_CAMERA_NEGATIVE_Y:
 		this->moveOy(1);
 		break;
-	case Controls::MOVE_CAMERA_POSITIVE_Z:
+	case Controls::Type::MOVE_CAMERA_POSITIVE_Z:
 		this->moveOz(-1);
 		break;
-	case Controls::MOVE_CAMERA_NEGATIVE_Z:
+	case Controls::Type::MOVE_CAMERA_NEGATIVE_Z:
 		this->moveOz(1);
 		break;
-	case Controls::ROTATE_CAMERA_POSITIVE_X:
+	case Controls::Type::ROTATE_CAMERA_POSITIVE_X:
 		this->rotateOx(1);
 		break;
-	case Controls::ROTATE_CAMERA_NEGATIVE_X:
+	case Controls::Type::ROTATE_CAMERA_NEGATIVE_X:
 		this->rotateOx(-1);
 		break;
-	case Controls::ROTATE_CAMERA_POSITIVE_Y:
+	case Controls::Type::ROTATE_CAMERA_POSITIVE_Y:
 		this->rotateOy(-1);
 		break;
-	case Controls::ROTATE_CAMERA_NEGATIVE_Y:
+	case Controls::Type::ROTATE_CAMERA_NEGATIVE_Y:
 		this->rotateOy(1);
 		break;
-	case Controls::ROTATE_CAMERA_POSITIVE_Z:
+	case Controls::Type::ROTATE_CAMERA_POSITIVE_Z:
 		this->rotateOz(-1);
 		break;
-	case Controls::ROTATE_CAMERA_NEGATIVE_Z:
+	case Controls::Type::ROTATE_CAMERA_NEGATIVE_Z:
 		this->rotateOz(1);
 		break;
 	default:

@@ -12,7 +12,7 @@
 SceneManager* SceneManager::scManInstance = nullptr;
 
 SceneManager::SceneManager()
-	:width{ 960 }, height{ 720 }, fullscreen{ false }, backgroundColor{ Vector3{0.0f, 0.0f, 0.0f} }, activeCameraId{ 0 }, sceneObjects{}
+	:width{}, height{}, fullscreen{ false }, backgroundColor{ Vector3{0.0f, 0.0f, 0.0f} }, activeCameraId{ 0 }, sceneObjects{}
 {
 	// TODO;
 }
@@ -69,13 +69,13 @@ void SceneManager::loadXML(rapidxml::xml_node<>* root)
 }
 
 template<>
-void SceneManager::loadXML<Controls>(rapidxml::xml_node<>* root)
+void SceneManager::loadXML<Controls::Type>(rapidxml::xml_node<>* root)
 {
 	for (auto control = root->first_node("control"); control; control = control->next_sibling())
 	{
 		if (auto key = control->first_node("key"), action = control->first_node("action"); key && action)
 		{
-			keyMap[atok(key->value())] = atoc(action->value());
+			keyMap[Controls::atok(key->value())] = Controls::atoc(action->value());
 		}
 	}
 }
@@ -85,6 +85,7 @@ void SceneManager::loadXML<Camera>(rapidxml::xml_node<>* root)
 {
 	for (auto camera = root->first_node("camera"); camera; camera = camera->next_sibling())
 	{
+		std::cout << width << " " << height << '\n';
 		std::shared_ptr<Camera> cameraPtr = std::make_shared<Camera>(width, height, atoi(camera->first_attribute("id")->value()));
 
 		if (auto type = camera->first_node("type"))
@@ -143,24 +144,42 @@ void SceneManager::loadXML<GLint>(rapidxml::xml_node<>* root)
 	}
 }
 
+void getScreenSize(GLint& width, GLint& height)
+{
+	RECT desktop;
+	GetWindowRect(GetDesktopWindow(), &desktop);
+	width = desktop.right;
+	height = desktop.bottom;
+}
+
 template<>
 void SceneManager::loadXML<GLboolean>(rapidxml::xml_node<>* root)
 {
 	if (auto screenSize = root->first_node("defaultScreenSize")) {
-		if (screenSize->first_node("fullscreen")) {
+		auto fullPtr = screenSize->first_node("fullscreen");
+		auto widthPtr = screenSize->first_node("width");
+		auto heightPtr = screenSize->first_node("height");
+
+		if (fullPtr && (widthPtr || heightPtr))
+		{
+			std::cout << "Cannot specify fullscreen and width/height at the same time!";
+			abort();
+		}
+		else if (fullPtr)
+		{
 			fullscreen = true;
+			getScreenSize(width, height);
+		}
+		else if (widthPtr && heightPtr)
+		{
+			fullscreen = false;
+			width = atoi(widthPtr->value());
+			height = atoi(heightPtr->value());
 		}
 		else
 		{
-			fullscreen = false;
-			if (auto widthPtr = screenSize->first_node("width"))
-			{
-				width = atoi(widthPtr->value());
-			}
-			if (auto heightPtr = screenSize->first_node("height"))
-			{
-				height = atoi(heightPtr->value());
-			}
+			std::cout << "Could not fetch fullscreen/(width + height) properties.";
+			abort();
 		}
 	}
 }
@@ -192,7 +211,6 @@ void SceneManager::loadXML<SceneObject>(rapidxml::xml_node<>* root)
 			sceneObjectPtr->setName(name->value());
 		}
 
-		sceneObjectPtr->setDepthTest(object->first_node("depth") != nullptr);
 		sceneObjectPtr->setWiredFormat(object->first_node("wired") != nullptr);
 		sceneObjectPtr->setPosition(loadXML(object, "position", "x", "y", "z"));
 		sceneObjectPtr->setRotation(loadXML(object, "rotation", "x", "y", "z"));
@@ -229,10 +247,9 @@ SceneManager* SceneManager::getInstance()
 	return scManInstance;
 }
 
-void SceneManager::init(const char* sceneManagerPath)
+void SceneManager::init(ESContext* esContext, const char* sceneManagerPath)
 {
-	// Initialize ESContext
-	esInitContext(&esContext);
+	this->esContext = esContext;
 
 	std::ifstream input{ sceneManagerPath };
 	if (!input.is_open()) {
@@ -250,18 +267,29 @@ void SceneManager::init(const char* sceneManagerPath)
 	// Get game title
 	loadXML<std::string>(root);
 
+	// Set window title
+	SetWindowTextA(esContext->hWnd, gameName.c_str());
+
 	// Get fullscreen/screen size
 	loadXML<GLboolean>(root);
 
 	// Handle FULLSCREEN CASE !!! + IF DEPTH !!
 	// TODO;
-	esCreateWindow(&esContext, gameName.c_str(), width, height, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
+	// std::cout << "ES: "<< width << " " << height << '\n';
+	esContext->width = width;
+	esContext->height = height;
+	glViewport(0, 0, width, height);
+	SetWindowPos(esContext->hWnd, 0, 0, 0, width, height, SWP_SHOWWINDOW);
+	if (fullscreen)
+	{
+		ShowWindow(esContext->hWnd, SW_MAXIMIZE);
+	}
 
 	// Get vector3 containing background colors
 	backgroundColor = loadXML(root, "backgroundColor", "r", "g", "b");
 
 	// Load key-binds to map
-	loadXML<Controls>(root->first_node("controls"));
+	loadXML<Controls::Type>(root->first_node("controls"));
 
 	// Load cameras
 	loadXML<Camera>(root->first_node("cameras"));
@@ -305,6 +333,14 @@ void SceneManager::update()
 	{
 		o->update();
 	}
+
+	for (const auto& [key, isPressed] : pressed)
+	{
+		if (isPressed)
+		{
+			cameraMap[activeCameraId]->execute(key);
+		}
+	}
 }
 
 void SceneManager::freeResources()
@@ -319,6 +355,14 @@ SceneManager::~SceneManager()
 {
 	std::cout << "Destructor was called for SceneManager." << std::endl;
 	freeResources();
+}
+
+void SceneManager::pressKey(GLubyte key, GLboolean isPressed)
+{
+	if (keyMap.find(key) != keyMap.end())
+	{
+		pressed[keyMap[key]] = isPressed;
+	}
 }
 
 std::string SceneManager::getGameName() const
@@ -392,12 +436,12 @@ std::shared_ptr<Camera> SceneManager::getActiveCamera()
 	return nullptr;
 }
 
-std::unordered_map<unsigned char, Controls>& SceneManager::getControls()
+std::unordered_map<unsigned char, Controls::Type>& SceneManager::getControls()
 {
 	return keyMap;
 }
 
-void SceneManager::setControls(std::unordered_map<unsigned char, Controls>& controls)
+void SceneManager::setControls(std::unordered_map<unsigned char, Controls::Type>& controls)
 {
 	this->keyMap = controls;
 }
@@ -422,12 +466,12 @@ void SceneManager::setSceneObjects(std::vector<std::shared_ptr<SceneObject>>& sc
 	this->sceneObjects = sceneObjects;
 }
 
-ESContext& SceneManager::getESContext()
+ESContext* SceneManager::getESContext()
 {
 	return esContext;
 }
 
-void SceneManager::setESContext(ESContext esContext)
+void SceneManager::setESContext(ESContext* esContext)
 {
 	this->esContext = esContext;
 }

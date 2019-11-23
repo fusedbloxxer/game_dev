@@ -2,8 +2,6 @@
 #include "..\Utilities\utilities.h"
 
 struct Fields {
-	// Attributes
-	GLint isTextureAttribute;
 	GLint positionAttribute;
 	GLint binormAttribute;
 	GLint colorAttribute;

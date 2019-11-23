@@ -3,8 +3,7 @@
   <gameName>FusedBloxxer's Game Engine</gameName>
 	
   <defaultScreenSize>
-		<width>960</width>
-		<height>720</height>
+    <fullscreen/>
 	</defaultScreenSize>
 	
   <backgroundColor>
@@ -67,8 +66,8 @@
 				<y>1.0</y>
 				<z>0.0</z>
 			</up>
-			<translationSpeed>1000</translationSpeed>
-			<rotationSpeed>10</rotationSpeed>
+			<translationSpeed>100</translationSpeed>
+			<rotationSpeed>100</rotationSpeed>
 			<fov>45</fov>
 			<near>0.2</near>
 			<far>10000</far>
@@ -103,8 +102,8 @@
 		</object>
     
 		<object id="3">
-			<model>1</model>
-			<shader>3</shader>
+			<model>5</model>
+			<shader>5</shader>
 			<type>normal</type>
 			<name>Mesh_minge</name>
       <wired/>
