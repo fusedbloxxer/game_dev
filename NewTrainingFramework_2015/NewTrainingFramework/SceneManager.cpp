@@ -234,6 +234,7 @@ void SceneManager::loadXML<SceneObject>(rapidxml::xml_node<>* root)
 		GLint objId;
 		if (auto id = object->first_attribute("id"))
 		{
+			// TODO; handle case where multiple objects have the same id in file
 			objId = atoi(id->value());
 		}
 		else
