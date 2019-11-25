@@ -1,7 +1,3 @@
 ﻿  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
-  NewTrainingFramework.cpp
-C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.h(49,12): warning C4240:  nonstandard extension used: access to 'SceneObject::Type' now defined to be 'public', previously it was defined to be 'protected'
-C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneObject.h(13): message :  see declaration of 'SceneObject::Type'
-C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.h(29,12): warning C4240:  nonstandard extension used: access to 'Camera::Type' now defined to be 'public', previously it was defined to be 'private'
-C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\Camera.h(9): message :  see declaration of 'Camera::Type'
-  NewTrainingFramework.vcxproj -> C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\\BIN-Nvidia\NewTrainingFramework.exe
+  TerrainObject.cpp
+  NewTrainingFramework.vcxproj -> C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\NewTrainingFramework_2015\\BIN-Nvidia\NewTrainingFramework.exe

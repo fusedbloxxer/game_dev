@@ -25,251 +25,424 @@
     <Filter Include="Resources\XMLFiles">
       <UniqueIdentifier>{4b5c693b-0fdc-4d23-9f68-1e42c177ee9d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Interfaces">
+      <UniqueIdentifier>{24272d2b-27ef-4481-aff6-5c3556f66af7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\Old">
+      <UniqueIdentifier>{890390d0-f8b1-481f-8cd8-3be9df9b9c16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\Current">
+      <UniqueIdentifier>{6347af46-ca90-408d-8cd4-db58f02b9b6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Packet\Models">
+      <UniqueIdentifier>{0b7d20e8-c3a7-4f75-b312-7c7262ffa62d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Packet\Textures">
+      <UniqueIdentifier>{e4d06a39-238d-4b72-a81b-c11c4ff93c58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\XMLFiles\Old">
+      <UniqueIdentifier>{cd9eac81-da86-4800-a95d-6017ddadd994}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\XMLFiles\Current">
+      <UniqueIdentifier>{7726d649-1f1b-426e-aac6-b0e97b65df43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components">
+      <UniqueIdentifier>{76ceba19-fc32-4c83-be8b-9ce4cb8bae6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Old">
+      <UniqueIdentifier>{f4bac803-d10f-49e4-b0dc-26f3dbffb657}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\SceneManager">
+      <UniqueIdentifier>{d80f71b6-413f-4e5f-b41a-64f2221c3b82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\SceneManager\Objects">
+      <UniqueIdentifier>{ebcd438f-4a35-40fc-a4ef-7ee0121a196e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\ResourceManager">
+      <UniqueIdentifier>{c6e63a36-0970-45fd-b3b2-c9614b95b51b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\ResourceManager\Resources">
+      <UniqueIdentifier>{a63e3860-ddb3-4e4c-b8f5-d443c4bb4ee7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\ResourceManager\Loaders">
+      <UniqueIdentifier>{480757d8-b00e-43b0-9132-1ce38f3c4877}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\SceneManager\Camera">
+      <UniqueIdentifier>{8a94c4cd-b6ad-4542-b519-62900d401a40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\ResourceManager\Other">
+      <UniqueIdentifier>{1001ddb4-f4be-4e50-bc96-c4fbfd6c4a82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interfaces">
+      <UniqueIdentifier>{0ca2ca9d-0310-4f5b-8c2a-efba58f2d9b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{530d52df-8da4-478d-b5f8-c135ba9d15c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\ResourceManager">
+      <UniqueIdentifier>{f3c222c0-d6ce-4a91-8682-8c72111b6ae5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\SceneManager">
+      <UniqueIdentifier>{fad86903-bba2-411f-b976-5c1f1548fd36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\SceneManager\Camera">
+      <UniqueIdentifier>{ab0938fe-fad0-4d67-a8dc-2e1d2d9fbdaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\SceneManager\Objects">
+      <UniqueIdentifier>{06d0e453-fcff-4d12-8376-551f77fb384f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\ResourceManager\Loaders">
+      <UniqueIdentifier>{c7164aa9-fb09-4152-9780-4a8da7fa5910}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\ResourceManager\Resources">
+      <UniqueIdentifier>{fe4ea4b8-9c47-42b0-a756-e75be78b0507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\ResourceManager\Other">
+      <UniqueIdentifier>{c9012f10-c77f-4333-bea0-f5affe564bab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Old">
+      <UniqueIdentifier>{79340373-0fc1-4522-8d4b-486072683098}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NewTrainingFramework.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Shaders.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Loadable.cpp">
+      <Filter>Source Files\Interfaces</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Drawable.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Releaser.cpp">
+      <Filter>Source Files\Interfaces</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Globals.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Shaders1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Parser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NFG.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vertex_NFG.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Loadable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelResource.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderResource.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureResource.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Components\SceneManager\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Controls.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Components\SceneManager\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="SceneObject.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files\Components\ResourceManager\Loaders</Filter>
     </ClCompile>
-    <ClCompile Include="TerrainObject.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ModelResource.cpp">
+      <Filter>Source Files\Components\ResourceManager\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="SkyboxObject.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ModelShader.cpp">
+      <Filter>Source Files\Old</Filter>
+    </ClCompile>
+    <ClCompile Include="NFG.cpp">
+      <Filter>Source Files\Old</Filter>
+    </ClCompile>
+    <ClCompile Include="Globals.cpp">
+      <Filter>Source Files\Old</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser.cpp">
+      <Filter>Source Files\Components\ResourceManager\Other</Filter>
     </ClCompile>
     <ClCompile Include="Resource.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Components\ResourceManager\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files\Components\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Source Files\Components\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneObject.cpp">
+      <Filter>Source Files\Components\SceneManager\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\Components\ResourceManager\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderResource.cpp">
+      <Filter>Source Files\Components\ResourceManager\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Shaders.cpp">
+      <Filter>Source Files\Old</Filter>
+    </ClCompile>
+    <ClCompile Include="Shaders1.cpp">
+      <Filter>Source Files\Old</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyboxObject.cpp">
+      <Filter>Source Files\Components\SceneManager\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files\Old</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex_NFG.cpp">
+      <Filter>Source Files\Components\ResourceManager\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureResource.cpp">
+      <Filter>Source Files\Components\ResourceManager\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainObject.cpp">
+      <Filter>Source Files\Components\SceneManager\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedModel.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Components\ResourceManager\Loaders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Globals.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Drawable.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Loadable.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Releaser.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Header Files\Components\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Header Files\Components\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelShader.h">
+      <Filter>Header Files\Old</Filter>
+    </ClInclude>
+    <ClInclude Include="NFG.h">
+      <Filter>Header Files\Old</Filter>
     </ClInclude>
     <ClInclude Include="Shaders.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Old</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders1.h">
+      <Filter>Header Files\Old</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Old</Filter>
     </ClInclude>
     <ClInclude Include="Vertex.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Old</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files\Old</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneObject.h">
+      <Filter>Header Files\Components\SceneManager\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyboxObject.h">
+      <Filter>Header Files\Components\SceneManager\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainObject.h">
+      <Filter>Header Files\Components\SceneManager\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelResource.h">
+      <Filter>Header Files\Components\ResourceManager\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderResource.h">
+      <Filter>Header Files\Components\ResourceManager\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureResource.h">
+      <Filter>Header Files\Components\ResourceManager\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files\Components\ResourceManager\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\Components\ResourceManager\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Components\ResourceManager\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files\Components\ResourceManager\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Header Files\Old</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Components\SceneManager\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Controls.h">
+      <Filter>Header Files\Components\SceneManager\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.h">
+      <Filter>Header Files\Components\ResourceManager\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex_NFG.h">
+      <Filter>Header Files\Components\ResourceManager\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Fields.h">
+      <Filter>Header Files\Components\ResourceManager\Resources</Filter>
     </ClInclude>
     <ClInclude Include="NewTrainingFramework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Shaders1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Parser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NFG.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vertex_NFG.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelShader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Loadable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelResource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderResource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureResource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Controls.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TerrainObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SkyboxObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Fields.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="GeneratedModel.h">
+      <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Resources\Shaders\TriangleShaderFS.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\TriangleShaderVS.vs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
     <None Include="..\..\Readme.doc" />
     <None Include="..\Resources\Shaders\LineShaderFS.fs">
-      <Filter>Resources\Shaders</Filter>
+      <Filter>Resources\Shaders\Old</Filter>
     </None>
     <None Include="..\Resources\Shaders\LineShaderVS.vs">
-      <Filter>Resources\Shaders</Filter>
+      <Filter>Resources\Shaders\Old</Filter>
     </None>
-    <None Include="..\Resources\NewResourcesPacket\Models\Bila.nfg">
-      <Filter>Resources\Packet</Filter>
+    <None Include="..\Resources\Shaders\TriangleShaderFS.fs">
+      <Filter>Resources\Shaders\Old</Filter>
     </None>
-    <None Include="..\Resources\NewResourcesPacket\Models\bus.nfg">
-      <Filter>Resources\Packet</Filter>
-    </None>
-    <None Include="..\Resources\NewResourcesPacket\Models\Croco.nfg">
-      <Filter>Resources\Packet</Filter>
-    </None>
-    <None Include="..\Resources\NewResourcesPacket\Models\fire.nfg">
-      <Filter>Resources\Packet</Filter>
-    </None>
-    <None Include="..\Resources\NewResourcesPacket\Models\Goliath.nfg">
-      <Filter>Resources\Packet</Filter>
-    </None>
-    <None Include="..\Resources\NewResourcesPacket\Models\House.nfg">
-      <Filter>Resources\Packet</Filter>
-    </None>
-    <None Include="..\Resources\NewResourcesPacket\Models\Marine.nfg">
-      <Filter>Resources\Packet</Filter>
-    </None>
-    <None Include="..\Resources\NewResourcesPacket\Models\Radar.nfg">
-      <Filter>Resources\Packet</Filter>
-    </None>
-    <None Include="..\Resources\NewResourcesPacket\Models\SCV.nfg">
-      <Filter>Resources\Packet</Filter>
-    </None>
-    <None Include="..\Resources\NewResourcesPacket\Models\SkyBox.nfg">
-      <Filter>Resources\Packet</Filter>
-    </None>
-    <None Include="..\Resources\NewResourcesPacket\Models\Teran_Command_Center.nfg">
-      <Filter>Resources\Packet</Filter>
-    </None>
-    <None Include="..\Resources\NewResourcesPacket\Models\Terrain.nfg">
-      <Filter>Resources\Packet</Filter>
-    </None>
-    <None Include="..\Resources\NewResourcesPacket\Models\train.nfg">
-      <Filter>Resources\Packet</Filter>
-    </None>
-    <None Include="..\Resources\NewResourcesPacket\Models\water.nfg">
-      <Filter>Resources\Packet</Filter>
-    </None>
-    <None Include="..\Resources\NewResourcesPacket\Models\witch.nfg">
-      <Filter>Resources\Packet</Filter>
-    </None>
-    <None Include="..\Resources\NewResourcesPacket\Models\Woman1.nfg">
-      <Filter>Resources\Packet</Filter>
-    </None>
-    <None Include="..\Resources\NewResourcesPacket\Models\Woman2.nfg">
-      <Filter>Resources\Packet</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\ModelShaderFS.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\ModelShaderVS.vs">
-      <Filter>Resources\Shaders</Filter>
+    <None Include="..\Resources\Shaders\TriangleShaderVS.vs">
+      <Filter>Resources\Shaders\Old</Filter>
     </None>
     <None Include="..\Resources\Shaders\ColorShaderFS.fs">
-      <Filter>Resources\Shaders</Filter>
+      <Filter>Resources\Shaders\Current</Filter>
     </None>
     <None Include="..\Resources\Shaders\ColorShaderVS.vs">
-      <Filter>Resources\Shaders</Filter>
+      <Filter>Resources\Shaders\Current</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\ModelShaderFS.fs">
+      <Filter>Resources\Shaders\Current</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\ModelShaderVS.vs">
+      <Filter>Resources\Shaders\Current</Filter>
+    </None>
+    <None Include="..\Resources\NewResourcesPacket\Models\Bila.nfg">
+      <Filter>Resources\Packet\Models</Filter>
+    </None>
+    <None Include="..\Resources\NewResourcesPacket\Models\bus.nfg">
+      <Filter>Resources\Packet\Models</Filter>
+    </None>
+    <None Include="..\Resources\NewResourcesPacket\Models\Croco.nfg">
+      <Filter>Resources\Packet\Models</Filter>
+    </None>
+    <None Include="..\Resources\NewResourcesPacket\Models\fire.nfg">
+      <Filter>Resources\Packet\Models</Filter>
+    </None>
+    <None Include="..\Resources\NewResourcesPacket\Models\Goliath.nfg">
+      <Filter>Resources\Packet\Models</Filter>
+    </None>
+    <None Include="..\Resources\NewResourcesPacket\Models\House.nfg">
+      <Filter>Resources\Packet\Models</Filter>
+    </None>
+    <None Include="..\Resources\NewResourcesPacket\Models\Marine.nfg">
+      <Filter>Resources\Packet\Models</Filter>
+    </None>
+    <None Include="..\Resources\NewResourcesPacket\Models\Radar.nfg">
+      <Filter>Resources\Packet\Models</Filter>
+    </None>
+    <None Include="..\Resources\NewResourcesPacket\Models\SCV.nfg">
+      <Filter>Resources\Packet\Models</Filter>
+    </None>
+    <None Include="..\Resources\NewResourcesPacket\Models\SkyBox.nfg">
+      <Filter>Resources\Packet\Models</Filter>
+    </None>
+    <None Include="..\Resources\NewResourcesPacket\Models\Teran_Command_Center.nfg">
+      <Filter>Resources\Packet\Models</Filter>
+    </None>
+    <None Include="..\Resources\NewResourcesPacket\Models\Terrain.nfg">
+      <Filter>Resources\Packet\Models</Filter>
+    </None>
+    <None Include="..\Resources\NewResourcesPacket\Models\train.nfg">
+      <Filter>Resources\Packet\Models</Filter>
+    </None>
+    <None Include="..\Resources\NewResourcesPacket\Models\water.nfg">
+      <Filter>Resources\Packet\Models</Filter>
+    </None>
+    <None Include="..\Resources\NewResourcesPacket\Models\witch.nfg">
+      <Filter>Resources\Packet\Models</Filter>
+    </None>
+    <None Include="..\Resources\NewResourcesPacket\Models\Woman1.nfg">
+      <Filter>Resources\Packet\Models</Filter>
+    </None>
+    <None Include="..\Resources\NewResourcesPacket\Models\Woman2.nfg">
+      <Filter>Resources\Packet\Models</Filter>
+    </None>
+    <None Include="..\Resources\Packet\Textures\heightmap.raw">
+      <Filter>Resources\Packet\Textures</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\TerrainShaderVS.vs">
+      <Filter>Resources\Shaders\Current</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\TerrainShaderFS.fs">
+      <Filter>Resources\Shaders\Current</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Resources\XMLFiles\exemplu_xml.xml">
-      <Filter>Resources\XMLFiles</Filter>
+      <Filter>Resources\XMLFiles\Old</Filter>
     </Xml>
     <Xml Include="..\Resources\XMLFiles\resourceManager.xml">
-      <Filter>Resources\XMLFiles</Filter>
+      <Filter>Resources\XMLFiles\Current</Filter>
     </Xml>
     <Xml Include="..\Resources\XMLFiles\sceneManager.xml">
-      <Filter>Resources\XMLFiles</Filter>
+      <Filter>Resources\XMLFiles\Current</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resources\Packet\Textures\Bus.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\Croco.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\Dirt.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\DisplacementMap.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\envMap.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\fire_mask.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\fire3.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\Golitah.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\Grass.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\House.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\Marine.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\NormalMap.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\radar.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\Rock.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\SCV.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\Terrain_blend_map.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\Terran_Command_Center.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\Train.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\WaterNormal.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\Witch.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\Woman1.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Packet\Textures\Woman2.tga">
+      <Filter>Resources\Packet\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -9,14 +9,10 @@
 #include <cstdlib>
 #include <string>
 
-ResourceManager::ResourceManager()
-{
-	// TODO;
-}
+ResourceManager::ResourceManager() {}
 
 void ResourceManager::freeResources()
 {
-	// TODO;
 	modelResMap.clear();
 	shaderResMap.clear();
 	textureResMap.clear();
@@ -30,8 +26,7 @@ ResourceManager::~ResourceManager()
 
 template<typename Type>
 std::shared_ptr<Type> ResourceManager::load(GLint id) {
-	std::cerr << " ------ ! No specialization was made for this. ! ------ ";
-	abort();
+	throw std::runtime_error{ " ------ ! No specialization was made for this. ! ------ " };
 }
 
 template<>
@@ -46,8 +41,7 @@ std::shared_ptr<Model> ResourceManager::load<Model>(GLint id) {
 		return model;
 	}
 	else {
-		std::cout << "Model invalid index was detected: " << id << std::endl;
-		abort();
+		throw std::runtime_error{ "Model invalid index was detected: " };
 	}
 }
 
@@ -63,8 +57,7 @@ std::shared_ptr<Shader> ResourceManager::load<Shader>(GLint id) {
 		return shader;
 	}
 	else {
-		std::cout << "Shader invalid index was detected: " << id << std::endl;
-		abort();
+		throw std::runtime_error{ "Shader invalid index was detected: " };
 	}
 }
 
@@ -80,8 +73,7 @@ std::shared_ptr<Texture> ResourceManager::load<Texture>(GLint id) {
 		return texture;
 	}
 	else {
-		std::cout << "Texture invalid index was detected: " << id << std::endl;
-		abort();
+		throw std::runtime_error{ "Texture invalid index was detected: " };
 	}
 }
 
@@ -128,8 +120,7 @@ void ResourceManager::init(const char* resourceManagerPath)
 	// std::cout << std::filesystem::current_path() << '\n';
 
 	if (!input.is_open()) {
-		printf("Failed to open file: %s\n", resourceManagerPath);
-		abort();
+		throw std::runtime_error{ "Failed to open file: " + std::string{resourceManagerPath} };
 	}
 
 	std::stringstream ss; ss << input.rdbuf();

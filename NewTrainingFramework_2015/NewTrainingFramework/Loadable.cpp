@@ -2,7 +2,6 @@
 #include "Loadable.h"
 
 Loadable::Loadable()
-	:holdsResources{ false }
 {
 }
 

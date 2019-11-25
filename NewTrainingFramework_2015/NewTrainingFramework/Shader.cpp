@@ -3,10 +3,7 @@
 #include <iostream>
 
 Shader::Shader(std::shared_ptr<ShaderResource> sr)
-	:programId{}, sr{ sr }
-{
-	// TODO;
-}
+	:programId{}, sr{ sr }, fields{} {}
 
 Shader& Shader::init(std::shared_ptr<ShaderResource> sr)
 {
@@ -26,25 +23,19 @@ void Shader::load()
 	GLuint vertexShader = esLoadShader(GL_VERTEX_SHADER, const_cast<char*>(sr->vsShader.c_str()));
 
 	if (vertexShader == 0) {
-		std::cerr << "Failed to compile vertex shader for id: " << sr->id << ", vs: " << sr->vsShader << std::endl;
-		abort();
+		throw std::runtime_error{ "Failed to compile vertex shader." };
 	}
 
 	GLuint fragmentShader = esLoadShader(GL_FRAGMENT_SHADER, const_cast<char*>(sr->fsShader.c_str()));
 
 	if (fragmentShader == 0) {
-		std::cerr << "Failed to compile fragment shader for id: " << sr->id << ", fs: " << sr->fsShader << std::endl;
-		glDeleteShader(vertexShader);
-		abort();
+		throw std::runtime_error{ "Failed to compile fragment shader." };
 	}
 
 	programId = esLoadProgram(vertexShader, fragmentShader);
 
 	if (programId == 0) {
-		std::cerr << "Failed to link program for id: " << sr->id << ", (vs, fs): (" << sr->vsShader << ", " << sr->fsShader << ")\n";
-		glDeleteShader(vertexShader);
-		glDeleteShader(fragmentShader);
-		abort();
+		throw std::runtime_error{ "Failed to link program." };
 	}
 
 	// Attributes
@@ -53,11 +44,16 @@ void Shader::load()
 	fields.colorAttribute = glGetAttribLocation(programId, "a_colorL");
 	fields.normAttribute = glGetAttribLocation(programId, "a_normL");
 	fields.tgtAttribute = glGetAttribLocation(programId, "a_tgtL");
+	fields.uv2Attribute = glGetAttribLocation(programId, "a_uv2L");
 	fields.uvAttribute = glGetAttribLocation(programId, "a_uvL");
 
 	// Uniforms
-	fields.textureUniform = glGetUniformLocation(programId, "u_texture");
+	fields.heightUniform = glGetUniformLocation(programId, "u_height");
 	fields.unifMatrix = glGetUniformLocation(programId, "u_matrix");
+	for (GLuint i = 0; i < Fields::MAX_TEXTURES; ++i)
+	{
+		fields.textureUniform[i] = glGetUniformLocation(programId, ("u_texture_" + std::to_string(i)).c_str());
+	}
 
 	std::cout << "Program was linked successfully for id: " << sr->id << std::endl;
 	holdsResources = true;

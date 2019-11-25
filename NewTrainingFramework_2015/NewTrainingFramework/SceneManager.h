@@ -1,15 +1,15 @@
 #pragma once
 #include "..\\Utilities\\rapidxml-1.13\\rapidxml.hpp"
-#include "..\\Utilities\\utilities.h"
-#include "SceneObject.h"
 #include <unordered_map>
+#include "SceneObject.h"
 #include "Controls.h"
+#include "Releaser.h"
 #include "Camera.h"
 #include <string>
 #include <memory>
 #include <vector>
 
-class SceneManager
+class SceneManager : public Drawable, public Releaser
 {
 	// Singleton Instance
 	static SceneManager* scManInstance;
@@ -38,9 +38,6 @@ class SceneManager
 	// Background color
 	Vector3 backgroundColor;
 
-	// Limit frames
-	GLfloat time, frameLimit;
-
 	// Map containing pressed keys
 	std::unordered_map<GLubyte, GLboolean> pressed;
 
@@ -63,16 +60,16 @@ public:
 	void init(ESContext* esContext, const char* sceneManagerPath = "..\\Resources\\XMLFiles\\sceneManager.xml");
 
 	// Draw Scene Objects
-	void draw();
+	virtual void draw() override;
 
 	// Update Scene Objects
-	void update();
+	virtual void update() override;
 
 	// Free resources
-	void freeResources();
+	virtual void freeResources() override;
 
 	// Destructor
-	~SceneManager();
+	virtual ~SceneManager();
 
 	// Other methods
 	void pressKey(GLubyte key, GLboolean isPressed);
@@ -86,6 +83,9 @@ public:
 
 	GLint getHeight() const;
 	void setHeight(GLint height);
+
+	ESContext* getESContext();
+	void setESContext(ESContext* esContext);
 
 	bool isFullscreen() const;
 	void setFullscreen(GLboolean fullscreen);
@@ -106,7 +106,4 @@ public:
 
 	std::vector<std::shared_ptr<SceneObject>>& getSceneObjects();
 	void setSceneObjects(std::vector<std::shared_ptr<SceneObject>>& sceneObjects);
-
-	ESContext* getESContext();
-	void setESContext(ESContext* esContext);
 };

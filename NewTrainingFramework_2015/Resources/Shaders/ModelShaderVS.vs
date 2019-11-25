@@ -6,7 +6,7 @@ attribute vec3 a_posL;
 attribute vec2 a_uvL;
 
 uniform mat4 u_matrix;
-uniform sampler2D u_texture;
+uniform sampler2D u_texture_0;
 
 varying vec2 v_uv;
 varying vec3 v_color;

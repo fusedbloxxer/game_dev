@@ -6,7 +6,7 @@
 //Vector2
 constexpr GLfloat PI = 3.1415926535897f;
 
-#define TO_RAD(x) ((x) * 0.0174533)
+#define TO_RAD(x) ((x) * 0.0174533f)
 
 class Vector2
 {

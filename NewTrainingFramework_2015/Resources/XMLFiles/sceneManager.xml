@@ -50,7 +50,7 @@
 	<cameras>
 		<camera id="1">
 			<comment>elemntul type este folosit doar in taskul optional cu tipurile de Camera </comment>
-			<type>firstPerson</type>
+      <type>firstPerson</type>
 			<position>
 				<x>0.0</x>
 				<y>0.0</y>
@@ -66,11 +66,11 @@
 				<y>1.0</y>
 				<z>0.0</z>
 			</up>
-			<translationSpeed>100</translationSpeed>
-			<rotationSpeed>100</rotationSpeed>
+			<translationSpeed>250</translationSpeed>
+			<rotationSpeed>150</rotationSpeed>
 			<fov>45</fov>
 			<near>0.2</near>
-			<far>10000</far>
+			<far>1000</far>
 		</camera>
 	</cameras>
 	<activeCamera>1</activeCamera>
@@ -86,7 +86,7 @@
 			</textures>
 			<position>
 				<x>0.0</x>
-				<y>-35.0</y>
+				<y>20.0</y>
 				<z>-235.0</z>
 			</position>
 			<rotation>
@@ -109,8 +109,8 @@
       <wired/>
       <color>
 				<r>1.0</r>
-				<g>0.0</g>
-				<b>0.0</b>
+				<g>1.0</g>
+				<b>1.0</b>
 			</color>
 			<position>
 				<x>0.0</x>
@@ -123,25 +123,43 @@
 				<z>0</z>
 			</rotation>
 			<scale>
-				<x>1.0</x>
-				<y>1.0</y>
-				<z>1.0</z>
+				<x>5.0</x>
+				<y>5.0</y>
+				<z>5.0</z>
 			</scale>
 		</object>
-		
-		<object id="8">
-			<model>5</model>
-			<shader>3</shader>
-			<type>terrain</type>
-			<name>Teren</name>
-			<textures>
-				<texture id="14"/>
-				<texture id="15"/>
-			</textures>
+
+    <object id="8">
+      <model>generated</model>
+      <shader>4</shader>
+      <type>terrain</type>
+      <name>Teren</name>
+      <colorBind>
+        <r>16</r>
+        <g>15</g>
+        <b>14</b>
+        <blend>17</blend>
+      </colorBind>
+      <height>
+        <r>85</r>
+        <g>-20</g>
+        <b>50</b>
+      </height>
+      <cells>
+        <count>50.0</count>
+        <size>35.0</size>
+        <offsetY>0.0</offsetY>
+      </cells>
+      <textures>
+        <texture id="14"/> <!-- Rock -->
+        <texture id="15"/> <!-- Dirt -->
+        <texture id="16"/> <!-- Grass -->
+        <texture id="17"/>
+      </textures>
       <position>
-        <x>40.0</x>
-        <y>-45.0</y>
-        <z>-100.0</z>
+        <x>0.0</x>
+        <y>0.0</y>
+        <z>0.0</z>
       </position>
       <rotation>
         <x>0.0</x>
@@ -149,10 +167,10 @@
         <z>0.0</z>
       </rotation>
       <scale>
-        <x>0.25</x>
-        <y>0.25</y>
-        <z>0.25</z>
+        <x>1.0</x>
+        <y>1.0</y>
+        <z>1.0</z>
       </scale>
-		</object>
+    </object>
 	</objects>
 </sceneManager>

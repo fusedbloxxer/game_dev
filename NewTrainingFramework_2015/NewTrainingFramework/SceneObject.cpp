@@ -1,27 +1,16 @@
 #include "stdafx.h"
 #include "SceneManager.h"
-#include "SceneObject.h"
 #include "Vertex_NFG.h"
-#include <iostream>
 #include <algorithm>
 
 SceneObject::SceneObject(GLint id)
-	:SceneObject{ id, Type::NORMAL }
-{
-}
+	:SceneObject{ id, Type::NORMAL } {}
 
 SceneObject::SceneObject(GLint id, Type type)
-	: id{ id }, name{}, model{ nullptr }, shader{ nullptr }, textures{}, wiredFormat{ false }, type{ type }
-{
-}
+	: id{ id }, name{}, model{ nullptr }, shader{ nullptr }, textures{}, wiredFormat{ false }, type{ type }, modified{ false } {}
 
 void SceneObject::draw()
 {
-	// TODO; Generated case
-	if (model == nullptr) {
-		return;
-	}
-
 	glUseProgram(shader->getProgramId());
 
 	glBindBuffer(GL_ARRAY_BUFFER, model->getVboId());
@@ -43,33 +32,26 @@ void SceneObject::draw()
 	if (fields.unifMatrix != -1)
 	{
 		auto camera = SceneManager::getInstance()->getActiveCamera();
-		// TODO;
-		// Add rot, scale, position - matrices for object 
 		glUniformMatrix4fv(fields.unifMatrix, 1, GL_FALSE, (float*)(getModelMatrix() * camera->getViewMatrix() * camera->getProjMatrix()).m);
 	}
 
-	// TEXTURE/COLOR WORK
-	if (fields.textureUniform != -1)
+	if (fields.uvAttribute != -1)
 	{
-		// In loc de 32 fa get si preia nr de texturi.
-		for (GLint index = 0; index < std::min<GLint>(32, textures.size()); ++index)
+		glEnableVertexAttribArray(fields.uvAttribute);
+		glVertexAttribPointer(fields.uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex_NFG), (void*)(5 * sizeof(Vector3)));
+	}
+
+	for (GLuint index = 0; index < std::min<GLuint>(Fields::MAX_TEXTURES, textures.size()); ++index)
+	{
+		glActiveTexture(index + GL_TEXTURE0);
+		glBindTexture(textures[index]->getTextureResource()->type, textures[index]->getTextureId());
+
+		if (fields.textureUniform[index] != -1)
 		{
-			glActiveTexture(index + GL_TEXTURE0);
-			glBindTexture(textures[index]->getTextureResource()->type, textures[index]->getTextureId());
-
-			if (fields.uvAttribute != -1)
-			{
-				glEnableVertexAttribArray(fields.uvAttribute);
-				glVertexAttribPointer(fields.uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex_NFG), (void*)(5 * sizeof(Vector3)));
-			}
-
-			if (fields.textureUniform != -1)
-			{
-				glUniform1i(fields.textureUniform, index); // Id = 0 deoarece este implicit o singura textura.
-			}
+			glUniform1i(fields.textureUniform[index], index);
 		}
 	}
-	
+
 	if (fields.colorAttribute != -1)
 	{
 		glVertexAttrib3f(fields.colorAttribute, color.x, color.y, color.z);
@@ -101,15 +83,12 @@ SceneObject::Type SceneObject::atot(const char* type)
 		return NORMAL;
 	}
 	else if (strcmp(type, "terrain") == 0) {
-		//return TERRAIN;
+		return TERRAIN;
 	}
 	else if (strcmp(type, "skybox") == 0) {
-		//return SKYBOX;
+		return SKYBOX;
 	}
-	else {
-		std::cerr << "INVALID CONST CHAR * - SceneObject::Type CONVERSION: " << type << std::endl;
-		abort();
-	}
+	throw std::runtime_error{ "INVALID CONST CHAR * - SceneObject::Type CONVERSION" };
 }
 
 GLint SceneObject::getId() const
@@ -178,7 +157,6 @@ Matrix& SceneObject::getModelMatrix()
 		tran = tran * modelMatrix.SetTranslation(position);
 		modelMatrix = tran;
 		modified = false;
-		// std::cout << modelMatrix << '\n'; // Checker
 	}
 	return modelMatrix;
 }
@@ -201,9 +179,9 @@ Vector3& SceneObject::getRotation()
 
 void SceneObject::setRotation(Vector3& rotation)
 {
-	this->rotation.x = TO_RAD(rotation.x);
-	this->rotation.y = TO_RAD(rotation.y);
-	this->rotation.z = TO_RAD(rotation.z);
+	this->rotation.x = GLfloat(TO_RAD(rotation.x));
+	this->rotation.y = GLfloat(TO_RAD(rotation.y));
+	this->rotation.z = GLfloat(TO_RAD(rotation.z));
 	modified = true;
 }
 

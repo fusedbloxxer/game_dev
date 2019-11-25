@@ -5,35 +5,11 @@
 void Model::load()
 {
 	auto pair = Parser::parseFile(mr->file.c_str());
-	glGenBuffers(3, &iboId);
-	noInd = pair.second.size();
-
-	// Load vertices into buffer
-	glBindBuffer(GL_ARRAY_BUFFER, vboId);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex_NFG) * pair.first.size(), pair.first.data(), GL_STATIC_DRAW);
-
-	// Load indexes into buffer
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * noInd, pair.second.data(), GL_STATIC_DRAW);
-
-	// Create wireframe indexes
-	auto wireframe = getWired(pair.second);
-	noIndWired = wireframe.size();
-
-	// Load wirefram indexes into buffer
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, wiredboId);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * noIndWired, wireframe.data(), GL_STATIC_DRAW);
-
-	std::cout << "Model with id: " << mr->id << " was loaded successfully." << std::endl;
-	holdsResources = true;
+	load<Vertex_NFG>(pair.first, pair.second);
 }
 
 Model::Model(std::shared_ptr<ModelResource> mr)
-	:mr{ mr }
-{
-	// TODO;
-
-}
+	:mr{ mr }, iboId{}, noInd{}, noIndWired{}, vboId{}, wiredboId{} {}
 
 Model& Model::init(std::shared_ptr<ModelResource> mr)
 {
@@ -44,8 +20,42 @@ Model& Model::init(std::shared_ptr<ModelResource> mr)
 
 Model::~Model()
 {
-	std::cout << "Model destructor with id " << mr->id << " was called." << std::endl;
 	freeResources();
+	if (mr)
+	{
+		std::cout << "Model destructor with id " << mr->id << " was called." << std::endl;
+	}
+	else
+	{
+		std::cout << "Generated model was destroyed." << std::endl;
+	}
+}
+
+std::vector<GLushort> Model::getWired(const std::vector<GLushort>& indexes)
+{
+	std::vector<GLushort> wired;
+
+	for (size_t i = 0; i < indexes.size(); i += 3)
+	{
+		wired.push_back(indexes[i]);
+		wired.push_back(indexes[i + 1]);
+
+		wired.push_back(indexes[i + 1]);
+		wired.push_back(indexes[i + 2]);
+
+		wired.push_back(indexes[i + 2]);
+		wired.push_back(indexes[i]);
+	}
+
+	return wired;
+}
+
+void Model::freeResources()
+{
+	if (holdsResources) {
+		glDeleteBuffers(3, &iboId);
+		holdsResources = false;
+	}
 }
 
 GLuint Model::getIboId() const
@@ -106,31 +116,4 @@ std::shared_ptr<ModelResource> Model::getModelResource()
 void Model::setModelResource(std::shared_ptr<ModelResource> mr)
 {
 	this->mr = mr;
-}
-
-std::vector<GLushort> Model::getWired(const std::vector<GLushort>& indexes)
-{
-	std::vector<GLushort> wired;
-
-	for (int i = 0; i < indexes.size(); i += 3)
-	{
-		wired.push_back(indexes[i]);
-		wired.push_back(indexes[i + 1]);
-
-		wired.push_back(indexes[i + 1]);
-		wired.push_back(indexes[i + 2]);
-
-		wired.push_back(indexes[i + 2]);
-		wired.push_back(indexes[i]);
-	}
-
-	return wired;
-}
-
-void Model::freeResources()
-{
-	if (holdsResources) {
-		glDeleteBuffers(3, &iboId);
-		holdsResources = false;
-	}
 }

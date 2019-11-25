@@ -6,8 +6,14 @@
 
 class Camera
 {
-	enum Type;
+public:
+	// Camera Type
+	enum Type {
+		FIRST_PERSON,
+		THIRD_PERSON
+	};
 
+private:
 	// Flag if perspective was modified
 	GLboolean perspModified;
 
@@ -25,24 +31,19 @@ public:
 
 	static Type atot(const char* str);
 
-	// Camera Type
-	enum Type {
-		FIRST_PERSON,
-		THIRD_PERSON
-	};
 
 	// Has default values.
 	Camera(GLfloat width, GLfloat height, GLint id, Vector3& position = Vector3{ 0.0f, 0.0f, 0.0f }, Vector3& target = Vector3{ 0.0f, 0.0f, 0.0f }, Vector3& up = Vector3{ 0.0f, 1.0f, 0.0f }, GLfloat moveSpeed = 3.0f, GLfloat rotateSpeed = 3.0f, GLfloat nearP = 0.2f, GLfloat farP = 10000.0f, GLfloat fov = 45.0f, GLfloat deltaTime = 0.0f, Type type = Type::FIRST_PERSON);
 
 	// Move functions
-	void moveOz(GLint directie);
-	void moveOx(GLint directie);
-	void moveOy(GLint directie);
+	void moveOz(GLfloat directie);
+	void moveOx(GLfloat directie);
+	void moveOy(GLfloat directie);
 
 	// Rotate functions
-	void rotateOy(GLint directie);
-	void rotateOx(GLint directie);
-	void rotateOz(GLint directie);
+	void rotateOy(GLfloat directie);
+	void rotateOx(GLfloat directie);
+	void rotateOz(GLfloat directie);
 	
 	// Execute control operations
 	void execute(GLubyte key);

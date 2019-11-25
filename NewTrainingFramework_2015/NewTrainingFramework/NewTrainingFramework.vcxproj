@@ -165,6 +165,8 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Controls.cpp" />
+    <ClCompile Include="Drawable.cpp" />
+    <ClCompile Include="GeneratedModel.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Loadable.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -173,6 +175,7 @@
     <ClCompile Include="NewTrainingFramework.cpp" />
     <ClCompile Include="NFG.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="Releaser.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -196,6 +199,8 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Controls.h" />
+    <ClInclude Include="Drawable.h" />
+    <ClInclude Include="GeneratedModel.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Loadable.h" />
     <ClInclude Include="Model.h" />
@@ -204,6 +209,7 @@
     <ClInclude Include="NewTrainingFramework.h" />
     <ClInclude Include="NFG.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="Releaser.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SceneManager.h" />
@@ -240,12 +246,15 @@
     <None Include="..\Resources\NewResourcesPacket\Models\witch.nfg" />
     <None Include="..\Resources\NewResourcesPacket\Models\Woman1.nfg" />
     <None Include="..\Resources\NewResourcesPacket\Models\Woman2.nfg" />
+    <None Include="..\Resources\Packet\Textures\heightmap.raw" />
     <None Include="..\Resources\Shaders\ColorShaderFS.fs" />
     <None Include="..\Resources\Shaders\ColorShaderVS.vs" />
     <None Include="..\Resources\Shaders\LineShaderFS.fs" />
     <None Include="..\Resources\Shaders\LineShaderVS.vs" />
     <None Include="..\Resources\Shaders\ModelShaderFS.fs" />
     <None Include="..\Resources\Shaders\ModelShaderVS.vs" />
+    <None Include="..\Resources\Shaders\TerrainShaderFS.fs" />
+    <None Include="..\Resources\Shaders\TerrainShaderVS.vs" />
     <None Include="..\Resources\Shaders\TriangleShaderFS.fs" />
     <None Include="..\Resources\Shaders\TriangleShaderVS.vs" />
     <None Include="..\..\Readme.doc" />
@@ -260,6 +269,30 @@
     <Xml Include="..\Resources\XMLFiles\exemplu_xml.xml" />
     <Xml Include="..\Resources\XMLFiles\resourceManager.xml" />
     <Xml Include="..\Resources\XMLFiles\sceneManager.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resources\Packet\Textures\Bus.tga" />
+    <Image Include="..\Resources\Packet\Textures\Croco.tga" />
+    <Image Include="..\Resources\Packet\Textures\Dirt.tga" />
+    <Image Include="..\Resources\Packet\Textures\DisplacementMap.tga" />
+    <Image Include="..\Resources\Packet\Textures\envMap.tga" />
+    <Image Include="..\Resources\Packet\Textures\fire3.tga" />
+    <Image Include="..\Resources\Packet\Textures\fire_mask.tga" />
+    <Image Include="..\Resources\Packet\Textures\Golitah.tga" />
+    <Image Include="..\Resources\Packet\Textures\Grass.tga" />
+    <Image Include="..\Resources\Packet\Textures\House.tga" />
+    <Image Include="..\Resources\Packet\Textures\Marine.tga" />
+    <Image Include="..\Resources\Packet\Textures\NormalMap.tga" />
+    <Image Include="..\Resources\Packet\Textures\radar.tga" />
+    <Image Include="..\Resources\Packet\Textures\Rock.tga" />
+    <Image Include="..\Resources\Packet\Textures\SCV.tga" />
+    <Image Include="..\Resources\Packet\Textures\Terrain_blend_map.tga" />
+    <Image Include="..\Resources\Packet\Textures\Terran_Command_Center.tga" />
+    <Image Include="..\Resources\Packet\Textures\Train.tga" />
+    <Image Include="..\Resources\Packet\Textures\WaterNormal.tga" />
+    <Image Include="..\Resources\Packet\Textures\Witch.tga" />
+    <Image Include="..\Resources\Packet\Textures\Woman1.tga" />
+    <Image Include="..\Resources\Packet\Textures\Woman2.tga" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

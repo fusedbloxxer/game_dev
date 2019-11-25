@@ -40,6 +40,9 @@ public:
 	template<typename Type>
 	std::shared_ptr<Type> load(GLint id);
 
+	// Add generated model
+	// std::shared_ptr<Model> load(std::vector<)
+
 	// Get Singleton Instance
 	static ResourceManager* getInstance();
 

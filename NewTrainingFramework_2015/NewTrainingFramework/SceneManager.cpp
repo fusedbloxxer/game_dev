@@ -3,8 +3,8 @@
 #include "TerrainObject.h"
 #include "SceneManager.h"
 #include "SkyboxObject.h"
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -12,29 +12,8 @@
 SceneManager* SceneManager::scManInstance = nullptr;
 
 SceneManager::SceneManager()
-	:width{}, height{}, fullscreen{ false }, backgroundColor{ Vector3{0.0f, 0.0f, 0.0f} }, activeCameraId{ 0 }, sceneObjects{}
-{
-	// TODO;
-}
-
-std::ostream& operator<<(std::ostream& os, const SceneManager& sceneManager)
-{
-	os << "Game Name:\n\t" << sceneManager.gameName << '\n'
-		<< "\tDefault Screen Size: " << (sceneManager.fullscreen ? "FULLSCREEN" : "FALSE") << ", (" << sceneManager.width << ", " << sceneManager.height << ")\n"
-		<< "\tBackground Color: (" << sceneManager.backgroundColor.x << ", " << sceneManager.backgroundColor.y << ", " << sceneManager.backgroundColor.z << ")\n"
-		<< "\tActive Camera: " << sceneManager.activeCameraId << std::endl
-		<< "\tControls:" << std::endl;
-
-	std::for_each(sceneManager.keyMap.begin(), sceneManager.keyMap.end(),
-		[](const auto& e) { std::cout << "\t\tMapId = " << e.first << ", " << e.second << std::endl; });
-
-	os << "\tCameras:" << std::endl;
-
-	std::for_each(sceneManager.cameraMap.begin(), sceneManager.cameraMap.end(),
-		[](const auto& e) { std::cout << "\t\tMapId = " << e.first << ", " << *e.second << std::endl; });
-
-	return os;
-}
+	:width{}, height{}, fullscreen{ false }, backgroundColor{ Vector3{0.0f, 0.0f, 0.0f} },
+	activeCameraId{ 0 }, sceneObjects{}, esContext{ nullptr } {}
 
 Vector3 SceneManager::loadXML(rapidxml::xml_node<>* root, const char* node, const char xP[2], const char yP[2], const char zP[2]) const
 {
@@ -44,28 +23,33 @@ Vector3 SceneManager::loadXML(rapidxml::xml_node<>* root, const char* node, cons
 	{
 		if (auto xPos = position->first_node(xP))
 		{
-			x = atof(xPos->value());
+			x = GLfloat(atof(xPos->value()));
+		}
+		else
+		{
+			throw std::runtime_error{ "X value is missing from resourceManager" };
 		}
 
 		if (auto yPos = position->first_node(yP))
 		{
-			y = atof(yPos->value());
+			y = GLfloat(atof(yPos->value()));
+		}
+		else
+		{
+			throw std::runtime_error{ "Y value is missing from resourceManager" };
 		}
 
 		if (auto zPos = position->first_node(zP))
 		{
-			z = atof(zPos->value());
+			z = GLfloat(atof(zPos->value()));
+		}
+		else
+		{
+			throw std::runtime_error{ "Z value is missing from resourceManager" };
 		}
 	}
 
-	return { x, y, z };
-}
-
-template<typename Config>
-void SceneManager::loadXML(rapidxml::xml_node<>* root)
-{
-	std::cerr << " ------ ! No specialization was made for this. ! ------ ";
-	abort();
+	return { x, y, z }; // Default: (0, 0, 0)
 }
 
 template<>
@@ -77,6 +61,10 @@ void SceneManager::loadXML<Controls::Type>(rapidxml::xml_node<>* root)
 		{
 			keyMap[Controls::atok(key->value())] = Controls::atoc(action->value());
 		}
+		else
+		{
+			throw std::runtime_error{ "Key-Action pair is missing from controls in sceneManager." };
+		}
 	}
 }
 
@@ -85,12 +73,24 @@ void SceneManager::loadXML<Camera>(rapidxml::xml_node<>* root)
 {
 	for (auto camera = root->first_node("camera"); camera; camera = camera->next_sibling())
 	{
-		std::cout << width << " " << height << '\n';
-		std::shared_ptr<Camera> cameraPtr = std::make_shared<Camera>(width, height, atoi(camera->first_attribute("id")->value()));
+		std::shared_ptr<Camera> cameraPtr;
+
+		if (auto id = camera->first_attribute("id"))
+		{
+			cameraPtr = std::make_shared<Camera>(width, height, atoi(camera->first_attribute("id")->value()));
+		}
+		else
+		{
+			throw std::runtime_error{ "No camera id was detected for a camera in sceneManager." };
+		}
 
 		if (auto type = camera->first_node("type"))
 		{
 			cameraPtr->setType(Camera::atot(type->value()));
+		}
+		else
+		{
+			throw std::runtime_error{ "No camera type was detected for a camera in sceneManager." };
 		}
 
 		cameraPtr->setPosition(loadXML(camera, "position", "x", "y", "z"));
@@ -99,27 +99,47 @@ void SceneManager::loadXML<Camera>(rapidxml::xml_node<>* root)
 
 		if (auto translationSpeed = camera->first_node("translationSpeed"))
 		{
-			cameraPtr->setMoveSpeed(atof(translationSpeed->value()));
+			cameraPtr->setMoveSpeed(GLfloat(atof(translationSpeed->value())));
+		}
+		else
+		{
+			throw std::runtime_error{ "No camera translationSpeed was detected for a camera in sceneManager." };
 		}
 
 		if (auto rotationSpeed = camera->first_node("rotationSpeed"))
 		{
-			cameraPtr->setRotateSpeed(atof(rotationSpeed->value()));
+			cameraPtr->setRotateSpeed(GLfloat(atof(rotationSpeed->value())));
+		}
+		else
+		{
+			throw std::runtime_error{ "No camera rotationSpeed was detected for a camera in sceneManager." };
 		}
 
 		if (auto fov = camera->first_node("fov"))
 		{
-			cameraPtr->setFov(atof(fov->value()));
+			cameraPtr->setFov(GLfloat(atof(fov->value())));
+		}
+		else
+		{
+			throw std::runtime_error{ "No camera fov was detected for a camera in sceneManager." };
 		}
 
 		if (auto nearP = camera->first_node("near"))
 		{
-			cameraPtr->setNear(atof(nearP->value()));
+			cameraPtr->setNear(GLfloat(atof(nearP->value())));
+		}
+		else
+		{
+			throw std::runtime_error{ "No camera near was detected for a camera in sceneManager." };
 		}
 
 		if (auto farP = camera->first_node("far"))
 		{
-			cameraPtr->setFar(atof(farP->value()));
+			cameraPtr->setFar(GLfloat(atof(farP->value())));
+		}
+		else
+		{
+			throw std::runtime_error{ "No camera far was detected for a camera in sceneManager." };
 		}
 
 		cameraMap[cameraPtr->getCameraId()] = cameraPtr;
@@ -133,6 +153,10 @@ void SceneManager::loadXML<std::string>(rapidxml::xml_node<>* root)
 	{
 		gameName = name->value();
 	}
+	else
+	{
+		throw std::runtime_error{ "No gameName was detected for in sceneManager." };
+	}
 }
 
 template<>
@@ -140,17 +164,23 @@ void SceneManager::loadXML<GLint>(rapidxml::xml_node<>* root)
 {
 	if (auto activeCamera = root->first_node("activeCamera"))
 	{
-		activeCameraId = atoi(activeCamera->value());
+		GLint cameraId = atoi(activeCamera->value());
+		if (cameraMap.find(cameraId) != cameraMap.end())
+		{
+			activeCameraId = cameraId;
+		}
+		else
+		{
+			throw std::runtime_error{ "ActiveCameraId in sceneManager doesn't exist in SceneManager class." };
+		}
+	}
+	else
+	{
+		throw std::runtime_error{ "No activeCamera was detected for in sceneManager." };
 	}
 }
 
-void getScreenSize(GLint& width, GLint& height)
-{
-	RECT desktop;
-	GetWindowRect(GetDesktopWindow(), &desktop);
-	width = desktop.right;
-	height = desktop.bottom;
-}
+void getScreenSize(GLint& width, GLint& height);
 
 template<>
 void SceneManager::loadXML<GLboolean>(rapidxml::xml_node<>* root)
@@ -162,8 +192,7 @@ void SceneManager::loadXML<GLboolean>(rapidxml::xml_node<>* root)
 
 		if (fullPtr && (widthPtr || heightPtr))
 		{
-			std::cout << "Cannot specify fullscreen and width/height at the same time!";
-			abort();
+			throw std::runtime_error{ "Cannot specify fullscreen and width/height at the same time!" };
 		}
 		else if (fullPtr)
 		{
@@ -178,9 +207,12 @@ void SceneManager::loadXML<GLboolean>(rapidxml::xml_node<>* root)
 		}
 		else
 		{
-			std::cout << "Could not fetch fullscreen/(width + height) properties.";
-			abort();
+			throw std::runtime_error{ "Could not fetch fullscreen/(width + height) properties." };
 		}
+	}
+	else
+	{
+		throw std::runtime_error{ "DefaultScreenSize doesn't exist in sceneManager." };
 	}
 }
 
@@ -189,8 +221,26 @@ void SceneManager::loadXML<SceneObject>(rapidxml::xml_node<>* root)
 {
 	for (auto object = root->first_node("object"); object; object = object->next_sibling())
 	{
-		SceneObject::Type objectType = SceneObject::atot(object->first_node("type")->value());
-		GLint objId = atoi(object->first_attribute("id")->value());
+		SceneObject::Type objectType;
+		if (auto type = object->first_node("type"))
+		{
+			objectType = SceneObject::atot(type->value());
+		}
+		else
+		{
+			throw std::runtime_error{ "Object doesn't have a type in sceneManager." };
+		}
+
+		GLint objId;
+		if (auto id = object->first_attribute("id"))
+		{
+			objId = atoi(id->value());
+		}
+		else
+		{
+			throw std::runtime_error{ "Object doesn't have an id in sceneManager." };
+		}
+
 		std::shared_ptr<SceneObject> sceneObjectPtr;
 
 		switch (objectType)
@@ -204,11 +254,17 @@ void SceneManager::loadXML<SceneObject>(rapidxml::xml_node<>* root)
 		case SceneObject::Type::SKYBOX:
 			sceneObjectPtr = std::make_unique<SkyboxObject>(objId);
 			break;
+		default:
+			throw std::runtime_error{ "SceneObject::Type::..... not listed here." };
 		}
 
 		if (auto name = object->first_node("name"))
 		{
 			sceneObjectPtr->setName(name->value());
+		}
+		else
+		{
+			throw std::runtime_error{ "Object doesn't have a name in sceneManager." };
 		}
 
 		sceneObjectPtr->setWiredFormat(object->first_node("wired") != nullptr);
@@ -217,22 +273,102 @@ void SceneManager::loadXML<SceneObject>(rapidxml::xml_node<>* root)
 		sceneObjectPtr->setScale(loadXML(object, "scale", "x", "y", "z"));
 		sceneObjectPtr->setColor(loadXML(object, "color", "r", "g", "b"));
 
-		if (auto model = object->first_node("model"); model && strcmp(model->value(), "generated") != 0)
+		if (auto textures = object->first_node("textures"))
 		{
-			sceneObjectPtr->setModel(ResourceManager::getInstance()->load<Model>(atoi(model->value())));
+			for (auto texture = textures->first_node("texture"); texture; texture = texture->next_sibling())
+			{
+				if (auto id = texture->first_attribute("id"))
+				{
+					sceneObjectPtr->getTextures().push_back(ResourceManager::getInstance()->load<Texture>(atoi(id->value())));
+				}
+				else
+				{
+					throw std::runtime_error{ "Object texture doesn't have an id in sceneManager." };
+				}
+			}
 		}
 
 		if (auto shader = object->first_node("shader"))
 		{
 			sceneObjectPtr->setShader(ResourceManager::getInstance()->load<Shader>(atoi(shader->value())));
 		}
-
-		if (auto textures = object->first_node("textures"))
+		else
 		{
-			for (auto texture = textures->first_node("texture"); texture; texture = texture->next_sibling())
+			throw std::runtime_error{ "Object doesn't have a shader in sceneManager." };
+		}
+
+		if (auto model = object->first_node("model"))
+		{
+			if (strcmp(model->value(), "generated") != 0)
 			{
-				sceneObjectPtr->getTextures().push_back(ResourceManager::getInstance()->load<Texture>(atoi(texture->first_attribute("id")->value())));
+				sceneObjectPtr->setModel(ResourceManager::getInstance()->load<Model>(atoi(model->value())));
 			}
+			else if (auto terrain = dynamic_cast<TerrainObject*>(sceneObjectPtr.get()))
+			{
+				if (auto cells = object->first_node("cells"))
+				{
+					if (auto count = cells->first_node("count"))
+					{
+						terrain->setSideCells(atoi(count->value()));
+					}
+					else
+					{
+						throw std::runtime_error{ "Could not find cell-count for special object." };
+					}
+
+					if (auto size = cells->first_node("size"))
+					{
+						terrain->setCellSize(GLfloat(atof(size->value())));
+					}
+					else
+					{
+						throw std::runtime_error{ "Could not find cell-size for special object." };
+					}
+
+					if (auto offsetY = cells->first_node("offsetY"))
+					{
+						terrain->setOffsetY(GLfloat(atof(offsetY->value())));
+					}
+					else
+					{
+						throw std::runtime_error{ "Could not find cell-offsetY for special object." };
+					}
+				}
+				else
+				{
+					throw std::runtime_error{ "Could not find cells for special object." };
+				}
+
+				terrain->setHeight(loadXML(object, "height", "r", "g", "b"));
+
+				if (auto colorBind = object->first_node("colorBind"))
+				{
+					if (auto blend = colorBind->first_node("blend"))
+					{
+						auto rgb = loadXML(object, "colorBind", "r", "g", "b");
+						terrain->setColorBind(rgb.x, rgb.y, rgb.z, atoi(blend->value()));
+					}
+					else
+					{
+						throw std::runtime_error{ "Could not find colorBind - blend property in sceneManager." };
+					}
+				}
+				else
+				{
+					throw std::runtime_error{ "Could not find colorBind in sceneManager." };
+				}
+
+				// Auto-generates model
+				if (cameraMap.find(activeCameraId) != cameraMap.end())
+				{
+					terrain->setCenter(cameraMap[activeCameraId]->getPosition());
+					terrain->generateModel();
+				}
+			}
+		}
+		else
+		{
+			throw std::runtime_error{ "Object doesn't have a model in sceneManager." };
 		}
 
 		sceneObjects.push_back(sceneObjectPtr);
@@ -253,8 +389,7 @@ void SceneManager::init(ESContext* esContext, const char* sceneManagerPath)
 
 	std::ifstream input{ sceneManagerPath };
 	if (!input.is_open()) {
-		std::cout << "Could't open file: " << sceneManagerPath << std::endl;
-		abort();
+		throw std::runtime_error{ "Could not open file: " + std::string(sceneManagerPath) };
 	}
 
 	std::stringstream ss; ss << input.rdbuf();
@@ -273,17 +408,12 @@ void SceneManager::init(ESContext* esContext, const char* sceneManagerPath)
 	// Get fullscreen/screen size
 	loadXML<GLboolean>(root);
 
-	// Handle FULLSCREEN CASE !!! + IF DEPTH !!
-	// TODO;
-	// std::cout << "ES: "<< width << " " << height << '\n';
+	// Setting window to fullscreen / (width, height)
 	esContext->width = width;
 	esContext->height = height;
 	glViewport(0, 0, width, height);
 	SetWindowPos(esContext->hWnd, 0, 0, 0, width, height, SWP_SHOWWINDOW);
-	if (fullscreen)
-	{
-		ShowWindow(esContext->hWnd, SW_MAXIMIZE);
-	}
+	if (fullscreen) { ShowWindow(esContext->hWnd, SW_MAXIMIZE); }
 
 	// Get vector3 containing background colors
 	backgroundColor = loadXML(root, "backgroundColor", "r", "g", "b");
@@ -294,26 +424,18 @@ void SceneManager::init(ESContext* esContext, const char* sceneManagerPath)
 	// Load cameras
 	loadXML<Camera>(root->first_node("cameras"));
 
-	// Load SceneObjects
-	loadXML<SceneObject>(root->first_node("objects"));
-
 	// Get active camera id
 	loadXML<GLint>(root);
 
+	// Load SceneObjects
+	loadXML<SceneObject>(root->first_node("objects"));
+
 	// Set clear background color
 	glClearColor(backgroundColor.x, backgroundColor.y, backgroundColor.z, 0.0f);
-
-	// std::cout << *getActiveCamera() << std::endl;
-	// std::cout << *this << std::endl;
 }
 
 void SceneManager::draw()
 {
-	/* TODO;
-
-		Draw(), care va face setarile generale pentru desenarea unui frame si apoi va itera prin
-		vectorul de obiecte, apeland Draw-ul lor.
-	*/
 	for (const auto& o : sceneObjects)
 	{
 		o->draw();
@@ -322,13 +444,6 @@ void SceneManager::draw()
 
 void SceneManager::update()
 {
-	/* TODO;
-
-		Update() - updatarea unor valori care nu tin in mod direct de desenarea scenei. Folosit
-		de exemplu pentru preluarea coordonatelor cursorului, ca sa se observe daca s-a facut
-		click pe un obiect din scena. In afara de asta, in cazul in care si obiectele au o functie de
-		Update va itera prin vectorul de obiecte si va apela Update-ul lor.
-	*/
 	for (const auto& o : sceneObjects)
 	{
 		o->update();
@@ -345,7 +460,7 @@ void SceneManager::update()
 
 void SceneManager::freeResources()
 {
-	// TODO;
+	pressed.clear();
 	keyMap.clear();
 	cameraMap.clear();
 	sceneObjects.clear();
@@ -363,6 +478,14 @@ void SceneManager::pressKey(GLubyte key, GLboolean isPressed)
 	{
 		pressed[keyMap[key]] = isPressed;
 	}
+}
+
+void getScreenSize(GLint& width, GLint& height)
+{
+	RECT desktop;
+	GetWindowRect(GetDesktopWindow(), &desktop);
+	width = desktop.right;
+	height = desktop.bottom;
 }
 
 std::string SceneManager::getGameName() const
@@ -474,4 +597,29 @@ ESContext* SceneManager::getESContext()
 void SceneManager::setESContext(ESContext* esContext)
 {
 	this->esContext = esContext;
+}
+
+template<typename Config>
+void SceneManager::loadXML(rapidxml::xml_node<>* root)
+{
+	throw std::runtime_error{ " ------ ! No specialization was made for this. ! ------ " };
+}
+
+std::ostream& operator<<(std::ostream& os, const SceneManager& sceneManager)
+{
+	os << "Game Name:\n\t" << sceneManager.gameName << '\n'
+		<< "\tDefault Screen Size: " << (sceneManager.fullscreen ? "FULLSCREEN" : "FALSE") << ", (" << sceneManager.width << ", " << sceneManager.height << ")\n"
+		<< "\tBackground Color: (" << sceneManager.backgroundColor.x << ", " << sceneManager.backgroundColor.y << ", " << sceneManager.backgroundColor.z << ")\n"
+		<< "\tActive Camera: " << sceneManager.activeCameraId << std::endl
+		<< "\tControls:" << std::endl;
+
+	std::for_each(sceneManager.keyMap.begin(), sceneManager.keyMap.end(),
+		[](const auto& e) { std::cout << "\t\tMapId = " << e.first << ", " << e.second << std::endl; });
+
+	os << "\tCameras:" << std::endl;
+
+	std::for_each(sceneManager.cameraMap.begin(), sceneManager.cameraMap.end(),
+		[](const auto& e) { std::cout << "\t\tMapId = " << e.first << ", " << *e.second << std::endl; });
+
+	return os;
 }

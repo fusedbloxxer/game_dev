@@ -14,7 +14,6 @@ TextureResource::TextureResource(GLint id, std::string type, std::string file, s
 		this->type = GL_TEXTURE_2D;
 	}
 	else {
-		std::cerr << "Invalid Texture Type for id:" << id << ", type: " << type << std::endl;
-		abort();
+		throw std::runtime_error{ "Invalid Texture Type" };
 	}
 }

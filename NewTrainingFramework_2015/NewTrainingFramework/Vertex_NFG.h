@@ -12,6 +12,6 @@ public:
 	Vertex_NFG();
 	Vertex_NFG(const Vertex_NFG& copy);
 	Vector3 pos, binorm, norm, tgt, color;
-	Vector2 uv;
+	Vector2 uv, uv2;
 };
 

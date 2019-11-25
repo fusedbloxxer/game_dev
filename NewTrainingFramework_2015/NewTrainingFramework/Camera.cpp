@@ -12,8 +12,7 @@ Camera::Type Camera::atot(const char* str)
 		return Camera::Type::THIRD_PERSON;
 	}
 	else {
-		std::cerr << "INVALID STRING-CAMERA::TYPE CONVERSION: " << str << std::endl;
-		abort();
+		throw std::runtime_error{ "INVALID STRING-CAMERA::TYPE CONVERSION" };
 	}
 }
 
@@ -24,7 +23,7 @@ Camera::Camera(GLfloat width, GLfloat height, GLint id, Vector3& position, Vecto
 	refreshAxis();
 }
 
-void Camera::moveOz(GLint directie)
+void Camera::moveOz(GLfloat directie)
 {
 	Vector3 vectorDeplasare = zAxis * directie * moveSpeed * deltaTime;
 	position += vectorDeplasare;
@@ -32,7 +31,7 @@ void Camera::moveOz(GLint directie)
 	refreshAxis();
 }
 
-void Camera::moveOx(GLint directie)
+void Camera::moveOx(GLfloat directie)
 {
 	Vector3 vectorDeplasare = xAxis * directie * moveSpeed * deltaTime;
 	position += vectorDeplasare;
@@ -40,7 +39,7 @@ void Camera::moveOx(GLint directie)
 	refreshAxis();
 }
 
-void Camera::moveOy(GLint directie)
+void Camera::moveOy(GLfloat directie)
 {
 	Vector3 vectorDeplasare = yAxis * directie * moveSpeed * deltaTime;
 	position += vectorDeplasare;
@@ -48,7 +47,7 @@ void Camera::moveOy(GLint directie)
 	refreshAxis();
 }
 
-void Camera::rotateOy(GLint directie)
+void Camera::rotateOy(GLfloat directie)
 {
 	Matrix mRotateOy;
 	Vector4 localTarget = Vector4(0.0f, 0.0f, -(target - position).Length(), 1.0f);
@@ -59,7 +58,7 @@ void Camera::rotateOy(GLint directie)
 	refreshAxis();
 }
 
-void Camera::rotateOx(GLint directie)
+void Camera::rotateOx(GLfloat directie)
 {
 	Matrix mRotateOx; mRotateOx.SetRotationX(TO_RAD(directie * rotateSpeed * deltaTime));
 
@@ -76,7 +75,7 @@ void Camera::rotateOx(GLint directie)
 	refreshAxis();
 }
 
-void Camera::rotateOz(GLint directie)
+void Camera::rotateOz(GLfloat directie)
 {
 	Matrix mRotateOz; mRotateOz.SetRotationZ(TO_RAD(directie * rotateSpeed * deltaTime));
 
@@ -98,9 +97,7 @@ void Camera::updateWorldView()
 
 	T.SetTranslation(position.x, position.y, position.z);
 
-	// M
 	worldMatrix = R * T;
-	// V - se returneaza
 	viewMatrix = T.SetTranslation(-position.x, -position.y, -position.z) * R.Transpose();
 }
 
@@ -117,7 +114,6 @@ Matrix& Camera::getWorldMatrix()
 Matrix& Camera::getProjMatrix()
 {
 	if (perspModified) {
-		// std::cout << "PROJ: " << width << " " << height << '\n';
 		projectionMatrix.SetPerspective(TO_RAD(fov), (GLfloat)width / (GLfloat)height, nearP, farP);
 		perspModified = false;
 	}

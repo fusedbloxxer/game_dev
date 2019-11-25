@@ -50,8 +50,7 @@ Controls::Type Controls::atoc(const char* str)
 		return SCENE_WIREFRAME_FALSE;
 	}
 	else {
-		std::cerr << "INVALID STRING-CONTROL CONVERSION: " << str << std::endl;
-		abort();
+		throw std::runtime_error{ "INVALID STRING-CONTROL CONVERSION" };
 	}
 }
 
@@ -73,7 +72,6 @@ GLubyte Controls::atok(const char* str)
 		return str[0];
 	}
 	else {
-		std::cerr << "COULD NOT CONVERT STRING-KEY: " << str << std::endl;
-		abort();
+		throw std::runtime_error{ "COULD NOT CONVERT STRING-KEY" };
 	}
 }

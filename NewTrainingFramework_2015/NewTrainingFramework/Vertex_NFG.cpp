@@ -59,4 +59,7 @@ Vertex_NFG::Vertex_NFG(const Vertex_NFG& copy)
 
 	uv.x = copy.uv.x;
 	uv.y = copy.uv.y;
+
+	uv2.x = copy.uv2.x;
+	uv2.y = copy.uv2.y;
 }

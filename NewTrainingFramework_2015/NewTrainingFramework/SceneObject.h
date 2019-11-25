@@ -1,5 +1,5 @@
 #pragma once
-#include "..\\Utilities\\utilities.h"
+#include "Drawable.h"
 #include "Texture.h"
 #include "Shader.h"
 #include "Model.h"
@@ -7,11 +7,17 @@
 #include <vector>
 #include <memory>
 
-class SceneObject
+class SceneObject : public Drawable
 {
-protected:
-	enum Type;
+public:
+	// Object Types
+	enum Type {
+		NORMAL,
+		TERRAIN,
+		SKYBOX
+	};
 
+protected:
 	// Object id
 	GLint id;
 
@@ -39,21 +45,14 @@ protected:
 	// Vector3 object properties
 	Vector3 position, rotation, scale, color;
 
-
 	// Pointer to its textures
 	std::vector<std::shared_ptr<Texture>> textures;
 
 public:
 
-	// Object Types
-	enum Type {
-		NORMAL,
-		TERRAIN,
-		SKYBOX
-	};
-
 	// Constructors
 	SceneObject(GLint id);
+	SceneObject(GLint id, Type type);
 
 	// !TODO; Prevent code auto-generation
 	SceneObject(const SceneObject& copy) = delete;
@@ -61,16 +60,14 @@ public:
 	SceneObject& operator=(const SceneObject& copy) = delete;
 	SceneObject& operator=(SceneObject&& move) noexcept = delete;
 
-	SceneObject(GLint id, Type type);
+	// Virtual destructor
+	virtual ~SceneObject();
 
 	// Draws the object on screen
-	void draw();
+	virtual void draw() override;
 
 	// Update objects
-	void update();
-	
-	// Virtual Destructor
-	virtual ~SceneObject();
+	virtual void update() override;
 
 	// Convert const char * to SceneObject::Type
 	static Type atot(const char* type);
@@ -93,7 +90,7 @@ public:
 	GLboolean getWiredFormat() const;
 	void setWiredFormat(GLboolean wiredFormat);
 
-	Matrix& getModelMatrix();
+	virtual Matrix& getModelMatrix();
 
 	Vector3& getPosition();
 	void setPosition(Vector3& position);

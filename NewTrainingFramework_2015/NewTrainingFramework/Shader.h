@@ -16,7 +16,6 @@ class Shader : public Loadable
 	GLuint programId;
 
 public:
-
 	// Constructor
 	Shader(std::shared_ptr<ShaderResource> sr = nullptr);
 
