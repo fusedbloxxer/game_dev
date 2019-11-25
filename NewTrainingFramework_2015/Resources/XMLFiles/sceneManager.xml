@@ -70,7 +70,7 @@
 			<rotationSpeed>150</rotationSpeed>
 			<fov>45</fov>
 			<near>0.2</near>
-			<far>1000</far>
+			<far>50000</far>
 		</camera>
 	</cameras>
 	<activeCamera>1</activeCamera>
@@ -141,13 +141,13 @@
         <blend>17</blend>
       </colorBind>
       <height>
-        <r>85</r>
-        <g>-20</g>
-        <b>50</b>
+        <r>450</r>
+        <g>-200</g>
+        <b>300</b>
       </height>
       <cells>
-        <count>50.0</count>
-        <size>35.0</size>
+        <count>44.0</count>
+        <size>500.0</size>
         <offsetY>0.0</offsetY>
       </cells>
       <textures>

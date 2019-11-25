@@ -9,7 +9,10 @@ void Model::load()
 }
 
 Model::Model(std::shared_ptr<ModelResource> mr)
-	:mr{ mr }, iboId{}, noInd{}, noIndWired{}, vboId{}, wiredboId{} {}
+	:mr{ mr }, iboId{}, noInd{}, noIndWired{}, vboId{}, wiredboId{} 
+{
+	glGenBuffers(3, &iboId);
+}
 
 Model& Model::init(std::shared_ptr<ModelResource> mr)
 {
@@ -21,6 +24,7 @@ Model& Model::init(std::shared_ptr<ModelResource> mr)
 Model::~Model()
 {
 	freeResources();
+	glDeleteBuffers(3, &iboId);
 	if (mr)
 	{
 		std::cout << "Model destructor with id " << mr->id << " was called." << std::endl;
@@ -53,7 +57,7 @@ std::vector<GLushort> Model::getWired(const std::vector<GLushort>& indexes)
 void Model::freeResources()
 {
 	if (holdsResources) {
-		glDeleteBuffers(3, &iboId);
+		// TODO; glDeleteBuffers(3, &iboId);
 		holdsResources = false;
 	}
 }

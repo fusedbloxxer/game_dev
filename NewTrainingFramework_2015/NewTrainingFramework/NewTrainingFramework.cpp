@@ -275,18 +275,12 @@ void Update(ESContext* esContext, float deltaTime)
 {
 	auto camera = SceneManager::getInstance()->getActiveCamera();
 	camera->setDeltaTime(deltaTime);
-	// Alegem o limita - constanta - globals
-	// Timp global care este zero initial
-	// Cand timpul global depaseste limita executam calculele. Scad limita cand = reset.
-	// Camera trebuie sa stie timpul real, atunci nu vrem ca miscarea sa fie sacadata si punem in afara ifului.
 
 	Globals::TIME += (Globals::TIME > Globals::FRAME_LIMIT) ? -Globals::FRAME_LIMIT : deltaTime;
 	if (Globals::TIME <= Globals::FRAME_LIMIT)
 	{
 		Globals::alpha = (Globals::alpha > 2 * PI) ? 2 * PI - Globals::alpha : Globals::alpha + Globals::pas;
-		// DO CALCULUS;
-		// Load tga;
-
+		/*
 		if ((GetKeyState(VK_LBUTTON) & 0x100) != 0)
 		{
 			// 0x100 sau 0x80 pentru MOUSE
@@ -299,7 +293,7 @@ void Update(ESContext* esContext, float deltaTime)
 			else {
 				camera->rotateOz(-1);
 			}
-		}
+		}*/
 	}
 	SceneManager::getInstance()->update();
 }

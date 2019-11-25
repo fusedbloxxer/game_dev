@@ -174,7 +174,7 @@ void TerrainObject::update()
 	move(dz, cameraPos.z, position.z,
 		[&](Vertex_NFG& vertex, GLint sign) { vertex.uv2.y += sign / (GLfloat) sideCells; });
 
-	model->freeResources();
+	// TODO; model->freeResources();
 	model->load<Vertex_NFG>(vertices, indexes);
 }
 

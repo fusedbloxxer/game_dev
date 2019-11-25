@@ -67,7 +67,6 @@ public:
 template<typename VertexType>
 void Model::load(const std::vector<VertexType>& vertices, const std::vector<GLushort>& indexes)
 {
-	glGenBuffers(3, &iboId);
 	noInd = indexes.size();
 
 	// Load vertices into buffer
@@ -86,11 +85,11 @@ void Model::load(const std::vector<VertexType>& vertices, const std::vector<GLus
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, wiredboId);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * noIndWired, wireframe.data(), GL_STATIC_DRAW);
 
-	std::cout << "Model was loaded succesfully.";
 	if (mr)
 	{
+		std::cout << "Model was loaded succesfully.";
 		std::cout << " Id: " << mr->id << ".\n";
+		std::cout << std::endl;
 	}
-	std::cout << std::endl;
 	holdsResources = true;
 }
