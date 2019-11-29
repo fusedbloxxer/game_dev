@@ -10,12 +10,14 @@ constexpr GLfloat PI = 3.1415926535897f;
 
 class Vector2
 {
+	friend std::ostream& operator<<(std::ostream& os, const Vector2& vec);
+	friend std::istream& operator>>(std::istream& is, Vector2& vec);
 public:
 	//Constructors
 	Vector2() : x(0.0f), y(0.0f){}
 	Vector2(GLfloat _x, GLfloat _y) : x(_x), y(_y) {}
 	Vector2(GLfloat * pArg) : x(pArg[0]), y(pArg[1]) {}
-	Vector2(Vector2 & vector) : x(vector.x), y(vector.y) {}
+	Vector2(const Vector2 & vector) : x(vector.x), y(vector.y) {}
 
 	//Vector's operations
 	GLfloat Length();
@@ -29,7 +31,7 @@ public:
 	Vector2 & operator *= (GLfloat k);
 	Vector2 operator / (GLfloat k);
 	Vector2 & operator /= (GLfloat k);
-	Vector2 & operator = (Vector2 & vector);
+	Vector2 & operator = (const Vector2 & vector);
 	Vector2 Modulate(Vector2 & vector);
 	GLfloat Dot(Vector2 & vector);
 
@@ -45,13 +47,14 @@ public:
 
 class Vector3
 {
-	friend std::ostream& operator<<(std::ostream& os, Vector3& vec);
+	friend std::ostream& operator<<(std::ostream& os, const Vector3& vec);
+	friend std::istream& operator>>(std::istream& is, Vector3& vec);
 public:
 	//Constructors
 	Vector3() : x(0.0f), y(0.0f), z(0.0f) {}
 	Vector3(GLfloat _x, GLfloat _y, GLfloat _z) : x(_x), y(_y), z(_z) {}
 	Vector3(GLfloat * pArg) : x(pArg[0]), y(pArg[1]), z(pArg[2]) {}
-	Vector3(Vector3 & vector) : x(vector.x), y(vector.y), z(vector.z) {}
+	Vector3(const Vector3 & vector) : x(vector.x), y(vector.y), z(vector.z) {}
 	
 	//Vector's operations
 	GLfloat Length();
@@ -65,7 +68,7 @@ public:
 	Vector3 & operator *= (GLfloat k);
 	Vector3 operator / (GLfloat k);
 	Vector3 & operator /= (GLfloat k);
-	Vector3 & operator = (Vector3 & vector);
+	Vector3 & operator = (const Vector3 & vector);
 	Vector3 Modulate(Vector3 & vector);
 	GLfloat Dot(Vector3 & vector);
 	Vector3 Cross(Vector3 & vector);

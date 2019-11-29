@@ -74,7 +74,7 @@ Vector2 & Vector2::operator /= (GLfloat k)
 	return operator *= (1.0f / k);
 }
 
-Vector2 & Vector2::operator = (Vector2 & vector)
+Vector2 & Vector2::operator = (const Vector2 & vector)
 {
 	x = vector.x;
 	y = vector.y;
@@ -99,10 +99,28 @@ GLfloat Vector2::Dot(Vector2 & vector)
 
 //Vector3
 
-std::ostream& operator<<(std::ostream& os, Vector3& vec)
+std::istream& operator>>(std::istream& is, Vector2& vec)
 {
-	os << '(' << vec.x << ", " << vec.y << ", " << vec.z << ')';
+	is >> vec.x >> vec.y;
+	return is;
+}
+
+std::ostream& operator<<(std::ostream& os, const Vector2& vec)
+{
+	os << '[' << vec.x << ", " << vec.y << ']';
 	return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const Vector3& vec)
+{
+	os << '[' << vec.x << ", " << vec.y << ", " << vec.z << ']';
+	return os;
+}
+
+std::istream& operator>>(std::istream& is, Vector3& vec)
+{
+	is >> vec.x >> vec.y >> vec.z;
+	return is;
 }
 
 GLfloat Vector3::Length()
@@ -178,7 +196,7 @@ Vector3 & Vector3::operator /= (GLfloat k)
 	return operator *= (1.0f / k);
 }
 
-Vector3 & Vector3::operator = (Vector3 & vector)
+Vector3 & Vector3::operator = (const Vector3 & vector)
 {
 	x = vector.x;
 	y = vector.y;

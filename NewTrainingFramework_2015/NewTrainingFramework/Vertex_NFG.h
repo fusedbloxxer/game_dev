@@ -15,3 +15,5 @@ public:
 	Vector2 uv, uv2;
 };
 
+void find_num(const GLchar* const buff, GLint& i);
+GLfloat extr_num(const GLchar* const buff, GLint& i);

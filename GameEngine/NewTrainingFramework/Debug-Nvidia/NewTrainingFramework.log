@@ -1,8 +1,0 @@
-﻿  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
-  stdafx.cpp
-  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
-  Shaders.cpp
-  NewTrainingFramework.cpp
-  Generating Code...
-NewTrainingFramework.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
-  NewTrainingFramework.vcxproj -> C:\Users\fused\Desktop\game_dev\GameEngine\\BIN-Nvidia\NewTrainingFramework.exe

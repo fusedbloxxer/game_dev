@@ -70,7 +70,7 @@
 			<rotationSpeed>150</rotationSpeed>
 			<fov>45</fov>
 			<near>0.2</near>
-			<far>50000</far>
+			<far>11000</far>
 		</camera>
 	</cameras>
 	<activeCamera>1</activeCamera>
@@ -230,7 +230,6 @@
         <texture id="15"/> <!-- Dirt -->
         <texture id="16"/> <!-- Grass -->
         <texture id="17"/> <!-- Blend -->
-        <!-- Water -->
       </textures>
       <position>
         <x>0.0</x>
