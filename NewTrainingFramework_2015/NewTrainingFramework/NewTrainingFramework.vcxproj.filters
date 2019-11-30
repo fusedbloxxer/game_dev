@@ -103,6 +103,12 @@
     <Filter Include="Source Files\Old">
       <UniqueIdentifier>{79340373-0fc1-4522-8d4b-486072683098}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\Utilities">
+      <UniqueIdentifier>{25725a1e-6576-4c03-861a-d07b1d124668}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Utilities">
+      <UniqueIdentifier>{078b488d-91ed-43e1-9265-b36813db3a11}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NewTrainingFramework.cpp">
@@ -185,6 +191,9 @@
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\Components\ResourceManager\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Source Files\Components\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +286,9 @@
     </ClInclude>
     <ClInclude Include="GeneratedModel.h">
       <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Header Files\Components\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

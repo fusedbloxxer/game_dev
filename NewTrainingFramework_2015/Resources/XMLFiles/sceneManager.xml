@@ -3,7 +3,9 @@
   <gameName>FusedBloxxer's Game Engine</gameName>
 	
   <defaultScreenSize>
-    <fullscreen/>
+    <height>720</height>
+    <width>960</width>
+    <!-- <fullscreen/> -->
 	</defaultScreenSize>
 	
   <backgroundColor>
@@ -226,10 +228,14 @@
         <offsetY>0.0</offsetY>
       </cells>
       <textures>
-        <texture id="14"/> <!-- Rock -->
-        <texture id="15"/> <!-- Dirt -->
-        <texture id="16"/> <!-- Grass -->
-        <texture id="17"/> <!-- Blend -->
+        <texture id="14"/>
+        <!-- Rock -->
+        <texture id="15"/>
+        <!-- Dirt -->
+        <texture id="16"/>
+        <!-- Grass -->
+        <texture id="17"/>
+        <!-- Blend -->
       </textures>
       <position>
         <x>0.0</x>

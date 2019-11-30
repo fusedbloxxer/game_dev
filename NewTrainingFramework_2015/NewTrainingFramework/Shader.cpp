@@ -14,7 +14,6 @@ Shader& Shader::init(std::shared_ptr<ShaderResource> sr)
 
 Shader::~Shader()
 {
-	std::cout << "Shader destructor with id " << sr->id << " was called." << std::endl;
 	freeResources();
 }
 
@@ -54,8 +53,6 @@ void Shader::load()
 	{
 		fields.textureUniform[i] = glGetUniformLocation(programId, ("u_texture_" + std::to_string(i)).c_str());
 	}
-
-	std::cout << "Program was linked successfully for id: " << sr->id << std::endl;
 	holdsResources = true;
 }
 

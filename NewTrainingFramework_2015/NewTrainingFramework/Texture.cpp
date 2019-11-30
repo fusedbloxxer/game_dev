@@ -17,7 +17,6 @@ Texture& Texture::init(std::shared_ptr<TextureResource> tr)
 
 Texture::~Texture()
 {
-	std::cout << "Texture destructor with id " << tr->id << " was called." << std::endl;
 }
 
 void Texture::load()
@@ -42,8 +41,6 @@ void Texture::load()
 
 	// Free TGA memory
 	delete[] chr;
-
-	std::cout << "Textures were loaded for id: " << tr->id << std::endl;
 	holdsResources = true;
 }
 

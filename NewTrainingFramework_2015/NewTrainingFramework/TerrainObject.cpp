@@ -71,46 +71,10 @@ void TerrainObject::draw()
 {
 	glUseProgram(shader->getProgramId());
 
-	glBindBuffer(GL_ARRAY_BUFFER, model->getVboId());
+	// Send common attribs and unifs.
+	sendCommonData();
 
-	if (!wiredFormat)
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, model->getIboId());
-	else
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, model->getWiredboId());
-
-	// Get field attributes and uniforms
 	Fields fields = shader->getFields();
-
-	if (fields.positionAttribute != -1)
-	{
-		glEnableVertexAttribArray(fields.positionAttribute);
-		glVertexAttribPointer(fields.positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex_NFG), 0);
-	}
-
-	if (fields.unifMatrix != -1)
-	{
-		auto camera = SceneManager::getInstance()->getActiveCamera();
-		glUniformMatrix4fv(fields.unifMatrix, 1, GL_FALSE, (float*)(getModelMatrix() * camera->getViewMatrix() * camera->getProjMatrix()).m);
-	}
-
-	// Atentie ! colorbind are dimensiune 4 iar MAX_TEXTURES 5, daca se mai adauga o textura arunca exceptie.
-	for (GLuint index = 0; index < std::min<GLuint>(Fields::MAX_TEXTURES, textures.size()); ++index)
-	{
-		glActiveTexture(index + GL_TEXTURE0);
-
-		glBindTexture(textures[index]->getTextureResource()->type, textures[colorBind[index]]->getTextureId());
-
-		if (fields.textureUniform[index] != -1)
-		{
-			glUniform1i(fields.textureUniform[index], index);
-		}
-	}
-
-	if (fields.uvAttribute != -1)
-	{
-		glEnableVertexAttribArray(fields.uvAttribute);
-		glVertexAttribPointer(fields.uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex_NFG), (void*)(5 * sizeof(Vector3)));
-	}
 
 	if (fields.uv2Attribute != -1)
 	{
@@ -123,11 +87,6 @@ void TerrainObject::draw()
 		glUniform3f(fields.heightUniform, height.x, height.y, height.z);
 	}
 
-	if (fields.colorAttribute != -1)
-	{
-		glVertexAttrib3f(fields.colorAttribute, color.x, color.y, color.z);
-	}
-
 	if (!wiredFormat)
 	{
 		glDrawElements(GL_TRIANGLES, model->getNoInd(), GL_UNSIGNED_SHORT, 0);
@@ -136,6 +95,9 @@ void TerrainObject::draw()
 	{
 		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
 	}
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 template<typename Fun>
@@ -175,6 +137,7 @@ void TerrainObject::update()
 		[&](Vertex_NFG& vertex, GLint sign) { vertex.uv2.y += sign / (GLfloat) sideCells; });
 
 	// TODO; model->freeResources();
+	// Trimiterea offset in shader - idee
 	model->load<Vertex_NFG>(vertices, indexes);
 }
 

@@ -66,6 +66,9 @@ public:
 	// Draws the object on screen
 	virtual void draw() override;
 
+	// Common data to all scene objects
+	virtual void sendCommonData();
+
 	// Update objects
 	virtual void update() override;
 

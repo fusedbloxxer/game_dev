@@ -25,14 +25,6 @@ Model::~Model()
 {
 	freeResources();
 	glDeleteBuffers(3, &iboId);
-	if (mr)
-	{
-		std::cout << "Model destructor with id " << mr->id << " was called." << std::endl;
-	}
-	else
-	{
-		std::cout << "Generated model was destroyed." << std::endl;
-	}
 }
 
 std::vector<GLushort> Model::getWired(const std::vector<GLushort>& indexes)

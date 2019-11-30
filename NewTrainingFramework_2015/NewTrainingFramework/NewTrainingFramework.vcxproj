@@ -169,6 +169,7 @@
     <ClCompile Include="GeneratedModel.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Loadable.cpp" />
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelResource.cpp" />
     <ClCompile Include="ModelShader.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="GeneratedModel.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Loadable.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelResource.h" />
     <ClInclude Include="ModelShader.h" />

@@ -85,11 +85,5 @@ void Model::load(const std::vector<VertexType>& vertices, const std::vector<GLus
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, wiredboId);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * noIndWired, wireframe.data(), GL_STATIC_DRAW);
 
-	if (mr)
-	{
-		std::cout << "Model was loaded succesfully.";
-		std::cout << " Id: " << mr->id << ".\n";
-		std::cout << std::endl;
-	}
 	holdsResources = true;
 }

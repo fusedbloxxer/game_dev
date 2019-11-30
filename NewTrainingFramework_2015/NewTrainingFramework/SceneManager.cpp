@@ -5,6 +5,7 @@
 #include "SkyboxObject.h"
 #include <algorithm>
 #include <iostream>
+#include "Logger.h"
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -445,17 +446,19 @@ void SceneManager::draw()
 
 void SceneManager::update()
 {
-	for (const auto& o : sceneObjects)
-	{
-		o->update();
-	}
+	auto camera = getActiveCamera();
 
 	for (const auto& [key, isPressed] : pressed)
 	{
 		if (isPressed)
 		{
-			cameraMap[activeCameraId]->execute(key);
+			camera->execute(key);
 		}
+	}
+
+	for (const auto& o : sceneObjects)
+	{
+		o->update();
 	}
 }
 
@@ -469,7 +472,7 @@ void SceneManager::freeResources()
 
 SceneManager::~SceneManager()
 {
-	std::cout << "Destructor was called for SceneManager." << std::endl;
+	Logger::d("Destructor was called for SceneManager.");
 	freeResources();
 }
 
@@ -477,6 +480,7 @@ void SceneManager::pressKey(GLubyte key, GLboolean isPressed)
 {
 	if (keyMap.find(key) != keyMap.end())
 	{
+		// TODO;
 		pressed[keyMap[key]] = isPressed;
 	}
 }
@@ -615,12 +619,12 @@ std::ostream& operator<<(std::ostream& os, const SceneManager& sceneManager)
 		<< "\tControls:" << std::endl;
 
 	std::for_each(sceneManager.keyMap.begin(), sceneManager.keyMap.end(),
-		[](const auto& e) { std::cout << "\t\tMapId = " << e.first << ", " << e.second << std::endl; });
+		[&](const auto& e) { os << "\t\tMapId = " << e.first << ", " << e.second << std::endl; });
 
 	os << "\tCameras:" << std::endl;
 
 	std::for_each(sceneManager.cameraMap.begin(), sceneManager.cameraMap.end(),
-		[](const auto& e) { std::cout << "\t\tMapId = " << e.first << ", " << *e.second << std::endl; });
+		[&](const auto& e) { os << "\t\tMapId = " << e.first << ", " << *e.second << std::endl; });
 
 	return os;
 }

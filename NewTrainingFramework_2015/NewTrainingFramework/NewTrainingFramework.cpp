@@ -280,8 +280,8 @@ void Update(ESContext* esContext, float deltaTime)
 	if (Globals::TIME <= Globals::FRAME_LIMIT)
 	{
 		Globals::alpha = (Globals::alpha > 2 * PI) ? 2 * PI - Globals::alpha : Globals::alpha + Globals::pas;
-		/*
-		if ((GetKeyState(VK_LBUTTON) & 0x100) != 0)
+		// Sa verific starea tastelor - aici
+		/*if ((GetKeyState(VK_LBUTTON) & 0x100) != 0)
 		{
 			// 0x100 sau 0x80 pentru MOUSE
 			POINT pct;

@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <algorithm>
 #include <iostream>
+#include "Logger.h"
 #include <fstream>
 #include <sstream>
 #include <numeric>
@@ -20,7 +21,7 @@ void ResourceManager::freeResources()
 
 ResourceManager::~ResourceManager()
 {
-	std::cout << "Destructor was called for ResourceManager." << std::endl;
+	Logger::d("Destructor was called for ResourceManager.");
 	freeResources();
 }
 

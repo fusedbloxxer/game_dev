@@ -13,6 +13,23 @@ void SceneObject::draw()
 {
 	glUseProgram(shader->getProgramId());
 
+	sendCommonData();
+
+	if (!wiredFormat)
+	{
+		glDrawElements(GL_TRIANGLES, model->getNoInd(), GL_UNSIGNED_SHORT, 0);
+	}
+	else
+	{
+		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
+	}
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+void SceneObject::sendCommonData()
+{
 	glBindBuffer(GL_ARRAY_BUFFER, model->getVboId());
 
 	if (!wiredFormat)
@@ -55,15 +72,6 @@ void SceneObject::draw()
 	if (fields.colorAttribute != -1)
 	{
 		glVertexAttrib3f(fields.colorAttribute, color.x, color.y, color.z);
-	}
-
-	if (!wiredFormat)
-	{
-		glDrawElements(GL_TRIANGLES, model->getNoInd(), GL_UNSIGNED_SHORT, 0);
-	}
-	else
-	{
-		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
 	}
 }
 
