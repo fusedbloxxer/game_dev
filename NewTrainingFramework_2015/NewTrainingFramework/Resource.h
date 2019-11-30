@@ -4,10 +4,10 @@
 struct Resource
 {
 	// Unique id
-	GLint id;
+	GLuint id;
 
 	// Constructor
-	Resource(GLint id);
+	Resource(GLuint id);
 
 	// Virtual Destructor
 	virtual ~Resource();

@@ -55,12 +55,12 @@
       <type>firstPerson</type>
 			<position>
 				<x>0.0</x>
-				<y>500.0</y>
-				<z>100.0</z>
+				<y>0.0</y>
+				<z>1.0</z>
 			</position>
 			<target>
 				<x>0.0</x>
-				<y>500.0</y>
+				<y>0.0</y>
 				<z>0.0</z>
 			</target>
 			<up>
@@ -68,7 +68,7 @@
 				<y>1.0</y>
 				<z>0.0</z>
 			</up>
-			<translationSpeed>750</translationSpeed>
+			<translationSpeed>7500</translationSpeed>
 			<rotationSpeed>150</rotationSpeed>
 			<fov>45</fov>
 			<near>0.2</near>
@@ -211,7 +211,6 @@
       <shader>6</shader>
       <type>skybox</type>
       <name>SkyBox Cube</name>
-      <offset>0.0</offset>
       <textures>
         <texture id="7"/>
       </textures>
@@ -221,14 +220,14 @@
         <z>0.0</z>
       </position>
       <rotation>
-        <x>0.0</x>
+        <x>180.0</x>
         <y>0.0</y>
         <z>0.0</z>
       </rotation>
       <scale>
-        <x>11000.0</x>
-        <y>11000.0</y>
-        <z>11000.0</z>
+        <x>10000.0</x>
+        <y>10000.0</y>
+        <z>10000.0</z>
       </scale>
     </object>
 

@@ -33,4 +33,6 @@ public:
 
 	// Inherited via Loadable
 	virtual void freeResources() override;
+private:
+	void fetchData(GLenum target, GLchar* const sbuff, GLint sz, const GLchar* const buff, const GLint bytes, const GLint hf, const GLint W, const GLint wf);
 };

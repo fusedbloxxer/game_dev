@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Resource.h"
 
-Resource::Resource(GLint id)
+Resource::Resource(GLuint id)
 	:id{ id }
 {
 }
