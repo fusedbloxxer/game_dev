@@ -68,7 +68,7 @@
 				<y>1.0</y>
 				<z>0.0</z>
 			</up>
-			<translationSpeed>7500</translationSpeed>
+			<translationSpeed>1000</translationSpeed>
 			<rotationSpeed>150</rotationSpeed>
 			<fov>45</fov>
 			<near>0.2</near>
@@ -88,8 +88,8 @@
 			</textures>
 			<position>
 				<x>0.0</x>
-				<y>-350.0</y>
-				<z>-100.0</z>
+				<y>0.0</y>
+				<z>0.0</z>
 			</position>
 			<rotation>
 				<x>0.0</x>
@@ -112,19 +112,19 @@
         <texture id="1"/>
       </textures>
       <position>
-        <x>0.0</x>
+        <x>-1200.0</x>
         <y>-600.0</y>
         <z>-200.0</z>
       </position>
       <rotation>
         <x>0</x>
-        <y>-90.0</y>
+        <y>0.0</y>
         <z>0</z>
       </rotation>
       <scale>
-        <x>1000.0</x>
-        <y>1000.0</y>
-        <z>1000.0</z>
+        <x>100.0</x>
+        <y>100.0</y>
+        <z>100.0</z>
       </scale>
     </object>
     
@@ -141,7 +141,7 @@
 			</color>
 			<position>
 				<x>0.0</x>
-				<y>0.0</y>
+				<y>250.0</y>
 				<z>0.0</z>
 			</position>
 			<rotation>
@@ -156,67 +156,21 @@
 			</scale>
 		</object>
 
-    <object id="4">
-      <model>2</model>
-      <shader>3</shader>
-      <type>normal</type>
-      <name>Sweet House</name>
-      <textures>
-        <texture id="3"/>
-      </textures>
-      <position>
-        <x>1500.0</x>
-        <y>0.0</y>
-        <z>-4000.0</z>
-      </position>
-      <rotation>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-      </rotation>
-      <scale>
-        <x>0.75</x>
-        <y>0.75</y>
-        <z>0.75</z>
-      </scale>
-    </object>
-
-    <object id="5">
-      <model>4</model>
-      <shader>3</shader>
-      <type>normal</type>
-      <name>Smart Woman</name>
-      <textures>
-        <texture id="2"/>
-      </textures>
-      <position>
-        <x>0.0</x>
-        <y>-600.0</y>
-        <z>800.0</z>
-      </position>
-      <rotation>
-        <x>0</x>
-        <y>-90</y>
-        <z>0</z>
-      </rotation>
-      <scale>
-        <x>1000.0</x>
-        <y>1000.0</y>
-        <z>1000.0</z>
-      </scale>
-    </object>
-
     <object id="6">
       <model>8</model>
       <shader>6</shader>
       <type>skybox</type>
       <name>SkyBox Cube</name>
+      <followingCamera>
+        <ox/>
+        <oz/>
+      </followingCamera>
       <textures>
         <texture id="7"/>
       </textures>
       <position>
         <x>0.0</x>
-        <y>0.0</y>
+        <y>6000.0</y>
         <z>0.0</z>
       </position>
       <rotation>
@@ -225,9 +179,9 @@
         <z>0.0</z>
       </rotation>
       <scale>
-        <x>10000.0</x>
-        <y>10000.0</y>
-        <z>10000.0</z>
+        <x>6250.0</x>
+        <y>6250.0</y>
+        <z>6250</z>
       </scale>
     </object>
 
@@ -243,13 +197,13 @@
         <blend>17</blend>
       </colorBind>
       <height>
-        <r>800</r>
-        <g>-200</g>
-        <b>300</b>
+        <r>400</r>
+        <g>0</g>
+        <b>200</b>
       </height>
       <cells>
-        <count>44.0</count>
-        <size>500.0</size>
+        <count>50.0</count>
+        <size>250.0</size>
       </cells>
       <textures>
         <texture id="14"/>
@@ -263,7 +217,7 @@
       </textures>
       <position>
         <x>0.0</x>
-        <y>-400.0</y>
+        <y>0.0</y>
         <z>0.0</z>
       </position>
       <rotation>

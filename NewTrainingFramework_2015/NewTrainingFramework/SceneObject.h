@@ -43,7 +43,7 @@ protected:
 	GLboolean wiredFormat;
 
 	// Vector3 object properties
-	Vector3 position, rotation, scale, color;
+	Vector3 position, rotation, scale, color, followingCamera, offset;
 
 	// Pointer to its textures
 	std::vector<std::shared_ptr<Texture>> textures;
@@ -94,6 +94,9 @@ public:
 	void setWiredFormat(GLboolean wiredFormat);
 
 	virtual Matrix& getModelMatrix();
+
+	Vector3& getFollowingCamera();
+	void setFollowingCamera(Vector3& followingCamera);
 
 	Vector3& getPosition();
 	void setPosition(Vector3& position);

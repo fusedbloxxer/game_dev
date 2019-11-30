@@ -7,7 +7,7 @@ SceneObject::SceneObject(GLint id)
 	:SceneObject{ id, Type::NORMAL } {}
 
 SceneObject::SceneObject(GLint id, Type type)
-	: id{ id }, name{}, model{ nullptr }, shader{ nullptr }, textures{}, wiredFormat{ false }, type{ type }, modified{ false } {}
+	: id{ id }, name{}, model{ nullptr }, shader{ nullptr }, textures{}, wiredFormat{ false }, type{ type }, modified{ false }, followingCamera{}, offset{} {}
 
 void SceneObject::draw()
 {
@@ -77,7 +77,25 @@ void SceneObject::sendCommonData()
 
 void SceneObject::update()
 {
-	// TODO;
+	auto cameraPos = SceneManager::getInstance()->getActiveCamera()->getPosition();
+	
+	if (followingCamera.x == 1)
+	{
+		position.x = offset.x + cameraPos.x;
+		modified = true;
+	}
+
+	if (followingCamera.y == 1)
+	{
+		position.y = offset.y + cameraPos.y;
+		modified = true;
+	}
+
+	if (followingCamera.z == 1)
+	{
+		position.z = offset.z + cameraPos.z;
+		modified = true;
+	}
 }
 
 SceneObject::~SceneObject()
@@ -169,6 +187,16 @@ Matrix& SceneObject::getModelMatrix()
 	return modelMatrix;
 }
 
+Vector3& SceneObject::getFollowingCamera()
+{
+	return followingCamera;
+}
+
+void SceneObject::setFollowingCamera(Vector3& followingCamera)
+{
+	this->followingCamera = followingCamera;
+}
+
 Vector3& SceneObject::getPosition()
 {
 	return position;
@@ -177,6 +205,7 @@ Vector3& SceneObject::getPosition()
 void SceneObject::setPosition(Vector3& position)
 {
 	this->position = position;
+	offset = position;
 	modified = true;
 }
 

@@ -8,7 +8,7 @@ TerrainObject::TerrainObject(GLint id)
 	:TerrainObject{ id, Type::TERRAIN } {}
 
 TerrainObject::TerrainObject(GLint id, Type type)
-	: SceneObject{ id, type }, cellSize{ 0 }, sideCells{ 0 }, center{}, dx{ 0 }, dz{ 0 } {}
+	: SceneObject{ id, type }, cellSize{ 0 }, sideCells{ 0 }, center{}, dx{ 0 }, dz{ 0 }, colorBind{} {}
 
 void TerrainObject::generateModel()
 {

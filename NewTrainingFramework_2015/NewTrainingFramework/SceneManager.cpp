@@ -275,6 +275,28 @@ void SceneManager::loadXML<SceneObject>(rapidxml::xml_node<>* root)
 		sceneObjectPtr->setScale(loadXML(object, "scale", "x", "y", "z"));
 		sceneObjectPtr->setColor(loadXML(object, "color", "r", "g", "b"));
 
+		if (auto follow = object->first_node("followingCamera"))
+		{
+			Vector3 foll;
+
+			if (follow->first_node("ox"))
+			{
+				foll.x = 1;
+			}
+
+			if (follow->first_node("oy"))
+			{
+				foll.y = 1;
+			}
+
+			if (follow->first_node("oz"))
+			{
+				foll.z = 1;
+			}
+
+			sceneObjectPtr->setFollowingCamera(foll);
+		}
+
 		if (auto textures = object->first_node("textures"))
 		{
 			for (auto texture = textures->first_node("texture"); texture; texture = texture->next_sibling())
