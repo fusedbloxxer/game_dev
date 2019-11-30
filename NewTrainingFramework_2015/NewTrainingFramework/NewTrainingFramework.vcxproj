@@ -255,6 +255,8 @@
     <None Include="..\Resources\Shaders\LineShaderVS.vs" />
     <None Include="..\Resources\Shaders\ModelShaderFS.fs" />
     <None Include="..\Resources\Shaders\ModelShaderVS.vs" />
+    <None Include="..\Resources\Shaders\SkyBoxFS.fs" />
+    <None Include="..\Resources\Shaders\SkyBoxVS.vs" />
     <None Include="..\Resources\Shaders\TerrainShaderFS.fs" />
     <None Include="..\Resources\Shaders\TerrainShaderVS.vs" />
     <None Include="..\Resources\Shaders\TriangleShaderFS.fs" />

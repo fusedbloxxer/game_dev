@@ -326,15 +326,6 @@ void SceneManager::loadXML<SceneObject>(rapidxml::xml_node<>* root)
 					{
 						throw std::runtime_error{ "Could not find cell-size for special object." };
 					}
-
-					if (auto offsetY = cells->first_node("offsetY"))
-					{
-						terrain->setOffsetY(GLfloat(atof(offsetY->value())));
-					}
-					else
-					{
-						throw std::runtime_error{ "Could not find cell-offsetY for special object." };
-					}
 				}
 				else
 				{

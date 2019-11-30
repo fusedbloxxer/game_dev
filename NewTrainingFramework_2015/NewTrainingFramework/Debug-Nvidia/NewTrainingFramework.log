@@ -1,18 +1,3 @@
 ﻿  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
-  SceneManager.cpp
-C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(351,46): warning C4244:  'argument': conversion from 'GLfloat' to 'GLuint', possible loss of data
-C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(351,39): warning C4244:  'argument': conversion from 'GLfloat' to 'GLuint', possible loss of data
-C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(351,32): warning C4244:  'argument': conversion from 'GLfloat' to 'GLuint', possible loss of data
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1555,71): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1607): message :  see reference to function template instantiation 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<GLint&,GLint&,int>(GLint &,GLint &,int &&)' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1607): message :         with
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1607): message :         [
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1607): message :             _Ty=Camera
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1607): message :         ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1608): message :  see reference to function template instantiation 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<GLint&,GLint&,int>(GLint &,GLint &,int &&)' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1608): message :         with
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1608): message :         [
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1608): message :             _Ty=Camera
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1608): message :         ]
-C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\NewTrainingFramework\SceneManager.cpp(81): message :  see reference to function template instantiation 'std::shared_ptr<Camera> std::make_shared<Camera,GLint&,GLint&,int>(GLint &,GLint &,int &&)' being compiled
+  TextureResource.cpp
   NewTrainingFramework.vcxproj -> C:\Users\fused\Desktop\game_dev\NewTrainingFramework_2015\\BIN-Nvidia\NewTrainingFramework.exe

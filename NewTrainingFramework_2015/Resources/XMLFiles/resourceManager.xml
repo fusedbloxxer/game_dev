@@ -24,6 +24,9 @@
       <model id="7">
         <file>Golitah.nfg</file>
       </model>
+      <model id="8">
+        <file>SkyBox.nfg</file>
+      </model>
     </folder>
   </models>
 
@@ -40,6 +43,10 @@
       <shader id="5">
         <vs>ColorShaderVS.vs</vs>
         <fs>ColorShaderFS.fs</fs>
+      </shader>
+      <shader id="6">
+        <vs>SkyBoxVS.vs</vs>
+        <fs>SkyBoxFS.fs</fs>
       </shader>
     </folder>
   </shaders>
@@ -88,6 +95,13 @@
         <wrap_s>CLAMP_TO_EDGE</wrap_s>
         <wrap_t>CLAMP_TO_EDGE</wrap_t>
       </texture>
+      <texture id="7" type="cube">
+        <file>envMap.tga</file>
+        <min_filter>LINEAR</min_filter>
+        <mag_filter>LINEAR</mag_filter>
+        <wrap_s>CLAMP_TO_EDGE</wrap_s>
+        <wrap_t>CLAMP_TO_EDGE</wrap_t>
+      </texture>
       <texture id="14" type="2d">
         <file>Rock.tga</file>
         <min_filter>LINEAR</min_filter>
@@ -122,13 +136,6 @@
         <mag_filter>LINEAR</mag_filter>
         <wrap_s>GL_REPEAT</wrap_s>
         <wrap_t>GL_REPEAT</wrap_t>
-      </texture>
-      <texture id="5" type="2d">
-        <file>bus.tga</file>
-        <min_filter>LINEAR</min_filter>
-        <mag_filter>LINEAR</mag_filter>
-        <wrap_s>CLAMP_TO_EDGE</wrap_s>
-        <wrap_t>CLAMP_TO_EDGE</wrap_t>
       </texture>
     </folder>
   </textures>

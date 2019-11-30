@@ -8,7 +8,7 @@ TerrainObject::TerrainObject(GLint id)
 	:TerrainObject{ id, Type::TERRAIN } {}
 
 TerrainObject::TerrainObject(GLint id, Type type)
-	: SceneObject{ id, type }, cellSize{ 0 }, sideCells{ 0 }, center{}, offsetY{ 0 }, dx{ 0 }, dz{ 0 } {}
+	: SceneObject{ id, type }, cellSize{ 0 }, sideCells{ 0 }, center{}, dx{ 0 }, dz{ 0 } {}
 
 void TerrainObject::generateModel()
 {
@@ -24,7 +24,7 @@ void TerrainObject::generateModel()
 		{
 			Vertex_NFG vex;
 			vex.pos.x = x + j * cellSize;
-			vex.pos.y = offsetY;
+			vex.pos.y = position.y; // offsetY
 			vex.pos.z = z + i * cellSize;
 
 			vex.uv.x = GLfloat(j);
@@ -149,8 +149,7 @@ Matrix& TerrainObject::getModelMatrix()
 		tran = tran * modelMatrix.SetRotationX(rotation.x);
 		tran = tran * modelMatrix.SetRotationY(rotation.y);
 		tran = tran * modelMatrix.SetRotationZ(rotation.z);
-		auto heightOffset = std::max<GLfloat>(height.x, std::max<GLfloat>(height.y, height.z));
-		tran = tran * modelMatrix.SetTranslation(position.x, position.y - heightOffset - 1, position.z);
+		tran = tran * modelMatrix.SetTranslation(position.x, position.y, position.z);
 		modelMatrix = tran;
 		modified = false;
 	}
@@ -179,16 +178,6 @@ void TerrainObject::setCellSize(GLfloat cellSize)
 GLfloat TerrainObject::getCellSize() const
 {
 	return cellSize;
-}
-
-void TerrainObject::setOffsetY(GLfloat offsetY)
-{
-	this->offsetY = offsetY;
-}
-
-GLfloat TerrainObject::getOffsetY() const
-{
-	return offsetY;
 }
 
 void TerrainObject::setCenter(Vector3& center)

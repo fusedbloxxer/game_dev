@@ -28,9 +28,7 @@ private:
 	friend std::ostream& operator<<(std::ostream& os, const Camera& camera);
 
 public:
-
 	static Type atot(const char* str);
-
 
 	// Has default values.
 	Camera(GLfloat width, GLfloat height, GLint id, Vector3& position = Vector3{ 0.0f, 0.0f, 0.0f }, Vector3& target = Vector3{ 0.0f, 0.0f, 0.0f }, Vector3& up = Vector3{ 0.0f, 1.0f, 0.0f }, GLfloat moveSpeed = 3.0f, GLfloat rotateSpeed = 3.0f, GLfloat nearP = 0.2f, GLfloat farP = 10000.0f, GLfloat fov = 45.0f, GLfloat deltaTime = 0.0f, Type type = Type::FIRST_PERSON);

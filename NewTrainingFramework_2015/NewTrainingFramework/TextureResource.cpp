@@ -13,6 +13,9 @@ TextureResource::TextureResource(GLint id, std::string type, std::string file, s
 	if (type == "2d") {
 		this->type = GL_TEXTURE_2D;
 	}
+	else if (type == "cube") {
+		this->type = GL_TEXTURE_CUBE_MAP;
+	}
 	else {
 		throw std::runtime_error{ "Invalid Texture Type" };
 	}

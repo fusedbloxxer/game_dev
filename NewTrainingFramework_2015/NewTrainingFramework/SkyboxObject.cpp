@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "SceneManager.h"
 #include "SkyboxObject.h"
 
 SkyboxObject::SkyboxObject(GLint id)

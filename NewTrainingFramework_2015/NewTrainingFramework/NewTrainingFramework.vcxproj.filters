@@ -377,6 +377,12 @@
     <None Include="..\Resources\Shaders\TerrainShaderFS.fs">
       <Filter>Resources\Shaders\Current</Filter>
     </None>
+    <None Include="..\Resources\Shaders\SkyBoxFS.fs">
+      <Filter>Resources\Shaders\Current</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\SkyBoxVS.vs">
+      <Filter>Resources\Shaders\Current</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Resources\XMLFiles\exemplu_xml.xml">

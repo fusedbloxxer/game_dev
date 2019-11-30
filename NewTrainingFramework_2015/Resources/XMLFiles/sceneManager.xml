@@ -55,12 +55,12 @@
       <type>firstPerson</type>
 			<position>
 				<x>0.0</x>
-				<y>0.0</y>
-				<z>1.0</z>
+				<y>500.0</y>
+				<z>100.0</z>
 			</position>
 			<target>
 				<x>0.0</x>
-				<y>0.0</y>
+				<y>500.0</y>
 				<z>0.0</z>
 			</target>
 			<up>
@@ -72,7 +72,7 @@
 			<rotationSpeed>150</rotationSpeed>
 			<fov>45</fov>
 			<near>0.2</near>
-			<far>11000</far>
+			<far>250000</far>
 		</camera>
 	</cameras>
 	<activeCamera>1</activeCamera>
@@ -206,6 +206,32 @@
       </scale>
     </object>
 
+    <object id="6">
+      <model>8</model>
+      <shader>6</shader>
+      <type>skybox</type>
+      <name>SkyBox Cube</name>
+      <offset>0.0</offset>
+      <textures>
+        <texture id="7"/>
+      </textures>
+      <position>
+        <x>0.0</x>
+        <y>0.0</y>
+        <z>0.0</z>
+      </position>
+      <rotation>
+        <x>0.0</x>
+        <y>0.0</y>
+        <z>0.0</z>
+      </rotation>
+      <scale>
+        <x>11000.0</x>
+        <y>11000.0</y>
+        <z>11000.0</z>
+      </scale>
+    </object>
+
     <object id="8">
       <model>generated</model>
       <shader>4</shader>
@@ -218,14 +244,13 @@
         <blend>17</blend>
       </colorBind>
       <height>
-        <r>450</r>
+        <r>800</r>
         <g>-200</g>
         <b>300</b>
       </height>
       <cells>
         <count>44.0</count>
         <size>500.0</size>
-        <offsetY>0.0</offsetY>
       </cells>
       <textures>
         <texture id="14"/>
@@ -239,7 +264,7 @@
       </textures>
       <position>
         <x>0.0</x>
-        <y>0.0</y>
+        <y>-400.0</y>
         <z>0.0</z>
       </position>
       <rotation>

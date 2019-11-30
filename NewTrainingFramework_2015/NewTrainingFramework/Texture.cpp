@@ -36,9 +36,14 @@ void Texture::load()
 	glTexParameteri(tr->type, GL_TEXTURE_WRAP_S, tr->wrapS);
 	glTexParameteri(tr->type, GL_TEXTURE_WRAP_T, tr->wrapT);
 
-	// Get 2D image
-	glTexImage2D(tr->type, 0, (bpp == 24) ? GL_RGB : GL_RGBA, width, height, 0, (bpp == 24) ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, chr);
-
+	if (tr->type == GL_TEXTURE_2D)
+	{
+		// Get 2D image
+		glTexImage2D(tr->type, 0, (bpp == 24) ? GL_RGB : GL_RGBA, width, height, 0, (bpp == 24) ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, chr);
+	}
+	else if (tr->type == GL_TEXTURE_CUBE_MAP)
+	{}
+	
 	// Free TGA memory
 	delete[] chr;
 	holdsResources = true;

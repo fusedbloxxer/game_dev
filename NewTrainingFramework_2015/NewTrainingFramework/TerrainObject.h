@@ -12,9 +12,6 @@ class TerrainObject : public SceneObject, public GeneratedModel
 	// The size of cell line
 	GLfloat cellSize;
 
-	// Object offset for Oy axis
-	GLfloat offsetY;
-
 	// Terrain center
 	Vector3 center;
 
@@ -59,9 +56,6 @@ public:
 	void setCellSize(GLfloat cellSize);
 	GLfloat getCellSize() const;
 
-	void setOffsetY(GLfloat offsetY);
-	GLfloat getOffsetY() const;
-
 	void setCenter(Vector3& center);
 	Vector3& getCenter();
 
@@ -70,6 +64,7 @@ public:
 
 	void setColorBind(GLuint r, GLuint g, GLuint b, GLuint blend);
 	const GLuint* getColorBind() const;
+
 private:
 	template<typename Fun>
 	void move(GLfloat& diff, const GLfloat& cpos, GLfloat& pos, Fun fun);

@@ -4,6 +4,7 @@
 #include "SceneObject.h"
 #include "Controls.h"
 #include "Releaser.h"
+#include "Logger.h"
 #include "Camera.h"
 #include <string>
 #include <memory>
