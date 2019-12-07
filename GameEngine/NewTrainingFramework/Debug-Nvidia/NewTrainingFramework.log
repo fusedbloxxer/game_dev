@@ -1,0 +1,16 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(452,5): warning MSB8028: The intermediate directory (Debug-Nvidia\) contains files shared from another project (NewTrainingFramework.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
+  SceneManager.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1555,71): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1607): message :  see reference to function template instantiation 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<GLint&,GLint&,int>(GLint &,GLint &,int &&)' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1607): message :         with
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1607): message :         [
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1607): message :             _Ty=Camera
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1607): message :         ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1608): message :  see reference to function template instantiation 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<GLint&,GLint&,int>(GLint &,GLint &,int &&)' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1608): message :         with
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1608): message :         [
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1608): message :             _Ty=Camera
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\memory(1608): message :         ]
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\SceneManager.cpp(68): message :  see reference to function template instantiation 'std::shared_ptr<Camera> std::make_shared<Camera,GLint&,GLint&,int>(GLint &,GLint &,int &&)' being compiled
+  NewTrainingFramework.vcxproj -> C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\\BIN-Nvidia\GameEngine.exe
