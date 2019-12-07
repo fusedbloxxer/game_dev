@@ -87,7 +87,12 @@ void TerrainObject::draw()
 		glUniform3f(fields.heightUniform, height.x, height.y, height.z);
 	}
 
-	if (!wiredFormat)
+	auto pressed = SceneManager::getInstance()->getPressedButtons();
+	if (pressed.find(Controls::MODE_DEBUG) != pressed.end() && pressed[Controls::MODE_DEBUG])
+	{
+		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
+	}
+	else if (!wiredFormat)
 	{
 		glDrawElements(GL_TRIANGLES, model->getNoInd(), GL_UNSIGNED_SHORT, 0);
 	}
@@ -111,7 +116,7 @@ inline void TerrainObject::move(GLfloat& diff, const GLfloat& cpos, GLfloat& pos
 		{
 			pos += cellSize;
 			diff -= cellSize;
-			std::for_each(vertices.begin(), vertices.end(), 
+			std::for_each(vertices.begin(), vertices.end(),
 				[&](auto& vertex) { fun(vertex, 1); });
 		}
 		else
@@ -131,10 +136,10 @@ void TerrainObject::update()
 	auto cameraPos = SceneManager::getInstance()->getActiveCamera()->getPosition();
 
 	move(dx, cameraPos.x, position.x,
-		[&](Vertex_NFG& vertex, GLint sign) { vertex.uv2.x += sign / (GLfloat) sideCells; });
+		[&](Vertex_NFG& vertex, GLint sign) { vertex.uv2.x += sign / (GLfloat)sideCells; });
 
 	move(dz, cameraPos.z, position.z,
-		[&](Vertex_NFG& vertex, GLint sign) { vertex.uv2.y += sign / (GLfloat) sideCells; });
+		[&](Vertex_NFG& vertex, GLint sign) { vertex.uv2.y += sign / (GLfloat)sideCells; });
 
 	// TODO; model->freeResources();
 	// Trimiterea offset in shader - idee

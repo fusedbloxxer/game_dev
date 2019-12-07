@@ -5,7 +5,6 @@ uniform sampler2D u_texture_1;
 uniform sampler2D u_texture_2;
 uniform sampler2D u_texture_3;
 
-varying vec3 v_color;
 varying vec2 v_uv2;
 varying vec2 v_uv;
 

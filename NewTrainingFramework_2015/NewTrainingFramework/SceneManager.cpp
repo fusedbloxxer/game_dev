@@ -445,6 +445,24 @@ void SceneManager::init(ESContext* esContext, const char* sceneManagerPath)
 	// Load SceneObjects
 	loadXML<SceneObject>(root->first_node("objects"));
 
+	// Load Axis Shader
+	if (auto axis = root->first_node("axisShader"))
+	{
+		if (auto id = axis->first_attribute("id"))
+		{
+			SceneObject::axisShader = ResourceManager::getInstance()->load<Shader>(atoi(id->value()));
+			SceneObject::axisShader->load();
+		}
+		else
+		{
+			throw std::runtime_error{ "No id was found for axis shader!" };
+		}
+	}
+	else
+	{
+		throw std::runtime_error{ "No AxisShader found !" };
+	}
+
 	// Set clear background color
 	glClearColor(backgroundColor.x, backgroundColor.y, backgroundColor.z, 0.0f);
 }
@@ -477,6 +495,7 @@ void SceneManager::update()
 
 void SceneManager::freeResources()
 {
+	// in model x, y ,z
 	pressed.clear();
 	keyMap.clear();
 	cameraMap.clear();
@@ -493,8 +512,17 @@ void SceneManager::pressKey(GLubyte key, GLboolean isPressed)
 {
 	if (keyMap.find(key) != keyMap.end())
 	{
-		// TODO;
-		pressed[keyMap[key]] = isPressed;
+		if (keyMap[key] == Controls::MODE_DEBUG)
+		{
+			if (isPressed)
+			{
+				pressed[keyMap[key]] = !pressed[keyMap[key]];
+			}
+		}
+		else
+		{
+			pressed[keyMap[key]] = isPressed;
+		}
 	}
 }
 
@@ -575,6 +603,16 @@ std::shared_ptr<Camera> SceneManager::getActiveCamera()
 		return cameraMap[activeCameraId];
 	}
 	return nullptr;
+}
+
+std::unordered_map<GLubyte, GLboolean>& SceneManager::getPressedButtons()
+{
+	return pressed;
+}
+
+void SceneManager::setPressedButtons(std::unordered_map<GLubyte, GLboolean>& pressed)
+{
+	this->pressed = pressed;
 }
 
 std::unordered_map<unsigned char, Controls::Type>& SceneManager::getControls()

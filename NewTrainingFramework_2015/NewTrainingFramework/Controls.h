@@ -20,7 +20,9 @@ namespace Controls {
 		ROTATE_CAMERA_NEGATIVE_Z,
 
 		SCENE_WIREFRAME_TRUE,
-		SCENE_WIREFRAME_FALSE
+		SCENE_WIREFRAME_FALSE,
+
+		MODE_DEBUG
 	};
 
 	Type atoc(const char* str);

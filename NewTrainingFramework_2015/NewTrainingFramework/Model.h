@@ -1,11 +1,14 @@
 #pragma once
 #include "ModelResource.h"
-#include "Loadable.h"
+#include "AxisModel.h"
 #include <vector>
 #include <memory>
 
 class Model : public Loadable
 {
+	// The model for its axis
+	AxisModel axisModel;
+
 	// Model Resource Config
 	std::shared_ptr<ModelResource> mr;
 
@@ -60,6 +63,9 @@ public:
 	GLuint getNoIndWired() const;
 	void setNoIndWired(GLuint id);
 
+	AxisModel& getAxisModel();
+	void setAxisModel(const AxisModel& axisModel);
+
 	std::shared_ptr<ModelResource> getModelResource();
 	void setModelResource(std::shared_ptr<ModelResource> mr);
 };
@@ -68,6 +74,31 @@ template<typename VertexType>
 void Model::load(const std::vector<VertexType>& vertices, const std::vector<GLushort>& indexes)
 {
 	noInd = indexes.size();
+
+	if (vertices.size() > 0)
+	{
+		GLfloat x = vertices[0].pos.x, y = vertices[0].pos.y, z = vertices[0].pos.z;
+		for (decltype(vertices.size()) i = 1; i < vertices.size(); ++i)
+		{
+			if (x < vertices[i].pos.x)
+			{
+				x = vertices[i].pos.x;
+			}
+
+			if (y < vertices[i].pos.y)
+			{
+				y = vertices[i].pos.y;
+			}
+
+			if (z < vertices[i].pos.z)
+			{
+				z = vertices[i].pos.z;
+			}
+		}
+
+		axisModel.init({ x, y, z });
+		axisModel.load();
+	}
 
 	// Load vertices into buffer
 	glBindBuffer(GL_ARRAY_BUFFER, vboId);

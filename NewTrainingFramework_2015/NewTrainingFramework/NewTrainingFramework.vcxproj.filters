@@ -195,6 +195,15 @@
     <ClCompile Include="Logger.cpp">
       <Filter>Source Files\Components\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="AxisModel.cpp">
+      <Filter>Source Files\Components\ResourceManager\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="AxisResource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexAxis.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Drawable.h">
@@ -290,6 +299,15 @@
     <ClInclude Include="Logger.h">
       <Filter>Header Files\Components\Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="AxisModel.h">
+      <Filter>Header Files\Components\ResourceManager\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="AxisResource.h">
+      <Filter>Header Files\Components\ResourceManager\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexAxis.h">
+      <Filter>Header Files\Components\ResourceManager\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Readme.doc" />
@@ -381,6 +399,12 @@
       <Filter>Resources\Shaders\Current</Filter>
     </None>
     <None Include="..\Resources\Shaders\SkyBoxVS.vs">
+      <Filter>Resources\Shaders\Current</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\AxisShaderFS.fs">
+      <Filter>Resources\Shaders\Current</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\AxisShaderVS.vs">
       <Filter>Resources\Shaders\Current</Filter>
     </None>
   </ItemGroup>

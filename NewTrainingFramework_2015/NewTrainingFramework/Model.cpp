@@ -104,6 +104,11 @@ void Model::setNoIndWired(GLuint id)
 	noIndWired = id;
 }
 
+AxisModel& Model::getAxisModel()
+{
+	return axisModel;
+}
+
 std::shared_ptr<ModelResource> Model::getModelResource()
 {
 	return mr;

@@ -99,6 +99,9 @@ public:
 
 	std::shared_ptr<Camera> getActiveCamera();
 
+	std::unordered_map<GLubyte, GLboolean>& getPressedButtons();
+	void setPressedButtons(std::unordered_map<GLubyte, GLboolean>& pressed);
+
 	std::unordered_map<unsigned char, Controls::Type>& getControls();
 	void setControls(std::unordered_map<unsigned char, Controls::Type>& controls);
 

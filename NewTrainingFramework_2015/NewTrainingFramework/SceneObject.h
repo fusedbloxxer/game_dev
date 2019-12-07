@@ -1,4 +1,5 @@
 #pragma once
+#include "AxisModel.h"
 #include "Drawable.h"
 #include "Texture.h"
 #include "Shader.h"
@@ -10,6 +11,9 @@
 class SceneObject : public Drawable
 {
 public:
+	// Axis Shader
+	inline static std::shared_ptr<Shader> axisShader;
+
 	// Object Types
 	enum Type {
 		NORMAL,

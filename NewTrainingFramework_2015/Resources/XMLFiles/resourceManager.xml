@@ -48,6 +48,10 @@
         <vs>SkyBoxVS.vs</vs>
         <fs>SkyBoxFS.fs</fs>
       </shader>
+      <shader id="7">
+        <vs>AxisShaderVS.vs</vs>
+        <fs>AxisShaderFS.fs</fs>
+      </shader>
     </folder>
   </shaders>
 

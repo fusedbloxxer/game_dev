@@ -163,6 +163,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AxisModel.cpp" />
+    <ClCompile Include="AxisResource.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Controls.cpp" />
     <ClCompile Include="Drawable.cpp" />
@@ -195,9 +197,12 @@
     <ClCompile Include="TerrainObject.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureResource.cpp" />
+    <ClCompile Include="VertexAxis.cpp" />
     <ClCompile Include="Vertex_NFG.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AxisModel.h" />
+    <ClInclude Include="AxisResource.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Controls.h" />
     <ClInclude Include="Drawable.h" />
@@ -228,6 +233,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureResource.h" />
     <ClInclude Include="Vertex.h" />
+    <ClInclude Include="VertexAxis.h" />
     <ClInclude Include="Vertex_NFG.h" />
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +255,8 @@
     <None Include="..\Resources\NewResourcesPacket\Models\Woman1.nfg" />
     <None Include="..\Resources\NewResourcesPacket\Models\Woman2.nfg" />
     <None Include="..\Resources\Packet\Textures\heightmap.raw" />
+    <None Include="..\Resources\Shaders\AxisShaderFS.fs" />
+    <None Include="..\Resources\Shaders\AxisShaderVS.vs" />
     <None Include="..\Resources\Shaders\ColorShaderFS.fs" />
     <None Include="..\Resources\Shaders\ColorShaderVS.vs" />
     <None Include="..\Resources\Shaders\LineShaderFS.fs" />

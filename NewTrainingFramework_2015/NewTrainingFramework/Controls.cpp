@@ -49,6 +49,9 @@ Controls::Type Controls::atoc(const char* str)
 	else if (strcmp(str, "SCENE_WIREFRAME_FALSE") == 0) {
 		return SCENE_WIREFRAME_FALSE;
 	}
+	else if (strcmp(str, "MODE_DEBUG") == 0) {
+		return MODE_DEBUG;
+	}
 	else {
 		throw std::runtime_error{ "INVALID STRING-CONTROL CONVERSION" };
 	}

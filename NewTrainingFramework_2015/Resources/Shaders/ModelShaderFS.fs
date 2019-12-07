@@ -2,7 +2,7 @@ precision highp float;
 
 uniform sampler2D u_texture_0;
 
-varying vec3 v_color;
+// varying vec3 v_color;
 varying vec2 v_uv;
 
 void main()
@@ -13,8 +13,5 @@ void main()
 	{
 		discard;
 	}
-	else
-	{
-		gl_FragColor = vecColor;	
-	}
+	gl_FragColor = vecColor;	
 }

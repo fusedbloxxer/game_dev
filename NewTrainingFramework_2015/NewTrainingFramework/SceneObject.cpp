@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SceneManager.h"
 #include "Vertex_NFG.h"
+#include "AxisResource.h"
 #include <algorithm>
 
 SceneObject::SceneObject(GLint id)
@@ -11,11 +12,50 @@ SceneObject::SceneObject(GLint id, Type type)
 
 void SceneObject::draw()
 {
+	int err;
+
 	glUseProgram(shader->getProgramId());
 
+	err = glGetError();
 	sendCommonData();
+	err = glGetError();
 
-	if (!wiredFormat)
+	auto pressed = SceneManager::getInstance()->getPressedButtons();
+	if (pressed.find(Controls::MODE_DEBUG) != pressed.end() && pressed[Controls::MODE_DEBUG])
+	{
+		// Draws wires
+		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+		err = glGetError();
+
+		// Draws axis
+		glUseProgram(axisShader->getProgramId());
+		glBindBuffer(GL_ARRAY_BUFFER, model->getAxisModel().getId());
+		
+		auto fields = axisShader->getFields();
+		if (fields.positionAttribute != -1)
+		{
+			glEnableVertexAttribArray(fields.positionAttribute);
+			glVertexAttribPointer(fields.positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexAxis), 0);
+		}
+
+		if (fields.colorAttribute != -1)
+		{
+			glEnableVertexAttribArray(fields.colorAttribute);
+			glVertexAttribPointer(fields.colorAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexAxis), (void *)sizeof(Vector3));
+		}
+
+		if (fields.unifMatrix != -1)
+		{
+			auto camera = SceneManager::getInstance()->getActiveCamera();
+			glUniformMatrix4fv(fields.unifMatrix, 1, GL_FALSE, (float*)(getModelMatrix() * camera->getViewMatrix() * camera->getProjMatrix()).m);
+		}
+
+		glDrawArrays(GL_LINES, 0, 6);
+	}
+	else if (!wiredFormat)
 	{
 		glDrawElements(GL_TRIANGLES, model->getNoInd(), GL_UNSIGNED_SHORT, 0);
 	}
@@ -24,6 +64,7 @@ void SceneObject::draw()
 		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
 	}
 
+	err = glGetError();
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
@@ -32,7 +73,10 @@ void SceneObject::sendCommonData()
 {
 	glBindBuffer(GL_ARRAY_BUFFER, model->getVboId());
 
-	if (!wiredFormat)
+	auto pressed = SceneManager::getInstance()->getPressedButtons();
+	if (pressed.find(Controls::MODE_DEBUG) != pressed.end() && pressed[Controls::MODE_DEBUG])
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, model->getWiredboId());
+	else if (!wiredFormat)
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, model->getIboId());
 	else
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, model->getWiredboId());

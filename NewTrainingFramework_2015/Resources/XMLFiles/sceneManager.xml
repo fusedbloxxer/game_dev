@@ -32,6 +32,10 @@
       <action>MOVE_CAMERA_POSITIVE_X</action>
     </control>
     <control>
+      <key>I</key>
+      <action>MODE_DEBUG</action>
+    </control>
+    <control>
       <key>VK_LEFT</key>
       <action>ROTATE_CAMERA_NEGATIVE_Y</action>
     </control>
@@ -76,9 +80,38 @@
 		</camera>
 	</cameras>
 	<activeCamera>1</activeCamera>
-	
-	<objects>
-		<object id="1">
+
+  <objects>
+
+    <object id="3">
+      <model>5</model>
+      <shader>5</shader>
+      <type>normal</type>
+      <name>Mesh_minge</name>
+      <wired/>
+      <color>
+        <r>1.0</r>
+        <g>1.0</g>
+        <b>1.0</b>
+      </color>
+      <position>
+        <x>0.0</x>
+        <y>250.0</y>
+        <z>0.0</z>
+      </position>
+      <rotation>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </rotation>
+      <scale>
+        <x>5.0</x>
+        <y>5.0</y>
+        <z>5.0</z>
+      </scale>
+    </object>
+<!--
+    <object id="1">
 			<model>1</model>
 			<shader>3</shader>
 			<type>normal</type>
@@ -128,33 +161,7 @@
       </scale>
     </object>
     
-		<object id="3">
-			<model>5</model>
-			<shader>5</shader>
-			<type>normal</type>
-			<name>Mesh_minge</name>
-      <wired/>
-      <color>
-				<r>1.0</r>
-				<g>1.0</g>
-				<b>1.0</b>
-			</color>
-			<position>
-				<x>0.0</x>
-				<y>250.0</y>
-				<z>0.0</z>
-			</position>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<scale>
-				<x>5.0</x>
-				<y>5.0</y>
-				<z>5.0</z>
-			</scale>
-		</object>
+	
 
     <object id="6">
       <model>8</model>
@@ -179,9 +186,9 @@
         <z>0.0</z>
       </rotation>
       <scale>
-        <x>6250.0</x>
-        <y>6250.0</y>
-        <z>6250</z>
+        <x>40000.0</x>
+        <y>40000.0</y>
+        <z>40000.0</z>
       </scale>
     </object>
 
@@ -207,13 +214,9 @@
       </cells>
       <textures>
         <texture id="14"/>
-        <!-- Rock -->
         <texture id="15"/>
-        <!-- Dirt -->
         <texture id="16"/>
-        <!-- Grass -->
         <texture id="17"/>
-        <!-- Blend -->
       </textures>
       <position>
         <x>0.0</x>
@@ -231,5 +234,8 @@
         <z>1.0</z>
       </scale>
     </object>
-	</objects>
+	-->
+  </objects>
+  
+  <axisShader id="7"/>
 </sceneManager>

@@ -4,6 +4,8 @@
 #include "Math.h"
 #include <iostream>
 
+// In shader resource, in scene manager / res man pentru ca toate au acelasi shader
+
 class Vertex_NFG
 {
 	friend std::istream& operator>>(std::istream& is, Vertex_NFG& obj);
