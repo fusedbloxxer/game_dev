@@ -110,7 +110,7 @@
         <z>5.0</z>
       </scale>
     </object>
-<!--
+    
     <object id="1">
 			<model>1</model>
 			<shader>3</shader>
@@ -138,12 +138,14 @@
 
     <object id="2">
       <model>3</model>
-      <shader>3</shader>
+      <shader>5</shader>
       <type>normal</type>
       <name>Cool Woman</name>
-      <textures>
-        <texture id="1"/>
-      </textures>
+      <color>
+        <r>1.0</r>
+        <g>0.0</g>
+        <b>1.0</b>
+      </color>
       <position>
         <x>-1200.0</x>
         <y>-600.0</y>
@@ -160,8 +162,6 @@
         <z>100.0</z>
       </scale>
     </object>
-    
-	
 
     <object id="6">
       <model>8</model>
@@ -234,7 +234,7 @@
         <z>1.0</z>
       </scale>
     </object>
-	-->
+    
   </objects>
   
   <axisShader id="7"/>

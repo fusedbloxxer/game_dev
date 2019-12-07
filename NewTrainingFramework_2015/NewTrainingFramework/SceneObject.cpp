@@ -12,23 +12,16 @@ SceneObject::SceneObject(GLint id, Type type)
 
 void SceneObject::draw()
 {
-	int err;
-
 	glUseProgram(shader->getProgramId());
-
-	err = glGetError();
 	sendCommonData();
-	err = glGetError();
 
 	auto pressed = SceneManager::getInstance()->getPressedButtons();
 	if (pressed.find(Controls::MODE_DEBUG) != pressed.end() && pressed[Controls::MODE_DEBUG])
 	{
 		// Draws wires
 		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-		err = glGetError();
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 		// Draws axis
 		glUseProgram(axisShader->getProgramId());
@@ -64,7 +57,6 @@ void SceneObject::draw()
 		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
 	}
 
-	err = glGetError();
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
@@ -115,6 +107,7 @@ void SceneObject::sendCommonData()
 
 	if (fields.colorAttribute != -1)
 	{
+		glDisableVertexAttribArray(fields.colorAttribute);
 		glVertexAttrib3f(fields.colorAttribute, color.x, color.y, color.z);
 	}
 }
