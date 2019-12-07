@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Logger.h"
-#include <iostream>
 #include <windows.h>
 
 void Logger::setMode(GLint priority)

@@ -1,6 +1,9 @@
 #pragma once
 #include "..\Utilities\utilities.h"
 
+// BIT OPERATIONS: verbose, debug, error, what a terrible failure
+//                    3       2      1          0 
+
 class Logger
 {
 	inline static int priority = 15;
@@ -21,6 +24,7 @@ public:
 	static void setMode(GLint priority);
 
 	static GLint getMode();
+
 private:
 	static void setColor(GLint colorCode);
 };
@@ -45,9 +49,6 @@ The different color codes are
 14  YELLOW
 15  WHITE
 */
-
-// BIT OPERATIONS: verbose, debug, error, what a terrible failure
-//                    3       2      1          0 
 
 template<typename Object>
 void Logger::wtf(Object object, bool show)

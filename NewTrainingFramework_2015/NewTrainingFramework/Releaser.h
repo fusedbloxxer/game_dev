@@ -9,7 +9,7 @@ protected:
 
 public:
 	// Constructors
-	Releaser();
+	Releaser() : holdsResources{ false } {}
 
 	// !TODO; Prevent code auto-generation
 	Releaser(const Releaser& copy) = delete;
@@ -19,6 +19,6 @@ public:
 
 	// Virtual methods
 	virtual void freeResources() = 0;
-	virtual ~Releaser();
+	virtual ~Releaser() = default;
 };
 

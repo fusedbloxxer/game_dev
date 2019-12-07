@@ -10,6 +10,5 @@ public:
 	virtual void update() = 0;
 	
 	// Virtual Destructor
-	virtual ~Drawable();
+	virtual ~Drawable() = default;
 };
-

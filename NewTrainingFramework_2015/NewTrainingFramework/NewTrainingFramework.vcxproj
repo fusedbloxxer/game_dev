@@ -167,26 +167,17 @@
     <ClCompile Include="AxisResource.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Controls.cpp" />
-    <ClCompile Include="Drawable.cpp" />
-    <ClCompile Include="GeneratedModel.cpp" />
-    <ClCompile Include="Globals.cpp" />
-    <ClCompile Include="Loadable.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelResource.cpp" />
-    <ClCompile Include="ModelShader.cpp" />
-    <ClCompile Include="NewTrainingFramework.cpp" />
-    <ClCompile Include="NFG.cpp" />
+    <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="Parser.cpp" />
-    <ClCompile Include="Releaser.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneObject.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderResource.cpp" />
-    <ClCompile Include="Shaders.cpp" />
-    <ClCompile Include="Shaders1.cpp" />
     <ClCompile Include="SkyboxObject.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-ATI|Win32'">Create</PrecompiledHeader>
@@ -212,9 +203,6 @@
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelResource.h" />
-    <ClInclude Include="ModelShader.h" />
-    <ClInclude Include="NewTrainingFramework.h" />
-    <ClInclude Include="NFG.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Releaser.h" />
     <ClInclude Include="Resource.h" />
@@ -224,15 +212,12 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Fields.h" />
     <ClInclude Include="ShaderResource.h" />
-    <ClInclude Include="Shaders.h" />
-    <ClInclude Include="Shaders1.h" />
     <ClInclude Include="SkyboxObject.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TerrainObject.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureResource.h" />
-    <ClInclude Include="Vertex.h" />
     <ClInclude Include="VertexAxis.h" />
     <ClInclude Include="Vertex_NFG.h" />
   </ItemGroup>
@@ -259,16 +244,12 @@
     <None Include="..\Resources\Shaders\AxisShaderVS.vs" />
     <None Include="..\Resources\Shaders\ColorShaderFS.fs" />
     <None Include="..\Resources\Shaders\ColorShaderVS.vs" />
-    <None Include="..\Resources\Shaders\LineShaderFS.fs" />
-    <None Include="..\Resources\Shaders\LineShaderVS.vs" />
     <None Include="..\Resources\Shaders\ModelShaderFS.fs" />
     <None Include="..\Resources\Shaders\ModelShaderVS.vs" />
     <None Include="..\Resources\Shaders\SkyBoxFS.fs" />
     <None Include="..\Resources\Shaders\SkyBoxVS.vs" />
     <None Include="..\Resources\Shaders\TerrainShaderFS.fs" />
     <None Include="..\Resources\Shaders\TerrainShaderVS.vs" />
-    <None Include="..\Resources\Shaders\TriangleShaderFS.fs" />
-    <None Include="..\Resources\Shaders\TriangleShaderVS.vs" />
     <None Include="..\..\Readme.doc" />
   </ItemGroup>
   <ItemGroup>
@@ -278,7 +259,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="..\Resources\XMLFiles\exemplu_xml.xml" />
     <Xml Include="..\Resources\XMLFiles\resourceManager.xml" />
     <Xml Include="..\Resources\XMLFiles\sceneManager.xml" />
   </ItemGroup>

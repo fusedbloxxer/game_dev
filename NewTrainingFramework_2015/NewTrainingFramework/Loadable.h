@@ -4,10 +4,7 @@
 class Loadable : public Releaser
 {
 public:
-	// Constructors
-	Loadable();
-
-	// Virtual methods
+	Loadable() = default;
 	virtual void load() = 0;
-	virtual ~Loadable();
+	virtual ~Loadable() = default;
 };

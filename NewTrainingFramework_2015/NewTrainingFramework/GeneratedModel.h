@@ -6,6 +6,5 @@ public:
 	virtual void generateModel() = 0;
 
 	// Virtual Destructor
-	virtual ~GeneratedModel();
+	virtual ~GeneratedModel() = default;
 };
-
