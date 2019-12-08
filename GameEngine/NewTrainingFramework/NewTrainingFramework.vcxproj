@@ -168,6 +168,7 @@
     <ClCompile Include="AxisResource.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Controls.cpp" />
+    <ClCompile Include="Fog.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelResource.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Controls.h" />
     <ClInclude Include="Drawable.h" />
+    <ClInclude Include="Fog.h" />
     <ClInclude Include="GeneratedModel.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Loadable.h" />

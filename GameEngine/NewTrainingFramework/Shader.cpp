@@ -42,8 +42,15 @@ void Shader::load()
 	fields.uvAttribute = glGetAttribLocation(programId, "a_uvL");
 
 	// Uniforms
+	fields.projectionUniform = glGetUniformLocation(programId, "u_projection");
+	fields.fogTransitionUniform = glGetUniformLocation(programId, "u_fog_R");
+	fields.fogColorUniform = glGetUniformLocation(programId, "u_fog_color");
+	fields.fogClarityUniform = glGetUniformLocation(programId, "u_fog_r");
 	fields.heightUniform = glGetUniformLocation(programId, "u_height");
-	fields.unifMatrix = glGetUniformLocation(programId, "u_matrix");
+	fields.cameraUniform = glGetUniformLocation(programId, "u_camera");
+	fields.modelUniform = glGetUniformLocation(programId, "u_model");
+	fields.viewUniform = glGetUniformLocation(programId, "u_view");
+
 	for (GLuint i = 0; i < Fields::MAX_TEXTURES; ++i)
 	{
 		fields.textureUniform[i] = glGetUniformLocation(programId, ("u_texture_" + std::to_string(i)).c_str());

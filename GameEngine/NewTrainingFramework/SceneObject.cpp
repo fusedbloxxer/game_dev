@@ -66,10 +66,43 @@ void SceneObject::sendCommonData()
 		glVertexAttribPointer(fields.positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexNfg), 0);
 	}
 
-	if (fields.unifMatrix != -1)
+	if (fields.modelUniform != -1)
 	{
-		auto camera = SceneManager::getInstance()->getActiveCamera();
-		glUniformMatrix4fv(fields.unifMatrix, 1, GL_FALSE, (float*)(getModelMatrix() * camera->getViewMatrix() * camera->getProjMatrix()).m);
+		glUniformMatrix4fv(fields.modelUniform, 1, GL_FALSE, (float*)(getModelMatrix()).m);
+	}
+
+	if (fields.viewUniform != -1)
+	{
+		glUniformMatrix4fv(fields.viewUniform, 1, GL_FALSE, (float*)(SceneManager::getInstance()->getActiveCamera()->getViewMatrix()).m);
+	}
+
+	if (fields.projectionUniform != -1)
+	{
+		glUniformMatrix4fv(fields.projectionUniform, 1, GL_FALSE, (float*)(SceneManager::getInstance()->getActiveCamera()->getProjMatrix()).m);
+	}
+
+	if (fields.fogColorUniform != -1)
+	{
+		Vector3 fog = SceneManager::getInstance()->getFog().getFogColor();
+		glUniform3f(fields.fogColorUniform, fog.x, fog.y, fog.z);
+	}
+
+	if (fields.fogClarityUniform != -1)
+	{
+		GLfloat clarity = SceneManager::getInstance()->getFog().getFogClarityRadius();
+		glUniform1f(fields.fogClarityUniform, clarity);
+	}
+
+	if (fields.fogTransitionUniform != -1)
+	{
+		GLfloat transition = SceneManager::getInstance()->getFog().getFogTransitionRadius();
+		glUniform1f(fields.fogTransitionUniform, transition);
+	}
+
+	if (fields.cameraUniform != -1)
+	{
+		auto cameraPosition = SceneManager::getInstance()->getActiveCamera()->getPosition();
+		glUniform3f(fields.cameraUniform, cameraPosition.x, cameraPosition.y, cameraPosition.z);
 	}
 
 	if (fields.uvAttribute != -1)
@@ -290,10 +323,19 @@ void SceneObject::drawAxis()
 		glVertexAttribPointer(fields.colorAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexAxis), (void*)sizeof(Vector3));
 	}
 
-	if (fields.unifMatrix != -1)
+	if (fields.modelUniform != -1)
 	{
-		auto camera = SceneManager::getInstance()->getActiveCamera();
-		glUniformMatrix4fv(fields.unifMatrix, 1, GL_FALSE, (float*)(getModelMatrix() * camera->getViewMatrix() * camera->getProjMatrix()).m);
+		glUniformMatrix4fv(fields.modelUniform, 1, GL_FALSE, (float*)(getModelMatrix()).m);
+	}
+
+	if (fields.viewUniform != -1)
+	{
+		glUniformMatrix4fv(fields.viewUniform, 1, GL_FALSE, (float*)(SceneManager::getInstance()->getActiveCamera()->getViewMatrix()).m);
+	}
+
+	if (fields.projectionUniform != -1)
+	{
+		glUniformMatrix4fv(fields.projectionUniform, 1, GL_FALSE, (float*)(SceneManager::getInstance()->getActiveCamera()->getProjMatrix()).m);
 	}
 
 	glDrawArrays(GL_LINES, 0, 6);

@@ -9,6 +9,7 @@
 #include <string>
 #include <memory>
 #include <vector>
+#include "Fog.h"
 
 class SceneManager : public Drawable, public Releaser
 {
@@ -22,6 +23,9 @@ class SceneManager : public Drawable, public Releaser
 	template<typename Config>
 	void loadXML(rapidxml::xml_node<>* root);
 	Vector3 loadXML(rapidxml::xml_node<>* root, const char* node, const char xP[2], const char yP[2], const char zP[2]) const;
+
+	// Fog
+	Fog fog;
 
 	// Game Name
 	std::string gameName;
@@ -89,6 +93,9 @@ public:
 	void setESContext(ESContext* esContext);
 
 	bool debug();
+
+	Fog getFog() const;
+	void setFog(const Fog& fog);
 
 	bool isFullscreen() const;
 	void setFullscreen(GLboolean fullscreen);

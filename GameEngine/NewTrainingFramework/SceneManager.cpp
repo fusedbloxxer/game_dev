@@ -42,6 +42,20 @@ void SceneManager::loadXML<Controls::Type>(rapidxml::xml_node<>* root)
 }
 
 template<>
+void SceneManager::loadXML<Fog>(rapidxml::xml_node<>* root)
+{
+	auto fog = root->first_node("fog"); if (!fog) { throw std::runtime_error{ "No fog was found !" }; }
+	auto radius = fog->first_node("radius"); if (!radius) { throw std::runtime_error{ "No radius was found." }; }
+	auto fogClarityRadius = radius->first_node("r"); if (!fogClarityRadius) { throw std::runtime_error{ "No r was found." }; }
+	auto fogTransiRadius = radius->first_node("R"); if (!fogTransiRadius) { throw std::runtime_error{ "No R was found." }; }
+	auto color = loadXML(fog, "color", "r", "g", "b");
+
+	SceneManager::fog.setFogColor({ color.x / 256, color.y / 256, color.z / 256 });
+	SceneManager::fog.setFogClarityRadius(atof(fogClarityRadius->value()));
+	SceneManager::fog.setFogTransitionRadius(atof(fogTransiRadius->value()));
+}
+
+template<>
 void SceneManager::loadXML<AxisModel>(rapidxml::xml_node<>* root)
 {
 	if (!root) { throw std::runtime_error{ "No AxisShader found !" }; }
@@ -305,6 +319,9 @@ void SceneManager::init(ESContext* esContext, const char* sceneManagerPath)
 	// Load the Axis Shader
 	loadXML<AxisModel>(root->first_node("axisShader"));
 
+	// Load fog
+	loadXML<Fog>(root);
+
 	// Set clear background color
 	glClearColor(backgroundColor.x, backgroundColor.y, backgroundColor.z, 0.0f);
 }
@@ -498,6 +515,16 @@ void SceneManager::setESContext(ESContext* esContext)
 bool SceneManager::debug()
 {
 	return pressed.find(Controls::MODE_DEBUG) != pressed.end() && pressed[Controls::MODE_DEBUG];
+}
+
+Fog SceneManager::getFog() const
+{
+	return fog;
+}
+
+void SceneManager::setFog(const Fog& fog)
+{
+	this->fog = fog;
 }
 
 template<typename Config>

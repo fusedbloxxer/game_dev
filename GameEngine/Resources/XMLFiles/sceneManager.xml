@@ -141,6 +141,7 @@
       <shader>5</shader>
       <type>normal</type>
       <name>Cool Woman</name>
+      <wired/>
       <color>
         <r>1.0</r>
         <g>0.0</g>
@@ -177,7 +178,7 @@
       </textures>
       <position>
         <x>0.0</x>
-        <y>6000.0</y>
+        <y>38000.0</y>
         <z>0.0</z>
       </position>
       <rotation>
@@ -236,6 +237,18 @@
     </object>
     
   </objects>
+  
+  <fog>
+    <radius>
+      <r>3000</r>
+      <R>5000</R>
+    </radius>
+    <color>
+      <r>60</r>
+      <g>68</g>
+      <b>85</b>
+    </color>
+  </fog>
   
   <axisShader id="7"/>
 </sceneManager>

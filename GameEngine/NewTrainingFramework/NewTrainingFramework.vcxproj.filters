@@ -132,6 +132,9 @@
     <ClCompile Include="Logger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Fog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Drawable.h">
@@ -214,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="VertexNfg.h">
       <Filter>Header Files\ResourceManager\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Fog.h">
+      <Filter>Header Files\SceneManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
