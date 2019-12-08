@@ -4,7 +4,6 @@ attribute vec3 a_posL;
 uniform mat4 u_view;
 uniform mat4 u_model;
 uniform mat4 u_projection;
-uniform samplerCube u_texture_0;
 
 varying vec2 v_uv;
 varying vec3 v_coord;

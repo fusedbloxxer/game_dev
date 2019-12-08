@@ -81,8 +81,74 @@
 	</cameras>
 	<activeCamera>1</activeCamera>
 
-  <objects>
+  <fog>
+    <radius>
+      <r>3000</r>
+      <R>5000</R>
+    </radius>
+    <color>
+      <r>60</r>
+      <g>68</g>
+      <b>85</b>
+    </color>
+  </fog>
 
+  <axisShader id="7"/>
+  
+  <objects>
+    <object id="1">
+      <model>1</model>
+      <shader>3</shader>
+      <type>normal</type>
+      <name>Crocodil_verde</name>
+      <textures>
+        <texture id="4"/>
+      </textures>
+      <position>
+        <x>0.0</x>
+        <y>0.0</y>
+        <z>0.0</z>
+      </position>
+      <rotation>
+        <x>0.0</x>
+        <y>90.0</y>
+        <z>0.0</z>
+      </rotation>
+      <scale>
+        <x>4</x>
+        <y>4</y>
+        <z>4</z>
+      </scale>
+    </object>
+
+    <object id="2">
+      <model>3</model>
+      <shader>5</shader>
+      <type>normal</type>
+      <name>Cool Woman</name>
+      <wired/>
+      <color>
+        <r>1.0</r>
+        <g>0.0</g>
+        <b>1.0</b>
+      </color>
+      <position>
+        <x>-1200.0</x>
+        <y>-600.0</y>
+        <z>-200.0</z>
+      </position>
+      <rotation>
+        <x>0</x>
+        <y>0.0</y>
+        <z>0</z>
+      </rotation>
+      <scale>
+        <x>100.0</x>
+        <y>100.0</y>
+        <z>100.0</z>
+      </scale>
+    </object>
+    
     <object id="3">
       <model>5</model>
       <shader>5</shader>
@@ -110,57 +176,63 @@
         <z>5.0</z>
       </scale>
     </object>
-    
-    <object id="1">
-			<model>1</model>
-			<shader>3</shader>
-			<type>normal</type>
-			<name>Crocodil_verde</name>
-			<textures>
-				<texture id="4"/>
-			</textures>
-			<position>
-				<x>0.0</x>
-				<y>0.0</y>
-				<z>0.0</z>
-			</position>
-			<rotation>
-				<x>0.0</x>
-				<y>90.0</y>
-				<z>0.0</z>
-			</rotation>
-			<scale>
-				<x>4</x>
-				<y>4</y>
-				<z>4</z>
-			</scale>
-		</object>
 
-    <object id="2">
-      <model>3</model>
+    <object id="4">
+      <model>5</model>
       <shader>5</shader>
       <type>normal</type>
-      <name>Cool Woman</name>
-      <wired/>
+      <name>Minge cu reflexie</name>
+      <reflection/>
       <color>
         <r>1.0</r>
         <g>0.0</g>
-        <b>1.0</b>
+        <b>0.0</b>
       </color>
       <position>
-        <x>-1200.0</x>
-        <y>-600.0</y>
-        <z>-200.0</z>
+        <x>-500.0</x>
+        <y>250.0</y>
+        <z>0.0</z>
       </position>
       <rotation>
         <x>0</x>
-        <y>0.0</y>
+        <y>0</y>
         <z>0</z>
       </rotation>
       <scale>
-        <x>100.0</x>
-        <y>100.0</y>
-        <z>100.0</z>
+        <x>5.0</x>
+        <y>5.0</y>
+        <z>5.0</z>
+      </scale>
+    </object>
+
+    <object id="5">
+      <model>5</model>
+      <shader>3</shader>
+      <type>normal</type>
+      <name>Minge cu textura si reflexie</name>
+      <reflection/>
+      <textures>
+        <texture id="14"/>
+      </textures>
+      <color>
+        <r>1.0</r>
+        <g>0.0</g>
+        <b>0.0</b>
+      </color>
+      <position>
+        <x>-1000.0</x>
+        <y>250.0</y>
+        <z>0.0</z>
+      </position>
+      <rotation>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </rotation>
+      <scale>
+        <x>5.0</x>
+        <y>5.0</y>
+        <z>5.0</z>
       </scale>
     </object>
 
@@ -236,18 +308,4 @@
       </scale>
     </object>
   </objects>
-  
-  <fog>
-    <radius>
-      <r>3000</r>
-      <R>5000</R>
-    </radius>
-    <color>
-      <r>60</r>
-      <g>68</g>
-      <b>85</b>
-    </color>
-  </fog>
-  
-  <axisShader id="7"/>
 </sceneManager>

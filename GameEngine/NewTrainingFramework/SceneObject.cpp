@@ -122,6 +122,32 @@ void SceneObject::sendCommonData()
 		}
 	}
 
+	if (fields.isReflectedUniform != -1)
+	{
+		glUniform1f(fields.isReflectedUniform, reflection ? 1.0f : 0.0f);
+	}
+
+	if (fields.skyboxUniform != -1)
+	{
+		for (auto x : SceneManager::getInstance()->getSceneObjects())
+		{
+			if (x->getType() == Type::SKYBOX)
+			{
+				GLuint index = std::min<GLuint>(Fields::MAX_TEXTURES, textures.size());
+				glActiveTexture(index + GL_TEXTURE0);
+				glBindTexture(x->textures[0]->getTextureResource()->type, x->textures[0]->getTextureId());
+				glUniform1i(fields.skyboxUniform, index);
+				break;
+			}
+		}
+	}
+
+	if (fields.normAttribute != -1)
+	{
+		glEnableVertexAttribArray(fields.normAttribute);
+		glVertexAttribPointer(fields.normAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexNfg), (void*)(2 * sizeof(Vector3)));
+	}
+
 	if (fields.colorAttribute != -1)
 	{
 		glDisableVertexAttribArray(fields.colorAttribute);
@@ -221,6 +247,16 @@ GLboolean SceneObject::getWiredFormat() const
 void SceneObject::setWiredFormat(GLboolean wiredFormat)
 {
 	this->wiredFormat = wiredFormat;
+}
+
+GLboolean SceneObject::getReflection() const
+{
+	return reflection;
+}
+
+void SceneObject::setReflection(GLboolean reflection)
+{
+	this->reflection = reflection;
 }
 
 Matrix& SceneObject::getModelMatrix()

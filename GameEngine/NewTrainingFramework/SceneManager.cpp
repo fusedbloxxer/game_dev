@@ -183,6 +183,7 @@ void SceneManager::loadXML<SceneObject>(rapidxml::xml_node<>* root)
 		}
 
 		sceneObjectPtr->setShader(ResourceManager::getInstance()->load<Shader>(atoi(shader->value())));
+		sceneObjectPtr->setReflection(object->first_node("reflection") != nullptr);
 		sceneObjectPtr->setWiredFormat(object->first_node("wired") != nullptr);
 		sceneObjectPtr->setPosition(loadXML(object, "position", "x", "y", "z"));
 		sceneObjectPtr->setRotation(loadXML(object, "rotation", "x", "y", "z"));

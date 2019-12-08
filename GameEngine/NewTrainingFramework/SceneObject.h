@@ -31,6 +31,9 @@ protected:
 	// Object name
 	std::string name;
 
+	// Reflects Skybox
+	GLboolean reflection;
+
 	// Modified lazily if 'modified' flag is true
 	Matrix modelMatrix;
 
@@ -89,6 +92,9 @@ public:
 
 	GLboolean getWiredFormat() const;
 	void setWiredFormat(GLboolean wiredFormat);
+
+	GLboolean getReflection() const;
+	void setReflection(GLboolean reflection);
 
 	virtual Matrix& getModelMatrix();
 

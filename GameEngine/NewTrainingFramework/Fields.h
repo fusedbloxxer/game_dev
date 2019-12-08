@@ -16,9 +16,11 @@ struct Fields {
 	// Uniforms
 	GLint textureUniform[MAX_TEXTURES];
 	GLint fogTransitionUniform;
+	GLint isReflectedUniform;
 	GLint fogClarityUniform;
 	GLint projectionUniform;
 	GLint fogColorUniform;
+	GLint skyboxUniform;
 	GLint heightUniform;
 	GLint cameraUniform;
 	GLint modelUniform;

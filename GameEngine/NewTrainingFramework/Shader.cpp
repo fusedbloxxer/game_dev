@@ -42,6 +42,8 @@ void Shader::load()
 	fields.uvAttribute = glGetAttribLocation(programId, "a_uvL");
 
 	// Uniforms
+	fields.isReflectedUniform = glGetUniformLocation(programId, "u_is_reflected");
+	fields.skyboxUniform = glGetUniformLocation(programId, "u_texture_skybox");
 	fields.projectionUniform = glGetUniformLocation(programId, "u_projection");
 	fields.fogTransitionUniform = glGetUniformLocation(programId, "u_fog_R");
 	fields.fogColorUniform = glGetUniformLocation(programId, "u_fog_color");
