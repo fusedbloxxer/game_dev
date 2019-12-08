@@ -11,7 +11,7 @@ varying vec3 v_coord;
 
 void main()
 {
+	v_uv = a_uvL;
 	v_coord = a_posL;
 	gl_Position = u_projection * u_view * u_model * vec4(a_posL, 1.0);
-	v_uv = a_uvL;
 }
