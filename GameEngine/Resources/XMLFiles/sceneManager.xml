@@ -3,9 +3,7 @@
   <gameName>FusedBloxxer's Game Engine</gameName>
 	
   <defaultScreenSize>
-    <height>720</height>
-    <width>960</width>
-    <!-- <fullscreen/> -->
+    <fullscreen/>
 	</defaultScreenSize>
 	
   <backgroundColor>

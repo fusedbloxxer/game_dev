@@ -26,8 +26,8 @@ void Update(ESContext* esContext, float deltaTime)
 
 	if (Globals::TIME <= Globals::FRAME_LIMIT)
 	{
-		SceneManager::getInstance()->update();
 	}
+	SceneManager::getInstance()->update();
 }
 
 void Key(ESContext* esContext, unsigned char key, bool bIsPressed)

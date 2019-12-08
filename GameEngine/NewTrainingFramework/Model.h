@@ -78,30 +78,48 @@ private:
 template<typename VertexType>
 void Model::load(const std::vector<VertexType>& vertices, const std::vector<GLushort>& indexes)
 {
-	// Create buffer
-	glGenBuffers(3, &iboId);
-
 	// Number of indexes
 	noInd = indexes.size();
 
 	// Load axis 
 	loadAxisModel(vertices);
 
-	// Load vertices into buffer
-	glBindBuffer(GL_ARRAY_BUFFER, vboId);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexType) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+	if (holdsResources)
+	{
+		// Load vertices into buffer
+		glBindBuffer(GL_ARRAY_BUFFER, vboId);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(VertexType) * vertices.size(), vertices.data());
 
-	// Load indexes into buffer
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * noInd, indexes.data(), GL_STATIC_DRAW);
+		// Load indexes into buffer
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
+		glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, sizeof(GLushort) * noInd, indexes.data());
 
-	// Create wireframe indexes
-	auto wireframe = getWired(indexes);
-	noIndWired = wireframe.size();
+		// Create wireframe indexes
+		auto wireframe = getWired(indexes);
+		noIndWired = wireframe.size();
 
-	// Load wirefram indexes into buffer
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, wiredboId);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * noIndWired, wireframe.data(), GL_STATIC_DRAW);
+		// Load wirefram indexes into buffer
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, wiredboId);
+		glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, sizeof(GLushort) * noIndWired, wireframe.data());
+	}
+	else
+	{
+		// Load vertices into buffer
+		glBindBuffer(GL_ARRAY_BUFFER, vboId);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(VertexType) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
 
-	holdsResources = true;
+		// Load indexes into buffer
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * noInd, indexes.data(), GL_STATIC_DRAW);
+
+		// Create wireframe indexes
+		auto wireframe = getWired(indexes);
+		noIndWired = wireframe.size();
+
+		// Load wirefram indexes into buffer
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, wiredboId);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * noIndWired, wireframe.data(), GL_STATIC_DRAW);
+
+		holdsResources = true;
+	}
 }

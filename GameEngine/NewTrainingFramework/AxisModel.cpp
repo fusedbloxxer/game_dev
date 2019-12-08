@@ -3,7 +3,11 @@
 #include "AxisResource.h"
 
 AxisModel::AxisModel(const Vector3& max)
-	:max{ max }, vboId{} {}
+	:max{ max }, vboId{}
+{
+	// Create buffer
+	glGenBuffers(1, &vboId); 
+}
 
 AxisModel& AxisModel::init(const Vector3& max)
 {
@@ -16,15 +20,12 @@ void AxisModel::freeResources()
 {
 	if (holdsResources)
 	{
-		glDeleteBuffers(1, &vboId);
 		holdsResources = false;
 	}
 }
 
 void AxisModel::load()
 {
-	// Create buffer
-	glGenBuffers(1, &vboId);
 	// Bind buffer to id
 	glBindBuffer(GL_ARRAY_BUFFER, vboId);
 	// Send data to current active buffer
@@ -36,6 +37,7 @@ void AxisModel::load()
 AxisModel::~AxisModel()
 {
 	freeResources();
+	glDeleteBuffers(1, &vboId);
 }
 
 GLuint AxisModel::getId() const

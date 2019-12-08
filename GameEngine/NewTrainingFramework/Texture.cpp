@@ -3,7 +3,11 @@
 #include "Logger.h"
 
 Texture::Texture(std::shared_ptr<TextureResource> tr)
-	:textureId{}, tr{ tr } {}
+	:textureId{}, tr{ tr }
+{
+	// Reserve a buffer name called textureId
+	glGenTextures(1, &textureId);
+}
 
 Texture& Texture::init(std::shared_ptr<TextureResource> tr)
 {
@@ -16,9 +20,6 @@ void Texture::load()
 {
 	GLint width, height, bpp;
 	const char* chr = LoadTGA(tr->file.c_str(), &width, &height, &bpp);
-
-	// Reserve a buffer name called textureId
-	glGenTextures(1, &textureId);
 
 	// Reserve buffer and bind it to that id;
 	glBindTexture(tr->type, textureId);
@@ -73,7 +74,6 @@ void Texture::fetchData(GLenum target, GLchar* const sbuff, GLint sz, const GLch
 void Texture::freeResources()
 {
 	if (holdsResources) {
-		glDeleteTextures(1, &textureId);
 		holdsResources = false;
 	}
 }
@@ -81,6 +81,7 @@ void Texture::freeResources()
 Texture::~Texture()
 {
 	freeResources();
+	glDeleteTextures(1, &textureId);
 }
 
 GLuint Texture::getTextureId() const

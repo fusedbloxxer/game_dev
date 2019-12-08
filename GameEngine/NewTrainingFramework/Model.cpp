@@ -4,7 +4,11 @@
 #include <string>
 
 Model::Model(std::shared_ptr<ModelResource> mr)
-	:mr{ mr }, iboId{}, noInd{}, noIndWired{}, vboId{}, wiredboId{} {}
+	:mr{ mr }, iboId{}, noInd{}, noIndWired{}, vboId{}, wiredboId{}
+{
+	// Create buffer
+	glGenBuffers(3, &iboId); 
+}
 
 void Model::load()
 {
@@ -41,7 +45,6 @@ std::vector<GLushort> Model::getWired(const std::vector<GLushort>& indexes)
 void Model::freeResources()
 {
 	if (holdsResources) {
-		glDeleteBuffers(3, &iboId);
 		axisModel.freeResources();
 		holdsResources = false;
 	}
@@ -123,6 +126,7 @@ std::pair<std::vector<VertexNfg>, std::vector<GLushort>> Model::parseFile(const 
 Model::~Model()
 {
 	freeResources();
+	glDeleteBuffers(3, &iboId);
 }
 
 GLuint Model::getIboId() const
