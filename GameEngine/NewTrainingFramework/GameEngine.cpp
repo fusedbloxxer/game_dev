@@ -5,10 +5,15 @@
 
 int init(ESContext* esContext)
 {
+	glEnable(GL_BLEND);
 	glEnable(GL_DEPTH_TEST);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	
 	ResourceManager::getInstance()->init();
 	SceneManager::getInstance()->init(esContext);
+
 	return 0;
 }
 
@@ -21,13 +26,16 @@ void Draw(ESContext* esContext)
 
 void Update(ESContext* esContext, float deltaTime)
 {
-	SceneManager::getInstance()->getActiveCamera()->setDeltaTime(deltaTime);
-	Globals::TIME += (Globals::TIME > Globals::FRAME_LIMIT) ? -Globals::FRAME_LIMIT : deltaTime;
-
 	if (Globals::TIME <= Globals::FRAME_LIMIT)
 	{
+		SceneManager::getInstance()->getActiveCamera()->setDeltaTime(deltaTime);
+		SceneManager::getInstance()->update();
+		Globals::TIME += deltaTime;
 	}
-	SceneManager::getInstance()->update();
+	else
+	{
+		Globals::TIME = -Globals::FRAME_LIMIT;
+	}
 }
 
 void Key(ESContext* esContext, unsigned char key, bool bIsPressed)

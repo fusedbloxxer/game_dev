@@ -18,7 +18,8 @@ public:
 	enum Type {
 		NORMAL,
 		TERRAIN,
-		SKYBOX
+		SKYBOX,
+		FIRE
 	};
 
 protected:
@@ -54,6 +55,8 @@ protected:
 
 	// Pointer to its textures
 	std::vector<std::shared_ptr<Texture>> textures;
+
+	void drawAxis();
 
 public:
 	// Constructors
@@ -115,7 +118,4 @@ public:
 
 	std::vector<std::shared_ptr<Texture>>& getTextures();
 	void setTextures(std::vector<std::shared_ptr<Texture>>& textures);
-
-private:
-	void drawAxis();
 };

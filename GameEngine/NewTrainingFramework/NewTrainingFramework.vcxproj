@@ -168,6 +168,7 @@
     <ClCompile Include="AxisResource.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Controls.cpp" />
+    <ClCompile Include="FireObject.cpp" />
     <ClCompile Include="Fog.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Controls.h" />
     <ClInclude Include="Drawable.h" />
+    <ClInclude Include="FireObject.h" />
     <ClInclude Include="Fog.h" />
     <ClInclude Include="GeneratedModel.h" />
     <ClInclude Include="Globals.h" />
@@ -245,6 +247,8 @@
     <None Include="..\Resources\Shaders\AxisShaderVS.vs" />
     <None Include="..\Resources\Shaders\ColorShaderFS.fs" />
     <None Include="..\Resources\Shaders\ColorShaderVS.vs" />
+    <None Include="..\Resources\Shaders\FireShaderFS.fs" />
+    <None Include="..\Resources\Shaders\FireShaderVS.vs" />
     <None Include="..\Resources\Shaders\ModelShaderFS.fs" />
     <None Include="..\Resources\Shaders\ModelShaderVS.vs" />
     <None Include="..\Resources\Shaders\SkyBoxFS.fs" />

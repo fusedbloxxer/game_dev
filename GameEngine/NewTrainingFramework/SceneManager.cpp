@@ -3,6 +3,7 @@
 #include "TerrainObject.h"
 #include "SceneManager.h"
 #include "SkyboxObject.h"
+#include "FireObject.h"
 #include <algorithm>
 #include "Logger.h"
 #include <fstream>
@@ -51,8 +52,8 @@ void SceneManager::loadXML<Fog>(rapidxml::xml_node<>* root)
 	auto color = loadXML(fog, "color", "r", "g", "b");
 
 	SceneManager::fog.setFogColor({ color.x / 256, color.y / 256, color.z / 256 });
-	SceneManager::fog.setFogClarityRadius(atof(fogClarityRadius->value()));
-	SceneManager::fog.setFogTransitionRadius(atof(fogTransiRadius->value()));
+	SceneManager::fog.setFogClarityRadius((GLfloat) atof(fogClarityRadius->value()));
+	SceneManager::fog.setFogTransitionRadius((GLfloat) atof(fogTransiRadius->value()));
 }
 
 template<>
@@ -170,13 +171,16 @@ void SceneManager::loadXML<SceneObject>(rapidxml::xml_node<>* root)
 		switch (objectType)
 		{
 		case SceneObject::Type::NORMAL:
-			sceneObjectPtr = std::make_unique<SceneObject>(objId);
+			sceneObjectPtr = std::make_shared<SceneObject>(objId);
 			break;
 		case SceneObject::Type::TERRAIN:
-			sceneObjectPtr = std::make_unique<TerrainObject>(objId);
+			sceneObjectPtr = std::make_shared<TerrainObject>(objId);
 			break;
 		case SceneObject::Type::SKYBOX:
-			sceneObjectPtr = std::make_unique<SkyboxObject>(objId);
+			sceneObjectPtr = std::make_shared<SkyboxObject>(objId);
+			break;
+		case SceneObject::Type::FIRE:
+			sceneObjectPtr = std::make_shared<FireObject>(objId);
 			break;
 		default:
 			throw std::runtime_error{ "SceneObject::Type::..... not listed here." };
@@ -231,6 +235,12 @@ void SceneManager::loadXML<SceneObject>(rapidxml::xml_node<>* root)
 		if (strcmp(model->value(), "generated") != 0)
 		{
 			sceneObjectPtr->setModel(ResourceManager::getInstance()->load<Model>(atoi(model->value())));
+			
+			if (auto fire = dynamic_cast<FireObject*>(sceneObjectPtr.get()))
+			{
+				auto dispMax = object->first_node("dispMax"); if (!dispMax) { throw std::runtime_error{ "No displacement max value was found." }; }
+				fire->setDispMax((GLfloat)atof(dispMax->value()));
+			}
 		}
 		else if (auto terrain = dynamic_cast<TerrainObject*>(sceneObjectPtr.get()))
 		{

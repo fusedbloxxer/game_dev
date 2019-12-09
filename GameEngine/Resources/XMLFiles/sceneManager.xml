@@ -3,7 +3,8 @@
   <gameName>FusedBloxxer's Game Engine</gameName>
 	
   <defaultScreenSize>
-    <fullscreen/>
+    <width>960</width>
+    <height>720</height>
 	</defaultScreenSize>
 	
   <backgroundColor>
@@ -328,6 +329,34 @@
         <x>1.0</x>
         <y>1.0</y>
         <z>1.0</z>
+      </scale>
+    </object>
+
+    <object id="9">
+      <model>9</model>
+      <shader>8</shader>
+      <type>fire</type>
+      <name>Fire</name>
+      <dispMax>1</dispMax>
+      <textures>
+        <texture id="8"/>
+        <texture id="9"/>
+        <texture id="10"/>
+      </textures>
+      <position>
+        <x>0.0</x>
+        <y>0.0</y>
+        <z>200.0</z>
+      </position>
+      <rotation>
+        <x>0.0</x>
+        <y>0.0</y>
+        <z>0.0</z>
+      </rotation>
+      <scale>
+        <x>20</x>
+        <y>20</y>
+        <z>20</z>
       </scale>
     </object>
   </objects>

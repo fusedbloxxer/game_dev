@@ -48,10 +48,12 @@ void Shader::load()
 	fields.fogTransitionUniform = glGetUniformLocation(programId, "u_fog_R");
 	fields.fogColorUniform = glGetUniformLocation(programId, "u_fog_color");
 	fields.fogClarityUniform = glGetUniformLocation(programId, "u_fog_r");
+	fields.dispMaxUniform = glGetUniformLocation(programId, "u_disp_max");
 	fields.heightUniform = glGetUniformLocation(programId, "u_height");
 	fields.cameraUniform = glGetUniformLocation(programId, "u_camera");
 	fields.modelUniform = glGetUniformLocation(programId, "u_model");
 	fields.viewUniform = glGetUniformLocation(programId, "u_view");
+	fields.timeUniform = glGetUniformLocation(programId, "u_time");
 
 	for (GLuint i = 0; i < Fields::MAX_TEXTURES; ++i)
 	{

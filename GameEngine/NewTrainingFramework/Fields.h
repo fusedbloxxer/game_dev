@@ -15,14 +15,24 @@ struct Fields {
 
 	// Uniforms
 	GLint textureUniform[MAX_TEXTURES];
-	GLint fogTransitionUniform;
 	GLint isReflectedUniform;
-	GLint fogClarityUniform;
-	GLint projectionUniform;
-	GLint fogColorUniform;
-	GLint skyboxUniform;
 	GLint heightUniform;
 	GLint cameraUniform;
+
+	// For fog effect
+	GLint fogTransitionUniform;
+	GLint fogClarityUniform;
+	GLint fogColorUniform;
+
+	// For reflection effect
+	GLint skyboxUniform;
+
+	// MVP
 	GLint modelUniform;
 	GLint viewUniform;
+	GLint projectionUniform;
+
+	// For fire effect
+	GLint dispMaxUniform;
+	GLint timeUniform;
 };

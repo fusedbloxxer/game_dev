@@ -26,6 +26,9 @@
       <model id="8">
         <file>SkyBox.nfg</file>
       </model>
+      <model id="9">
+        <file>fire.nfg</file>
+      </model>
     </folder>
   </models>
 
@@ -50,6 +53,10 @@
       <shader id="7">
         <vs>AxisShaderVS.vs</vs>
         <fs>AxisShaderFS.fs</fs>
+      </shader>
+      <shader id="8">
+        <vs>FireShaderVS.vs</vs>
+        <fs>FireShaderFS.fs</fs>
       </shader>
     </folder>
   </shaders>
@@ -100,6 +107,27 @@
       </texture>
       <texture id="7" type="cube">
         <file>envMap.tga</file>
+        <min_filter>LINEAR</min_filter>
+        <mag_filter>LINEAR</mag_filter>
+        <wrap_s>CLAMP_TO_EDGE</wrap_s>
+        <wrap_t>CLAMP_TO_EDGE</wrap_t>
+      </texture>
+      <texture id="8" type="2d">
+        <file>DisplacementMap.tga</file>
+        <min_filter>LINEAR</min_filter>
+        <mag_filter>LINEAR</mag_filter>
+        <wrap_s>GL_REPEAT</wrap_s>
+        <wrap_t>GL_REPEAT</wrap_t>
+      </texture>
+      <texture id="9" type="2d">
+        <file>fire3.tga</file>
+        <min_filter>LINEAR</min_filter>
+        <mag_filter>LINEAR</mag_filter>
+        <wrap_s>CLAMP_TO_EDGE</wrap_s>
+        <wrap_t>CLAMP_TO_EDGE</wrap_t>
+      </texture>
+      <texture id="10" type="2d">
+        <file>fire_mask.tga</file>
         <min_filter>LINEAR</min_filter>
         <mag_filter>LINEAR</mag_filter>
         <wrap_s>CLAMP_TO_EDGE</wrap_s>

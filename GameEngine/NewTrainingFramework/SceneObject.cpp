@@ -8,7 +8,7 @@ SceneObject::SceneObject(GLint id)
 	:SceneObject{ id, Type::NORMAL } {}
 
 SceneObject::SceneObject(GLint id, Type type)
-	: id{ id }, name{}, model{ nullptr }, shader{ nullptr }, textures{}, wiredFormat{ false }, type{ type }, modified{ false }, followingCamera{}, offset{} {}
+	: id{ id }, name{}, model{ nullptr }, shader{ nullptr }, textures{}, wiredFormat{ false }, type{ type }, modified{ false }, followingCamera{}, offset{}, reflection{ false } {}
 
 void SceneObject::draw()
 {
@@ -190,6 +190,9 @@ SceneObject::Type SceneObject::atot(const char* type)
 	}
 	else if (strcmp(type, "skybox") == 0) {
 		return SKYBOX;
+	}
+	else if (strcmp(type, "fire") == 0) {
+		return FIRE;
 	}
 	throw std::runtime_error{ "INVALID CONST CHAR * - SceneObject::Type CONVERSION" };
 }

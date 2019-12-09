@@ -133,7 +133,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Fog.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="FireObject.cpp">
+      <Filter>Source Files\SceneManager\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -221,6 +224,9 @@
     <ClInclude Include="Fog.h">
       <Filter>Header Files\SceneManager</Filter>
     </ClInclude>
+    <ClInclude Include="FireObject.h">
+      <Filter>Header Files\SceneManager\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Readme.doc" />
@@ -306,6 +312,12 @@
       <Filter>Resources\Shaders</Filter>
     </None>
     <None Include="..\Resources\Shaders\TerrainShaderVS.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\FireShaderFS.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\FireShaderVS.vs">
       <Filter>Resources\Shaders</Filter>
     </None>
   </ItemGroup>
