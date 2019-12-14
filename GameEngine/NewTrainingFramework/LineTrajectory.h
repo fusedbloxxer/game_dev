@@ -17,4 +17,3 @@ public:
 	void setPoints(const std::vector<Vector3>& points);
 	std::vector<Vector3>& getPoints();
 };
-

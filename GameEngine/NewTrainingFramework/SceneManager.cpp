@@ -171,6 +171,8 @@ void SceneManager::loadXML<SceneObject>(rapidxml::xml_node<>* root)
 		std::shared_ptr<SceneObject> sceneObjectPtr =
 			std::shared_ptr<SceneObject>(SceneObjectFactory::newInstance(objectType, objId));
 
+		// Read trajectory -- use factory
+
 		sceneObjectPtr->setShader(ResourceManager::getInstance()->load<Shader>(atoi(shader->value())));
 		sceneObjectPtr->setReflection(object->first_node("reflection") != nullptr);
 		sceneObjectPtr->setWiredFormat(object->first_node("wired") != nullptr);

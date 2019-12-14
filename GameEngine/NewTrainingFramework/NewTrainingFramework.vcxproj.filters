@@ -142,10 +142,10 @@
       <Filter>Source Files\SceneManager\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Trajectory.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\SceneManager\Objects</Filter>
     </ClCompile>
     <ClCompile Include="LineTrajectory.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\SceneManager\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -239,11 +239,11 @@
     <ClInclude Include="SceneObjectFactory.h">
       <Filter>Header Files\SceneManager\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Trajectory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LineTrajectory.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\SceneManager\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Trajectory.h">
+      <Filter>Header Files\SceneManager\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
