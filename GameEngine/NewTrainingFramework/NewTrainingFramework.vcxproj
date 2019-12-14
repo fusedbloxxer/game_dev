@@ -170,6 +170,7 @@
     <ClCompile Include="Controls.cpp" />
     <ClCompile Include="FireObject.cpp" />
     <ClCompile Include="Fog.cpp" />
+    <ClCompile Include="LineTrajectory.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelResource.cpp" />
@@ -191,6 +192,7 @@
     <ClCompile Include="TerrainObject.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureResource.cpp" />
+    <ClCompile Include="Trajectory.cpp" />
     <ClCompile Include="VertexAxis.cpp" />
     <ClCompile Include="Vertex_NFG.cpp" />
   </ItemGroup>
@@ -204,6 +206,7 @@
     <ClInclude Include="Fog.h" />
     <ClInclude Include="GeneratedModel.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="LineTrajectory.h" />
     <ClInclude Include="Loadable.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Model.h" />
@@ -223,6 +226,7 @@
     <ClInclude Include="TerrainObject.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureResource.h" />
+    <ClInclude Include="Trajectory.h" />
     <ClInclude Include="VertexAxis.h" />
     <ClInclude Include="VertexNfg.h" />
   </ItemGroup>

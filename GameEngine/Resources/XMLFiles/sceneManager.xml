@@ -258,6 +258,20 @@
         <y>1.0</y>
         <z>1.0</z>
       </scale>
+      <trajectory type="linear" iteration-count="10" direction="alternate" speed="4">
+        <points>
+          <point>
+            <x>2</x>
+            <y>7</y>
+            <z>1</z>
+          </point>
+          <point>
+            <x>18</x>
+            <y>3</y>
+            <z>5</z>
+          </point>
+        </points>
+      </trajectory>
     </object>
 
     <object id="7">

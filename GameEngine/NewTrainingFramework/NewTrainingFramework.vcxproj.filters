@@ -139,6 +139,12 @@
       <Filter>Source Files\SceneManager\Objects</Filter>
     </ClCompile>
     <ClCompile Include="SceneObjectFactory.cpp">
+      <Filter>Source Files\SceneManager\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Trajectory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LineTrajectory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -231,6 +237,12 @@
       <Filter>Header Files\SceneManager\Objects</Filter>
     </ClInclude>
     <ClInclude Include="SceneObjectFactory.h">
+      <Filter>Header Files\SceneManager\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Trajectory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LineTrajectory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

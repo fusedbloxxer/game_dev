@@ -4,6 +4,8 @@
 #include "SkyboxObject.h"
 #include "FireObject.h"
 
+class SceneObject;
+
 SceneObject* SceneObjectFactory::newInstance(SceneObject::Type type, GLint objId)
 {
 	switch (type)

@@ -7,4 +7,3 @@ class SceneObjectFactory
 public:
 	static SceneObject* newInstance(SceneObject::Type type, GLint objId);
 };
-
