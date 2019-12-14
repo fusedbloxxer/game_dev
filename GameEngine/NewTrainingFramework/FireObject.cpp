@@ -15,8 +15,8 @@ void FireObject::update()
 {
 	SceneObject::update();
 
-	GLfloat deltaTime = SceneManager::getInstance()->getActiveCamera()->getDeltaTime();
-	time = (time + deltaTime < 1) ? time + deltaTime : 0;
+	GLfloat deltaTime = SceneManager::getInstance()->getActiveCamera()->getDeltaTime() / 2;
+	time = (time + deltaTime < 1) ? time + deltaTime : time - 1 + deltaTime;
 }
 
 void FireObject::draw()

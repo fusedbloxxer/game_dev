@@ -178,6 +178,7 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneObject.cpp" />
+    <ClCompile Include="SceneObjectFactory.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderResource.cpp" />
     <ClCompile Include="SkyboxObject.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneObject.h" />
+    <ClInclude Include="SceneObjectFactory.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Fields.h" />
     <ClInclude Include="ShaderResource.h" />

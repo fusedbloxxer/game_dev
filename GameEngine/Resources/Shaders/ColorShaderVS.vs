@@ -17,6 +17,6 @@ void main()
 
 	v_color = a_colorL;
 	v_pos = u_model * position;
-	v_Wnorm = u_model * vec4(a_normL, 1.0);
+	v_Wnorm = u_model * vec4(a_normL, 0.0);
 	gl_Position = u_projection * u_view * u_model * position;
 }

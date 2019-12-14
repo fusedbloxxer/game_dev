@@ -8,6 +8,7 @@
 #include "Logger.h"
 #include <fstream>
 #include <sstream>
+#include "SceneObjectFactory.h"
 
 SceneManager* SceneManager::scManInstance = nullptr;
 
@@ -52,8 +53,8 @@ void SceneManager::loadXML<Fog>(rapidxml::xml_node<>* root)
 	auto color = loadXML(fog, "color", "r", "g", "b");
 
 	SceneManager::fog.setFogColor({ color.x / 256, color.y / 256, color.z / 256 });
-	SceneManager::fog.setFogClarityRadius((GLfloat) atof(fogClarityRadius->value()));
-	SceneManager::fog.setFogTransitionRadius((GLfloat) atof(fogTransiRadius->value()));
+	SceneManager::fog.setFogClarityRadius((GLfloat)atof(fogClarityRadius->value()));
+	SceneManager::fog.setFogTransitionRadius((GLfloat)atof(fogTransiRadius->value()));
 }
 
 template<>
@@ -164,27 +165,11 @@ void SceneManager::loadXML<SceneObject>(rapidxml::xml_node<>* root)
 		auto type = object->first_node("type"); if (!type) { throw std::runtime_error{ "Object doesn't have a type in sceneManager." }; }
 		auto id = object->first_attribute("id"); if (!id) { throw std::runtime_error{ "Object doesn't have an id in sceneManager." }; }
 
-		SceneObject::Type objectType = SceneObject::atot(type->value());;
-		std::shared_ptr<SceneObject> sceneObjectPtr;
+		SceneObject::Type objectType = SceneObject::atot(type->value());
 		GLint objId = atoi(id->value());
 
-		switch (objectType)
-		{
-		case SceneObject::Type::NORMAL:
-			sceneObjectPtr = std::make_shared<SceneObject>(objId);
-			break;
-		case SceneObject::Type::TERRAIN:
-			sceneObjectPtr = std::make_shared<TerrainObject>(objId);
-			break;
-		case SceneObject::Type::SKYBOX:
-			sceneObjectPtr = std::make_shared<SkyboxObject>(objId);
-			break;
-		case SceneObject::Type::FIRE:
-			sceneObjectPtr = std::make_shared<FireObject>(objId);
-			break;
-		default:
-			throw std::runtime_error{ "SceneObject::Type::..... not listed here." };
-		}
+		std::shared_ptr<SceneObject> sceneObjectPtr =
+			std::shared_ptr<SceneObject>(SceneObjectFactory::newInstance(objectType, objId));
 
 		sceneObjectPtr->setShader(ResourceManager::getInstance()->load<Shader>(atoi(shader->value())));
 		sceneObjectPtr->setReflection(object->first_node("reflection") != nullptr);
@@ -235,7 +220,7 @@ void SceneManager::loadXML<SceneObject>(rapidxml::xml_node<>* root)
 		if (strcmp(model->value(), "generated") != 0)
 		{
 			sceneObjectPtr->setModel(ResourceManager::getInstance()->load<Model>(atoi(model->value())));
-			
+
 			if (auto fire = dynamic_cast<FireObject*>(sceneObjectPtr.get()))
 			{
 				auto dispMax = object->first_node("dispMax"); if (!dispMax) { throw std::runtime_error{ "No displacement max value was found." }; }

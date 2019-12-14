@@ -27,7 +27,7 @@ void main()
 	if (u_is_reflected != 0.0)
 	{
 		vec3 vec_camera = v_pos.xyz - u_camera;
-		vec3 dirReflect = reflect(normalize(vec_camera), normalize(v_Wnorm.xyz));
+		vec3 dirReflect = reflect(normalize(-vec_camera), normalize(v_Wnorm.xyz));
 		obj_color = obj_color * 0.5 + textureCube(u_texture_skybox, dirReflect) * 0.5;
 		obj_color.w = 1.0;
 	}

@@ -29,8 +29,8 @@ void Update(ESContext* esContext, float deltaTime)
 	if (Globals::TIME <= Globals::FRAME_LIMIT)
 	{
 		SceneManager::getInstance()->getActiveCamera()->setDeltaTime(deltaTime);
-		SceneManager::getInstance()->update();
 		Globals::TIME += deltaTime;
+		SceneManager::getInstance()->update();
 	}
 	else
 	{

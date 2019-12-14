@@ -138,6 +138,9 @@
     <ClCompile Include="FireObject.cpp">
       <Filter>Source Files\SceneManager\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="SceneObjectFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Drawable.h">
@@ -226,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="FireObject.h">
       <Filter>Header Files\SceneManager\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneObjectFactory.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

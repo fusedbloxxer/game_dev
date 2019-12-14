@@ -193,7 +193,7 @@
         <z>-250.0</z>
       </position>
       <rotation>
-        <x>0</x>
+        <x>180</x>
         <y>0</y>
         <z>0</z>
       </rotation>
@@ -274,7 +274,7 @@
       </textures>
       <position>
         <x>0.0</x>
-        <y>38000.0</y>
+        <y>30000.0</y>
         <z>0.0</z>
       </position>
       <rotation>
@@ -283,9 +283,9 @@
         <z>0.0</z>
       </rotation>
       <scale>
-        <x>40000.0</x>
-        <y>40000.0</y>
-        <z>40000.0</z>
+        <x>50000.0</x>
+        <y>50000.0</y>
+        <z>50000.0</z>
       </scale>
     </object>
 
@@ -337,7 +337,7 @@
       <shader>8</shader>
       <type>fire</type>
       <name>Fire</name>
-      <dispMax>1</dispMax>
+      <dispMax>0.2</dispMax>
       <textures>
         <texture id="8"/>
         <texture id="9"/>
