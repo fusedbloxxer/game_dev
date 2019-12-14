@@ -147,6 +147,12 @@
     <ClCompile Include="LineTrajectory.cpp">
       <Filter>Source Files\SceneManager\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="RapidSceneAdapter.cpp">
+      <Filter>Source Files\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneObjectBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Drawable.h">
@@ -244,6 +250,18 @@
     </ClInclude>
     <ClInclude Include="Trajectory.h">
       <Filter>Header Files\SceneManager\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneAdapter.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="RapidSceneAdapter.h">
+      <Filter>Header Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="IBuilder.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneObjectBuilder.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,11 @@
 #include "Fog.h"
 
 
+Fog::Fog(const Vector3& fogColor, GLfloat fogClarityRadius, GLfloat fogTransitionRadius)
+	:fogColor{ fogColor }, fogClarityRadius{ fogClarityRadius }, fogTransitionRadius{ fogTransitionRadius }
+{
+}
+
 Vector3 Fog::getFogColor() const
 {
 	return fogColor;

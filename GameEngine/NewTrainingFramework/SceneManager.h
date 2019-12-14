@@ -1,6 +1,7 @@
 #pragma once
 #include "..\\Utilities\\rapidxml-1.13\\rapidxml.hpp"
 #include <unordered_map>
+#include "SceneAdapter.h"
 #include "SceneObject.h"
 #include "Controls.h"
 #include "Releaser.h"
@@ -18,11 +19,6 @@ class SceneManager : public Drawable, public Releaser
 
 	// Private Constructor
 	SceneManager();
-
-	// Loading XML Configurations
-	template<typename Config>
-	void loadXML(rapidxml::xml_node<>* root);
-	Vector3 loadXML(rapidxml::xml_node<>* root, const char* node, const char xP[2], const char yP[2], const char zP[2]) const;
 
 	// Fog
 	Fog fog;
@@ -62,7 +58,9 @@ public:
 	static SceneManager* getInstance();
 
 	// Initializer
-	void init(ESContext* esContext, const char* sceneManagerPath = "..\\Resources\\XMLFiles\\sceneManager.xml");
+	void init(ESContext* esContext, SceneAdapter* adapter);
+
+	void setUpWindow(ESContext* esContext, SceneAdapter* adapter);
 
 	// Draw Scene Objects
 	virtual void draw() override;

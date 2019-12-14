@@ -1,5 +1,6 @@
 // GameEngine.cpp : Defines the entry point for the console application.
 #include "stdafx.h"
+#include "RapidSceneAdapter.h"
 #include "ResourceManager.h"
 #include "SceneManager.h"
 
@@ -12,7 +13,7 @@ int init(ESContext* esContext)
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	
 	ResourceManager::getInstance()->init();
-	SceneManager::getInstance()->init(esContext);
+	SceneManager::getInstance()->init(esContext, new RapidSceneAdapter("..\\Resources\\XMLFiles\\sceneManager.xml"));
 
 	return 0;
 }

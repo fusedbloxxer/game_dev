@@ -8,6 +8,8 @@ class Fog
 	GLfloat fogTransitionRadius;
 
 public:
+	Fog(const Vector3& fogColor = { 0.0f, 0.0f, 0.0f }, GLfloat fogClarityRadius = 0.0f, GLfloat fogTransitionRadius = 0.0f);
+
 	Vector3 getFogColor() const;
 	GLfloat getFogClarityRadius() const;
 	GLfloat getFogTransitionRadius() const;

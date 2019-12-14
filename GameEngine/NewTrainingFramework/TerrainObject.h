@@ -56,7 +56,7 @@ public:
 	void setCellSize(GLfloat cellSize);
 	GLfloat getCellSize() const;
 
-	void setCenter(Vector3& center);
+	void setCenter(const Vector3& center);
 	Vector3& getCenter();
 
 	void setHeight(Vector3& height);

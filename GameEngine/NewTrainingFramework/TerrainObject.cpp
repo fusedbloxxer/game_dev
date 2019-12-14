@@ -176,7 +176,7 @@ GLfloat TerrainObject::getCellSize() const
 	return cellSize;
 }
 
-void TerrainObject::setCenter(Vector3& center)
+void TerrainObject::setCenter(const Vector3& center)
 {
 	this->center = center;
 }
