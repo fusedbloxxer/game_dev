@@ -31,7 +31,7 @@ public:
 	GLuint getTextureId() const;
 	void setTextureId(GLuint id);
 
-	std::shared_ptr<TextureResource> getTextureResource();
+	std::shared_ptr<TextureResource> getTextureResources();
 	void setTextureResource(std::shared_ptr<TextureResource> textureResource);
 
 private:

@@ -8,7 +8,7 @@ class FireObject : public SceneObject
 	// Current time
 	GLfloat time;
 
-	// MAx displacement
+	// Max displacement
 	GLfloat dispMax;
 
 public:

@@ -1,14 +1,11 @@
 #pragma once
 #include "stdafx.h"
-#include "..\Utilities\rapidxml-1.13\rapidxml.hpp"
+#include "SceneObjectBuilder.h"
 #include "SceneAdapter.h"
+#include "Rapid.h"
 
-class RapidSceneAdapter final : public SceneAdapter
+class RapidSceneAdapter final : public SceneAdapter, public Rapid
 {
-	std::string content;
-	rapidxml::xml_node<>* root;
-	std::unique_ptr<rapidxml::xml_document<>> xmlParser;
-
 public:
 	// Constructor
 	RapidSceneAdapter(const char* sceneManagerPath);
@@ -28,6 +25,8 @@ public:
 	virtual ~RapidSceneAdapter() = default;
 
 private:
+	Vector3 loadFollowingCamera(rapidxml::xml_node<>* object) const;
+	std::vector<std::shared_ptr<Texture>> loadTextures(rapidxml::xml_node<>* object) const;
 	Vector3 loadVector(rapidxml::xml_node<>* root, const char* node, const char xP[2], const char yP[2], const char zP[2]) const;
+	void setSpecificProperties(std::unique_ptr<SceneObjectBuilder>& builder, rapidxml::xml_node<>* object, const Vector3& activeCamera) const;
 };
-

@@ -37,6 +37,6 @@ public:
 
 	Fields getFields() const;
 
-	std::shared_ptr<ShaderResource> getShaderResource();
+	std::shared_ptr<ShaderResource> getShaderResources();
 	void setShaderResource(std::shared_ptr<ShaderResource> shaderResource);
 };

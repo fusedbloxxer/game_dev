@@ -1,28 +1,15 @@
 #include "stdafx.h"
+#include "TerrainObjectBuilder.h"
 #include "RapidSceneAdapter.h"
+#include "FireObjectBuilder.h"
 #include "ResourceManager.h"
-#include "TerrainObject.h"
-#include "SkyboxObject.h"
-#include "FireObject.h"
+#include "CameraBuilder.h"
 #include <sstream>
 #include <fstream>
 #include <string>
-#include "SceneObjectFactory.h"
 
 RapidSceneAdapter::RapidSceneAdapter(const char* sceneManagerPath)
-	:xmlParser{ std::make_unique<rapidxml::xml_document<>>() }
-{
-	std::ifstream input{ sceneManagerPath };
-
-	if (!input.is_open()) {
-		throw std::runtime_error{ "Could not open file: " + std::string(sceneManagerPath) };
-	}
-
-	std::stringstream ss; ss << input.rdbuf();
-	input.close(); content = ss.str();
-	xmlParser->parse<0>(&content[0]);
-	root = xmlParser->first_node("sceneManager");
-}
+	:Rapid{ sceneManagerPath } {}
 
 Fog RapidSceneAdapter::getFog() const
 {
@@ -120,6 +107,55 @@ std::unordered_map<GLubyte, Controls::Type> RapidSceneAdapter::getKeys() const
 	return keyMap;
 }
 
+#include "SceneObjectBuilderFactory.h"
+
+Vector3 RapidSceneAdapter::loadFollowingCamera(rapidxml::xml_node<>* object) const
+{
+	Vector3 foll;
+
+	if (auto follow = object->first_node("followingCamera"))
+	{
+		if (follow->first_node("ox"))
+		{
+			foll.x = 1;
+		}
+
+		if (follow->first_node("oy"))
+		{
+			foll.y = 1;
+		}
+
+		if (follow->first_node("oz"))
+		{
+			foll.z = 1;
+		}
+	}
+
+	return foll;
+}
+
+std::vector<std::shared_ptr<Texture>> RapidSceneAdapter::loadTextures(rapidxml::xml_node<>* object) const
+{
+	std::vector<std::shared_ptr<Texture>> texturesPtrs;
+
+	if (auto textures = object->first_node("textures"))
+	{
+		for (auto texture = textures->first_node("texture"); texture; texture = texture->next_sibling())
+		{
+			if (auto id = texture->first_attribute("id"))
+			{
+				texturesPtrs.push_back(ResourceManager::getInstance()->load<Texture>(atoi(id->value())));
+			}
+			else
+			{
+				throw std::runtime_error{ "Object texture doesn't have an id in sceneManager." };
+			}
+		}
+	}
+
+	return texturesPtrs;
+}
+
 std::vector<std::shared_ptr<SceneObject>> RapidSceneAdapter::getSceneObjects(const Vector3& activeCamera) const
 {
 	auto objects = root->first_node("objects"); if (!objects) { throw std::runtime_error{ "Could not find objects in file." }; }
@@ -128,103 +164,58 @@ std::vector<std::shared_ptr<SceneObject>> RapidSceneAdapter::getSceneObjects(con
 	for (auto object = objects->first_node("object"); object; object = object->next_sibling())
 	{
 		auto shader = object->first_node("shader"); if (!shader) { throw std::runtime_error{ "Object doesn't have a shader in sceneManager." }; }
-		auto model = object->first_node("model"); if (!model) { throw std::runtime_error{ "Object doesn't have a model in sceneManager." }; }
 		auto name = object->first_node("name"); if (!name) { throw std::runtime_error{ "Object doesn't have a name in sceneManager." }; }
 		auto type = object->first_node("type"); if (!type) { throw std::runtime_error{ "Object doesn't have a type in sceneManager." }; }
 		auto id = object->first_attribute("id"); if (!id) { throw std::runtime_error{ "Object doesn't have an id in sceneManager." }; }
 
-		SceneObject::Type objectType = SceneObject::atot(type->value());
-		GLint objId = atoi(id->value());
+		auto builder = std::unique_ptr<SceneObjectBuilder>(SceneObjectBuilderFactory::newBuilderInstance(SceneObject::atot(type->value()), atoi(id->value())));
 
-		std::shared_ptr<SceneObject> sceneObjectPtr =
-			std::shared_ptr<SceneObject>(SceneObjectFactory::newInstance(objectType, objId));
+		builder->setShader(ResourceManager::getInstance()->load<Shader>(atoi(shader->value())))
+			.setReflection(object->first_node("reflection") != nullptr)
+			.setPosition(loadVector(object, "position", "x", "y", "z"))
+			.setRotation(loadVector(object, "rotation", "x", "y", "z"))
+			.setWiredFormat(object->first_node("wired") != nullptr)
+			.setScale(loadVector(object, "scale", "x", "y", "z"))
+			.setColor(loadVector(object, "color", "r", "g", "b"))
+			.setFollowingCamera(loadFollowingCamera(object))
+			.setTextures(loadTextures(object))
+			.setName(name->value());
 
-		// Relatia dintre scenemanager si trajectory decuplata printr-o abstractizare
-		// Read trajectory -- use factory
-
-		sceneObjectPtr->setShader(ResourceManager::getInstance()->load<Shader>(atoi(shader->value())));
-		sceneObjectPtr->setReflection(object->first_node("reflection") != nullptr);
-		sceneObjectPtr->setWiredFormat(object->first_node("wired") != nullptr);
-		sceneObjectPtr->setPosition(loadVector(object, "position", "x", "y", "z"));
-		sceneObjectPtr->setRotation(loadVector(object, "rotation", "x", "y", "z"));
-		sceneObjectPtr->setScale(loadVector(object, "scale", "x", "y", "z"));
-		sceneObjectPtr->setColor(loadVector(object, "color", "r", "g", "b"));
-		sceneObjectPtr->setName(name->value());
-
-		if (auto follow = object->first_node("followingCamera"))
-		{
-			Vector3 foll;
-
-			if (follow->first_node("ox"))
-			{
-				foll.x = 1;
-			}
-
-			if (follow->first_node("oy"))
-			{
-				foll.y = 1;
-			}
-
-			if (follow->first_node("oz"))
-			{
-				foll.z = 1;
-			}
-
-			sceneObjectPtr->setFollowingCamera(foll);
-		}
-
-		if (auto textures = object->first_node("textures"))
-		{
-			for (auto texture = textures->first_node("texture"); texture; texture = texture->next_sibling())
-			{
-				if (auto id = texture->first_attribute("id"))
-				{
-					sceneObjectPtr->getTextures().push_back(ResourceManager::getInstance()->load<Texture>(atoi(id->value())));
-				}
-				else
-				{
-					throw std::runtime_error{ "Object texture doesn't have an id in sceneManager." };
-				}
-			}
-		}
-
-		if (strcmp(model->value(), "generated") != 0)
-		{
-			sceneObjectPtr->setModel(ResourceManager::getInstance()->load<Model>(atoi(model->value())));
-
-			if (auto fire = dynamic_cast<FireObject*>(sceneObjectPtr.get()))
-			{
-				auto dispMax = object->first_node("dispMax"); if (!dispMax) { throw std::runtime_error{ "No displacement max value was found." }; }
-				fire->setDispMax((GLfloat)atof(dispMax->value()));
-			}
-		}
-		else if (auto terrain = dynamic_cast<TerrainObject*>(sceneObjectPtr.get()))
-		{
-			auto rgb = loadVector(object, "colorBind", "r", "g", "b");
-			auto cells = object->first_node("cells"); if (!cells) { throw std::runtime_error{ "Could not find cells for special object." }; }
-			auto size = cells->first_node("size"); if (!size) { throw std::runtime_error{ "Could not find cell-size for special object." }; }
-			auto count = cells->first_node("count"); if (!count) { throw std::runtime_error{ "Could not find cell-count for special object." }; }
-			auto colorBind = object->first_node("colorBind"); if (!colorBind) { throw std::runtime_error{ "Could not find colorBind in sceneManager." }; }
-			auto blend = colorBind->first_node("blend"); if (!blend) { throw std::runtime_error{ "Could not find colorBind - blend property in sceneManager." }; }
-
-			terrain->setSideCells(atoi(count->value()));
-			terrain->setCellSize(GLfloat(atof(size->value())));
-			terrain->setHeight(loadVector(object, "height", "r", "g", "b"));
-			terrain->setColorBind((GLuint)rgb.x, (GLuint)rgb.y, (GLuint)rgb.z, atoi(blend->value()));
-
-			// Auto-generates model
-			terrain->setCenter(activeCamera);
-			terrain->generateModel();
-		}
-		else
-		{
-			throw std::runtime_error{ "Object doesn't have a model in sceneManager." };
-		}
-
-		sceneObjects.push_back(sceneObjectPtr);
+		RapidSceneAdapter::setSpecificProperties(builder, object, activeCamera);
+		sceneObjects.push_back(std::shared_ptr<SceneObject>(builder->build()));
 	}
 
 	return sceneObjects;
+}
+
+void RapidSceneAdapter::setSpecificProperties(std::unique_ptr<SceneObjectBuilder>& builder, rapidxml::xml_node<>* object, const Vector3& activeCamera) const
+{
+	if (auto terrain = dynamic_cast<TerrainObjectBuilder*>(builder.get()))
+	{
+		auto rgb = loadVector(object, "colorBind", "r", "g", "b");
+		auto cells = object->first_node("cells"); if (!cells) { throw std::runtime_error{ "Could not find cells for special object." }; }
+		auto size = cells->first_node("size"); if (!size) { throw std::runtime_error{ "Could not find cell-size for special object." }; }
+		auto count = cells->first_node("count"); if (!count) { throw std::runtime_error{ "Could not find cell-count for special object." }; }
+		auto colorBind = object->first_node("colorBind"); if (!colorBind) { throw std::runtime_error{ "Could not find colorBind in sceneManager." }; }
+		auto blend = colorBind->first_node("blend"); if (!blend) { throw std::runtime_error{ "Could not find colorBind - blend property in sceneManager." }; }
+
+		terrain->setCenter(activeCamera);
+		terrain->setSideCells(atoi(count->value()));
+		terrain->setCellSize(GLfloat(atof(size->value())));
+		terrain->setHeight(loadVector(object, "height", "r", "g", "b"));
+		terrain->setColorBind((GLuint)rgb.x, (GLuint)rgb.y, (GLuint)rgb.z, atoi(blend->value()));
+	}
+	else
+	{
+		auto model = object->first_node("model"); if (!model) { throw std::runtime_error{ "Object doesn't have a model in sceneManager." }; }
+		builder->setModel(ResourceManager::getInstance()->load<Model>(atoi(model->value())));
+
+		if (auto fire = dynamic_cast<FireObjectBuilder*>(builder.get()))
+		{
+			auto dispMax = object->first_node("dispMax"); if (!dispMax) { throw std::runtime_error{ "No displacement max value was found." }; }
+			fire->setDispMax((GLfloat)atof(dispMax->value()));
+		}
+	}
 }
 
 std::unordered_map<GLint, std::shared_ptr<Camera>> RapidSceneAdapter::getCameras(GLint width, GLint height) const
@@ -234,8 +225,6 @@ std::unordered_map<GLint, std::shared_ptr<Camera>> RapidSceneAdapter::getCameras
 
 	for (auto camera = cameras->first_node("camera"); camera; camera = camera->next_sibling())
 	{
-		std::shared_ptr<Camera> cameraPtr;
-
 		auto fov = camera->first_node("fov"); if (!fov) { throw std::runtime_error{ "No camera fov was detected for a camera in sceneManager." }; }
 		auto id = camera->first_attribute("id"); if (!id) { throw std::runtime_error{ "No camera id was detected for a camera in sceneManager." }; }
 		auto farP = camera->first_node("far"); if (!farP) { throw std::runtime_error{ "No camera far was detected for a camera in sceneManager." }; }
@@ -244,17 +233,19 @@ std::unordered_map<GLint, std::shared_ptr<Camera>> RapidSceneAdapter::getCameras
 		auto rotation = camera->first_node("rotationSpeed"); if (!rotation) { throw std::runtime_error{ "No camera rotationSpeed in sceneManager." }; }
 		auto translation = camera->first_node("translationSpeed"); if (!translation) { throw std::runtime_error{ "No camera translationSpeed in sceneManager." }; }
 
-		cameraPtr = std::make_shared<Camera>(width, height, atoi(camera->first_attribute("id")->value()));
-		cameraPtr->setPosition(loadVector(camera, "position", "x", "y", "z"));
-		cameraPtr->setMoveSpeed(GLfloat(atof(translation->value())));
-		cameraPtr->setRotateSpeed(GLfloat(atof(rotation->value())));
-		cameraPtr->setTarget(loadVector(camera, "target", "x", "y", "z"));
-		cameraPtr->setUp(loadVector(camera, "up", "x", "y", "z"));
-		cameraPtr->setNear(GLfloat(atof(nearP->value())));
-		cameraPtr->setFar(GLfloat(atof(farP->value())));
-		cameraPtr->setType(Camera::atot(type->value()));
-		cameraPtr->setFov(GLfloat(atof(fov->value())));
-		cameraMap[cameraPtr->getCameraId()] = cameraPtr;
+		auto cameraObject = CameraBuilder(atoi(camera->first_attribute("id")->value()), (GLint) width, (GLint) height)
+			.setPosition(loadVector(camera, "position", "x", "y", "z"))
+			.setTarget(loadVector(camera, "target", "x", "y", "z"))
+			.setMoveSpeed(GLfloat(atof(translation->value())))
+			.setRotateSpeed(GLfloat(atof(rotation->value())))
+			.setUp(loadVector(camera, "up", "x", "y", "z"))
+			.setNear(GLfloat(atof(nearP->value())))
+			.setFar(GLfloat(atof(farP->value())))
+			.setType(Camera::atot(type->value()))
+			.setFov(GLfloat(atof(fov->value())))
+			.build();
+
+		cameraMap[cameraObject->getCameraId()] = std::shared_ptr<Camera>(cameraObject);
 	}
 	return cameraMap;
 }

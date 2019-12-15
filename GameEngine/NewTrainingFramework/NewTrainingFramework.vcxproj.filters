@@ -67,6 +67,42 @@
     <Filter Include="Header Files\SceneManager\Camera">
       <UniqueIdentifier>{8a94c4cd-b6ad-4542-b519-62900d401a40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SceneManager\Objects\Builders">
+      <UniqueIdentifier>{b0dd6174-32f9-492d-bd8a-92b7e8d7a023}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SceneManager\Objects\Trajectories">
+      <UniqueIdentifier>{d66cff2a-050e-464c-b623-7570e4740c70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SceneManager\Objects\Scene">
+      <UniqueIdentifier>{833cdbf7-69f2-48d7-88a3-a1a457b650ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SceneManager\Adapters">
+      <UniqueIdentifier>{b02f2398-5dfa-4b28-9b15-c04445871ee0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utilities">
+      <UniqueIdentifier>{6bfc239b-d5a2-4527-90cc-d2b13a04d7e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneManager\Objects\Scene">
+      <UniqueIdentifier>{5ef15242-a5a0-4940-b42b-d3a9673cf84e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneManager\Objects\Trajectories">
+      <UniqueIdentifier>{23716f9e-8f6d-4cb4-b0a1-98f1e52cc3ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneManager\Objects\Builders">
+      <UniqueIdentifier>{d5598866-528d-490b-9f23-14f9369e621c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneManager\Adapters">
+      <UniqueIdentifier>{8c5124f6-71a1-42b2-80cf-07b295f0dbb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{c24e73c9-d64f-408a-bf97-b5b653ee9982}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ResourceManager\Adapters">
+      <UniqueIdentifier>{de5b3a19-3f89-4d6d-a893-8903ccccdd7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ResourceManager\Adapters">
+      <UniqueIdentifier>{94744014-8a5a-40a1-b605-4863d07a180a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp">
@@ -90,26 +126,17 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files\SceneManager</Filter>
     </ClCompile>
-    <ClCompile Include="SceneObject.cpp">
-      <Filter>Source Files\SceneManager\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\ResourceManager\Loaders</Filter>
     </ClCompile>
     <ClCompile Include="ShaderResource.cpp">
       <Filter>Source Files\ResourceManager\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="SkyboxObject.cpp">
-      <Filter>Source Files\SceneManager\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Vertex_NFG.cpp">
       <Filter>Source Files\ResourceManager\Resources</Filter>
     </ClCompile>
     <ClCompile Include="TextureResource.cpp">
       <Filter>Source Files\ResourceManager\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="TerrainObject.cpp">
-      <Filter>Source Files\SceneManager\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\ResourceManager\Loaders</Filter>
@@ -126,32 +153,59 @@
     <ClCompile Include="GameEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Logger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Fog.cpp">
       <Filter>Source Files\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="FireObject.cpp">
-      <Filter>Source Files\SceneManager\Objects</Filter>
+      <Filter>Source Files\SceneManager\Objects\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="SceneObjectFactory.cpp">
-      <Filter>Source Files\SceneManager\Objects</Filter>
+    <ClCompile Include="SceneObject.cpp">
+      <Filter>Source Files\SceneManager\Objects\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Trajectory.cpp">
-      <Filter>Source Files\SceneManager\Objects</Filter>
+    <ClCompile Include="SkyboxObject.cpp">
+      <Filter>Source Files\SceneManager\Objects\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainObject.cpp">
+      <Filter>Source Files\SceneManager\Objects\Scene</Filter>
     </ClCompile>
     <ClCompile Include="LineTrajectory.cpp">
-      <Filter>Source Files\SceneManager\Objects</Filter>
+      <Filter>Source Files\SceneManager\Objects\Trajectories</Filter>
+    </ClCompile>
+    <ClCompile Include="Trajectory.cpp">
+      <Filter>Source Files\SceneManager\Objects\Trajectories</Filter>
     </ClCompile>
     <ClCompile Include="RapidSceneAdapter.cpp">
-      <Filter>Source Files\ResourceManager</Filter>
+      <Filter>Source Files\SceneManager\Adapters</Filter>
+    </ClCompile>
+    <ClCompile Include="FireObjectBuilder.cpp">
+      <Filter>Source Files\SceneManager\Objects\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="SceneObjectBuilder.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\SceneManager\Objects\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneObjectBuilderFactory.cpp">
+      <Filter>Source Files\SceneManager\Objects\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyboxObjectBuilder.cpp">
+      <Filter>Source Files\SceneManager\Objects\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainObjectBuilder.cpp">
+      <Filter>Source Files\SceneManager\Objects\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraBuilder.cpp">
+      <Filter>Source Files\SceneManager\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="RapidResourceAdapter.cpp">
+      <Filter>Source Files\ResourceManager\Adapters</Filter>
+    </ClCompile>
+    <ClCompile Include="Rapid.cpp">
+      <Filter>Source Files\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -169,15 +223,6 @@
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Header Files\ResourceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneObject.h">
-      <Filter>Header Files\SceneManager\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="SkyboxObject.h">
-      <Filter>Header Files\SceneManager\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="TerrainObject.h">
-      <Filter>Header Files\SceneManager\Objects</Filter>
     </ClInclude>
     <ClInclude Include="ModelResource.h">
       <Filter>Header Files\ResourceManager\Resources</Filter>
@@ -221,47 +266,77 @@
     <ClInclude Include="VertexAxis.h">
       <Filter>Header Files\ResourceManager\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Globals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Logger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="VertexNfg.h">
       <Filter>Header Files\ResourceManager\Resources</Filter>
     </ClInclude>
     <ClInclude Include="Fog.h">
       <Filter>Header Files\SceneManager</Filter>
     </ClInclude>
-    <ClInclude Include="FireObject.h">
-      <Filter>Header Files\SceneManager\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneObjectFactory.h">
-      <Filter>Header Files\SceneManager\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="LineTrajectory.h">
-      <Filter>Header Files\SceneManager\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Trajectory.h">
-      <Filter>Header Files\SceneManager\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="SceneAdapter.h">
       <Filter>Header Files\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="RapidSceneAdapter.h">
-      <Filter>Header Files\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="IBuilder.h">
       <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="SceneObjectBuilder.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\SceneManager\Objects\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="FireObjectBuilder.h">
+      <Filter>Header Files\SceneManager\Objects\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyboxObjectBuilder.h">
+      <Filter>Header Files\SceneManager\Objects\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainObjectBuilder.h">
+      <Filter>Header Files\SceneManager\Objects\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="Trajectory.h">
+      <Filter>Header Files\SceneManager\Objects\Trajectories</Filter>
+    </ClInclude>
+    <ClInclude Include="LineTrajectory.h">
+      <Filter>Header Files\SceneManager\Objects\Trajectories</Filter>
+    </ClInclude>
+    <ClInclude Include="FireObject.h">
+      <Filter>Header Files\SceneManager\Objects\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneObject.h">
+      <Filter>Header Files\SceneManager\Objects\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyboxObject.h">
+      <Filter>Header Files\SceneManager\Objects\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainObject.h">
+      <Filter>Header Files\SceneManager\Objects\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="RapidSceneAdapter.h">
+      <Filter>Header Files\SceneManager\Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneObjectBuilderFactory.h">
+      <Filter>Header Files\SceneManager\Objects\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraBuilder.h">
+      <Filter>Header Files\SceneManager\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceAdapter.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="RapidResourceAdapter.h">
+      <Filter>Header Files\ResourceManager\Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="Rapid.h">
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

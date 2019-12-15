@@ -186,7 +186,7 @@ Vector3& TerrainObject::getCenter()
 	return center;
 }
 
-void TerrainObject::setHeight(Vector3& height)
+void TerrainObject::setHeight(const Vector3& height)
 {
 	this->height = height;
 }
@@ -201,25 +201,25 @@ void TerrainObject::setColorBind(GLuint r, GLuint g, GLuint b, GLuint blend)
 	bool hasR{ false }, hasG{ hasR }, hasB{ hasG }, hasBlend{ hasB };
 	for (GLuint i = 0; i < textures.size(); ++i)
 	{
-		if (!hasR && r == textures[i]->getTextureResource()->id)
+		if (!hasR && r == textures[i]->getTextureResources()->id)
 		{
 			hasR = true;
 			this->colorBind[0] = i;
 		}
 
-		if (!hasG && g == textures[i]->getTextureResource()->id)
+		if (!hasG && g == textures[i]->getTextureResources()->id)
 		{
 			hasG = true;
 			this->colorBind[1] = i;
 		}
 
-		if (!hasB && b == textures[i]->getTextureResource()->id)
+		if (!hasB && b == textures[i]->getTextureResources()->id)
 		{
 			hasB = true;
 			this->colorBind[2] = i;
 		}
 
-		if (!hasBlend && blend == textures[i]->getTextureResource()->id)
+		if (!hasBlend && blend == textures[i]->getTextureResources()->id)
 		{
 			hasBlend = true;
 			this->colorBind[3] = i;

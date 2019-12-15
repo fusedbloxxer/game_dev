@@ -102,20 +102,20 @@ public:
 	virtual Matrix& getModelMatrix();
 
 	Vector3& getFollowingCamera();
-	void setFollowingCamera(Vector3& followingCamera);
+	void setFollowingCamera(const Vector3& followingCamera);
 
 	Vector3& getPosition();
-	void setPosition(Vector3& position);
+	void setPosition(const Vector3& position);
 
 	Vector3& getRotation();
-	void setRotation(Vector3& rotation);
+	void setRotation(const Vector3& rotation);
 
 	Vector3& getScale();
-	void setScale(Vector3& scale);
+	void setScale(const Vector3& scale);
 
 	Vector3& getColor();
-	void setColor(Vector3& color);
+	void setColor(const Vector3& color);
 
 	std::vector<std::shared_ptr<Texture>>& getTextures();
-	void setTextures(std::vector<std::shared_ptr<Texture>>& textures);
+	void setTextures(const std::vector<std::shared_ptr<Texture>>& textures);
 };

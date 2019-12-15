@@ -124,14 +124,6 @@ void SceneManager::pressKey(GLubyte key, GLboolean isPressed)
 	}
 }
 
-void getScreenSize(GLint& width, GLint& height)
-{
-	RECT desktop;
-	GetWindowRect(GetDesktopWindow(), &desktop);
-	width = desktop.right;
-	height = desktop.bottom;
-}
-
 std::string SceneManager::getGameName() const
 {
 	return gameName;

@@ -59,7 +59,7 @@ public:
 	void setCenter(const Vector3& center);
 	Vector3& getCenter();
 
-	void setHeight(Vector3& height);
+	void setHeight(const Vector3& height);
 	Vector3& getHeight();
 
 	void setColorBind(GLuint r, GLuint g, GLuint b, GLuint blend);

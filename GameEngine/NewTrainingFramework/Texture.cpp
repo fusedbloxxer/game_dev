@@ -94,7 +94,7 @@ void Texture::setTextureId(GLuint id)
 	textureId = id;
 }
 
-std::shared_ptr<TextureResource> Texture::getTextureResource()
+std::shared_ptr<TextureResource> Texture::getTextureResources()
 {
 	return tr;
 }

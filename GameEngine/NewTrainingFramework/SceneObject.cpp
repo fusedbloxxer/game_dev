@@ -114,7 +114,7 @@ void SceneObject::sendCommonData()
 	for (GLuint index = 0; index < std::min<GLuint>(Fields::MAX_TEXTURES, textures.size()); ++index)
 	{
 		glActiveTexture(index + GL_TEXTURE0);
-		glBindTexture(textures[index]->getTextureResource()->type, textures[index]->getTextureId());
+		glBindTexture(textures[index]->getTextureResources()->type, textures[index]->getTextureId());
 
 		if (fields.textureUniform[index] != -1)
 		{
@@ -135,7 +135,7 @@ void SceneObject::sendCommonData()
 			{
 				GLuint index = std::min<GLuint>(Fields::MAX_TEXTURES, textures.size());
 				glActiveTexture(index + GL_TEXTURE0);
-				glBindTexture(x->textures[0]->getTextureResource()->type, x->textures[0]->getTextureId());
+				glBindTexture(x->textures[0]->getTextureResources()->type, x->textures[0]->getTextureId());
 				glUniform1i(fields.skyboxUniform, index);
 				break;
 			}
@@ -282,7 +282,7 @@ Vector3& SceneObject::getFollowingCamera()
 	return followingCamera;
 }
 
-void SceneObject::setFollowingCamera(Vector3& followingCamera)
+void SceneObject::setFollowingCamera(const Vector3& followingCamera)
 {
 	this->followingCamera = followingCamera;
 }
@@ -292,7 +292,7 @@ Vector3& SceneObject::getPosition()
 	return position;
 }
 
-void SceneObject::setPosition(Vector3& position)
+void SceneObject::setPosition(const Vector3& position)
 {
 	this->position = position;
 	offset = position;
@@ -304,7 +304,7 @@ Vector3& SceneObject::getRotation()
 	return rotation;
 }
 
-void SceneObject::setRotation(Vector3& rotation)
+void SceneObject::setRotation(const Vector3& rotation)
 {
 	this->rotation.x = GLfloat(TO_RAD(rotation.x));
 	this->rotation.y = GLfloat(TO_RAD(rotation.y));
@@ -317,7 +317,7 @@ Vector3& SceneObject::getScale()
 	return scale;
 }
 
-void SceneObject::setScale(Vector3& scale)
+void SceneObject::setScale(const Vector3& scale)
 {
 	this->scale = scale;
 	modified = true;
@@ -328,7 +328,7 @@ Vector3& SceneObject::getColor()
 	return color;
 }
 
-void SceneObject::setColor(Vector3& color)
+void SceneObject::setColor(const Vector3& color)
 {
 	this->color = color;
 }
@@ -338,7 +338,7 @@ std::vector<std::shared_ptr<Texture>>& SceneObject::getTextures()
 	return textures;
 }
 
-void SceneObject::setTextures(std::vector<std::shared_ptr<Texture>>& textures)
+void SceneObject::setTextures(const std::vector<std::shared_ptr<Texture>>& textures)
 {
 	this->textures = textures;
 }

@@ -109,7 +109,7 @@ Fields Shader::getFields() const
 	return fields;
 }
 
-std::shared_ptr<ShaderResource> Shader::getShaderResource()
+std::shared_ptr<ShaderResource> Shader::getShaderResources()
 {
 	return sr;
 }

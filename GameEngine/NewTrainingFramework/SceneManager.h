@@ -1,18 +1,15 @@
 #pragma once
-#include "..\\Utilities\\rapidxml-1.13\\rapidxml.hpp"
 #include <unordered_map>
 #include "SceneAdapter.h"
 #include "SceneObject.h"
 #include "Controls.h"
 #include "Releaser.h"
-#include "Logger.h"
 #include "Camera.h"
-#include <string>
 #include <memory>
 #include <vector>
 #include "Fog.h"
 
-class SceneManager : public Drawable, public Releaser
+class SceneManager final : public Drawable, public Releaser
 {
 	// Singleton Instance
 	static SceneManager* scManInstance;

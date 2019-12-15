@@ -122,10 +122,12 @@
 
     <object id="2">
       <model>3</model>
-      <shader>5</shader>
+      <shader>3</shader>
       <type>normal</type>
       <name>Cool Woman</name>
-      <wired/>
+      <textures>
+        <texture id="1" type="2d"/>
+      </textures>
       <color>
         <r>1.0</r>
         <g>0.0</g>

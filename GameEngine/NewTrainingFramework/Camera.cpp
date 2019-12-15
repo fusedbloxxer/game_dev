@@ -16,7 +16,7 @@ Camera::Type Camera::atot(const char* str)
 	}
 }
 
-Camera::Camera(GLfloat width, GLfloat height, GLint id, Vector3& position, Vector3& target, Vector3& up, GLfloat moveSpeed, GLfloat rotateSpeed, GLfloat nearP, GLfloat farP, GLfloat fov, GLfloat deltaTime, Type type)
+Camera::Camera(GLfloat width, GLfloat height, GLint id, const Vector3& position, const Vector3& target, const Vector3& up, GLfloat moveSpeed, GLfloat rotateSpeed, GLfloat nearP, GLfloat farP, GLfloat fov, GLfloat deltaTime, Type type)
 	:width{ width }, height{ height }, id{ id }, target{ target }, position{ position }, up{ up }, moveSpeed{ moveSpeed }, rotateSpeed{ rotateSpeed }, nearP{ nearP }, farP{ farP }, fov{ fov }, deltaTime{ deltaTime }, type{ type },
 	perspModified{ true }
 {
