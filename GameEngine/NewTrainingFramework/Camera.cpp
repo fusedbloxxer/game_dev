@@ -242,10 +242,10 @@ void Camera::execute(GLubyte key)
 		this->moveOx(-1);
 		break;
 	case Controls::Type::MOVE_CAMERA_POSITIVE_Y:
-		this->moveOy(-1);
+		this->moveOy(1);
 		break;
 	case Controls::Type::MOVE_CAMERA_NEGATIVE_Y:
-		this->moveOy(1);
+		this->moveOy(-1);
 		break;
 	case Controls::Type::MOVE_CAMERA_POSITIVE_Z:
 		this->moveOz(-1);

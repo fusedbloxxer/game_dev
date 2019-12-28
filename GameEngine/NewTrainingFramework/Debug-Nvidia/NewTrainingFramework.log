@@ -1,9 +1,8 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(452,5): warning MSB8028: The intermediate directory (Debug-Nvidia\) contains files shared from another project (GameEngine.vcxproj, NewTrainingFramework.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
-  GameEngine.cpp
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  RapidSceneAdapter.cpp
-  RapidResourceAdapter.cpp
-  Rapid.cpp
+  LinearTrajectory.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LinearTrajectory.cpp(5,138): warning C4244:  'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LinearTrajectory.cpp(5,129): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LinearTrajectory.cpp(10,139): warning C4244:  'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LinearTrajectory.cpp(10,130): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
   NewTrainingFramework.vcxproj -> C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\\BIN-Nvidia\GameEngine.exe

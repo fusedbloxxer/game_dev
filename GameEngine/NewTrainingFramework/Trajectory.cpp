@@ -25,19 +25,13 @@ Trajectory::Type Trajectory::strToType(const char* type)
 	}
 }
 
-Trajectory::~Trajectory()
-{
-}
+Trajectory::~Trajectory() {}
 
-Trajectory::Trajectory(const char* type, GLint itCount, GLfloat speed, GLboolean direction)
-	:Trajectory{ strToType(type), itCount, speed, direction }
-{
-}
+Trajectory::Trajectory(const char* type, GLfloat speed, GLint itCount)
+	:Trajectory{ strToType(type), speed, itCount } {}
 
-Trajectory::Trajectory(Type type, GLint itCount, GLfloat speed, GLboolean direction)
-	: type{ type }, iterationCount{ itCount }, speed{ speed }, normalDirection{ direction }
-{
-}
+Trajectory::Trajectory(Type type, GLfloat speed, GLint itCount)
+	: type{ type }, iterationCount{ itCount }, speed{ speed } {}
 
 void Trajectory::setSpeed(GLfloat speed)
 {
@@ -67,14 +61,4 @@ void Trajectory::setItCount(GLint itCount)
 GLint Trajectory::getItCount() const
 {
 	return iterationCount;
-}
-
-GLboolean Trajectory::isNormalDirection() const
-{
-	return normalDirection;
-}
-
-void Trajectory::setNormalDirection(GLboolean direction)
-{
-	this->normalDirection = direction;
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include "..\Utilities\utilities.h"
+#include "SceneObject.h"
 
 class Trajectory
 {
@@ -11,10 +11,11 @@ public:
 		LINE_LOOP,
 		CIRCLE
 	};
+
 	inline static constexpr GLint DEFAULT_IT_COUNT = 1;
 	inline static constexpr GLfloat DEFAULT_SPEED = 100.0f;
-	inline static constexpr GLboolean DEFAULT_DIRECTION = false;
 	static Type strToType(const char* type);
+
 protected:
 	// Trajectory type
 	Type type;
@@ -22,17 +23,18 @@ protected:
 	// Trajectory speed
 	GLfloat speed;
 
-	// Forward / Backward movement
-	GLboolean normalDirection;
-
 	// Iteration count
 	GLint iterationCount;
 
 	// Constructors
-	Trajectory(const char * type, GLint itCount = DEFAULT_IT_COUNT, GLfloat speed = DEFAULT_SPEED, GLboolean direction = DEFAULT_DIRECTION);
-	Trajectory(Type type, GLint itCount = DEFAULT_IT_COUNT, GLfloat speed = DEFAULT_SPEED, GLboolean direction = DEFAULT_DIRECTION);
+	Trajectory(const char * type, GLfloat speed = DEFAULT_SPEED, GLint itCount = DEFAULT_IT_COUNT);
+	Trajectory(Type type, GLfloat speed = DEFAULT_SPEED, GLint itCount = DEFAULT_IT_COUNT);
 
 public:
+
+	// Move the object into the world
+	virtual void move(SceneObject* object, GLfloat time) = 0;
+
 	// Virtual destructor
 	virtual ~Trajectory() = 0;
 
@@ -45,7 +47,4 @@ public:
 
 	void setItCount(GLint itCount);
 	GLint getItCount() const;
-
-	GLboolean isNormalDirection() const;
-	void setNormalDirection(GLboolean direction);
 };
