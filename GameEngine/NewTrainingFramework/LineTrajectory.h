@@ -4,8 +4,22 @@
 
 class LineTrajectory : public virtual Trajectory
 {
+protected:
 	// Intermediary positions
 	std::vector<Vector3> points;
+
+	// Normalized direction vector
+	Vector4 vecDirection;
+
+	// Distante to be travelled up to point
+	GLfloat distance;
+
+	// Current portion index
+	GLint pos;
+
+	void calculateTravelProps(const GLint orientation);
+
+	Vector4 calculateStep(GLfloat time);
 
 public:
 	// Constructors

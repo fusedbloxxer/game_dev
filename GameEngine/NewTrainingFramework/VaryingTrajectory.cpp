@@ -2,12 +2,12 @@
 #include "VaryingTrajectory.h"
 
 VaryingTrajectory::VaryingTrajectory(const char* type, GLint itCount, GLfloat speed, GLboolean direction)
-	:Trajectory{ type, itCount, speed }, alternateDirection{ direction }
+	:Trajectory{ type, itCount, speed }, alternateDirection{ direction }, orientation{ 1 }
 {
 }
 
 VaryingTrajectory::VaryingTrajectory(Type type, GLint itCount, GLfloat speed, GLboolean direction)
-	: Trajectory{ type, itCount, speed }, alternateDirection{ direction }
+	: Trajectory{ type, itCount, speed }, alternateDirection{ direction }, orientation{ 1 }
 {
 }
 

@@ -157,7 +157,7 @@ Vector3 Vector3::operator - ()
 	return Vector3(-x, -y, -z);
 }
 
-Vector3 Vector3::operator - (Vector3 & vector)
+Vector3 Vector3::operator - (const Vector3 & vector) const
 {
 	return Vector3(x - vector.x, y - vector.y, z - vector.z);
 }

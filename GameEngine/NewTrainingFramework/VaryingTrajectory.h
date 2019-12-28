@@ -10,6 +10,9 @@ protected:
 	// Forward / Backward movement
 	GLboolean alternateDirection;
 
+	// Forward / Backward - (1) or (-1)
+	GLint orientation;
+
 	// Constructors
 	VaryingTrajectory(const char* type, GLint itCount = DEFAULT_IT_COUNT, GLfloat speed = DEFAULT_SPEED, GLboolean direction = DEFAULT_DIRECTION);
 	VaryingTrajectory(Type type, GLint itCount = DEFAULT_IT_COUNT, GLfloat speed = DEFAULT_SPEED, GLboolean direction = DEFAULT_DIRECTION);

@@ -5,4 +5,18 @@ C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\
 C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LinearTrajectory.cpp(5,129): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
 C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LinearTrajectory.cpp(10,139): warning C4244:  'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
 C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LinearTrajectory.cpp(10,130): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
-  NewTrainingFramework.vcxproj -> C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\\BIN-Nvidia\GameEngine.exe
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LinearTrajectory.cpp(26,21): error C2059:  syntax error: ')'
+  LineTrajectory.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LinearTrajectory.cpp(27,2): error C2143:  syntax error: missing ';' before '{'
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(5,30): warning C4244:  'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(5,21): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(11,31): warning C4244:  'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(11,22): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(30,28): error C2678:  binary '*': no operator found which takes a left-hand operand of type 'const Vector4' (or there is no acceptable conversion)
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(118,10): message :  could be 'Vector4 Vector4::operator *(Matrix &)'
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(109,10): message :  or       'Vector4 Vector4::operator *(GLfloat)'
+  Generating Code...
+  Compiling...
+  TrajectoryFactory.cpp
+  Generating Code...
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(30,28): message :  while trying to match the argument list '(const Vector4, GLfloat)'
