@@ -13,7 +13,7 @@ Trajectory::Type Trajectory::strToType(const char* type)
 	}
 	else if (std::strcmp(type, "line_loop") == 0)
 	{
-		return Type::LINE_STRIP;
+		return Type::LINE_LOOP;
 	}
 	else if (std::strcmp(type, "circle") == 0)
 	{
@@ -31,7 +31,19 @@ Trajectory::Trajectory(const char* type, GLfloat speed, GLint itCount)
 	:Trajectory{ strToType(type), speed, itCount } {}
 
 Trajectory::Trajectory(Type type, GLfloat speed, GLint itCount)
-	: type{ type }, iterationCount{ itCount }, speed{ speed } {}
+	: type{ type }, speed{ speed }, iterationCount{ itCount }
+{
+	if (itCount < 0)
+		throw std::invalid_argument{ "Iteration-count cannot be negative." };
+}
+
+void Trajectory::print(std::ostream& os) const
+{
+
+	os << typeid(*this).name() << " "
+		<< "speed: " << speed << " "
+		<< "iteration-count: " << iterationCount;
+}
 
 void Trajectory::setSpeed(GLfloat speed)
 {
@@ -58,7 +70,25 @@ void Trajectory::setItCount(GLint itCount)
 	this->iterationCount = itCount;
 }
 
+void Trajectory::setItCount(const char* itCount)
+{
+	if (::strcmp(itCount, "infinite") == 0)
+	{
+		iterationCount = -1;
+	}
+	else
+	{
+		iterationCount = ::atoi(itCount);
+	}
+}
+
 GLint Trajectory::getItCount() const
 {
 	return iterationCount;
+}
+
+std::ostream& operator<<(std::ostream& os, const Trajectory& trajectory)
+{
+	trajectory.print(os);
+	return os;
 }

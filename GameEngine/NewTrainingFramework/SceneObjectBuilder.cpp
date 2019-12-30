@@ -8,6 +8,7 @@ void SceneObjectBuilder::sendCommonProperties(SceneObject* base) const
 {
 	base->setFollowingCamera(followingCamera);
 	base->setWiredFormat(wiredFormat);
+	base->setTrajectory(trajectory);
 	base->setReflection(reflection);
 	base->setRotation(rotation);
 	base->setPosition(position);
@@ -75,6 +76,12 @@ SceneObjectBuilder& SceneObjectBuilder::setShader(std::shared_ptr<Shader> shader
 SceneObjectBuilder& SceneObjectBuilder::setFollowingCamera(const Vector3& followingCamera)
 {
 	this->followingCamera = followingCamera;
+	return *this;
+}
+
+SceneObjectBuilder& SceneObjectBuilder::setTrajectory(const std::shared_ptr<Trajectory> trajectory)
+{
+	this->trajectory = trajectory;
 	return *this;
 }
 

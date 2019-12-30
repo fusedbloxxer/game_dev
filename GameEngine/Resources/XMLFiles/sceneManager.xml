@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sceneManager>
   <gameName>FusedBloxxer's Game Engine</gameName>
-	
+
   <defaultScreenSize>
     <width>960</width>
     <height>720</height>
-	</defaultScreenSize>
-	
+  </defaultScreenSize>
+
   <backgroundColor>
-		<r>0.0</r>
-		<g>0.0</g>
-		<b>0.0</b>
-	</backgroundColor>
-  
-	<controls>
+    <r>0.0</r>
+    <g>0.0</g>
+    <b>0.0</b>
+  </backgroundColor>
+
+  <controls>
     <control>
       <key>Q</key>
       <action>MOVE_CAMERA_POSITIVE_Y</action>
@@ -22,18 +22,18 @@
       <key>E</key>
       <action>MOVE_CAMERA_NEGATIVE_Y</action>
     </control>
-		<control>
-			<key>W</key>
-			<action>MOVE_CAMERA_POSITIVE_Z</action>
-		</control>
+    <control>
+      <key>W</key>
+      <action>MOVE_CAMERA_POSITIVE_Z</action>
+    </control>
     <control>
       <key>A</key>
       <action>MOVE_CAMERA_NEGATIVE_X</action>
     </control>
-		<control>
-			<key>S</key>
-			<action>MOVE_CAMERA_NEGATIVE_Z</action>
-		</control>
+    <control>
+      <key>S</key>
+      <action>MOVE_CAMERA_NEGATIVE_Z</action>
+    </control>
     <control>
       <key>D</key>
       <action>MOVE_CAMERA_POSITIVE_X</action>
@@ -58,35 +58,35 @@
       <key>VK_DOWN</key>
       <action>ROTATE_CAMERA_NEGATIVE_X</action>
     </control>
-	</controls>
-	
-	<cameras>
-		<camera id="1">
-			<comment>elemntul type este folosit doar in taskul optional cu tipurile de Camera </comment>
+  </controls>
+
+  <cameras>
+    <camera id="1">
+      <comment>elemntul type este folosit doar in taskul optional cu tipurile de Camera </comment>
       <type>firstPerson</type>
-			<position>
+      <position>
         <x>400.0</x>
         <y>350.0</y>
         <z>200.0</z>
-			</position>
-			<target>
-				<x>0.0</x>
+      </position>
+      <target>
+        <x>0.0</x>
         <y>350.0</y>
-				<z>0.0</z>
-			</target>
-			<up>
-				<x>0.0</x>
-				<y>1.0</y>
-				<z>0.0</z>
-			</up>
-			<translationSpeed>1000</translationSpeed>
-			<rotationSpeed>150</rotationSpeed>
-			<fov>45</fov>
-			<near>0.2</near>
-			<far>250000</far>
-		</camera>
-	</cameras>
-	<activeCamera>1</activeCamera>
+        <z>0.0</z>
+      </target>
+      <up>
+        <x>0.0</x>
+        <y>1.0</y>
+        <z>0.0</z>
+      </up>
+      <translationSpeed>1000</translationSpeed>
+      <rotationSpeed>150</rotationSpeed>
+      <fov>45</fov>
+      <near>0.2</near>
+      <far>250000</far>
+    </camera>
+  </cameras>
+  <activeCamera>1</activeCamera>
 
   <fog>
     <radius>
@@ -101,7 +101,7 @@
   </fog>
 
   <axisShader id="7"/>
-  
+
   <objects>
     <object id="1">
       <model>1</model>
@@ -114,7 +114,7 @@
       <position>
         <x>0.0</x>
         <y>200.0</y>
-        <z>0.0</z>
+        <z>-400.0</z>
       </position>
       <rotation>
         <x>0.0</x>
@@ -157,7 +157,7 @@
         <z>100.0</z>
       </scale>
     </object>
-    
+
     <object id="3">
       <model>5</model>
       <shader>5</shader>
@@ -203,7 +203,7 @@
         <z>-250.0</z>
       </position>
       <rotation>
-        <x>180</x>
+        <x>0</x>
         <y>0</y>
         <z>0</z>
       </rotation>
@@ -259,26 +259,31 @@
         <z>0.0</z>
       </position>
       <rotation>
-        <x>0</x>
+        <x>0.0</x>
         <y>0.0</y>
-        <z>0</z>
+        <z>0.0</z>
       </rotation>
       <scale>
         <x>1.0</x>
         <y>1.0</y>
         <z>1.0</z>
       </scale>
-      <trajectory type="linear" iteration-count="10" direction="alternate" speed="4">
+      <trajectory type="line_loop" iteration-count="infinite" direction="normal" speed="1000" rotationSpeed="200">
         <points>
           <point>
-            <x>2</x>
-            <y>7</y>
-            <z>1</z>
+            <x>-750.0</x>
+            <y>250.0</y>
+            <z>0.0</z>
           </point>
           <point>
-            <x>18</x>
-            <y>3</y>
-            <z>5</z>
+            <x>-750.0</x>
+            <y>500.0</y>
+            <z>200.0</z>
+          </point>
+          <point>
+            <x>900.0</x>
+            <y>200.0</y>
+            <z>200.0</z>
           </point>
         </points>
       </trajectory>
@@ -370,7 +375,7 @@
       <position>
         <x>0.0</x>
         <y>0.0</y>
-        <z>200.0</z>
+        <z>-300.0</z>
       </position>
       <rotation>
         <x>0.0</x>

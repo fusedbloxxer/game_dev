@@ -19,8 +19,12 @@ class SceneObjectBuilder : public IBuilder<SceneObject>
 	// Pointer to its shader
 	std::shared_ptr<Shader> shader;
 
+	// Pointer to its trajectory
+	std::shared_ptr<Trajectory> trajectory;
+
 	// Pointer to its textures
 	std::vector<std::shared_ptr<Texture>> textures;
+
 
 	// Vector3 object properties
 	Vector3 position, rotation, scale, color, followingCamera, offset;
@@ -52,6 +56,7 @@ public:
 	SceneObjectBuilder& setModel(std::shared_ptr<Model> model);
 	SceneObjectBuilder& setShader(std::shared_ptr<Shader> shader);
 	SceneObjectBuilder& setFollowingCamera(const Vector3& followingCamera);
+	SceneObjectBuilder& setTrajectory(const std::shared_ptr<Trajectory> trajectory);
 	SceneObjectBuilder& setTextures(const std::vector<std::shared_ptr<Texture>>& textures);
 
 	// Virtual destructor

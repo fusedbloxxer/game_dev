@@ -1,4 +1,5 @@
 #pragma once
+#include "Trajectory.h"
 #include "AxisModel.h"
 #include "Drawable.h"
 #include "Texture.h"
@@ -7,6 +8,8 @@
 #include <string>
 #include <vector>
 #include <memory>
+
+class Trajectory;
 
 class SceneObject : public Drawable
 {
@@ -52,6 +55,9 @@ protected:
 
 	// Vector3 object properties
 	Vector3 position, rotation, scale, color, followingCamera, offset;
+
+	// Pointer to its trajectory
+	std::shared_ptr<Trajectory> trajectory;
 
 	// Pointer to its textures
 	std::vector<std::shared_ptr<Texture>> textures;
@@ -118,4 +124,7 @@ public:
 
 	std::vector<std::shared_ptr<Texture>>& getTextures();
 	void setTextures(const std::vector<std::shared_ptr<Texture>>& textures);
+
+	std::shared_ptr<Trajectory> getTrajectory();
+	void setTrajectory(const std::shared_ptr<Trajectory> trajectory);
 };

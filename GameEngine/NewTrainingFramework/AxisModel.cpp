@@ -44,3 +44,8 @@ GLuint AxisModel::getId() const
 {
 	return vboId;
 }
+
+Vector3 AxisModel::getAxis() const
+{
+	return max;
+}

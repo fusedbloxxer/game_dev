@@ -6,7 +6,8 @@
 //Vector2
 constexpr GLfloat PI = 3.1415926535897f;
 
-#define TO_RAD(x) ((x) * 0.0174533f)
+#define TO_RAD(x) ((x) * PI / 180)
+#define TO_ANG(x) ((x) * 180 / PI)
 
 class Vector2
 {
@@ -59,7 +60,7 @@ public:
 	//Vector's operations
 	GLfloat Length();
 	Vector3 & Normalize();
-	Vector3 operator + (Vector3 & vector);
+	Vector3 operator + (const Vector3 & vector);
 	Vector3 & operator += (Vector3 & vector);
 	Vector3 operator - ();
 	Vector3 operator - (const Vector3 & vector) const;

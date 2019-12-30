@@ -23,4 +23,6 @@ public:
 
 	// Getters and setters
 	GLuint getId() const;
+
+	Vector3 getAxis() const;
 };

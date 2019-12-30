@@ -1,8 +1,15 @@
 #pragma once
+#include "..\Utilities\utilities.h"
 #include "SceneObject.h"
+#include <typeinfo>
+#include <iostream>
+
+class SceneObject;
 
 class Trajectory
 {
+	friend std::ostream& operator<<(std::ostream& os, const Trajectory& trajectory);
+
 public:
 	enum class Type
 	{
@@ -30,8 +37,10 @@ protected:
 	Trajectory(const char * type, GLfloat speed = DEFAULT_SPEED, GLint itCount = DEFAULT_IT_COUNT);
 	Trajectory(Type type, GLfloat speed = DEFAULT_SPEED, GLint itCount = DEFAULT_IT_COUNT);
 
-public:
+	// Virtual print
+	virtual void print(std::ostream& os) const = 0;
 
+public:
 	// Move the object into the world
 	virtual void move(SceneObject* object, GLfloat time) = 0;
 
@@ -46,5 +55,6 @@ public:
 	Type getType() const;
 
 	void setItCount(GLint itCount);
+	void setItCount(const char* itCount);
 	GLint getItCount() const;
 };

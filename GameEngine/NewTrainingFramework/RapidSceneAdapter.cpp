@@ -1,8 +1,11 @@
 #include "stdafx.h"
 #include "TerrainObjectBuilder.h"
+#include "TrajectoryFactory.h"
 #include "RapidSceneAdapter.h"
 #include "FireObjectBuilder.h"
+#include "CircleTrajectory.h"
 #include "ResourceManager.h"
+#include "LineTrajectory.h"
 #include "CameraBuilder.h"
 #include <sstream>
 #include <fstream>
@@ -17,7 +20,7 @@ Fog RapidSceneAdapter::getFog() const
 	auto radius = fog->first_node("radius"); if (!radius) { throw std::runtime_error{ "No radius was found." }; }
 	auto fogClarityRadius = radius->first_node("r"); if (!fogClarityRadius) { throw std::runtime_error{ "No r was found." }; }
 	auto fogTransiRadius = radius->first_node("R"); if (!fogTransiRadius) { throw std::runtime_error{ "No R was found." }; }
-	auto color = loadVector(fog, "color", "r", "g", "b");
+	auto color = loadVector(fog->first_node("color"), "r", "g", "b");
 
 	return { {color.x / 256.0f, color.y / 256.0f, color.z / 256.0f},
 		static_cast<GLfloat>(atof(fogClarityRadius->value())),
@@ -42,7 +45,7 @@ GLint RapidSceneAdapter::getActiveCameraId() const
 
 Vector3 RapidSceneAdapter::getBackground() const
 {
-	return loadVector(root, "backgroundColor", "r", "g", "b");
+	return loadVector(root->first_node("backgroundColor"), "r", "g", "b");
 }
 
 std::string RapidSceneAdapter::getGameTitle() const
@@ -134,6 +137,103 @@ Vector3 RapidSceneAdapter::loadFollowingCamera(rapidxml::xml_node<>* object) con
 	return foll;
 }
 
+std::shared_ptr<Trajectory> RapidSceneAdapter::loadTrajectory(rapidxml::xml_node<>* trajectoryXml) const
+{
+	if (trajectoryXml)
+	{
+		auto type = trajectoryXml->first_attribute("type"); if (!type) { throw std::runtime_error{ "Trajectory type was not found." }; }
+		std::shared_ptr<Trajectory> trajectory = std::shared_ptr<Trajectory>(TrajectoryFactory::newInstance(Trajectory::strToType(type->value())));
+
+		if (auto itCount = trajectoryXml->first_attribute("iteration-count"))
+		{
+			trajectory->setItCount(itCount->value());
+		}
+
+		if (auto speed = trajectoryXml->first_attribute("speed"))
+		{
+			trajectory->setSpeed(::atoi(speed->value()));
+		}
+
+		switch (trajectory->getType())
+		{
+		case Trajectory::Type::LINEAR:
+		case Trajectory::Type::LINE_LOOP:
+		case Trajectory::Type::LINE_STRIP:
+		{
+			if (auto lineTrajectory = dynamic_cast<LineTrajectory*>(trajectory.get()))
+			{
+				if (auto rotationSpeed = trajectoryXml->first_attribute("rotationSpeed"))
+				{
+					lineTrajectory->setRotationSpeed(::atof(rotationSpeed->value()));
+				}
+
+				// Add all points.
+				std::vector<Vector3> transport;
+
+				if (auto points = trajectoryXml->first_node("points"))
+				{
+					for (auto point = points->first_node("point"); point; point = point->next_sibling())
+					{
+						transport.push_back(loadVector(point));
+					}
+
+					lineTrajectory->setPoints(transport);
+				}
+				else
+				{
+					throw std::runtime_error{ "No points were found for trajectory." };
+				}
+
+				// Common for all line trajectories.
+				if (trajectory->getType() == Trajectory::Type::LINE_LOOP)
+				{
+					break;
+				}
+
+				// It's a varying trajectory.
+				if (auto direction = trajectoryXml->first_attribute("direction"))
+				{
+					lineTrajectory->setDirection(direction->value());
+				}
+			}
+		}
+		break;
+		case Trajectory::Type::CIRCLE:
+		{
+			auto circle = dynamic_cast<CircleTrajectory*>(trajectory.get());
+			circle->setCenter(loadVector(trajectoryXml->first_node("center")));
+
+			if (auto radius = trajectoryXml->first_node("radius"))
+			{
+				circle->setRadius(::atof(radius->value()));
+			}
+			else
+			{
+				throw std::runtime_error{ "No radius was found." };
+			}
+
+			if (auto rotationPlane = trajectoryXml->first_node("rotationPlane"))
+			{
+				circle->setRotationPlane(loadVector(rotationPlane));
+			}
+			else
+			{
+				throw std::runtime_error{ "No rotationPlane was found." };
+			}
+		}
+		break;
+		default:
+			throw std::runtime_error{ "Trajectory type is not valid !" };
+			break;
+		}
+
+		std::cout << *trajectory << std::endl;
+		return trajectory;
+	}
+
+	return nullptr;
+}
+
 std::vector<std::shared_ptr<Texture>> RapidSceneAdapter::loadTextures(rapidxml::xml_node<>* object) const
 {
 	std::vector<std::shared_ptr<Texture>> texturesPtrs;
@@ -171,12 +271,13 @@ std::vector<std::shared_ptr<SceneObject>> RapidSceneAdapter::getSceneObjects(con
 		auto builder = std::unique_ptr<SceneObjectBuilder>(SceneObjectBuilderFactory::newBuilderInstance(SceneObject::atot(type->value()), atoi(id->value())));
 
 		builder->setShader(ResourceManager::getInstance()->load<Shader>(atoi(shader->value())))
+			.setPosition(loadVector(object->first_node("position")))
+			.setRotation(loadVector(object->first_node("rotation")))
+			.setScale(loadVector(object->first_node("scale")))
+			.setColor(loadVector(object->first_node("color"), "r", "g", "b"))
+			.setTrajectory(loadTrajectory(object->first_node("trajectory")))
 			.setReflection(object->first_node("reflection") != nullptr)
-			.setPosition(loadVector(object, "position", "x", "y", "z"))
-			.setRotation(loadVector(object, "rotation", "x", "y", "z"))
 			.setWiredFormat(object->first_node("wired") != nullptr)
-			.setScale(loadVector(object, "scale", "x", "y", "z"))
-			.setColor(loadVector(object, "color", "r", "g", "b"))
 			.setFollowingCamera(loadFollowingCamera(object))
 			.setTextures(loadTextures(object))
 			.setName(name->value());
@@ -192,7 +293,7 @@ void RapidSceneAdapter::setSpecificProperties(std::unique_ptr<SceneObjectBuilder
 {
 	if (auto terrain = dynamic_cast<TerrainObjectBuilder*>(builder.get()))
 	{
-		auto rgb = loadVector(object, "colorBind", "r", "g", "b");
+		auto rgb = loadVector(object->first_node("colorBind"), "r", "g", "b");
 		auto cells = object->first_node("cells"); if (!cells) { throw std::runtime_error{ "Could not find cells for special object." }; }
 		auto size = cells->first_node("size"); if (!size) { throw std::runtime_error{ "Could not find cell-size for special object." }; }
 		auto count = cells->first_node("count"); if (!count) { throw std::runtime_error{ "Could not find cell-count for special object." }; }
@@ -202,7 +303,7 @@ void RapidSceneAdapter::setSpecificProperties(std::unique_ptr<SceneObjectBuilder
 		terrain->setCenter(activeCamera);
 		terrain->setSideCells(atoi(count->value()));
 		terrain->setCellSize(GLfloat(atof(size->value())));
-		terrain->setHeight(loadVector(object, "height", "r", "g", "b"));
+		terrain->setHeight(loadVector(object->first_node("height"), "r", "g", "b"));
 		terrain->setColorBind((GLuint)rgb.x, (GLuint)rgb.y, (GLuint)rgb.z, atoi(blend->value()));
 	}
 	else
@@ -233,12 +334,12 @@ std::unordered_map<GLint, std::shared_ptr<Camera>> RapidSceneAdapter::getCameras
 		auto rotation = camera->first_node("rotationSpeed"); if (!rotation) { throw std::runtime_error{ "No camera rotationSpeed in sceneManager." }; }
 		auto translation = camera->first_node("translationSpeed"); if (!translation) { throw std::runtime_error{ "No camera translationSpeed in sceneManager." }; }
 
-		auto cameraObject = CameraBuilder(atoi(camera->first_attribute("id")->value()), (GLint) width, (GLint) height)
-			.setPosition(loadVector(camera, "position", "x", "y", "z"))
-			.setTarget(loadVector(camera, "target", "x", "y", "z"))
+		auto cameraObject = CameraBuilder(atoi(camera->first_attribute("id")->value()), (GLint)width, (GLint)height)
+			.setPosition(loadVector(camera->first_node("position")))
+			.setTarget(loadVector(camera->first_node("target")))
 			.setMoveSpeed(GLfloat(atof(translation->value())))
 			.setRotateSpeed(GLfloat(atof(rotation->value())))
-			.setUp(loadVector(camera, "up", "x", "y", "z"))
+			.setUp(loadVector(camera->first_node("up")))
 			.setNear(GLfloat(atof(nearP->value())))
 			.setFar(GLfloat(atof(farP->value())))
 			.setType(Camera::atot(type->value()))
@@ -250,15 +351,15 @@ std::unordered_map<GLint, std::shared_ptr<Camera>> RapidSceneAdapter::getCameras
 	return cameraMap;
 }
 
-Vector3 RapidSceneAdapter::loadVector(rapidxml::xml_node<>* root, const char* node, const char xP[2], const char yP[2], const char zP[2]) const
+Vector3 RapidSceneAdapter::loadVector(rapidxml::xml_node<>* root, const char xP[2], const char yP[2], const char zP[2]) const
 {
 	GLfloat x = 0.0f, y = 0.0f, z = 0.0f;
 
-	if (auto position = root->first_node(node))
+	if (root)
 	{
-		auto xPos = position->first_node(xP); if (!xPos) { throw std::runtime_error{ "X value is missing from file." }; }
-		auto yPos = position->first_node(yP); if (!yPos) { throw std::runtime_error{ "Y value is missing from file." }; }
-		auto zPos = position->first_node(zP); if (!zPos) { throw std::runtime_error{ "Z value is missing from file." }; }
+		auto xPos = root->first_node(xP); if (!xPos) { throw std::runtime_error{ "X value is missing from file." }; }
+		auto yPos = root->first_node(yP); if (!yPos) { throw std::runtime_error{ "Y value is missing from file." }; }
+		auto zPos = root->first_node(zP); if (!zPos) { throw std::runtime_error{ "Z value is missing from file." }; }
 		x = GLfloat(atof(xPos->value()));
 		y = GLfloat(atof(yPos->value()));
 		z = GLfloat(atof(zPos->value()));

@@ -173,7 +173,6 @@
     <ClCompile Include="FireObject.cpp" />
     <ClCompile Include="FireObjectBuilder.cpp" />
     <ClCompile Include="Fog.cpp" />
-    <ClCompile Include="LinearTrajectory.cpp" />
     <ClCompile Include="LineTrajectory.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -204,7 +203,6 @@
     <ClCompile Include="TextureResource.cpp" />
     <ClCompile Include="Trajectory.cpp" />
     <ClCompile Include="TrajectoryFactory.cpp" />
-    <ClCompile Include="VaryingTrajectory.cpp" />
     <ClCompile Include="VertexAxis.cpp" />
     <ClCompile Include="Vertex_NFG.cpp" />
   </ItemGroup>
@@ -222,7 +220,6 @@
     <ClInclude Include="GeneratedModel.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="IBuilder.h" />
-    <ClInclude Include="LinearTrajectory.h" />
     <ClInclude Include="LineTrajectory.h" />
     <ClInclude Include="Loadable.h" />
     <ClInclude Include="Logger.h" />
@@ -253,7 +250,6 @@
     <ClInclude Include="TextureResource.h" />
     <ClInclude Include="Trajectory.h" />
     <ClInclude Include="TrajectoryFactory.h" />
-    <ClInclude Include="VaryingTrajectory.h" />
     <ClInclude Include="VertexAxis.h" />
     <ClInclude Include="VertexNfg.h" />
   </ItemGroup>

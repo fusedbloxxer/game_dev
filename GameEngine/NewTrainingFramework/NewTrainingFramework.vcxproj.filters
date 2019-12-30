@@ -213,12 +213,6 @@
     <ClCompile Include="TrajectoryFactory.cpp">
       <Filter>Source Files\SceneManager\Objects\Trajectories</Filter>
     </ClCompile>
-    <ClCompile Include="VaryingTrajectory.cpp">
-      <Filter>Source Files\SceneManager\Objects\Trajectories</Filter>
-    </ClCompile>
-    <ClCompile Include="LinearTrajectory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Drawable.h">
@@ -355,12 +349,6 @@
     </ClInclude>
     <ClInclude Include="CircleTrajectory.h">
       <Filter>Header Files\SceneManager\Objects\Trajectories</Filter>
-    </ClInclude>
-    <ClInclude Include="VaryingTrajectory.h">
-      <Filter>Header Files\SceneManager\Objects\Trajectories</Filter>
-    </ClInclude>
-    <ClInclude Include="LinearTrajectory.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -157,24 +157,29 @@ void SceneObject::sendCommonData()
 
 void SceneObject::update()
 {
-	auto cameraPos = SceneManager::getInstance()->getActiveCamera()->getPosition();
+	auto camera = SceneManager::getInstance()->getActiveCamera();
 
 	if (followingCamera.x == 1)
 	{
-		position.x = offset.x + cameraPos.x;
+		position.x = offset.x + camera->getPosition().x;
 		modified = true;
 	}
 
 	if (followingCamera.y == 1)
 	{
-		position.y = offset.y + cameraPos.y;
+		position.y = offset.y + camera->getPosition().y;
 		modified = true;
 	}
 
 	if (followingCamera.z == 1)
 	{
-		position.z = offset.z + cameraPos.z;
+		position.z = offset.z + camera->getPosition().z;
 		modified = true;
+	}
+
+	if (trajectory != nullptr)
+	{
+		trajectory->move(this, camera->getDeltaTime());
 	}
 }
 
@@ -341,6 +346,16 @@ std::vector<std::shared_ptr<Texture>>& SceneObject::getTextures()
 void SceneObject::setTextures(const std::vector<std::shared_ptr<Texture>>& textures)
 {
 	this->textures = textures;
+}
+
+std::shared_ptr<Trajectory> SceneObject::getTrajectory()
+{
+	return trajectory;
+}
+
+void SceneObject::setTrajectory(const std::shared_ptr<Trajectory> trajectory)
+{
+	this->trajectory = trajectory;
 }
 
 void SceneObject::drawAxis()
