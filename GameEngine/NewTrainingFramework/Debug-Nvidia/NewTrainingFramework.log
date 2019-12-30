@@ -1,13 +1,6 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(452,5): warning MSB8028: The intermediate directory (Debug-Nvidia\) contains files shared from another project (GameEngine.vcxproj, NewTrainingFramework.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
-  LineTrajectory.cpp
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(5,30): warning C4244:  'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(5,21): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(11,31): warning C4244:  'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(11,22): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
-  Generating Code...
-  TrajectoryFactory.cpp
-  RapidSceneAdapter.cpp
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(106,10): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(106,10): warning C4018: Skipping... (no relevant changes detected)
+  CircleTrajectory.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
   NewTrainingFramework.vcxproj -> C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\\BIN-Nvidia\GameEngine.exe

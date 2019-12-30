@@ -3,8 +3,15 @@
 
 class CircleTrajectory : public Trajectory
 {
-	Vector3 center, rotationPlane;
-	GLfloat radius;
+	Vector3 center;
+
+	GLboolean first;
+
+	Matrix rotationMatrix;
+	
+	GLfloat radius, angle;
+
+	Vector3 rotationPlane, initial;
 
 protected:
 	virtual void print(std::ostream& os) const override;
@@ -16,6 +23,8 @@ public:
 
 	virtual void move(SceneObject* obj, GLfloat time) override;
 
+	void updateObject(SceneObject* obj, const GLfloat& step);
+
 	// Virtual destructor
 	virtual ~CircleTrajectory() = default;
 
@@ -23,7 +32,7 @@ public:
 	const Vector3& getCenter() const;
 	void setCenter(const Vector3& center);
 
-	const Vector3& getRotationPlane() const;
+	Vector3 getRotationPlane() const;
 	void setRotationPlane(const Vector3& rotationPlane);
 
 	GLfloat getRadius() const;

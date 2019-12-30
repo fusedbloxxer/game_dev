@@ -133,12 +133,16 @@ public:
 
 class Matrix
 {
-	friend std::ostream& operator<<(std::ostream& os, Matrix& mat);
+	friend std::ostream& operator<<(std::ostream& os, const Matrix& mat);
+
 public:
 	//constructors
 	Matrix() {}
 	Matrix(GLfloat val);
 	Matrix(Matrix & mat);
+	Matrix(const Matrix& mat);
+
+	Matrix& operator=(const Matrix& mat);
 
 	// Matrix operations
 	Matrix & SetZero();
