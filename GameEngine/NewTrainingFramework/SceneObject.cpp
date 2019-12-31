@@ -363,8 +363,8 @@ void SceneObject::drawAxis()
 	// Draws axis
 	glUseProgram(axisShader->getProgramId());
 	glBindBuffer(GL_ARRAY_BUFFER, model->getAxisModel().getId());
-
 	auto fields = axisShader->getFields();
+
 	if (fields.positionAttribute != -1)
 	{
 		glEnableVertexAttribArray(fields.positionAttribute);

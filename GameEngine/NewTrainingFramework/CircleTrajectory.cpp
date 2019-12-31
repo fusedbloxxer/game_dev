@@ -55,13 +55,13 @@ void CircleTrajectory::move(SceneObject* obj, GLfloat time)
 
 void CircleTrajectory::updateObject(SceneObject* obj, const GLfloat& step)
 {
-	auto pos = rotationMatrix * Vector4{ radius * ::sin(TO_RAD(angle)), 0.0f, radius * ::cos(TO_RAD(angle)), 1.0f };
+	auto pos = rotationMatrix * Vector4{ radius * ::cos(TO_RAD(angle)), radius * ::sin(TO_RAD(angle)), 0.0f, 1.0f };
 	obj->setPosition({ pos.x + center.x, pos.y + center.y, pos.z + center.z });
 
 	obj->setRotation({
-			TO_ANG(obj->getRotation().x),
-			adjustAngle(obj->getRotation().y, step),
-			TO_ANG(obj->getRotation().z)
+		   TO_ANG(initial.x - rotationPlane.x),
+		   TO_ANG(initial.y - rotationPlane.y),
+		   TO_ANG(initial.z - rotationPlane.z) + angle
 		});
 }
 

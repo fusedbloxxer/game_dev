@@ -260,8 +260,8 @@
       </position>
       <rotation>
         <x>0.0</x>
-        <y>0.0</y>
-        <z>0.0</z>
+        <y>180.0</y>
+        <z>270.0</z>
       </rotation>
       <scale>
         <x>1.0</x>
