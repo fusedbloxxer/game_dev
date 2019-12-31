@@ -73,8 +73,6 @@ void SceneManager::draw()
 	{
 		o->draw();
 	}
-
-	glUseProgram(SceneObject::axisShader->getProgramId());
 }
 
 void SceneManager::update()
