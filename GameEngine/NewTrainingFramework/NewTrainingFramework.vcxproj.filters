@@ -213,6 +213,24 @@
     <ClCompile Include="TrajectoryFactory.cpp">
       <Filter>Source Files\SceneManager\Objects\Trajectories</Filter>
     </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="I_Printable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AmbientLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Convertable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Drawable.h">
@@ -274,9 +292,6 @@
     </ClInclude>
     <ClInclude Include="VertexNfg.h">
       <Filter>Header Files\ResourceManager\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Fog.h">
-      <Filter>Header Files\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="SceneAdapter.h">
       <Filter>Header Files\Interfaces</Filter>
@@ -349,6 +364,27 @@
     </ClInclude>
     <ClInclude Include="CircleTrajectory.h">
       <Filter>Header Files\SceneManager\Objects\Trajectories</Filter>
+    </ClInclude>
+    <ClInclude Include="I_Printable.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Fog.h">
+      <Filter>Header Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Header Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="AmbientLight.h">
+      <Filter>Header Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLight.h">
+      <Filter>Header Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Convertable.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

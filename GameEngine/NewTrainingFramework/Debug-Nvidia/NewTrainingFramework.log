@@ -1,54 +1,86 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(459,5): warning MSB8028: The intermediate directory (Debug-Nvidia\) contains files shared from another project (GameEngine.vcxproj, NewTrainingFramework.vcxproj).  This can lead to incorrect clean and rebuild behavior.
 cl : command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
-  stdafx.cpp
-cl : command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
-  Vertex_NFG.cpp
-  VertexAxis.cpp
-  TrajectoryFactory.cpp
-  Trajectory.cpp
-  TextureResource.cpp
-  Texture.cpp
-  TerrainObjectBuilder.cpp
   TerrainObject.cpp
-  SkyboxObjectBuilder.cpp
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(6,29): error C2653: 'NormalLight': is not a class or namespace name
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8,19): error C2011: 'NormalLight': 'enum' type redefinition
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8): message : see declaration of 'NormalLight'
   SkyboxObject.cpp
-  ShaderResource.cpp
-  Shader.cpp
-  SceneObjectBuilderFactory.cpp
-  SceneObjectBuilder.cpp
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(6,29): error C2653: 'NormalLight': is not a class or namespace name
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8,19): error C2011: 'NormalLight': 'enum' type redefinition
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8): message : see declaration of 'NormalLight'
   SceneObject.cpp
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(6,29): error C2653: 'NormalLight': is not a class or namespace name
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8,19): error C2011: 'NormalLight': 'enum' type redefinition
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8): message : see declaration of 'NormalLight'
   SceneManager.cpp
-  ResourceManager.cpp
-  Resource.cpp
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(6,29): error C2653: 'NormalLight': is not a class or namespace name
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8,19): error C2011: 'NormalLight': 'enum' type redefinition
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8): message : see declaration of 'NormalLight'
   RapidSceneAdapter.cpp
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(6,29): error C2653: 'NormalLight': is not a class or namespace name
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8,19): error C2011: 'NormalLight': 'enum' type redefinition
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8): message : see declaration of 'NormalLight'
 D:\Git\game_dev\GameEngine\NewTrainingFramework\RapidSceneAdapter.cpp(154,31): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 D:\Git\game_dev\GameEngine\NewTrainingFramework\RapidSceneAdapter.cpp(167,45): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
 D:\Git\game_dev\GameEngine\NewTrainingFramework\RapidSceneAdapter.cpp(208,29): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Git\game_dev\GameEngine\NewTrainingFramework\RapidSceneAdapter.cpp(337,104): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
-D:\Git\game_dev\GameEngine\NewTrainingFramework\RapidSceneAdapter.cpp(337,90): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
-  RapidResourceAdapter.cpp
-  Generating Code...
-  Compiling...
-  Rapid.cpp
+D:\Git\game_dev\GameEngine\NewTrainingFramework\RapidSceneAdapter.cpp(356,104): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+D:\Git\game_dev\GameEngine\NewTrainingFramework\RapidSceneAdapter.cpp(356,90): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+  NormalLight.cpp
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(6,29): error C2653: 'NormalLight': is not a class or namespace name
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8,19): error C2011: 'NormalLight': 'enum' type redefinition
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8): message : see declaration of 'NormalLight'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(4,14): error C2027: use of undefined type 'NormalLight'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8): message : see declaration of 'NormalLight'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(4,39): error C2027: use of undefined type 'NormalLight'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8): message : see declaration of 'NormalLight'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(4,44): error C2146: syntax error: missing ')' before identifier 'type'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(4,44): error C2086: 'NormalLight Type': redefinition
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(6): message : see declaration of 'Type'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(4,44): error C2146: syntax error: missing ';' before identifier 'type'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(4,48): error C2059: syntax error: ')'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(5,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(5,2): error C2059: syntax error: ':'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(5,7): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(5,3): error C2086: 'int type': redefinition
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(4): message : see declaration of 'type'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(5,16): error C2059: syntax error: '{'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(5,16): error C2143: syntax error: missing ';' before '{'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(5,16): error C2447: '{': missing function header (old-style formal list?)
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(7,19): error C2027: use of undefined type 'NormalLight'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8): message : see declaration of 'NormalLight'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(8,1): error C2270: 'print': modifiers not allowed on nonmember functions
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(11,14): error C2027: use of undefined type 'NormalLight'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8): message : see declaration of 'NormalLight'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(11,32): error C2027: use of undefined type 'NormalLight'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8): message : see declaration of 'NormalLight'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(11,44): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(11,19): error C2371: 'Type': redefinition; different basic types
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(6): message : see declaration of 'Type'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(11,44): error C2146: syntax error: missing ';' before identifier 'getLightType'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(12,1): error C2143: syntax error: missing ';' before '{'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(12,1): error C2447: '{': missing function header (old-style formal list?)
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(16,19): error C2027: use of undefined type 'NormalLight'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8): message : see declaration of 'NormalLight'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(16,37): error C2146: syntax error: missing ')' before identifier 'type'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(17,1): error C2143: syntax error: missing ';' before '{'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(17,1): error C2447: '{': missing function header (old-style formal list?)
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(21,19): error C2027: use of undefined type 'NormalLight'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8): message : see declaration of 'NormalLight'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(21,42): error C2027: use of undefined type 'NormalLight'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8): message : see declaration of 'NormalLight'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(21,46): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(21,46): error C2143: syntax error: missing ',' before '&'
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.cpp(22,1): error C2270: 'fts': modifiers not allowed on nonmember functions
   GameEngine.cpp
-  ModelResource.cpp
-  Model.cpp
-  Logger.cpp
-  LineTrajectory.cpp
-D:\Git\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(5,30): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-D:\Git\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(5,21): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
-D:\Git\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(11,31): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-D:\Git\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(11,22): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
-D:\Git\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(106,10): warning C4018: '<': signed/unsigned mismatch
-  Fog.cpp
-  FireObjectBuilder.cpp
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(6,29): error C2653: 'NormalLight': is not a class or namespace name
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8,19): error C2011: 'NormalLight': 'enum' type redefinition
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8): message : see declaration of 'NormalLight'
   FireObject.cpp
-  Controls.cpp
-  CircleTrajectory.cpp
-  CameraBuilder.cpp
-  Camera.cpp
-  AxisResource.cpp
-  AxisModel.cpp
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(6,29): error C2653: 'NormalLight': is not a class or namespace name
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8,19): error C2011: 'NormalLight': 'enum' type redefinition
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8): message : see declaration of 'NormalLight'
+  AmbientLight.cpp
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(6,29): error C2653: 'NormalLight': is not a class or namespace name
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8,19): error C2011: 'NormalLight': 'enum' type redefinition
+D:\Git\game_dev\GameEngine\NewTrainingFramework\NormalLight.h(8): message : see declaration of 'NormalLight'
   Generating Code...
-AxisModel.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
-  NewTrainingFramework.vcxproj -> D:\Git\game_dev\GameEngine\\BIN-Nvidia\GameEngine.exe

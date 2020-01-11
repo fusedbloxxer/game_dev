@@ -1,7 +1,9 @@
 #pragma once
 #include "..\Utilities\utilities.h"
+#include "AmbientLight.h"
 #include "SceneObject.h"
 #include <unordered_map>
+#include "PointLight.h"
 #include "Controls.h"
 #include "Camera.h"
 #include <vector>
@@ -22,10 +24,14 @@ public:
 	virtual std::string getGameTitle() const = 0;
 
 	virtual std::shared_ptr<Shader> getAxis() const = 0;
+
+	virtual std::shared_ptr<AmbientLight> getAmbientLight() const = 0;
 	
 	virtual std::tuple<GLboolean, GLint, GLint> getScreenSize() const = 0;
 	
 	virtual std::unordered_map<GLubyte, Controls::Type> getKeys() const = 0;
+
+	virtual std::vector<std::shared_ptr<PointLight>> getNormalLights() const = 0;
 
 	virtual std::vector<std::shared_ptr<SceneObject>> getSceneObjects(const Vector3& camera) const = 0;
 

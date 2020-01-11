@@ -44,6 +44,9 @@ void SceneManager::init(ESContext* esContext, SceneAdapter* adapter)
 	// Load fog
 	fog = adapter->getFog();
 
+	// Load ambiental light
+	ambientalLight = adapter->getAmbientLight();
+
 	// Set clear background color
 	glClearColor(backgroundColor.x, backgroundColor.y, backgroundColor.z, 0.0f);
 
@@ -193,6 +196,16 @@ std::shared_ptr<Camera> SceneManager::getActiveCamera()
 		return cameraMap[activeCameraId];
 	}
 	return nullptr;
+}
+
+std::shared_ptr<AmbientLight> SceneManager::getAmbientalLight()
+{
+	return ambientalLight;
+}
+
+void SceneManager::setAmbientalLight(std::shared_ptr<AmbientLight> ambientalLight)
+{
+	this->ambientalLight = ambientalLight;
 }
 
 std::unordered_map<GLubyte, GLboolean>& SceneManager::getPressedButtons()

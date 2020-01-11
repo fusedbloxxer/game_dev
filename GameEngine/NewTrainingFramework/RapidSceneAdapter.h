@@ -21,13 +21,18 @@ public:
 
 	virtual std::shared_ptr<Shader> getAxis() const override;
 
+	virtual std::shared_ptr<AmbientLight> getAmbientLight() const override;
+
 	virtual std::tuple<GLboolean, GLint, GLint> getScreenSize() const override;
 
 	virtual std::unordered_map<GLubyte, Controls::Type> getKeys() const override;
 
+	virtual std::vector<std::shared_ptr<PointLight>> getNormalLights() const override;
+
 	virtual std::vector<std::shared_ptr<SceneObject>> getSceneObjects(const Vector3& camera) const override;
 
 	virtual std::unordered_map<GLint, std::shared_ptr<Camera>> getCameras(GLint width, GLint height) const override;
+
 
 	// Virtual destructor
 	virtual ~RapidSceneAdapter() = default;

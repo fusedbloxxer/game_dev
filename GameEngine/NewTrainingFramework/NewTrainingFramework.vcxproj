@@ -164,20 +164,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AmbientLight.cpp" />
     <ClCompile Include="AxisModel.cpp" />
     <ClCompile Include="AxisResource.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraBuilder.cpp" />
     <ClCompile Include="CircleTrajectory.cpp" />
     <ClCompile Include="Controls.cpp" />
+    <ClCompile Include="Convertable.cpp" />
     <ClCompile Include="FireObject.cpp" />
     <ClCompile Include="FireObjectBuilder.cpp" />
     <ClCompile Include="Fog.cpp" />
+    <ClCompile Include="I_Printable.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="LineTrajectory.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelResource.cpp" />
     <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="NormalLight.cpp" />
+    <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Rapid.cpp" />
     <ClCompile Include="RapidResourceAdapter.cpp" />
     <ClCompile Include="RapidSceneAdapter.cpp" />
@@ -207,12 +213,14 @@
     <ClCompile Include="Vertex_NFG.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AmbientLight.h" />
     <ClInclude Include="AxisModel.h" />
     <ClInclude Include="AxisResource.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraBuilder.h" />
     <ClInclude Include="CircleTrajectory.h" />
     <ClInclude Include="Controls.h" />
+    <ClInclude Include="Convertable.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="FireObject.h" />
     <ClInclude Include="FireObjectBuilder.h" />
@@ -220,11 +228,15 @@
     <ClInclude Include="GeneratedModel.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="IBuilder.h" />
+    <ClInclude Include="I_Printable.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="LineTrajectory.h" />
     <ClInclude Include="Loadable.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelResource.h" />
+    <ClInclude Include="NormalLight.h" />
+    <ClInclude Include="PointLight.h" />
     <ClInclude Include="Rapid.h" />
     <ClInclude Include="RapidResourceAdapter.h" />
     <ClInclude Include="RapidSceneAdapter.h" />

@@ -1,6 +1,7 @@
 #pragma once
 #include <unordered_map>
 #include "SceneAdapter.h"
+#include "AmbientLight.h"
 #include "SceneObject.h"
 #include "Controls.h"
 #include "Releaser.h"
@@ -35,6 +36,9 @@ class SceneManager final : public Drawable, public Releaser
 
 	// Background color
 	Vector3 backgroundColor;
+
+	// AmbientalLight
+	std::shared_ptr<AmbientLight> ambientalLight;
 
 	// Map containing pressed keys
 	std::unordered_map<GLubyte, GLboolean> pressed;
@@ -102,6 +106,9 @@ public:
 	void setBackgroundColor(Vector3& backColor);
 
 	std::shared_ptr<Camera> getActiveCamera();
+
+	std::shared_ptr<AmbientLight> getAmbientalLight();
+	void setAmbientalLight(std::shared_ptr<AmbientLight> ambientalLight);
 
 	std::unordered_map<GLubyte, GLboolean>& getPressedButtons();
 	void setPressedButtons(std::unordered_map<GLubyte, GLboolean>& pressed);

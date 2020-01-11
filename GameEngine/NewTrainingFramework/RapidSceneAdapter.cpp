@@ -319,6 +319,25 @@ void RapidSceneAdapter::setSpecificProperties(std::unique_ptr<SceneObjectBuilder
 	}
 }
 
+std::shared_ptr<AmbientLight> RapidSceneAdapter::getAmbientLight() const
+{
+	if (auto ambientalLight = root->first_node("ambientalLight"))
+	{
+		auto ratio = ambientalLight->first_node("ratio");
+		auto color = loadVector(ambientalLight->first_node("color"), "r", "g", "b");
+		return std::make_shared<AmbientLight>(color, static_cast<GLfloat>(ratio ? ::atof(ratio->value()) : 1.0f));
+	}
+	else
+	{
+		throw std::runtime_error{ "Could not find ambientalLight in sceneManager." };
+	}
+}
+
+std::vector<std::shared_ptr<PointLight>> RapidSceneAdapter::getNormalLights() const
+{
+	return std::vector<std::shared_ptr<PointLight>>();
+}
+
 std::unordered_map<GLint, std::shared_ptr<Camera>> RapidSceneAdapter::getCameras(GLint width, GLint height) const
 {
 	auto cameras = root->first_node("cameras"); if (!cameras) { throw std::runtime_error{ "No cameras were found." }; }
