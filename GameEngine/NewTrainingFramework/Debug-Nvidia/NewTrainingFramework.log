@@ -1,6 +1,54 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(452,5): warning MSB8028: The intermediate directory (Debug-Nvidia\) contains files shared from another project (GameEngine.vcxproj, NewTrainingFramework.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(459,5): warning MSB8028: The intermediate directory (Debug-Nvidia\) contains files shared from another project (GameEngine.vcxproj, NewTrainingFramework.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+cl : command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
+  stdafx.cpp
+cl : command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
+  Vertex_NFG.cpp
+  VertexAxis.cpp
+  TrajectoryFactory.cpp
+  Trajectory.cpp
+  TextureResource.cpp
+  Texture.cpp
+  TerrainObjectBuilder.cpp
+  TerrainObject.cpp
+  SkyboxObjectBuilder.cpp
+  SkyboxObject.cpp
+  ShaderResource.cpp
+  Shader.cpp
+  SceneObjectBuilderFactory.cpp
+  SceneObjectBuilder.cpp
+  SceneObject.cpp
+  SceneManager.cpp
+  ResourceManager.cpp
+  Resource.cpp
+  RapidSceneAdapter.cpp
+D:\Git\game_dev\GameEngine\NewTrainingFramework\RapidSceneAdapter.cpp(154,31): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+D:\Git\game_dev\GameEngine\NewTrainingFramework\RapidSceneAdapter.cpp(167,45): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Git\game_dev\GameEngine\NewTrainingFramework\RapidSceneAdapter.cpp(208,29): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Git\game_dev\GameEngine\NewTrainingFramework\RapidSceneAdapter.cpp(337,104): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+D:\Git\game_dev\GameEngine\NewTrainingFramework\RapidSceneAdapter.cpp(337,90): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+  RapidResourceAdapter.cpp
+  Generating Code...
+  Compiling...
+  Rapid.cpp
+  GameEngine.cpp
+  ModelResource.cpp
+  Model.cpp
+  Logger.cpp
+  LineTrajectory.cpp
+D:\Git\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(5,30): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+D:\Git\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(5,21): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+D:\Git\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(11,31): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+D:\Git\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(11,22): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+D:\Git\game_dev\GameEngine\NewTrainingFramework\LineTrajectory.cpp(106,10): warning C4018: '<': signed/unsigned mismatch
+  Fog.cpp
+  FireObjectBuilder.cpp
+  FireObject.cpp
+  Controls.cpp
   CircleTrajectory.cpp
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
-  NewTrainingFramework.vcxproj -> C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\\BIN-Nvidia\GameEngine.exe
+  CameraBuilder.cpp
+  Camera.cpp
+  AxisResource.cpp
+  AxisModel.cpp
+  Generating Code...
+AxisModel.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+  NewTrainingFramework.vcxproj -> D:\Git\game_dev\GameEngine\\BIN-Nvidia\GameEngine.exe

@@ -20,4 +20,3 @@ private:
 	template<typename Fun>
 	void loadHelper(rapidxml::xml_node<>* root, const char* first, const char* second, Fun fun) const;
 };
-

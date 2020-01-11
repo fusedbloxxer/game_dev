@@ -126,6 +126,20 @@
         <y>2</y>
         <z>2</z>
       </scale>
+      <trajectory type="linear" iteration-count="infinite" direction="normal" speed="1000" rotationSpeed="200">
+        <points>
+          <point>
+            <x>0.0</x>
+            <y>200.0</y>
+            <z>-400.0</z>
+          </point>
+          <point>
+            <x>0.0</x>
+            <y>250.0</y>
+            <z>-1000.0</z>
+          </point>
+        </points>
+      </trajectory>
     </object>
 
     <object id="2">
@@ -142,20 +156,34 @@
         <b>1.0</b>
       </color>
       <position>
-        <x>-1200.0</x>
-        <y>-600.0</y>
+        <x>-600.0</x>
+        <y>200.0</y>
         <z>-200.0</z>
       </position>
       <rotation>
         <x>0</x>
-        <y>0.0</y>
+        <y>180.0</y>
         <z>0</z>
       </rotation>
       <scale>
-        <x>100.0</x>
-        <y>100.0</y>
-        <z>100.0</z>
+        <x>200.0</x>
+        <y>200.0</y>
+        <z>200.0</z>
       </scale>
+      <trajectory type="linear" iteration-count="infinite" direction="alternate" speed="1000" rotationSpeed="200">
+        <points>
+          <point>
+            <x>-400.0</x>
+            <y>200.0</y>
+            <z>-400.0</z>
+          </point>
+          <point>
+            <x>-400.0</x>
+            <y>250.0</y>
+            <z>-1000.0</z>
+          </point>
+        </points>
+      </trajectory>
     </object>
 
     <object id="3">
@@ -276,29 +304,10 @@
         </center>
         <radius>1000.0</radius>
         <rotationPlane>
-          <x>0.0</x>
+          <x>45.0</x>
           <y>0.0</y>
           <z>0.0</z>
         </rotationPlane>
-      </trajectory>
-      <trajectory type="line_loop" iteration-count="infinite" direction="normal" speed="1000" rotationSpeed="200">
-        <points>
-          <point>
-            <x>-750.0</x>
-            <y>250.0</y>
-            <z>0.0</z>
-          </point>
-          <point>
-            <x>-750.0</x>
-            <y>500.0</y>
-            <z>200.0</z>
-          </point>
-          <point>
-            <x>900.0</x>
-            <y>200.0</y>
-            <z>200.0</z>
-          </point>
-        </points>
       </trajectory>
     </object>
 
@@ -401,5 +410,196 @@
         <z>20</z>
       </scale>
     </object>
+
+    <object id="10">
+      <model>3</model>
+      <shader>3</shader>
+      <type>normal</type>
+      <name>Cool Woman</name>
+      <textures>
+        <texture id="1" type="2d"/>
+      </textures>
+      <color>
+        <r>1.0</r>
+        <g>0.0</g>
+        <b>1.0</b>
+      </color>
+      <position>
+        <x>-600.0</x>
+        <y>200.0</y>
+        <z>-200.0</z>
+      </position>
+      <rotation>
+        <x>0</x>
+        <y>180.0</y>
+        <z>0</z>
+      </rotation>
+      <scale>
+        <x>200.0</x>
+        <y>200.0</y>
+        <z>200.0</z>
+      </scale>
+      <trajectory type="line_strip" iteration-count="infinite" direction="normal" speed="1000" rotationSpeed="400">
+        <points>
+          <point>
+            <x>-800.0</x>
+            <y>1000.0</y>
+            <z>-400.0</z>
+          </point>
+          <point>
+            <x>-800.0</x>
+            <y>1000.0</y>
+            <z>-1000.0</z>
+          </point>
+          <point>
+            <x>-800.0</x>
+            <y>400.0</y>
+            <z>-500.0</z>
+          </point>
+          <point>
+            <x>-800.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+          </point>
+        </points>
+      </trajectory>
+    </object>
+
+
+    <object id="11">
+      <model>3</model>
+      <shader>3</shader>
+      <type>normal</type>
+      <name>Cool Woman</name>
+      <textures>
+        <texture id="1" type="2d"/>
+      </textures>
+      <color>
+        <r>1.0</r>
+        <g>0.0</g>
+        <b>1.0</b>
+      </color>
+      <position>
+        <x>-600.0</x>
+        <y>200.0</y>
+        <z>-200.0</z>
+      </position>
+      <rotation>
+        <x>0</x>
+        <y>180.0</y>
+        <z>0</z>
+      </rotation>
+      <scale>
+        <x>200.0</x>
+        <y>200.0</y>
+        <z>200.0</z>
+      </scale>
+      <trajectory type="line_strip" iteration-count="infinite" direction="alternate" speed="1000" rotationSpeed="400">
+        <points>
+          <point>
+            <x>-1200.0</x>
+            <y>1000.0</y>
+            <z>-400.0</z>
+          </point>
+          <point>
+            <x>-1200.0</x>
+            <y>1000.0</y>
+            <z>-1000.0</z>
+          </point>
+          <point>
+            <x>-1200.0</x>
+            <y>400.0</y>
+            <z>-500.0</z>
+          </point>
+          <point>
+            <x>-1200.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+          </point>
+        </points>
+      </trajectory>
+    </object>
+    
+    <object id="12">
+      <model>6</model>
+      <shader>3</shader>
+      <type>normal</type>
+      <name>Evil Witch</name>
+      <textures>
+        <texture id="5"/>
+      </textures>
+      <position>
+        <x>-750.0</x>
+        <y>250.0</y>
+        <z>0.0</z>
+      </position>
+      <rotation>
+        <x>0.0</x>
+        <y>0.0</y>
+        <z>0.0</z>
+      </rotation>
+      <scale>
+        <x>1.0</x>
+        <y>1.0</y>
+        <z>1.0</z>
+      </scale>
+      <trajectory type="line_loop" iteration-count="infinite" direction="normal" speed="1000" rotationSpeed="400">
+        <points>
+          <point>
+            <x>-1400.0</x>
+            <y>1000.0</y>
+            <z>-400.0</z>
+          </point>
+          <point>
+            <x>-1400.0</x>
+            <y>1000.0</y>
+            <z>-1000.0</z>
+          </point>
+          <point>
+            <x>-1400.0</x>
+            <y>400.0</y>
+            <z>-500.0</z>
+          </point>
+          <point>
+            <x>-1400.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+          </point>
+        </points>
+      </trajectory>
+    </object>
+    
   </objects>
+
+  <ambientalLight>
+    <color>
+      <r>1.0</r>
+      <g>1.0</g>
+      <b>1.0</b>
+    </color>
+    <ratio>0.2</ratio>
+  </ambientalLight>
+  
+  <lights>
+    <light id="1">
+      <associatedObject>2</associatedObject>
+      <position>
+        <x>0.0</x>
+        <y>2000.0</y>
+        <z>0.0</z>
+      </position>
+      <diffuseColor>
+        <r>1.0</r>
+        <g>1.0</g>
+        <b>1.0</b>
+      </diffuseColor>
+      <specularColor>
+        <r>1.0</r>
+        <g>1.0</g>
+        <b>1.0</b>
+      </specularColor>
+      <type>point</type>
+    </light>
+  </lights>
+  
 </sceneManager>
