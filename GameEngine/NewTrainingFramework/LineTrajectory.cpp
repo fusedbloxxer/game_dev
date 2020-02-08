@@ -2,13 +2,13 @@
 #include "LineTrajectory.h"
 
 LineTrajectory::LineTrajectory(const char* type, GLint itCount, GLfloat speed, GLboolean direction, const std::vector<Vector3>& points)
-	:Trajectory{ type, itCount, speed }, distance{ 0.0f }, pos{ 0 }, vecDirection{ 0.0f, 0.0f, 0.0f }, alternateDirection{ direction }, orientation{ 1 }, reset{ true }, rotating{ false }, first{ true }
+	:Trajectory{ type, speed, itCount }, distance{ 0.0f }, pos{ 0 }, vecDirection{ 0.0f, 0.0f, 0.0f }, alternateDirection{ direction }, orientation{ 1 }, reset{ true }, rotating{ false }, first{ true }
 {
 	setPoints(points);
 }
 
 LineTrajectory::LineTrajectory(Type type, GLint itCount, GLfloat speed, GLboolean direction, const std::vector<Vector3>& points)
-	: Trajectory{ type, itCount, speed }, distance{ 0.0f }, pos{ 0 }, vecDirection{ 0.0f, 0.0f, 0.0f }, alternateDirection{ direction }, orientation{ 1 }, reset{ true }, rotating{ false }, first{ true }
+	: Trajectory{ type, speed, itCount }, distance{ 0.0f }, pos{ 0 }, vecDirection{ 0.0f, 0.0f, 0.0f }, alternateDirection{ direction }, orientation{ 1 }, reset{ true }, rotating{ false }, first{ true }
 {
 	setPoints(points);
 }
@@ -103,7 +103,7 @@ void LineTrajectory::move(SceneObject* obj, GLfloat time)
 
 void LineTrajectory::calculateTravelProps(SceneObject* obj, GLfloat time)
 {
-	if (pos < points.size() && pos >= 0)
+	if (pos < static_cast<GLint>(points.size()) && pos >= 0)
 	{
 		if (Trajectory::Type::LINE_LOOP == type && pos == points.size() - 2)
 		{

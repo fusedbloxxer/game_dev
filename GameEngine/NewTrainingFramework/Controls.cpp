@@ -8,52 +8,75 @@ Controls::Type Controls::atoc(const char* str)
 {
 	if (strcmp(str, "MOVE_CAMERA_POSITIVE_X") == 0)
 	{
-		return MOVE_CAMERA_POSITIVE_X;
+		return Controls::Type::MOVE_CAMERA_POSITIVE_X;
 	}
 	else if (strcmp(str, "MOVE_CAMERA_NEGATIVE_X") == 0) {
-		return MOVE_CAMERA_NEGATIVE_X;
+		return Controls::Type::MOVE_CAMERA_NEGATIVE_X;
 	}
 	else if (strcmp(str, "MOVE_CAMERA_POSITIVE_Y") == 0) {
-		return MOVE_CAMERA_POSITIVE_Y;
+		return Controls::Type::MOVE_CAMERA_POSITIVE_Y;
 	}
 	else if (strcmp(str, "MOVE_CAMERA_NEGATIVE_Y") == 0) {
-		return MOVE_CAMERA_NEGATIVE_Y;
+		return Controls::Type::MOVE_CAMERA_NEGATIVE_Y;
 	}
 	else if (strcmp(str, "MOVE_CAMERA_POSITIVE_Z") == 0) {
-		return MOVE_CAMERA_POSITIVE_Z;
+		return Controls::Type::MOVE_CAMERA_POSITIVE_Z;
 	}
 	else if (strcmp(str, "MOVE_CAMERA_NEGATIVE_Z") == 0) {
-		return MOVE_CAMERA_NEGATIVE_Z;
+		return Controls::Type::MOVE_CAMERA_NEGATIVE_Z;
 	}
 	else if (strcmp(str, "ROTATE_CAMERA_POSITIVE_X") == 0) {
-		return ROTATE_CAMERA_POSITIVE_X;
+		return Controls::Type::ROTATE_CAMERA_POSITIVE_X;
 	}
 	else if (strcmp(str, "ROTATE_CAMERA_NEGATIVE_X") == 0) {
-		return ROTATE_CAMERA_NEGATIVE_X;
+		return Controls::Type::ROTATE_CAMERA_NEGATIVE_X;
 	}
 	else if (strcmp(str, "ROTATE_CAMERA_POSITIVE_Y") == 0) {
-		return ROTATE_CAMERA_POSITIVE_Y;
+		return Controls::Type::ROTATE_CAMERA_POSITIVE_Y;
 	}
 	else if (strcmp(str, "ROTATE_CAMERA_NEGATIVE_Y") == 0) {
-		return ROTATE_CAMERA_NEGATIVE_Y;
+		return Controls::Type::ROTATE_CAMERA_NEGATIVE_Y;
 	}
 	else if (strcmp(str, "ROTATE_CAMERA_POSITIVE_Z") == 0) {
-		return ROTATE_CAMERA_POSITIVE_Z;
+		return Controls::Type::ROTATE_CAMERA_POSITIVE_Z;
 	}
 	else if (strcmp(str, "ROTATE_CAMERA_NEGATIVE_Z") == 0) {
-		return ROTATE_CAMERA_NEGATIVE_Z;
+		return Controls::Type::ROTATE_CAMERA_NEGATIVE_Z;
 	}
 	else if (strcmp(str, "SCENE_WIREFRAME_TRUE") == 0) {
-		return SCENE_WIREFRAME_TRUE;
+		return Controls::Type::SCENE_WIREFRAME_TRUE;
 	}
 	else if (strcmp(str, "SCENE_WIREFRAME_FALSE") == 0) {
-		return SCENE_WIREFRAME_FALSE;
+		return Controls::Type::SCENE_WIREFRAME_FALSE;
 	}
 	else if (strcmp(str, "MODE_DEBUG") == 0) {
-		return MODE_DEBUG;
+		return Controls::Type::MODE_DEBUG;
 	}
 	else {
 		throw std::runtime_error{ "INVALID STRING-CONTROL CONVERSION" };
+	}
+}
+
+const char* Controls::ctoa(const Type& type)
+{
+	switch (type)
+	{
+	case Controls::Type::MOVE_CAMERA_NEGATIVE_X: return "MOVE_CAMERA_NEGATIVE_X";
+	case Controls::Type::MOVE_CAMERA_NEGATIVE_Y: return "MOVE_CAMERA_NEGATIVE_Y";
+	case Controls::Type::MOVE_CAMERA_NEGATIVE_Z: return "MOVE_CAMERA_NEGATIVE_Z";
+	case Controls::Type::MOVE_CAMERA_POSITIVE_X: return "MOVE_CAMERA_POSITIVE_X";
+	case Controls::Type::MOVE_CAMERA_POSITIVE_Y: return "MOVE_CAMERA_POSITIVE_Y";
+	case Controls::Type::MOVE_CAMERA_POSITIVE_Z: return "MOVE_CAMERA_POSITIVE_Z";
+	case Controls::Type::ROTATE_CAMERA_POSITIVE_X: return "ROTATE_CAMERA_POSITIVE_X";
+	case Controls::Type::ROTATE_CAMERA_POSITIVE_Y: return "ROTATE_CAMERA_POSITIVE_Y";
+	case Controls::Type::ROTATE_CAMERA_POSITIVE_Z: return "ROTATE_CAMERA_POSITIVE_Z";
+	case Controls::Type::ROTATE_CAMERA_NEGATIVE_X: return "ROTATE_CAMERA_NEGATIVE_X";
+	case Controls::Type::ROTATE_CAMERA_NEGATIVE_Y: return "ROTATE_CAMERA_NEGATIVE_Y";
+	case Controls::Type::ROTATE_CAMERA_NEGATIVE_Z: return "ROTATE_CAMERA_NEGATIVE_Z";
+	case Controls::Type::SCENE_WIREFRAME_FALSE: return "SCENE_WIREFRAME_FALSE";
+	case Controls::Type::SCENE_WIREFRAME_TRUE: return "SCENE_WIREFRAME_TRUE";
+	case Controls::Type::MODE_DEBUG: return "MODE_DEBUG";
+	default: throw std::invalid_argument{ "Invalidd controls enum type." };
 	}
 }
 

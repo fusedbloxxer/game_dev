@@ -3,7 +3,7 @@
 #include <unordered_map>
 
 namespace Controls {
-	enum Type
+	enum class Type
 	{
 		MOVE_CAMERA_POSITIVE_X,
 		MOVE_CAMERA_NEGATIVE_X,
@@ -26,6 +26,7 @@ namespace Controls {
 	};
 
 	Type atoc(const char* str);
+	const char* ctoa(const Type& type);
 
 	GLubyte atok(const char* str);
 }

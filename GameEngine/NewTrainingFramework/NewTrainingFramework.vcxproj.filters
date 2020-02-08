@@ -103,6 +103,15 @@
     <Filter Include="Source Files\ResourceManager\Adapters">
       <UniqueIdentifier>{94744014-8a5a-40a1-b605-4863d07a180a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SceneManager\Effects">
+      <UniqueIdentifier>{f371c0d0-aac7-4f3f-8e31-683fb0b97b29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SceneManager\Effects\Fog">
+      <UniqueIdentifier>{08822ed3-8256-4dda-843d-a697e0f45726}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SceneManager\Effects\Lights">
+      <UniqueIdentifier>{afe89ab8-5871-4350-ab04-e5cddf5ac8c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp">
@@ -228,7 +237,10 @@
     <ClCompile Include="NormalLight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Convertable.cpp">
+    <ClCompile Include="DirectionalLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LightFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -368,23 +380,29 @@
     <ClInclude Include="I_Printable.h">
       <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Fog.h">
-      <Filter>Header Files\SceneManager</Filter>
+    <ClInclude Include="UTools.h">
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Light.h">
-      <Filter>Header Files\SceneManager</Filter>
+      <Filter>Header Files\SceneManager\Effects\Lights</Filter>
     </ClInclude>
     <ClInclude Include="AmbientLight.h">
-      <Filter>Header Files\SceneManager</Filter>
+      <Filter>Header Files\SceneManager\Effects\Lights</Filter>
     </ClInclude>
-    <ClInclude Include="PointLight.h">
-      <Filter>Header Files\SceneManager</Filter>
+    <ClInclude Include="Fog.h">
+      <Filter>Header Files\SceneManager\Effects\Fog</Filter>
     </ClInclude>
     <ClInclude Include="NormalLight.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\SceneManager\Effects\Lights</Filter>
     </ClInclude>
-    <ClInclude Include="Convertable.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="PointLight.h">
+      <Filter>Header Files\SceneManager\Effects\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectionalLight.h">
+      <Filter>Header Files\SceneManager\Effects\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="LightFactory.h">
+      <Filter>Header Files\SceneManager\Effects\Lights</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

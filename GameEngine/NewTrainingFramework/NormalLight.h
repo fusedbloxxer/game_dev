@@ -1,38 +1,34 @@
 #pragma once
-#include "Convertable.h"
 #include "Light.h"
 #include <string>
 
-enum class NormalLight::Type;
-
-class NormalLight : public Light, public Convertable<NormalLight::Type, std::string>
+class NormalLight : public Light
 {
-public:
-
-	enum class Type
-	{
-		POINT,
-		DIRECTIONAL,
-		SPOTLIGHT
-	};
-
 protected:
-	Type type;
+	Vector3 specularColor, diffuseColor;
+	GLfloat specPower;
+	GLint id;
 
-	NormalLight(Type type);
+	NormalLight(const GLint id, const Vector3& diffuseColor = { 0.0f, 0.0f, 0.0f }, const Vector3& specularColor = { 0.0f, 0.0f, 0.0f }, const GLfloat specPower = 0);
 
 public:
+
 	virtual void print(std::ostream& os) const override;
 
-	virtual ~NormalLight() = 0;
-
 	// Getters and setters
-	NormalLight::Type getLightType() const;
-	void setLightType(Type type);
 
-	// Inherited via Convertable
-	virtual void fts(const NormalLight::Type& first, std::string& second) const override;
-	
-	// virtual void stf(const SecondType& first, FirstType& second) const override;
+	const Vector3& getSpecularColor() const;
+	void setSpecularcolor(const Vector3& specularColor);
+
+	const Vector3& getDiffuseColor() const;
+	void setDiffuseColor(const Vector3& diffuseColor);
+
+	GLfloat getSpecPower() const;
+	void setSpecPower(const GLfloat specPower);
+
+	const GLint getId() const;
+	void setId(const GLint id);
+
+	virtual ~NormalLight() = 0;
 };
 

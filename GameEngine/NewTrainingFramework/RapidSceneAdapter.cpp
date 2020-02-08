@@ -7,8 +7,12 @@
 #include "ResourceManager.h"
 #include "LineTrajectory.h"
 #include "CameraBuilder.h"
+#include "LightFactory.h"
+#include <algorithm>
+#include "Logger.h"
 #include <sstream>
 #include <fstream>
+#include <numeric>
 #include <string>
 
 RapidSceneAdapter::RapidSceneAdapter(const char* sceneManagerPath)
@@ -151,7 +155,7 @@ std::shared_ptr<Trajectory> RapidSceneAdapter::loadTrajectory(rapidxml::xml_node
 
 		if (auto speed = trajectoryXml->first_attribute("speed"))
 		{
-			trajectory->setSpeed(::atoi(speed->value()));
+			trajectory->setSpeed(static_cast<GLfloat>(::atoi(speed->value())));
 		}
 
 		switch (trajectory->getType())
@@ -164,7 +168,7 @@ std::shared_ptr<Trajectory> RapidSceneAdapter::loadTrajectory(rapidxml::xml_node
 			{
 				if (auto rotationSpeed = trajectoryXml->first_attribute("rotationSpeed"))
 				{
-					lineTrajectory->setRotationSpeed(::atof(rotationSpeed->value()));
+					lineTrajectory->setRotationSpeed(static_cast<GLfloat>(::atof(rotationSpeed->value())));
 				}
 
 				// Add all points.
@@ -205,7 +209,7 @@ std::shared_ptr<Trajectory> RapidSceneAdapter::loadTrajectory(rapidxml::xml_node
 
 			if (auto radius = trajectoryXml->first_node("radius"))
 			{
-				circle->setRadius(::atof(radius->value()));
+				circle->setRadius(static_cast<GLfloat>(::atof(radius->value())));
 			}
 			else
 			{
@@ -333,9 +337,51 @@ std::shared_ptr<AmbientLight> RapidSceneAdapter::getAmbientLight() const
 	}
 }
 
-std::vector<std::shared_ptr<PointLight>> RapidSceneAdapter::getNormalLights() const
+std::vector<std::shared_ptr<Light>> RapidSceneAdapter::getLights() const
 {
-	return std::vector<std::shared_ptr<PointLight>>();
+	if (auto lightsXml = root->first_node("lights"))
+	{
+		std::vector<std::shared_ptr<Light>> lights;
+
+		for (auto light = lightsXml->first_node(); light; light = light->next_sibling())
+		{
+			// Send everything that is needed
+			auto specPower = light->first_node("specPower");
+			auto diffuseColor = loadVector(light->first_node("diffuseColor"), "r", "g", "b");
+			auto specularColor = loadVector(light->first_node("specularColor"), "r", "g", "b");
+			auto id = light->first_attribute("id"); if (!id) { throw std::runtime_error{ "Light doesn't have an id." }; }
+			auto type = light->first_node("type"); if (!type) { throw std::runtime_error{ "Light doesn't have a type." }; }
+
+			// Check if id doesn't already exist.
+			GLint lightId = static_cast<GLint>(::atoi(id->value()));
+
+			auto exists = std::count_if(lights.begin(), lights.end(), [&lightId](const auto& li) { return dynamic_cast<NormalLight*>(li.get())->getId() == lightId; }) != 0;
+
+			if (exists) { throw std::runtime_error{ "Id is already in lights array." }; }
+
+			// Initialize and insert into array.
+			if (strcmp(type->value(), "directional") == 0)
+			{
+				auto direction = loadVector(light->first_node("direction"), "x", "y", "z");
+				lights.push_back(LightFactory::newInstance(type->value(), lightId, diffuseColor, specularColor, specPower ? static_cast<GLfloat>(::atof(specPower->value())) : 0.0f, direction));
+			}
+			else if (strcmp(type->value(), "point") == 0)
+			{
+				auto asObjId = light->first_node("associatedObj");
+				Logger::d("Point Light: Not yet implemented");
+			}
+			else
+			{
+				throw std::runtime_error("Type invalid/not yet implemented.");
+			}
+		}
+
+		return lights;
+	}
+	else
+	{
+		throw std::runtime_error{ "Could not find ambientalLight in sceneManager." };
+	}
 }
 
 std::unordered_map<GLint, std::shared_ptr<Camera>> RapidSceneAdapter::getCameras(GLint width, GLint height) const
@@ -353,7 +399,7 @@ std::unordered_map<GLint, std::shared_ptr<Camera>> RapidSceneAdapter::getCameras
 		auto rotation = camera->first_node("rotationSpeed"); if (!rotation) { throw std::runtime_error{ "No camera rotationSpeed in sceneManager." }; }
 		auto translation = camera->first_node("translationSpeed"); if (!translation) { throw std::runtime_error{ "No camera translationSpeed in sceneManager." }; }
 
-		auto cameraObject = CameraBuilder(atoi(camera->first_attribute("id")->value()), (GLint)width, (GLint)height)
+		auto cameraObject = CameraBuilder(atoi(camera->first_attribute("id")->value()), static_cast<GLfloat>(width), static_cast<GLfloat>(height))
 			.setPosition(loadVector(camera->first_node("position")))
 			.setTarget(loadVector(camera->first_node("target")))
 			.setMoveSpeed(GLfloat(atof(translation->value())))

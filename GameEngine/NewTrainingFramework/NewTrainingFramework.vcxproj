@@ -83,7 +83,6 @@
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(SolutionDir)\Include\Nvidia;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -171,12 +170,13 @@
     <ClCompile Include="CameraBuilder.cpp" />
     <ClCompile Include="CircleTrajectory.cpp" />
     <ClCompile Include="Controls.cpp" />
-    <ClCompile Include="Convertable.cpp" />
+    <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="FireObject.cpp" />
     <ClCompile Include="FireObjectBuilder.cpp" />
     <ClCompile Include="Fog.cpp" />
     <ClCompile Include="I_Printable.cpp" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="LightFactory.cpp" />
     <ClCompile Include="LineTrajectory.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -220,7 +220,7 @@
     <ClInclude Include="CameraBuilder.h" />
     <ClInclude Include="CircleTrajectory.h" />
     <ClInclude Include="Controls.h" />
-    <ClInclude Include="Convertable.h" />
+    <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="FireObject.h" />
     <ClInclude Include="FireObjectBuilder.h" />
@@ -230,6 +230,7 @@
     <ClInclude Include="IBuilder.h" />
     <ClInclude Include="I_Printable.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="LightFactory.h" />
     <ClInclude Include="LineTrajectory.h" />
     <ClInclude Include="Loadable.h" />
     <ClInclude Include="Logger.h" />
@@ -262,6 +263,7 @@
     <ClInclude Include="TextureResource.h" />
     <ClInclude Include="Trajectory.h" />
     <ClInclude Include="TrajectoryFactory.h" />
+    <ClInclude Include="UTools.h" />
     <ClInclude Include="VertexAxis.h" />
     <ClInclude Include="VertexNfg.h" />
   </ItemGroup>

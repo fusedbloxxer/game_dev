@@ -126,7 +126,7 @@
         <y>2</y>
         <z>2</z>
       </scale>
-      <trajectory type="linear" iteration-count="infinite" direction="normal" speed="1000" rotationSpeed="200">
+      <trajectory type="linear" iteration-count="2" direction="normal" speed="1000" rotationSpeed="200">
         <points>
           <point>
             <x>0.0</x>
@@ -582,23 +582,23 @@
   
   <lights>
     <light id="1">
-      <associatedObject>2</associatedObject>
-      <position>
-        <x>0.0</x>
-        <y>2000.0</y>
-        <z>0.0</z>
-      </position>
+      <direction>
+        <x>0.2</x>
+        <y>1.0</y>
+        <z>0.3</z>
+      </direction>
       <diffuseColor>
-        <r>1.0</r>
+        <r>0.0</r>
         <g>1.0</g>
-        <b>1.0</b>
+        <b>0.0</b>
       </diffuseColor>
       <specularColor>
         <r>1.0</r>
-        <g>1.0</g>
-        <b>1.0</b>
+        <g>0.0</g>
+        <b>0.0</b>
       </specularColor>
-      <type>point</type>
+      <specPower>1</specPower>
+      <type>directional</type>
     </light>
   </lights>
   

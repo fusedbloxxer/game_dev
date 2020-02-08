@@ -9,9 +9,9 @@ class AmbientLight : public Light
 public:
 	AmbientLight(const Vector3& color = { 0.0f, 0.0f, 0.0f }, const GLfloat ratio = 1.0f);
 
-	virtual ~AmbientLight() = default;
-
 	virtual void print(std::ostream& os) const override;
+
+	virtual ~AmbientLight() = default;
 
 	// Getters and setters
 	Vector3 getColor() const;

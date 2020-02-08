@@ -6,6 +6,7 @@
 #include "Controls.h"
 #include "Releaser.h"
 #include "Camera.h"
+#include "Light.h"
 #include <memory>
 #include <vector>
 #include "Fog.h"
@@ -37,11 +38,14 @@ class SceneManager final : public Drawable, public Releaser
 	// Background color
 	Vector3 backgroundColor;
 
+	// Other lights
+	std::vector<std::shared_ptr<Light>> lights;
+
 	// AmbientalLight
 	std::shared_ptr<AmbientLight> ambientalLight;
 
 	// Map containing pressed keys
-	std::unordered_map<GLubyte, GLboolean> pressed;
+	std::unordered_map<Controls::Type, GLboolean> pressed;
 
 	// Key mapping
 	std::unordered_map<GLubyte, Controls::Type> keyMap;
@@ -61,6 +65,7 @@ public:
 	// Initializer
 	void init(ESContext* esContext, SceneAdapter* adapter);
 
+	// Setting up the window parameters
 	void setUpWindow(ESContext* esContext, SceneAdapter* adapter);
 
 	// Draw Scene Objects
@@ -110,8 +115,8 @@ public:
 	std::shared_ptr<AmbientLight> getAmbientalLight();
 	void setAmbientalLight(std::shared_ptr<AmbientLight> ambientalLight);
 
-	std::unordered_map<GLubyte, GLboolean>& getPressedButtons();
-	void setPressedButtons(std::unordered_map<GLubyte, GLboolean>& pressed);
+	std::unordered_map<Controls::Type, GLboolean>& getPressedButtons();
+	void setPressedButtons(std::unordered_map<Controls::Type, GLboolean>& pressed);
 
 	std::unordered_map<unsigned char, Controls::Type>& getControls();
 	void setControls(std::unordered_map<unsigned char, Controls::Type>& controls);

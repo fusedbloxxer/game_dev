@@ -47,6 +47,9 @@ void SceneManager::init(ESContext* esContext, SceneAdapter* adapter)
 	// Load ambiental light
 	ambientalLight = adapter->getAmbientLight();
 
+	// Load other lights
+	lights = adapter->getLights();
+
 	// Set clear background color
 	glClearColor(backgroundColor.x, backgroundColor.y, backgroundColor.z, 0.0f);
 
@@ -113,7 +116,7 @@ void SceneManager::pressKey(GLubyte key, GLboolean isPressed)
 {
 	if (keyMap.find(key) != keyMap.end())
 	{
-		if (keyMap[key] == Controls::MODE_DEBUG)
+		if (keyMap[key] == Controls::Type::MODE_DEBUG)
 		{
 			if (isPressed)
 			{
@@ -208,12 +211,12 @@ void SceneManager::setAmbientalLight(std::shared_ptr<AmbientLight> ambientalLigh
 	this->ambientalLight = ambientalLight;
 }
 
-std::unordered_map<GLubyte, GLboolean>& SceneManager::getPressedButtons()
+std::unordered_map<Controls::Type, GLboolean>& SceneManager::getPressedButtons()
 {
 	return pressed;
 }
 
-void SceneManager::setPressedButtons(std::unordered_map<GLubyte, GLboolean>& pressed)
+void SceneManager::setPressedButtons(std::unordered_map<Controls::Type, GLboolean>& pressed)
 {
 	this->pressed = pressed;
 }
@@ -260,7 +263,7 @@ void SceneManager::setESContext(ESContext* esContext)
 
 bool SceneManager::debug()
 {
-	return pressed.find(Controls::MODE_DEBUG) != pressed.end() && pressed[Controls::MODE_DEBUG];
+	return pressed.find(Controls::Type::MODE_DEBUG) != pressed.end() && pressed[Controls::Type::MODE_DEBUG];
 }
 
 Fog SceneManager::getFog() const
@@ -283,7 +286,7 @@ std::ostream& operator<<(std::ostream& os, const SceneManager& sceneManager)
 
 	for (const auto& e : sceneManager.keyMap)
 	{
-		os << "\t\tMapId = " << e.first << ", " << e.second << std::endl;
+		os << "\t\tMapId = " << e.first << ", " << Controls::ctoa(e.second) << std::endl;
 	}
 
 	os << "\tCameras:" << std::endl;

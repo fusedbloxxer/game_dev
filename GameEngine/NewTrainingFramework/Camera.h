@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "../Utilities/utilities.h" 
+#include "Controls.h"
 #include "Globals.h"
 #include <ostream>
 
@@ -8,7 +9,7 @@ class Camera
 {
 public:
 	// Camera Type
-	enum Type {
+	enum class Type {
 		FIRST_PERSON,
 		THIRD_PERSON
 	};
@@ -29,6 +30,7 @@ private:
 
 public:
 	static Type atot(const char* str);
+	static const char* ttoa(const Type& type);
 
 	// Has default values.
 	Camera(GLfloat width, GLfloat height, GLint id, const Vector3& position = Vector3{ 0.0f, 0.0f, 0.0f }, const Vector3& target = Vector3{ 0.0f, 0.0f, 0.0f }, const Vector3& up = Vector3{ 0.0f, 1.0f, 0.0f }, GLfloat moveSpeed = 3.0f, GLfloat rotateSpeed = 3.0f, GLfloat nearP = 0.2f, GLfloat farP = 10000.0f, GLfloat fov = 45.0f, GLfloat deltaTime = 0.0f, Type type = Type::FIRST_PERSON);
@@ -44,7 +46,7 @@ public:
 	void rotateOz(GLfloat directie);
 	
 	// Execute control operations
-	void execute(GLubyte key);
+	void execute(Controls::Type key);
 
 	// Getters and setters.
 	void updateWorldView();

@@ -16,6 +16,16 @@ Camera::Type Camera::atot(const char* str)
 	}
 }
 
+const char* Camera::ttoa(const Type& type)
+{
+	switch (type)
+	{
+	case Camera::Type::FIRST_PERSON: return "FIRST_PERSON";
+	case Camera::Type::THIRD_PERSON: return "THIRD_PERSON";
+	default: throw std::invalid_argument{ "Invalid Camera-string::Type conversion" };
+	}
+}
+
 Camera::Camera(GLfloat width, GLfloat height, GLint id, const Vector3& position, const Vector3& target, const Vector3& up, GLfloat moveSpeed, GLfloat rotateSpeed, GLfloat nearP, GLfloat farP, GLfloat fov, GLfloat deltaTime, Type type)
 	:width{ width }, height{ height }, id{ id }, target{ target }, position{ position }, up{ up }, moveSpeed{ moveSpeed }, rotateSpeed{ rotateSpeed }, nearP{ nearP }, farP{ farP }, fov{ fov }, deltaTime{ deltaTime }, type{ type },
 	perspModified{ true }
@@ -231,7 +241,7 @@ GLint Camera::getCameraId() const
 	return id;
 }
 
-void Camera::execute(GLubyte key)
+void Camera::execute(Controls::Type key)
 {
 	switch (key)
 	{
@@ -286,7 +296,7 @@ void Camera::refreshAxis()
 
 std::ostream& operator<<(std::ostream& os, const Camera& camera)
 {
-	os << "Camera: [id = " << camera.id << ", type = " << camera.type << ", "
+	os << "Camera: [id = " << camera.id << ", type = " << Camera::ttoa(camera.type) << ", "
 		<< "position = (" << camera.position.x << ", " << camera.position.y << ", " << camera.position.z << "), "
 		<< "target = (" << camera.target.x << ", " << camera.target.y << ", " << camera.target.z << "), "
 		<< "up = (" << camera.up.x << ", " << camera.up.y << ", " << camera.up.z << "), "

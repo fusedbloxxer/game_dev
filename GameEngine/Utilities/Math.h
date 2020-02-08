@@ -137,7 +137,7 @@ class Matrix
 
 public:
 	//constructors
-	Matrix() {}
+	Matrix():m() {}
 	Matrix(GLfloat val);
 	Matrix(Matrix & mat);
 	Matrix(const Matrix& mat);

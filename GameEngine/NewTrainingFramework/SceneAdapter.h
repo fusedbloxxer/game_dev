@@ -25,13 +25,13 @@ public:
 
 	virtual std::shared_ptr<Shader> getAxis() const = 0;
 
+	virtual std::vector<std::shared_ptr<Light>> getLights() const = 0;
+
 	virtual std::shared_ptr<AmbientLight> getAmbientLight() const = 0;
 	
 	virtual std::tuple<GLboolean, GLint, GLint> getScreenSize() const = 0;
 	
 	virtual std::unordered_map<GLubyte, Controls::Type> getKeys() const = 0;
-
-	virtual std::vector<std::shared_ptr<PointLight>> getNormalLights() const = 0;
 
 	virtual std::vector<std::shared_ptr<SceneObject>> getSceneObjects(const Vector3& camera) const = 0;
 
