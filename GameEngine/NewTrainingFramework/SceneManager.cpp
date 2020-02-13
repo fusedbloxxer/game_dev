@@ -206,9 +206,19 @@ std::shared_ptr<AmbientLight> SceneManager::getAmbientalLight()
 	return ambientalLight;
 }
 
-void SceneManager::setAmbientalLight(std::shared_ptr<AmbientLight> ambientalLight)
+void SceneManager::setAmbientalLight(const std::shared_ptr<AmbientLight>& ambientalLight)
 {
 	this->ambientalLight = ambientalLight;
+}
+
+const std::vector<std::shared_ptr<Light>>& SceneManager::getLights()
+{
+	return lights;
+}
+
+void SceneManager::setLights(const std::vector<std::shared_ptr<Light>>& lights)
+{
+	this->lights = lights;
 }
 
 std::unordered_map<Controls::Type, GLboolean>& SceneManager::getPressedButtons()

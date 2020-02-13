@@ -3,6 +3,7 @@
 
 struct Fields {
 	// The maximum number of available textures
+	static constexpr GLuint MAX_LIGHT_SOURCES = 8;
 	static constexpr GLuint MAX_TEXTURES = 5;
 
 	GLint positionAttribute;
@@ -26,6 +27,18 @@ struct Fields {
 
 	// For reflection effect
 	GLint skyboxUniform;
+
+	// Light effects
+	struct Light
+	{
+		GLint lightDirectionUniform;
+		GLint specularColorUniform;
+		GLint specularPowerUniform;
+		GLint diffuseColorUniform;
+	}lights[MAX_LIGHT_SOURCES];
+
+	GLint ambientalRatioUniform;
+	GLint ambientalLightUniform;
 
 	// MVP
 	GLint modelUniform;

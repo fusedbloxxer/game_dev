@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Shader.h"
 #include <iostream>
+#include <string>
 
 Shader::Shader(std::shared_ptr<ShaderResource> sr)
 	:programId{}, sr{ sr }, fields{} {}
@@ -54,6 +55,18 @@ void Shader::load()
 	fields.modelUniform = glGetUniformLocation(programId, "u_model");
 	fields.viewUniform = glGetUniformLocation(programId, "u_view");
 	fields.timeUniform = glGetUniformLocation(programId, "u_time");
+
+	// Lights
+	for (std::size_t i = 0; i < Fields::MAX_LIGHT_SOURCES; ++i)
+	{
+		fields.lights[i].diffuseColorUniform = glGetUniformLocation(programId, ("u_c_diff_" + std::to_string(i)).c_str());
+		fields.lights[i].lightDirectionUniform = glGetUniformLocation(programId, ("u_light_dir_" + std::to_string(i)).c_str());
+		fields.lights[i].specularColorUniform = glGetUniformLocation(programId, ("u_c_spec_" + std::to_string(i)).c_str());
+		fields.lights[i].specularPowerUniform = glGetUniformLocation(programId, ("u_spec_power_" + std::to_string(i)).c_str());
+	}
+
+	fields.ambientalLightUniform = glGetUniformLocation(programId, "u_c_amb");
+	fields.ambientalRatioUniform = glGetUniformLocation(programId, "u_r_amb");
 
 	for (GLuint i = 0; i < Fields::MAX_TEXTURES; ++i)
 	{

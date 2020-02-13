@@ -112,9 +112,6 @@ public:
 
 	std::shared_ptr<Camera> getActiveCamera();
 
-	std::shared_ptr<AmbientLight> getAmbientalLight();
-	void setAmbientalLight(std::shared_ptr<AmbientLight> ambientalLight);
-
 	std::unordered_map<Controls::Type, GLboolean>& getPressedButtons();
 	void setPressedButtons(std::unordered_map<Controls::Type, GLboolean>& pressed);
 
@@ -126,4 +123,10 @@ public:
 
 	std::vector<std::shared_ptr<SceneObject>>& getSceneObjects();
 	void setSceneObjects(std::vector<std::shared_ptr<SceneObject>>& sceneObjects);
+
+	std::shared_ptr<AmbientLight> getAmbientalLight();
+	void setAmbientalLight(const std::shared_ptr<AmbientLight>& ambientalLight);
+
+	const std::vector<std::shared_ptr<Light>>& getLights();
+	void setLights(const std::vector<std::shared_ptr<Light>>& lights);
 };

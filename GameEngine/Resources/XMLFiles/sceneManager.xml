@@ -577,25 +577,25 @@
       <g>1.0</g>
       <b>1.0</b>
     </color>
-    <ratio>0.2</ratio>
+    <ratio>0.5</ratio>
   </ambientalLight>
   
   <lights>
     <light id="1">
       <direction>
-        <x>0.2</x>
-        <y>1.0</y>
-        <z>0.3</z>
+        <x>1.0</x>
+        <y>0.0</y>
+        <z>1.0</z>
       </direction>
       <diffuseColor>
-        <r>0.0</r>
+        <r>1.0</r>
         <g>1.0</g>
         <b>0.0</b>
       </diffuseColor>
       <specularColor>
         <r>1.0</r>
-        <g>0.0</g>
-        <b>0.0</b>
+        <g>1.0</g>
+        <b>1.0</b>
       </specularColor>
       <specPower>1</specPower>
       <type>directional</type>

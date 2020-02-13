@@ -43,6 +43,7 @@ d:\git\game_dev\gameengine\newtrainingframework\debug-nvidia\rapidsceneadapter.o
 d:\git\game_dev\gameengine\newtrainingframework\debug-nvidia\rapidresourceadapter.obj
 d:\git\game_dev\gameengine\newtrainingframework\debug-nvidia\rapid.obj
 d:\git\game_dev\gameengine\newtrainingframework\debug-nvidia\vertex_nfg.obj
+d:\git\game_dev\gameengine\newtrainingframework\debug-nvidia\lightfactory.obj
 d:\git\game_dev\gameengine\bin-nvidia\gameengine.exe
 d:\git\game_dev\gameengine\bin-nvidia\gameengine.ilk
 d:\git\game_dev\gameengine\bin-nvidia\gameengine.pdb
@@ -52,6 +53,10 @@ d:\git\game_dev\gameengine\\bin-nvidia\gameengine.ilk
 d:\git\game_dev\gameengine\newtrainingframework\debug-nvidia\gameengine.tlog\cl.command.1.tlog
 d:\git\game_dev\gameengine\newtrainingframework\debug-nvidia\gameengine.tlog\cl.read.1.tlog
 d:\git\game_dev\gameengine\newtrainingframework\debug-nvidia\gameengine.tlog\cl.write.1.tlog
+d:\git\game_dev\gameengine\newtrainingframework\debug-nvidia\gameengine.tlog\link.13880.delete.1.tlog
+d:\git\game_dev\gameengine\newtrainingframework\debug-nvidia\gameengine.tlog\link.16824.delete.1.tlog
+d:\git\game_dev\gameengine\newtrainingframework\debug-nvidia\gameengine.tlog\link.19308.delete.1.tlog
+d:\git\game_dev\gameengine\newtrainingframework\debug-nvidia\gameengine.tlog\link.1972.delete.1.tlog
 d:\git\game_dev\gameengine\newtrainingframework\debug-nvidia\gameengine.tlog\link.command.1.tlog
 d:\git\game_dev\gameengine\newtrainingframework\debug-nvidia\gameengine.tlog\link.read.1.tlog
 d:\git\game_dev\gameengine\newtrainingframework\debug-nvidia\gameengine.tlog\link.write.1.tlog

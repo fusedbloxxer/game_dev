@@ -3,6 +3,7 @@
 #include "VertexNfg.h"
 #include "AxisResource.h"
 #include <algorithm>
+#include "DirectionalLight.h"
 
 SceneObject::SceneObject(GLint id)
 	:SceneObject{ id, Type::NORMAL } {}
@@ -153,6 +154,58 @@ void SceneObject::sendCommonData()
 		glDisableVertexAttribArray(fields.colorAttribute);
 		glVertexAttrib3f(fields.colorAttribute, color.x, color.y, color.z);
 	}
+
+	// Send ambiental light
+	if (fields.ambientalLightUniform != -1)
+	{
+		const auto& [x, y, z] = SceneManager::getInstance()->getAmbientalLight()->getColor();
+		glUniform3f(fields.ambientalLightUniform, x, y, z);
+	}
+
+	if (fields.ambientalRatioUniform != -1)
+	{
+		glUniform1f(fields.ambientalRatioUniform, SceneManager::getInstance()->getAmbientalLight()->getRatio());
+	}
+
+	{
+		// Other lights scope
+		const auto& lights = SceneManager::getInstance()->getLights();
+		const auto& count = std::min<std::size_t>(Fields::MAX_LIGHT_SOURCES, lights.size());
+
+		// Send first directional light source
+		for (auto index = 0; index < count; ++index)
+		{
+			if (const auto& normLight = dynamic_cast<NormalLight*>(lights.at(index).get()))
+			{
+				if (fields.lights[index].diffuseColorUniform != -1)
+				{
+					const auto& [x, y, z] = normLight->getDiffuseColor();
+					glUniform3f(fields.lights[index].diffuseColorUniform, x, y, z);
+				}
+
+				if (fields.lights[index].specularColorUniform != -1)
+				{
+					const auto& [x, y, z] = normLight->getSpecularColor();
+					glUniform3f(fields.lights[index].specularColorUniform, x, y, z);
+				}
+
+				if (fields.lights[index].specularPowerUniform != -1)
+				{
+					glUniform1f(fields.lights[index].specularPowerUniform, normLight->getSpecPower());
+				}
+
+				if (const auto& dirLight = dynamic_cast<DirectionalLight*>(normLight))
+				{
+					if (fields.lights[index].lightDirectionUniform != -1)
+					{
+						const auto& [x, y, z] = dirLight->getDirection();
+						glUniform3f(fields.lights[index].lightDirectionUniform, x, y, z);
+					}
+				}
+			}
+		}
+	}
+	
 }
 
 void SceneObject::update()
