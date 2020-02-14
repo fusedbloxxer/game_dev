@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ResourceManager.h"
+#include "Logger.h"
 
 ResourceManager* ResourceManager::resManInstance = nullptr;
 
@@ -17,8 +18,13 @@ void ResourceManager::init(ResourceAdapter* adapter)
 {
 	// Get resources from adapter
 	modelResMap = adapter->getModelResources();
+	Logger::d("Fetched model data.");
+
 	shaderResMap = adapter->getShaderResources();
+	Logger::d("Fetched shader data.");
+
 	textureResMap = adapter->getTextureResources();
+	Logger::d("Fetched texture data.");
 
 	// The adapter did its job :)
 	delete adapter;

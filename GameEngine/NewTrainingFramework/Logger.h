@@ -6,7 +6,7 @@
 
 class Logger
 {
-	inline static int priority = 15;
+	inline static GLint priority = 15;
 
 public:
 	template<typename Object>

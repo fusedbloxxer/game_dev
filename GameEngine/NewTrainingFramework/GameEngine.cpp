@@ -4,6 +4,7 @@
 #include "RapidSceneAdapter.h"
 #include "ResourceManager.h"
 #include "SceneManager.h"
+#include "Logger.h"
 
 int init(ESContext* esContext)
 {
@@ -12,7 +13,7 @@ int init(ESContext* esContext)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	
+
 	ResourceManager::getInstance()->init(new RapidResourceAdapter("..\\Resources\\XMLFiles\\resourceManager.xml"));
 	SceneManager::getInstance()->init(esContext, new RapidSceneAdapter("..\\Resources\\XMLFiles\\sceneManager.xml"));
 
@@ -49,22 +50,54 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	// Identifying memory leaks
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	
-	ESContext esContext;
-	esInitContext(&esContext);
-	esCreateWindow(&esContext, NULL, NULL, NULL, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
-	
-	if (init(&esContext) != 0)
-		return 0;
 
-	esRegisterDrawFunc(&esContext, Draw);
-	esRegisterUpdateFunc(&esContext, Update);
-	esRegisterKeyFunc(&esContext, Key);
+	Logger::setMode(15);
+	Logger::v("Program started . . .");
 
-	esMainLoop(&esContext);
-	
+	try
+	{
+		ESContext esContext;
+		esInitContext(&esContext);
+		esCreateWindow(&esContext, NULL, NULL, NULL, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
+
+		Logger::v("ESContext was initialized. Initializing data . . .");
+
+		if (init(&esContext) != 0)
+			return 0;
+
+		Logger::v("Everything was initialized. Binding Draw/Update/Key functions to esContext . . .");
+
+		esRegisterDrawFunc(&esContext, Draw);
+		esRegisterUpdateFunc(&esContext, Update);
+		esRegisterKeyFunc(&esContext, Key);
+
+		Logger::v("Functions are bound, executing MainLoop . . .");
+
+		esMainLoop(&esContext);
+	}
+	catch (std::runtime_error& ex)
+	{
+		Logger::e("An error took place:");
+		Logger::e(ex.what());
+	}
+	catch (std::exception& ex)
+	{
+		Logger::e("An exception took place:");
+		Logger::e(ex.what());
+	}
+	catch (...)
+	{
+		Logger::wtf("An exception took place:");
+	}
+
+	Logger::d("Freeing scene manager memory.");
 	delete SceneManager::getInstance();
+
+	Logger::d("Freeing resource manager memory.");
 	delete ResourceManager::getInstance();
+
+	Logger::v("Program is finished.");
 	printf("Press any key...\n");
+
 	return 0;
 }

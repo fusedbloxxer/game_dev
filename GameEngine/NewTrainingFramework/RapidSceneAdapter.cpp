@@ -232,7 +232,6 @@ std::shared_ptr<Trajectory> RapidSceneAdapter::loadTrajectory(rapidxml::xml_node
 			break;
 		}
 
-		std::cout << *trajectory << std::endl;
 		return trajectory;
 	}
 
