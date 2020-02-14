@@ -1,41 +1,23 @@
 #include "stdafx.h"
+#include "SpotLight.h"
+#include "PointLight.h"
 #include "LightFactory.h"
 #include "AmbientLight.h"
 #include "DirectionalLight.h"
 
-std::shared_ptr<Light> LightFactory::newInstance(const char* lightType, const GLint id, const Vector3& diff, const Vector3& sp, const GLfloat spow, const Vector3& dir, const Vector3& pos, const GLint aObj)
+std::shared_ptr<Light> LightFactory::newInstance(const char* lightType, const GLint id, const Vector3& diff, const Vector3& sp, const GLfloat spow, const Vector3& dir, const GLint aObj)
 {
 	if (strcmp(lightType, "point") == 0)
 	{
-		return nullptr;
+		return std::make_shared<PointLight>(id, diff, sp, spow, dir);
 	} 
 	else if (strcmp(lightType, "directional") == 0)
 	{
 		return std::make_shared<DirectionalLight>(id, diff, sp, spow, dir);
 	}
-	else
+	else if (strcmp(lightType, "spotlight") == 0)
 	{
-		throw std::invalid_argument{ "Light type is invalid." };
-	}
-}
-
-std::shared_ptr<Light> LightFactory::newInstance(const char* lightType, const GLint id, const Vector3& diff, const Vector3& sp, const GLfloat spow, const Vector3& pos, const GLint aObj)
-{
-	if (strcmp(lightType, "point") == 0)
-	{
-		return nullptr;
-	}
-	else
-	{
-		throw std::invalid_argument{ "Light type is invalid." };
-	}
-}
-
-std::shared_ptr<Light> LightFactory::newInstance(const char* lightType, const GLint id, const Vector3& diff, const Vector3& sp, const GLfloat spow, const Vector3& dir)
-{
-	if (strcmp(lightType, "directional") == 0)
-	{
-		return std::make_shared<DirectionalLight>(id, diff, sp, spow, dir);
+		return std::make_shared<SpotLight>(id, aObj, diff, sp, spow, dir);
 	}
 	else
 	{

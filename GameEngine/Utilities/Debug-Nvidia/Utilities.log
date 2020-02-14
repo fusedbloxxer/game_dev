@@ -1,8 +1,1 @@
-﻿  stdafx.cpp
-  esShader.cpp
-  esUtil.cpp
-  esUtil_win.cpp
-  Math.cpp
-  TGA.cpp
-  Generating Code...
-  Utilities.vcxproj -> D:\Git\game_dev\GameEngine\\BIN-Nvidia\Utilities.lib
+﻿  Utilities.vcxproj -> C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\\BIN-Nvidia\Utilities.lib

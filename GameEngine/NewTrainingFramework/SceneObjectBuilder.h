@@ -7,6 +7,9 @@ class SceneObjectBuilder : public IBuilder<SceneObject>
 	// Object name
 	std::string name;
 
+	// Light elements
+	GLfloat kdif, kspec;
+
 	// Reflects Skybox
 	GLboolean reflection;
 
@@ -24,7 +27,6 @@ class SceneObjectBuilder : public IBuilder<SceneObject>
 
 	// Pointer to its textures
 	std::vector<std::shared_ptr<Texture>> textures;
-
 
 	// Vector3 object properties
 	Vector3 position, rotation, scale, color, followingCamera, offset;
@@ -46,6 +48,8 @@ public:
 	virtual SceneObject* build() const override;
 
 	// Setters
+	SceneObjectBuilder& setKDif(GLfloat kdif);
+	SceneObjectBuilder& setKSpec(GLfloat kspec);
 	SceneObjectBuilder& setScale(const Vector3& scale);
 	SceneObjectBuilder& setColor(const Vector3& color);
 	SceneObjectBuilder& setName(const std::string& name);

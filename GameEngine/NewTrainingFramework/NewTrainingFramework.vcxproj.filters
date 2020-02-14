@@ -243,6 +243,9 @@
     <ClCompile Include="LightFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SpotLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Drawable.h">
@@ -402,6 +405,9 @@
       <Filter>Header Files\SceneManager\Effects\Lights</Filter>
     </ClInclude>
     <ClInclude Include="LightFactory.h">
+      <Filter>Header Files\SceneManager\Effects\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="SpotLight.h">
       <Filter>Header Files\SceneManager\Effects\Lights</Filter>
     </ClInclude>
   </ItemGroup>

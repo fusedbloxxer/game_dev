@@ -31,14 +31,21 @@ struct Fields {
 	// Light effects
 	struct Light
 	{
+		GLint associatedObjectPositionUniform;
 		GLint lightDirectionUniform;
 		GLint specularColorUniform;
 		GLint specularPowerUniform;
 		GLint diffuseColorUniform;
+		GLint innerCutoffUniform;
+		GLint outercutoffUniform;
+		GLint lightTypeUniform;
 	}lights[MAX_LIGHT_SOURCES];
 
 	GLint ambientalRatioUniform;
 	GLint ambientalLightUniform;
+
+	GLint kdifUniform;
+	GLint kspecUniform;
 
 	// MVP
 	GLint modelUniform;

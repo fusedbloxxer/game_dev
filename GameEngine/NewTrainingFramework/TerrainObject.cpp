@@ -33,6 +33,10 @@ void TerrainObject::generateModel()
 			vex.uv2.x = j / (GLfloat)sideCells;
 			vex.uv2.y = i / (GLfloat)sideCells;
 
+			vex.norm = { 0.0f, 1.0f, -0.0f };
+			vex.binorm = { 0.0f, -0.0f, -1.0f };
+			vex.tgt = { 1.0f, 0.0f, 0.0f };
+
 			vertices.push_back(vex);
 
 			if (j > 0 && i < sideCells)
@@ -69,9 +73,9 @@ void TerrainObject::setSideCells(GLint sideCells)
 
 void TerrainObject::draw()
 {
-	sendCommonData();
+	SceneObject::sendCommonData();
 
-	Fields fields = shader->getFields();
+	const Fields& fields = shader->getFields();
 
 	if (fields.uv2Attribute != -1)
 	{

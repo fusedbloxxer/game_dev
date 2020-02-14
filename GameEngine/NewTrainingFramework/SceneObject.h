@@ -62,6 +62,9 @@ protected:
 	// Pointer to its textures
 	std::vector<std::shared_ptr<Texture>> textures;
 
+	// Light elements
+	GLfloat kdif = 1.0f, kspec = 1.0f;
+
 	void drawAxis();
 
 public:
@@ -121,6 +124,12 @@ public:
 
 	Vector3& getColor();
 	void setColor(const Vector3& color);
+
+	GLfloat getKDif() const;
+	void setKDif(GLfloat kdif);
+
+	GLfloat getKSpec() const;
+	void setKSpec(GLfloat kspec);
 
 	std::vector<std::shared_ptr<Texture>>& getTextures();
 	void setTextures(const std::vector<std::shared_ptr<Texture>>& textures);

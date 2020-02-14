@@ -8,6 +8,7 @@
 #include "LineTrajectory.h"
 #include "CameraBuilder.h"
 #include "LightFactory.h"
+#include "SpotLight.h"
 #include <algorithm>
 #include "Logger.h"
 #include <sstream>
@@ -271,10 +272,13 @@ std::vector<std::shared_ptr<SceneObject>> RapidSceneAdapter::getSceneObjects(con
 		auto name = object->first_node("name"); if (!name) { throw std::runtime_error{ "Object doesn't have a name in sceneManager." }; }
 		auto type = object->first_node("type"); if (!type) { throw std::runtime_error{ "Object doesn't have a type in sceneManager." }; }
 		auto id = object->first_attribute("id"); if (!id) { throw std::runtime_error{ "Object doesn't have an id in sceneManager." }; }
+		auto kdif = object->first_node("kdif"), kspec = object->first_node("kspec");
 
 		auto builder = std::unique_ptr<SceneObjectBuilder>(SceneObjectBuilderFactory::newBuilderInstance(SceneObject::atot(type->value()), atoi(id->value())));
 
 		builder->setShader(ResourceManager::getInstance()->load<Shader>(atoi(shader->value())))
+			.setKSpec(kspec ? static_cast<GLfloat>(::atof(kspec->value())) : 1.0f)
+			.setKDif(kdif ? static_cast<GLfloat>(::atof(kdif->value())) : 1.0f)
 			.setPosition(loadVector(object->first_node("position")))
 			.setRotation(loadVector(object->first_node("rotation")))
 			.setScale(loadVector(object->first_node("scale")))
@@ -347,10 +351,13 @@ std::vector<std::shared_ptr<Light>> RapidSceneAdapter::getLights() const
 		{
 			// Send everything that is needed
 			auto specPower = light->first_node("specPower");
+			auto asObjId = light->first_node("associatedObj");
+			auto direction = loadVector(light->first_node("direction"), "x", "y", "z");
 			auto diffuseColor = loadVector(light->first_node("diffuseColor"), "r", "g", "b");
 			auto specularColor = loadVector(light->first_node("specularColor"), "r", "g", "b");
 			auto id = light->first_attribute("id"); if (!id) { throw std::runtime_error{ "Light doesn't have an id." }; }
 			auto type = light->first_node("type"); if (!type) { throw std::runtime_error{ "Light doesn't have a type." }; }
+			if (strcmp(type->value(), "spotlight") == 0 && !asObjId) { throw std::runtime_error("Spotlight doesn't have an associated obj id."); }
 
 			// Check if id doesn't already exist.
 			GLint lightId = static_cast<GLint>(::atoi(id->value()));
@@ -360,19 +367,23 @@ std::vector<std::shared_ptr<Light>> RapidSceneAdapter::getLights() const
 			if (exists) { throw std::runtime_error{ "Id is already in lights array." }; }
 
 			// Initialize and insert into array.
-			if (strcmp(type->value(), "directional") == 0)
+			lights.push_back(
+				LightFactory::newInstance(
+					type->value(),
+					lightId,
+					diffuseColor,
+					specularColor,
+					specPower ? static_cast<GLfloat>(::atof(specPower->value())) : 0.0f,
+					direction,
+					asObjId ? static_cast<GLint>(::atoi(asObjId->value())) : 0
+				)
+			);
+
+			if (auto spotLight = dynamic_cast<SpotLight*>(lights.back().get()))
 			{
-				auto direction = loadVector(light->first_node("direction"), "x", "y", "z");
-				lights.push_back(LightFactory::newInstance(type->value(), lightId, diffuseColor, specularColor, specPower ? static_cast<GLfloat>(::atof(specPower->value())) : 0.0f, direction));
-			}
-			else if (strcmp(type->value(), "point") == 0)
-			{
-				auto asObjId = light->first_node("associatedObj");
-				Logger::d("Point Light: Not yet implemented");
-			}
-			else
-			{
-				throw std::runtime_error("Type invalid/not yet implemented.");
+				auto innerCutoff = light->first_node("innerCutoff"); if (!innerCutoff) { throw std::runtime_error{ "Inner cutoff specifier is missing." }; }
+				auto outerCutoff = light->first_node("outerCutoff"); if (!outerCutoff) { throw std::runtime_error{ "Outer cutoff specifier is missing." }; }
+				spotLight->setCutoffs(::cos(TO_RAD(static_cast<GLfloat>(::atof(innerCutoff->value())))), ::cos(TO_RAD(static_cast<GLfloat>(::atof(outerCutoff->value())))));
 			}
 		}
 

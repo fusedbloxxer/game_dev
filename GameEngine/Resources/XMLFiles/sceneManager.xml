@@ -86,6 +86,7 @@
       <far>250000</far>
     </camera>
   </cameras>
+  
   <activeCamera>1</activeCamera>
 
   <fog>
@@ -108,6 +109,8 @@
       <shader>3</shader>
       <type>normal</type>
       <name>Crocodil_verde</name>
+      <kdif>1.0</kdif>
+      <kspec>0.0</kspec>
       <textures>
         <texture id="4"/>
       </textures>
@@ -147,6 +150,8 @@
       <shader>3</shader>
       <type>normal</type>
       <name>Cool Woman</name>
+      <kdif>1.0</kdif>
+      <kspec>0.0</kspec>
       <textures>
         <texture id="1" type="2d"/>
       </textures>
@@ -192,6 +197,8 @@
       <type>normal</type>
       <name>Mesh_minge</name>
       <wired/>
+      <kdif>1.0</kdif>
+      <kspec>0.0</kspec>
       <color>
         <r>1.0</r>
         <g>1.0</g>
@@ -247,6 +254,8 @@
       <shader>3</shader>
       <type>normal</type>
       <name>Minge cu textura si reflexie</name>
+      <kdif>0.8</kdif>
+      <kspec>0.5</kspec>
       <reflection/>
       <textures>
         <texture id="14"/>
@@ -257,9 +266,9 @@
         <b>0.0</b>
       </color>
       <position>
-        <x>-1000.0</x>
+        <x>500.0</x>
         <y>250.0</y>
-        <z>-250.0</z>
+        <z>250.0</z>
       </position>
       <rotation>
         <x>0</x>
@@ -278,6 +287,8 @@
       <shader>3</shader>
       <type>normal</type>
       <name>Evil Witch</name>
+      <kdif>1.0</kdif>
+      <kspec>0.0</kspec>
       <textures>
         <texture id="5"/>
       </textures>
@@ -345,6 +356,8 @@
       <shader>4</shader>
       <type>terrain</type>
       <name>Teren</name>
+      <kdif>1.0</kdif>
+      <kspec>0.0</kspec>
       <colorBind>
         <r>16</r>
         <g>15</g>
@@ -416,6 +429,8 @@
       <shader>3</shader>
       <type>normal</type>
       <name>Cool Woman</name>
+      <kdif>1.0</kdif>
+      <kspec>0.0</kspec>
       <textures>
         <texture id="1" type="2d"/>
       </textures>
@@ -465,12 +480,13 @@
       </trajectory>
     </object>
 
-
     <object id="11">
       <model>3</model>
       <shader>3</shader>
       <type>normal</type>
       <name>Cool Woman</name>
+      <kdif>1.0</kdif>
+      <kspec>0.0</kspec>
       <textures>
         <texture id="1" type="2d"/>
       </textures>
@@ -525,6 +541,8 @@
       <shader>3</shader>
       <type>normal</type>
       <name>Evil Witch</name>
+      <kdif>1.0</kdif>
+      <kspec>0.0</kspec>
       <textures>
         <texture id="5"/>
       </textures>
@@ -568,7 +586,46 @@
         </points>
       </trajectory>
     </object>
-    
+
+    <object id="13">
+      <model>1</model>
+      <shader>3</shader>
+      <type>normal</type>
+      <name>Aligator</name>
+      <kdif>1.0</kdif>
+      <kspec>0.0</kspec>
+      <textures>
+        <texture id="4"/>
+      </textures>
+      <position>
+        <x>0.0</x>
+        <y>100.0</y>
+        <z>1500.0</z>
+      </position>
+      <rotation>
+        <x>0</x>
+        <y>270</y>
+        <z>0</z>
+      </rotation>
+      <scale>
+        <x>1.0</x>
+        <y>1.0</y>
+        <z>1.0</z>
+      </scale>
+      <trajectory type="circle" iteration-count="infinite" speed="100">
+        <center>
+          <x>0.0</x>
+          <y>100.0</y>
+          <z>1500.0</z>
+        </center>
+        <radius>650.0</radius>
+        <rotationPlane>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </rotationPlane>
+      </trajectory>
+    </object>
   </objects>
 
   <ambientalLight>
@@ -577,18 +634,41 @@
       <g>1.0</g>
       <b>1.0</b>
     </color>
-    <ratio>0.5</ratio>
+    <ratio>0.0</ratio>
   </ambientalLight>
   
   <lights>
     <light id="1">
       <direction>
-        <x>1.0</x>
-        <y>0.0</y>
-        <z>1.0</z>
+        <x>0.0</x>
+        <y>1000.0</y>
+        <z>1500.0</z>
       </direction>
       <diffuseColor>
         <r>1.0</r>
+        <g>0.0</g>
+        <b>0.0</b>
+      </diffuseColor>
+      <specularColor>
+        <r>1.0</r>
+        <g>1.0</g>
+        <b>1.0</b>
+      </specularColor>
+      <associatedObj>13</associatedObj>
+      <innerCutoff>25</innerCutoff>
+      <outerCutoff>35</outerCutoff>
+      <specPower>512</specPower>
+      <type>spotlight</type>
+    </light>
+    
+    <light id="2">
+      <direction>
+        <x>0.0</x>
+        <y>100.0</y>
+        <z>0.0</z>
+      </direction>
+      <diffuseColor>
+        <r>0.0</r>
         <g>1.0</g>
         <b>0.0</b>
       </diffuseColor>
@@ -597,7 +677,27 @@
         <g>1.0</g>
         <b>1.0</b>
       </specularColor>
-      <specPower>1</specPower>
+      <specPower>128</specPower>
+      <type>point</type>
+    </light>
+    
+    <light id="3">
+      <direction>
+        <x>0.0</x>
+        <y>-1.0</y>
+        <z>0.0</z>
+      </direction>
+      <diffuseColor>
+        <r>0.0</r>
+        <g>0.0</g>
+        <b>1.0</b>
+      </diffuseColor>
+      <specularColor>
+        <r>1.0</r>
+        <g>1.0</g>
+        <b>1.0</b>
+      </specularColor>
+      <specPower>64</specPower>
       <type>directional</type>
     </light>
   </lights>

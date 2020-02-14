@@ -18,6 +18,8 @@ void SceneObjectBuilder::sendCommonProperties(SceneObject* base) const
 	base->setScale(scale);
 	base->setColor(color);
 	base->setName(name);
+	base->setKDif(kdif);
+	base->setKSpec(kspec);
 }
 
 SceneObject* SceneObjectBuilder::build() const
@@ -88,6 +90,26 @@ SceneObjectBuilder& SceneObjectBuilder::setTrajectory(const std::shared_ptr<Traj
 SceneObjectBuilder& SceneObjectBuilder::setTextures(const std::vector<std::shared_ptr<Texture>>& textures)
 {
 	this->textures = textures;
+	return *this;
+}
+
+SceneObjectBuilder& SceneObjectBuilder::setKDif(GLfloat kdif)
+{
+	if (kdif < 0.0f || kdif > 1.0f)
+	{
+		throw std::runtime_error{ "Value cannot be lower than zero or higher than one." };
+	}
+	this->kdif = kdif;
+	return *this;
+}
+
+SceneObjectBuilder& SceneObjectBuilder::setKSpec(GLfloat kspec)
+{
+	if (kspec < 0.0f || kspec > 1.0f)
+	{
+		throw std::runtime_error{ "Value cannot be lower than zero or higher than one." };
+	}
+	this->kspec = kspec;
 	return *this;
 }
 

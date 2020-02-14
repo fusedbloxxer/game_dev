@@ -1,5 +1,7 @@
-attribute vec3 a_tgtL;
 attribute vec3 a_posL;
+attribute vec3 a_normL;
+attribute vec3 a_binormL;
+attribute vec3 a_tgtL;
 attribute vec2 a_uv2L;
 attribute vec2 a_uvL;
 
@@ -15,6 +17,7 @@ uniform sampler2D u_texture_3;
 varying vec2 v_uv;
 varying vec2 v_uv2;
 varying vec4 v_pos;
+varying vec4 v_Wnorm;
 
 void main()
 {
@@ -25,5 +28,6 @@ void main()
 	v_uv = a_uvL;
 	v_uv2 = a_uv2L;
 	v_pos = u_model *  new_pos;
+	v_Wnorm = u_model * vec4(a_normL, 0.0);
 	gl_Position = u_projection * u_view * u_model * new_pos;
 }

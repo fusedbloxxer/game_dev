@@ -63,10 +63,18 @@ void Shader::load()
 		fields.lights[i].lightDirectionUniform = glGetUniformLocation(programId, ("u_light_dir_" + std::to_string(i)).c_str());
 		fields.lights[i].specularColorUniform = glGetUniformLocation(programId, ("u_c_spec_" + std::to_string(i)).c_str());
 		fields.lights[i].specularPowerUniform = glGetUniformLocation(programId, ("u_spec_power_" + std::to_string(i)).c_str());
+		fields.lights[i].lightTypeUniform = glGetUniformLocation(programId, ("u_light_type_" + std::to_string(i)).c_str());
+
+		fields.lights[i].innerCutoffUniform = glGetUniformLocation(programId, ("u_inner_cutoff_" + std::to_string(i)).c_str());
+		fields.lights[i].outercutoffUniform = glGetUniformLocation(programId, ("u_outer_cutoff_" + std::to_string(i)).c_str());
+		fields.lights[i].associatedObjectPositionUniform = glGetUniformLocation(programId, ("u_assoc_obj_pos_" + std::to_string(i)).c_str());
 	}
 
 	fields.ambientalLightUniform = glGetUniformLocation(programId, "u_c_amb");
 	fields.ambientalRatioUniform = glGetUniformLocation(programId, "u_r_amb");
+
+	fields.kdifUniform = glGetUniformLocation(programId, "u_kdif");
+	fields.kspecUniform = glGetUniformLocation(programId, "u_kspec");
 
 	for (GLuint i = 0; i < Fields::MAX_TEXTURES; ++i)
 	{

@@ -4,6 +4,7 @@
 #include "AxisResource.h"
 #include <algorithm>
 #include "DirectionalLight.h"
+#include "SpotLight.h"
 
 SceneObject::SceneObject(GLint id)
 	:SceneObject{ id, Type::NORMAL } {}
@@ -167,6 +168,16 @@ void SceneObject::sendCommonData()
 		glUniform1f(fields.ambientalRatioUniform, SceneManager::getInstance()->getAmbientalLight()->getRatio());
 	}
 
+	if (fields.kdifUniform != -1)
+	{
+		glUniform1f(fields.kdifUniform, kdif);
+	}
+
+	if (fields.kspecUniform != -1)
+	{
+		glUniform1f(fields.kspecUniform, kspec);
+	}
+
 	{
 		// Other lights scope
 		const auto& lights = SceneManager::getInstance()->getLights();
@@ -175,8 +186,13 @@ void SceneObject::sendCommonData()
 		// Send first directional light source
 		for (auto index = 0; index < count; ++index)
 		{
-			if (const auto& normLight = dynamic_cast<NormalLight*>(lights.at(index).get()))
+			if (const auto & normLight = dynamic_cast<NormalLight*>(lights.at(index).get()))
 			{
+				if (fields.lights[index].lightTypeUniform != -1)
+				{
+					glUniform1f(fields.lights[index].lightTypeUniform, normLight->getLightType());
+				}
+
 				if (fields.lights[index].diffuseColorUniform != -1)
 				{
 					const auto& [x, y, z] = normLight->getDiffuseColor();
@@ -194,18 +210,36 @@ void SceneObject::sendCommonData()
 					glUniform1f(fields.lights[index].specularPowerUniform, normLight->getSpecPower());
 				}
 
-				if (const auto& dirLight = dynamic_cast<DirectionalLight*>(normLight))
+				if (fields.lights[index].lightDirectionUniform != -1)
 				{
-					if (fields.lights[index].lightDirectionUniform != -1)
+					const auto& [x, y, z] = normLight->getDirection();
+					glUniform3f(fields.lights[index].lightDirectionUniform, x, y, z);
+				}
+
+				if (const auto & spotLight = dynamic_cast<SpotLight*>(lights.at(index).get()))
+				{
+					if (fields.lights[index].associatedObjectPositionUniform != -1)
 					{
-						const auto& [x, y, z] = dirLight->getDirection();
-						glUniform3f(fields.lights[index].lightDirectionUniform, x, y, z);
+						const auto& objects = SceneManager::getInstance()->getSceneObjects();
+						const auto& [x, y, z, w] =  Vector4((*std::find_if(objects.cbegin(), objects.cend(),
+							[&spotLight](const std::shared_ptr<SceneObject> o) { return o->getId() == spotLight->getAObj(); }))->getPosition());
+						glUniform3f(fields.lights[index].associatedObjectPositionUniform, x, y, z);
+					}
+
+					if (fields.lights[index].innerCutoffUniform != -1)
+					{
+						glUniform1f(fields.lights[index].innerCutoffUniform, spotLight->getInnerCutoff());
+					}
+
+					if (fields.lights[index].outercutoffUniform != -1)
+					{
+						glUniform1f(fields.lights[index].innerCutoffUniform, spotLight->getOuterCutoff());
 					}
 				}
 			}
 		}
 	}
-	
+
 }
 
 void SceneObject::update()
@@ -389,6 +423,34 @@ Vector3& SceneObject::getColor()
 void SceneObject::setColor(const Vector3& color)
 {
 	this->color = color;
+}
+
+GLfloat SceneObject::getKDif() const
+{
+	return kdif;
+}
+
+void SceneObject::setKDif(GLfloat kdif)
+{
+	if (kdif < 0 || kdif > 1)
+	{
+		throw std::runtime_error{ "Value cannot be lower than zero or higher than one." };
+	}
+	this->kdif = kdif;
+}
+
+GLfloat SceneObject::getKSpec() const
+{
+	return kspec;
+}
+
+void SceneObject::setKSpec(GLfloat kspec)
+{
+	if (kspec < 0.0f || kspec > 1.0f)
+	{
+		throw std::runtime_error{ "Value cannot be lower than 0 or higher than 1." };
+	}
+	this->kspec = kspec;
 }
 
 std::vector<std::shared_ptr<Texture>>& SceneObject::getTextures()
