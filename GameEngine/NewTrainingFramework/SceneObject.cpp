@@ -489,7 +489,7 @@ void SceneObject::drawAxis()
 	if (fields.colorAttribute != -1)
 	{
 		glEnableVertexAttribArray(fields.colorAttribute);
-		glVertexAttribPointer(fields.colorAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexAxis), (void*)sizeof(Vector3));
+		glVertexAttribPointer(fields.colorAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexAxis), (void *)sizeof(Vector3));
 	}
 
 	if (fields.modelUniform != -1)

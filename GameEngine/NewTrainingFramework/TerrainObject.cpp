@@ -91,6 +91,10 @@ void TerrainObject::draw()
 	if (SceneManager::getInstance()->debug())
 	{
 		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		drawAxis();
 	}
 	else if (!wiredFormat)
 	{

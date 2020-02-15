@@ -274,7 +274,7 @@ std::vector<std::shared_ptr<SceneObject>> RapidSceneAdapter::getSceneObjects(con
 		auto kdif = object->first_node("kdif"), kspec = object->first_node("kspec");
 
 		const auto& idValue = atoi(id->value());
-		
+
 		{
 			auto exists = std::count_if(sceneObjects.begin(), sceneObjects.end(), [&idValue](const auto& o) { return o->getId() == idValue; }) != 0;
 
@@ -339,7 +339,11 @@ void RapidSceneAdapter::setSpecificProperties(std::unique_ptr<SceneObjectBuilder
 
 std::shared_ptr<AmbientLight> RapidSceneAdapter::getAmbientLight() const
 {
-	if (auto ambientalLight = root->first_node("ambientalLight"))
+	if (!root->first_node("lights"))
+	{
+		throw std::runtime_error{ "Could not find lights tag in order to fetch ambiental light." };
+	}
+	else if (auto ambientalLight = root->first_node("lights")->first_node("ambientalLight"))
 	{
 		auto ratio = ambientalLight->first_node("ratio");
 		auto color = loadVector(ambientalLight->first_node("color"), "r", "g", "b");
@@ -355,9 +359,14 @@ std::vector<std::shared_ptr<Light>> RapidSceneAdapter::getLights() const
 {
 	if (auto lightsXml = root->first_node("lights"))
 	{
-		std::vector<std::shared_ptr<Light>> lights;
+		auto debugShaderId = lightsXml->first_node("debugShader"); if (!debugShaderId) { throw std::runtime_error{ "Lighting debugging shader was not found." }; }
+		NormalLight::setDebugShader(ResourceManager::getInstance()->load<Shader>(::atoi(debugShaderId->value())));
 
-		for (auto light = lightsXml->first_node(); light; light = light->next_sibling())
+		auto debugModelId = lightsXml->first_node("debugModel"); if (!debugModelId) { throw std::runtime_error{ "Lighting debugging model was not found." }; }
+		NormalLight::setDebugModel(ResourceManager::getInstance()->load<Model>(::atoi(debugModelId->value())));
+
+		std::vector<std::shared_ptr<Light>> lights;
+		for (auto light = lightsXml->first_node("light"); light; light = light->next_sibling())
 		{
 			// Send everything that is needed
 			auto specPower = light->first_node("specPower");

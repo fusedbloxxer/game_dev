@@ -22,7 +22,8 @@ public:
 		NORMAL,
 		TERRAIN,
 		SKYBOX,
-		FIRE
+		FIRE,
+		LIGHT
 	};
 
 protected:

@@ -639,8 +639,8 @@
       <shader>5</shader>
       <type>normal</type>
       <name>Minge simpla colorata</name>
-      <kdif>0.8</kdif>
-      <kspec>0.5</kspec>
+      <kdif>1.0</kdif>
+      <kspec>1.0</kspec>
       <color>
         <r>1.0</r>
         <g>0.0</g>
@@ -760,16 +760,19 @@
     </object>
   </objects>
 
-  <ambientalLight>
-    <color>
-      <r>1.0</r>
-      <g>1.0</g>
-      <b>1.0</b>
-    </color>
-    <ratio>0.5</ratio>
-  </ambientalLight>
-
   <lights>
+    <debugShader>5</debugShader>
+    <debugModel>5</debugModel>
+
+    <ambientalLight>
+      <color>
+        <r>1.0</r>
+        <g>1.0</g>
+        <b>1.0</b>
+      </color>
+      <ratio>0.5</ratio>
+    </ambientalLight>
+
     <light id="1">
       <direction>
         <x>0.0</x>

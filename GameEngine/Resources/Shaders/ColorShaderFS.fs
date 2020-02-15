@@ -133,7 +133,6 @@ void main()
 		vec3 vec_camera = v_pos.xyz - u_camera;
 		vec3 dirReflect = reflect(normalize(-vec_camera), normalize(v_Wnorm.xyz));
 		obj_color = textureCube(u_texture_0, dirReflect);
-		
 	}
 
 	// Apply ambiental light

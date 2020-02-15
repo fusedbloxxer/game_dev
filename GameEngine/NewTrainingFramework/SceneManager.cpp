@@ -92,6 +92,11 @@ void SceneManager::draw()
 	{
 		o->draw();
 	}
+
+	for (const auto& li : lights)
+	{
+		dynamic_cast<Drawable*>(li.get())->draw();
+	}
 }
 
 void SceneManager::update()
