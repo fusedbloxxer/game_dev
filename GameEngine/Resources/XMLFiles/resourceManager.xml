@@ -47,6 +47,9 @@
       <model id="15">
         <file>train.nfg</file>
       </model>
+      <model id="16">
+        <file>water.nfg</file>
+      </model>
     </folder>
   </models>
 

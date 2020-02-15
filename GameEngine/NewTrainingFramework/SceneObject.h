@@ -66,6 +66,10 @@ protected:
 	// Light elements
 	GLfloat kdif = 1.0f, kspec = 1.0f;
 
+	void drawVertexNormals();
+
+	void drawCollisionBox();
+
 	void drawAxis();
 
 public:
@@ -137,4 +141,7 @@ public:
 
 	std::shared_ptr<Trajectory> getTrajectory();
 	void setTrajectory(const std::shared_ptr<Trajectory> trajectory);
+
+private:
+	void sendLineData(const std::shared_ptr<Shader>& shader);
 };

@@ -25,6 +25,13 @@ void SceneObject::draw()
 
 		if (type != Type::SKYBOX)
 		{
+			// Draw collision box 
+			drawCollisionBox();
+
+			// Draw normals
+			drawVertexNormals();
+
+			// Draw axis
 			drawAxis();
 		}
 	}
@@ -239,7 +246,95 @@ void SceneObject::sendCommonData()
 			}
 		}
 	}
+}
 
+void SceneObject::drawCollisionBox()
+{
+	// Use shader
+	glUseProgram(axisShader->getProgramId());
+
+	// Open buffers
+	glBindBuffer(GL_ARRAY_BUFFER, model->getCollisionVboId());
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, model->getCollisionIboId());
+
+	// Select and send data from buffers
+	sendLineData(axisShader);
+
+	// Draw on screen
+	glDrawElements(GL_LINES, model->getNoCollisionIndices(), GL_UNSIGNED_SHORT, 0);
+
+	// Close buffers
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+void SceneObject::drawAxis()
+{
+	// Use the program
+	glUseProgram(axisShader->getProgramId());
+
+	// Open the buffer
+	glBindBuffer(GL_ARRAY_BUFFER, model->getAxisModel().getId());
+
+	// Select and send data from buffers
+	sendLineData(axisShader);
+
+	// Draw on screen
+	glDrawArrays(GL_LINES, 0, 6);
+
+	// Close buffer
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void SceneObject::drawVertexNormals()
+{
+	// Use the program
+	glUseProgram(axisShader->getProgramId());
+
+	// Open the buffer
+	glBindBuffer(GL_ARRAY_BUFFER, model->getNormalVboId());
+
+	// Select and send data from buffers
+	sendLineData(axisShader);
+
+	// Draw on screen
+	glDrawArrays(GL_LINES, 0, model->getNoNormalInd());
+
+	// Close buffer
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void SceneObject::sendLineData(const std::shared_ptr<Shader>& shader)
+{
+	// Select data from the buffer
+	auto fields = shader->getFields();
+
+	if (fields.positionAttribute != -1)
+	{
+		glEnableVertexAttribArray(fields.positionAttribute);
+		glVertexAttribPointer(fields.positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexAxis), 0);
+	}
+
+	if (fields.colorAttribute != -1)
+	{
+		glEnableVertexAttribArray(fields.colorAttribute);
+		glVertexAttribPointer(fields.colorAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexAxis), (void*)sizeof(Vector3));
+	}
+
+	if (fields.modelUniform != -1)
+	{
+		glUniformMatrix4fv(fields.modelUniform, 1, GL_FALSE, (float*)(getModelMatrix()).m);
+	}
+
+	if (fields.viewUniform != -1)
+	{
+		glUniformMatrix4fv(fields.viewUniform, 1, GL_FALSE, (float*)(SceneManager::getInstance()->getActiveCamera()->getViewMatrix()).m);
+	}
+
+	if (fields.projectionUniform != -1)
+	{
+		glUniformMatrix4fv(fields.projectionUniform, 1, GL_FALSE, (float*)(SceneManager::getInstance()->getActiveCamera()->getProjMatrix()).m);
+	}
 }
 
 void SceneObject::update()
@@ -471,41 +566,4 @@ std::shared_ptr<Trajectory> SceneObject::getTrajectory()
 void SceneObject::setTrajectory(const std::shared_ptr<Trajectory> trajectory)
 {
 	this->trajectory = trajectory;
-}
-
-void SceneObject::drawAxis()
-{
-	// Draws axis
-	glUseProgram(axisShader->getProgramId());
-	glBindBuffer(GL_ARRAY_BUFFER, model->getAxisModel().getId());
-
-	auto fields = axisShader->getFields();
-	if (fields.positionAttribute != -1)
-	{
-		glEnableVertexAttribArray(fields.positionAttribute);
-		glVertexAttribPointer(fields.positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexAxis), 0);
-	}
-
-	if (fields.colorAttribute != -1)
-	{
-		glEnableVertexAttribArray(fields.colorAttribute);
-		glVertexAttribPointer(fields.colorAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexAxis), (void *)sizeof(Vector3));
-	}
-
-	if (fields.modelUniform != -1)
-	{
-		glUniformMatrix4fv(fields.modelUniform, 1, GL_FALSE, (float*)(getModelMatrix()).m);
-	}
-
-	if (fields.viewUniform != -1)
-	{
-		glUniformMatrix4fv(fields.viewUniform, 1, GL_FALSE, (float*)(SceneManager::getInstance()->getActiveCamera()->getViewMatrix()).m);
-	}
-
-	if (fields.projectionUniform != -1)
-	{
-		glUniformMatrix4fv(fields.projectionUniform, 1, GL_FALSE, (float*)(SceneManager::getInstance()->getActiveCamera()->getProjMatrix()).m);
-	}
-
-	glDrawArrays(GL_LINES, 0, 6);
 }

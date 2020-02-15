@@ -819,7 +819,7 @@
         <y>3.0</y>
         <z>3.0</z>
       </scale>
-      <trajectory type="circle" iteration-count="infinite" speed="75">
+      <trajectory type="circle" iteration-count="1" speed="75">
         <center>
           <x>-3000.0</x>
           <y>250.0</y>

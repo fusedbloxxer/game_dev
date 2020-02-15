@@ -19,8 +19,17 @@ class Model : public Loadable
 	// Buffer id that contains the vertices
 	GLuint vboId;
 
+	// Buffer id that contains the normal lines
+	GLuint normalVboId;
+
+	// Buffer id that contains the collision box data
+	GLuint collisionVboId;
+
+	// Buffer id that contains the collision box indices
+	GLuint collisionIboId;
+
 	// The number of indexes
-	GLuint noInd, noIndWired;
+	GLuint noInd, noIndWired, noNormalInd, noCollisionInd, noCollisionIndices;
 
 	// Model Resource Config
 	std::shared_ptr<ModelResource> mr;
@@ -65,6 +74,24 @@ public:
 	GLuint getNoIndWired() const;
 	void setNoIndWired(GLuint id);
 
+	GLuint getNoNormalInd() const;
+	void setNoNormalInd(GLuint count);
+
+	GLuint getNormalVboId() const;
+	void setNormalVboId(GLuint id);
+
+	GLuint getCollisionVboId() const;
+	void setCollisionVboId(GLuint id);
+
+	GLuint getNoCollisionInd() const;
+	void setNoCollisionInd(GLuint count);
+
+	GLuint getCollisionIboId() const;
+	void setCollisionIboId(GLuint id);
+
+	GLuint getNoCollisionIndices() const;
+	void setNoCollisionIndices(GLuint count);
+
 	AxisModel& getAxisModel();
 
 	std::shared_ptr<ModelResource> getModelResource();
@@ -72,7 +99,13 @@ public:
 
 private:
 	template<typename VertexType>
+	void loadNormals(const std::vector<VertexType>& vertices);
+
+	template<typename VertexType>
 	void loadAxisModel(const std::vector<VertexType>& vertices);
+
+	template<typename VertexType>
+	void loadCollisionBox(const std::vector<VertexType>& vertices);
 };
 
 template<typename VertexType>
@@ -81,8 +114,8 @@ void Model::load(const std::vector<VertexType>& vertices, const std::vector<GLus
 	// Number of indexes
 	noInd = indexes.size();
 
-	// Load axis 
-	loadAxisModel(vertices);
+	// Load AABBs 
+	loadCollisionBox<VertexType>(vertices);
 
 	if (holdsResources)
 	{
@@ -104,6 +137,12 @@ void Model::load(const std::vector<VertexType>& vertices, const std::vector<GLus
 	}
 	else
 	{
+		// Load normals
+		loadNormals<VertexType>(vertices);
+
+		// Load axis 
+		loadAxisModel<VertexType>(vertices);
+
 		// Load vertices into buffer
 		glBindBuffer(GL_ARRAY_BUFFER, vboId);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(VertexType) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
@@ -116,7 +155,7 @@ void Model::load(const std::vector<VertexType>& vertices, const std::vector<GLus
 		auto wireframe = getWired(indexes);
 		noIndWired = wireframe.size();
 
-		// Load wirefram indexes into buffer
+		// Load wireframe indexes into buffer
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, wiredboId);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * noIndWired, wireframe.data(), GL_STATIC_DRAW);
 

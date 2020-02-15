@@ -94,6 +94,17 @@ void TerrainObject::draw()
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+		// TODO: Collision box for terrain is flat, change it.
+		// TODO: Normals are under the terrain if it has height. 
+		// TODO: Both problems are related.
+
+		// Draw collision box 
+		drawCollisionBox();
+
+		// Draw normals
+		drawVertexNormals();
+
+		// Draw axis
 		drawAxis();
 	}
 	else if (!wiredFormat)
