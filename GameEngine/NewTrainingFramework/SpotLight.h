@@ -4,8 +4,8 @@
 class SpotLight : public NormalLight
 {
 	GLint aObj;
-	GLfloat innerCutoff = 0.9;
-	GLfloat outerCutoff = 0.81;
+	GLfloat innerCutoff = 0.9f;
+	GLfloat outerCutoff = 0.81f;
 
 public:
 	SpotLight(const GLint id, const GLint aObj, const Vector3& diffuseColor = { 0.0f, 0.0f, 0.0f }, const Vector3& specularColor = { 0.0f, 0.0f, 0.0f }, const GLfloat specPower = 0, const Vector3 & direction = { 0.0f, 0.0f, 0.0f }, const GLfloat in = 0.9, const GLfloat out = 0.81);

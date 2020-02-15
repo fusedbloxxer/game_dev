@@ -112,6 +112,18 @@
     <Filter Include="Header Files\SceneManager\Effects\Lights">
       <UniqueIdentifier>{afe89ab8-5871-4350-ab04-e5cddf5ac8c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Interfaces">
+      <UniqueIdentifier>{fa54a7a5-b401-416d-a0a1-82ba5f9728a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneManager\Effects">
+      <UniqueIdentifier>{6a679692-3fb3-4c0a-9ac6-bd0e7779b66b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneManager\Effects\Lights">
+      <UniqueIdentifier>{f56e4ca4-644a-451a-99bf-9827cea12d9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneManager\Effects\Fog">
+      <UniqueIdentifier>{4ab3d837-fec8-48e0-8337-b575ca6d8394}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp">
@@ -161,9 +173,6 @@
     </ClCompile>
     <ClCompile Include="GameEngine.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Fog.cpp">
-      <Filter>Source Files\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="FireObject.cpp">
       <Filter>Source Files\SceneManager\Objects\Scene</Filter>
@@ -222,29 +231,32 @@
     <ClCompile Include="TrajectoryFactory.cpp">
       <Filter>Source Files\SceneManager\Objects\Trajectories</Filter>
     </ClCompile>
-    <ClCompile Include="Light.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="I_Printable.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Interfaces</Filter>
     </ClCompile>
-    <ClCompile Include="AmbientLight.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PointLight.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NormalLight.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectionalLight.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Light.cpp">
+      <Filter>Source Files\SceneManager\Effects\Lights</Filter>
     </ClCompile>
     <ClCompile Include="LightFactory.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\SceneManager\Effects\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="AmbientLight.cpp">
+      <Filter>Source Files\SceneManager\Effects\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionalLight.cpp">
+      <Filter>Source Files\SceneManager\Effects\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalLight.cpp">
+      <Filter>Source Files\SceneManager\Effects\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLight.cpp">
+      <Filter>Source Files\SceneManager\Effects\Lights</Filter>
     </ClCompile>
     <ClCompile Include="SpotLight.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\SceneManager\Effects\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Fog.cpp">
+      <Filter>Source Files\SceneManager\Effects\Fog</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -21,13 +21,31 @@
         <file>witch.nfg</file>
       </model>
       <model id="7">
-        <file>Golitah.nfg</file>
+        <file>Goliath.nfg</file>
       </model>
       <model id="8">
         <file>SkyBox.nfg</file>
       </model>
       <model id="9">
         <file>fire.nfg</file>
+      </model>
+      <model id="10">
+        <file>Marine.nfg</file>
+      </model>
+      <model id="11">
+        <file>Teran_Command_Center.nfg</file>
+      </model>
+      <model id="12">
+        <file>SCV.nfg</file>
+      </model>
+      <model id="13">
+        <file>Radar.nfg</file>
+      </model>
+      <model id="14">
+        <file>bus.nfg</file>
+      </model>
+      <model id="15">
+        <file>train.nfg</file>
       </model>
     </folder>
   </models>
@@ -99,7 +117,7 @@
         <wrap_t>CLAMP_TO_EDGE</wrap_t>
       </texture>
       <texture id="6" type="2d">
-        <file>Golitah.tga</file>
+        <file>Goliath.tga</file>
         <min_filter>NEAREST</min_filter>
         <mag_filter>NEAREST</mag_filter>
         <wrap_s>CLAMP_TO_EDGE</wrap_s>
@@ -167,6 +185,48 @@
         <mag_filter>LINEAR</mag_filter>
         <wrap_s>GL_REPEAT</wrap_s>
         <wrap_t>GL_REPEAT</wrap_t>
+      </texture>
+      <texture id="19" type="2d">
+        <file>Marine.tga</file>
+        <min_filter>LINEAR</min_filter>
+        <mag_filter>LINEAR</mag_filter>
+        <wrap_s>CLAMP_TO_EDGE</wrap_s>
+        <wrap_t>CLAMP_TO_EDGE</wrap_t>
+      </texture>
+      <texture id="20" type="2d">
+        <file>Terran_Command_Center.tga</file>
+        <min_filter>LINEAR</min_filter>
+        <mag_filter>LINEAR</mag_filter>
+        <wrap_s>CLAMP_TO_EDGE</wrap_s>
+        <wrap_t>CLAMP_TO_EDGE</wrap_t>
+      </texture>
+      <texture id="21" type="2d">
+        <file>SCV.tga</file>
+        <min_filter>LINEAR</min_filter>
+        <mag_filter>LINEAR</mag_filter>
+        <wrap_s>CLAMP_TO_EDGE</wrap_s>
+        <wrap_t>CLAMP_TO_EDGE</wrap_t>
+      </texture>
+      <texture id="22" type="2d">
+        <file>radar.tga</file>
+        <min_filter>LINEAR</min_filter>
+        <mag_filter>LINEAR</mag_filter>
+        <wrap_s>CLAMP_TO_EDGE</wrap_s>
+        <wrap_t>CLAMP_TO_EDGE</wrap_t>
+      </texture>
+      <texture id="23" type="2d">
+        <file>Bus.tga</file>
+        <min_filter>LINEAR</min_filter>
+        <mag_filter>LINEAR</mag_filter>
+        <wrap_s>CLAMP_TO_EDGE</wrap_s>
+        <wrap_t>CLAMP_TO_EDGE</wrap_t>
+      </texture>
+      <texture id="24" type="2d">
+        <file>Train.tga</file>
+        <min_filter>LINEAR</min_filter>
+        <mag_filter>LINEAR</mag_filter>
+        <wrap_s>CLAMP_TO_EDGE</wrap_s>
+        <wrap_t>CLAMP_TO_EDGE</wrap_t>
       </texture>
     </folder>
   </textures>

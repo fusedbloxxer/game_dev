@@ -273,7 +273,18 @@ std::vector<std::shared_ptr<SceneObject>> RapidSceneAdapter::getSceneObjects(con
 		auto id = object->first_attribute("id"); if (!id) { throw std::runtime_error{ "Object doesn't have an id in sceneManager." }; }
 		auto kdif = object->first_node("kdif"), kspec = object->first_node("kspec");
 
-		auto builder = std::unique_ptr<SceneObjectBuilder>(SceneObjectBuilderFactory::newBuilderInstance(SceneObject::atot(type->value()), atoi(id->value())));
+		const auto& idValue = atoi(id->value());
+		
+		{
+			auto exists = std::count_if(sceneObjects.begin(), sceneObjects.end(), [&idValue](const auto& o) { return o->getId() == idValue; }) != 0;
+
+			if (exists)
+			{
+				throw std::runtime_error{ "Scene object id cannot be duplicate." };
+			}
+		}
+
+		auto builder = std::unique_ptr<SceneObjectBuilder>(SceneObjectBuilderFactory::newBuilderInstance(SceneObject::atot(type->value()), idValue));
 
 		builder->setShader(ResourceManager::getInstance()->load<Shader>(atoi(shader->value())))
 			.setKSpec(kspec ? static_cast<GLfloat>(::atof(kspec->value())) : 1.0f)
