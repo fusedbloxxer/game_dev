@@ -43,6 +43,14 @@
       <action>MODE_DEBUG</action>
     </control>
     <control>
+      <key>C</key>
+      <action>NEXT_CAMERA</action>
+    </control>
+    <control>
+      <key>X</key>
+      <action>PREVIOUS_CAMERA</action>
+    </control>
+    <control>
       <key>VK_LEFT</key>
       <action>ROTATE_CAMERA_NEGATIVE_Y</action>
     </control>
@@ -62,7 +70,6 @@
 
   <cameras>
     <camera id="1">
-      <comment>elemntul type este folosit doar in taskul optional cu tipurile de Camera </comment>
       <type>firstPerson</type>
       <position>
         <x>400.0</x>
@@ -80,6 +87,103 @@
         <z>0.0</z>
       </up>
       <translationSpeed>1000</translationSpeed>
+      <rotationSpeed>150</rotationSpeed>
+      <fov>45</fov>
+      <near>0.2</near>
+      <far>250000</far>
+    </camera>
+    
+    <camera id="2">
+      <comment>This camera illustrates various effects on spheres.</comment>
+      <type>firstPerson</type>
+      <position>
+        <x>-881.717</x>
+        <y>2320.77</y>
+        <z>-4348.83</z>
+      </position>
+      <target>
+        <x>-879.054</x>
+        <y>2022.67</y>
+        <z>-4015.46</z>
+      </target>
+      <up>
+        <x>-0.0132664</x>
+        <y>0.74532</y>
+        <z>0.666575</z>
+      </up>
+      <translationSpeed>1000</translationSpeed>
+      <rotationSpeed>150</rotationSpeed>
+      <fov>45</fov>
+      <near>0.2</near>
+      <far>250000</far>
+    </camera>
+
+    <camera id="3">
+      <type>firstPerson</type>
+      <position>
+        <x>-3167.33</x>
+        <y>2743.82</y>
+        <z>295.782</z>
+      </position>
+      <target>
+        <x>-3162.19</x>
+        <y>2300.44</y>
+        <z>237.547</z>
+      </target>
+      <up>
+        <x>-0.00530587</x>
+        <y>0.130162</y>
+        <z>-0.991479</z>
+      </up>
+      <translationSpeed>1000</translationSpeed>
+      <rotationSpeed>150</rotationSpeed>
+      <fov>45</fov>
+      <near>0.2</near>
+      <far>250000</far>
+    </camera>
+
+    <camera id="4">
+      <type>firstPerson</type>
+      <position>
+        <x>-4003.23</x>
+        <y>1658.78</y>
+        <z>-462.521</z>
+      </position>
+      <target>
+        <x>-3558.93</x>
+        <y>1608.11</y>
+        <z>-456.476</z>
+      </target>
+      <up>
+        <x>0.113327</x>
+        <y>0.993558</y>
+        <z>-0.000712064</z>
+      </up>
+      <translationSpeed>1000</translationSpeed>
+      <rotationSpeed>150</rotationSpeed>
+      <fov>45</fov>
+      <near>0.2</near>
+      <far>250000</far>
+    </camera>
+
+    <camera id="5">
+      <type>firstPerson</type>
+      <position>
+        <x>683.333</x>
+        <y>241084</y>
+        <z>303.976</z>
+      </position>
+      <target>
+        <x>703.397</x>
+        <y>240637</y>
+        <z>304.568</z>
+      </target>
+      <up>
+        <x>0.998871</x>
+        <y>0.0447976</y>
+        <z>-0.015786</z>
+      </up>
+      <translationSpeed>10000</translationSpeed>
       <rotationSpeed>150</rotationSpeed>
       <fov>45</fov>
       <near>0.2</near>

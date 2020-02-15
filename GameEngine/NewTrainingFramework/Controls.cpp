@@ -49,6 +49,12 @@ Controls::Type Controls::atoc(const char* str)
 	else if (strcmp(str, "SCENE_WIREFRAME_FALSE") == 0) {
 		return Controls::Type::SCENE_WIREFRAME_FALSE;
 	}
+	else if (strcmp(str, "NEXT_CAMERA") == 0) {
+		return Controls::Type::NEXT_CAMERA;
+	}
+	else if (strcmp(str, "PREVIOUS_CAMERA") == 0) {
+		return Controls::Type::PREVIOUS_CAMERA;
+	}
 	else if (strcmp(str, "MODE_DEBUG") == 0) {
 		return Controls::Type::MODE_DEBUG;
 	}
@@ -75,6 +81,8 @@ const char* Controls::ctoa(const Type& type)
 	case Controls::Type::ROTATE_CAMERA_NEGATIVE_Z: return "ROTATE_CAMERA_NEGATIVE_Z";
 	case Controls::Type::SCENE_WIREFRAME_FALSE: return "SCENE_WIREFRAME_FALSE";
 	case Controls::Type::SCENE_WIREFRAME_TRUE: return "SCENE_WIREFRAME_TRUE";
+	case Controls::Type::NEXT_CAMERA: return "NEXT_CAMERA";
+	case Controls::Type::PREVIOUS_CAMERA: return "PREVIOUS_CAMERA";
 	case Controls::Type::MODE_DEBUG: return "MODE_DEBUG";
 	default: throw std::invalid_argument{ "Invalidd controls enum type." };
 	}

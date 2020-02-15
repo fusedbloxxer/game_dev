@@ -141,6 +141,14 @@ void SceneManager::pressKey(GLubyte key, GLboolean isPressed)
 				pressed[keyMap[key]] = !pressed[keyMap[key]];
 			}
 		}
+		else if (isPressed && keyMap[key] == Controls::Type::NEXT_CAMERA)
+		{
+			activeCameraId += cameraMap.find(activeCameraId + 1) != cameraMap.end() ? 1 : 0;
+		}
+		else if (isPressed && keyMap[key] == Controls::Type::PREVIOUS_CAMERA)
+		{
+			activeCameraId += cameraMap.find(activeCameraId - 1) != cameraMap.end() ? -1 : 0;
+		}
 		else
 		{
 			pressed[keyMap[key]] = isPressed;

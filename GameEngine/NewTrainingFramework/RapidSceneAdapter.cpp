@@ -429,7 +429,18 @@ std::unordered_map<GLint, std::shared_ptr<Camera>> RapidSceneAdapter::getCameras
 		auto rotation = camera->first_node("rotationSpeed"); if (!rotation) { throw std::runtime_error{ "No camera rotationSpeed in sceneManager." }; }
 		auto translation = camera->first_node("translationSpeed"); if (!translation) { throw std::runtime_error{ "No camera translationSpeed in sceneManager." }; }
 
-		auto cameraObject = CameraBuilder(atoi(camera->first_attribute("id")->value()), static_cast<GLfloat>(width), static_cast<GLfloat>(height))
+		const auto& idValue = ::atoi(id->value());
+
+		{
+			auto exists = cameraMap.find(idValue) != cameraMap.end();
+
+			if (exists)
+			{
+				throw std::runtime_error{ "Camera id cannot be duplicate." };
+			}
+		}
+
+		auto cameraObject = CameraBuilder(idValue, static_cast<GLfloat>(width), static_cast<GLfloat>(height))
 			.setPosition(loadVector(camera->first_node("position")))
 			.setTarget(loadVector(camera->first_node("target")))
 			.setMoveSpeed(GLfloat(atof(translation->value())))

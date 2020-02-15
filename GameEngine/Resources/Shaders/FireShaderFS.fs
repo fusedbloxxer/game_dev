@@ -46,7 +46,7 @@ void main()
 	}
 
 	// Apply fog
-	float distance  = distance(vec4(u_camera, 1.0), obj_color);
+	float distance  = distance(vec4(u_camera, 1.0), v_pos);
 	float alpha = (clamp(distance, u_fog_r, u_fog_R) - u_fog_r) / (u_fog_R - u_fog_r); 
 	gl_FragColor = alpha * vec4(u_fog_color, 1.0) + (1.0 - alpha) * obj_color;	
 }
