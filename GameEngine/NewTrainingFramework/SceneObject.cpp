@@ -14,38 +14,12 @@ SceneObject::SceneObject(GLint id, Type type)
 
 void SceneObject::draw()
 {
-	sendCommonData();
+	// Template Pattern
+	sendCommonData(); 
+	
+	sendSpecificData(shader->getFields());
 
-	if (SceneManager::getInstance()->debug())
-	{
-		// Draws wires
-		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-		if (type != Type::SKYBOX)
-		{
-			// Draw collision box 
-			drawCollisionBox();
-
-			// Draw normals
-			drawVertexNormals();
-
-			// Draw axis
-			drawAxis();
-		}
-	}
-	else if (wiredFormat)
-	{
-		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
-	}
-	else
-	{
-		glDrawElements(GL_TRIANGLES, model->getNoInd(), GL_UNSIGNED_SHORT, 0);
-	}
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	callDrawFunctions();
 }
 
 void SceneObject::sendCommonData()
@@ -67,7 +41,7 @@ void SceneObject::sendCommonData()
 	}
 
 	// Get common attributes and uniforms
-	Fields fields = shader->getFields();
+	const Fields& fields = shader->getFields();
 
 	if (fields.positionAttribute != -1)
 	{
@@ -246,6 +220,45 @@ void SceneObject::sendCommonData()
 			}
 		}
 	}
+}
+
+void SceneObject::sendSpecificData(const Fields& fields)
+{
+	// Nothing specific to be sent.
+}
+
+void SceneObject::callDrawFunctions()
+{
+	if (SceneManager::getInstance()->debug())
+	{
+		// Draws wires
+		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		if (type != Type::SKYBOX)
+		{
+			// Draw collision box 
+			drawCollisionBox();
+
+			// Draw normals
+			drawVertexNormals();
+
+			// Draw axis
+			drawAxis();
+		}
+	}
+	else if (wiredFormat)
+	{
+		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
+	}
+	else
+	{
+		glDrawElements(GL_TRIANGLES, model->getNoInd(), GL_UNSIGNED_SHORT, 0);
+	}
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 void SceneObject::drawCollisionBox()

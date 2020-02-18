@@ -114,9 +114,6 @@ void Model::load(const std::vector<VertexType>& vertices, const std::vector<GLus
 	// Number of indexes
 	noInd = indexes.size();
 
-	// Load AABBs 
-	loadCollisionBox<VertexType>(vertices);
-
 	if (holdsResources)
 	{
 		// Load vertices into buffer
@@ -137,11 +134,14 @@ void Model::load(const std::vector<VertexType>& vertices, const std::vector<GLus
 	}
 	else
 	{
-		// Load normals
-		loadNormals<VertexType>(vertices);
+		// Load AABBs 
+		loadCollisionBox<VertexType>(vertices);
 
 		// Load axis 
 		loadAxisModel<VertexType>(vertices);
+
+		// Load normals
+		loadNormals<VertexType>(vertices);
 
 		// Load vertices into buffer
 		glBindBuffer(GL_ARRAY_BUFFER, vboId);

@@ -71,12 +71,8 @@ void TerrainObject::setSideCells(GLint sideCells)
 	this->sideCells = sideCells;
 }
 
-void TerrainObject::draw()
+void TerrainObject::sendSpecificData(const Fields& fields)
 {
-	SceneObject::sendCommonData();
-
-	const Fields& fields = shader->getFields();
-
 	if (fields.uv2Attribute != -1)
 	{
 		glEnableVertexAttribArray(fields.uv2Attribute);
@@ -87,37 +83,6 @@ void TerrainObject::draw()
 	{
 		glUniform3f(fields.heightUniform, height.x, height.y, height.z);
 	}
-
-	if (SceneManager::getInstance()->debug())
-	{
-		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-		// TODO: Collision box for terrain is flat, change it.
-		// TODO: Normals are under the terrain if it has height. 
-		// TODO: Both problems are related.
-
-		// Draw collision box 
-		drawCollisionBox();
-
-		// Draw normals
-		drawVertexNormals();
-
-		// Draw axis
-		drawAxis();
-	}
-	else if (!wiredFormat)
-	{
-		glDrawElements(GL_TRIANGLES, model->getNoInd(), GL_UNSIGNED_SHORT, 0);
-	}
-	else
-	{
-		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
-	}
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 template<typename Fun>

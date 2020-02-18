@@ -19,12 +19,8 @@ void FireObject::update()
 	time = (time + deltaTime < 1) ? time + deltaTime : time - 1 + deltaTime;
 }
 
-void FireObject::draw()
+void FireObject::sendSpecificData(const Fields& fields)
 {
-	sendCommonData();
-
-	Fields fields = shader->getFields();
-	
 	if (fields.timeUniform != -1)
 	{
 		glUniform1f(fields.timeUniform, time);
@@ -34,37 +30,7 @@ void FireObject::draw()
 	{
 		glUniform1f(fields.dispMaxUniform, dispMax);
 	}
-
-	if (SceneManager::getInstance()->debug())
-	{
-		// Draws wires
-		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-		// Draw collision box 
-		drawCollisionBox();
-
-		// Draw normals
-		drawVertexNormals();
-
-		// Draw axis
-		drawAxis();
-	}
-	else if (wiredFormat)
-	{
-		glDrawElements(GL_LINES, model->getNoIndWired(), GL_UNSIGNED_SHORT, 0);
-	}
-	else
-	{
-		glDrawElements(GL_TRIANGLES, model->getNoInd(), GL_UNSIGNED_SHORT, 0);
-	}
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
-
-FireObject::~FireObject() = default;
 
 GLfloat FireObject::getTime() const
 {
@@ -85,3 +51,5 @@ void FireObject::setDispMax(GLfloat dispMax)
 {
 	this->dispMax = dispMax;
 }
+
+FireObject::~FireObject() = default;

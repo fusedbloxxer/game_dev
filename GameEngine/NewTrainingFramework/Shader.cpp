@@ -59,15 +59,15 @@ void Shader::load()
 	// Lights
 	for (std::size_t i = 0; i < Fields::MAX_LIGHT_SOURCES; ++i)
 	{
-		fields.lights[i].diffuseColorUniform = glGetUniformLocation(programId, ("u_c_diff_" + std::to_string(i)).c_str());
-		fields.lights[i].lightDirectionUniform = glGetUniformLocation(programId, ("u_light_dir_" + std::to_string(i)).c_str());
-		fields.lights[i].specularColorUniform = glGetUniformLocation(programId, ("u_c_spec_" + std::to_string(i)).c_str());
-		fields.lights[i].specularPowerUniform = glGetUniformLocation(programId, ("u_spec_power_" + std::to_string(i)).c_str());
-		fields.lights[i].lightTypeUniform = glGetUniformLocation(programId, ("u_light_type_" + std::to_string(i)).c_str());
+		fields.lights[i].diffuseColorUniform = glGetUniformLocation(programId, ("u_lights[" + std::to_string(i) + "].diffusion").c_str());
+		fields.lights[i].lightDirectionUniform = glGetUniformLocation(programId, ("u_lights[" + std::to_string(i) + "].direction").c_str());
+		fields.lights[i].specularColorUniform = glGetUniformLocation(programId, ("u_lights[" + std::to_string(i) + "].specular").c_str());
+		fields.lights[i].specularPowerUniform = glGetUniformLocation(programId, ("u_lights[" + std::to_string(i) + "].specular_power").c_str());
+		fields.lights[i].lightTypeUniform = glGetUniformLocation(programId, ("u_lights[" + std::to_string(i) + "].type").c_str());
 
-		fields.lights[i].innerCutoffUniform = glGetUniformLocation(programId, ("u_inner_cutoff_" + std::to_string(i)).c_str());
-		fields.lights[i].outercutoffUniform = glGetUniformLocation(programId, ("u_outer_cutoff_" + std::to_string(i)).c_str());
-		fields.lights[i].associatedObjectPositionUniform = glGetUniformLocation(programId, ("u_assoc_obj_pos_" + std::to_string(i)).c_str());
+		fields.lights[i].innerCutoffUniform = glGetUniformLocation(programId, ("u_lights[" + std::to_string(i) + "].inner_cutoff").c_str());
+		fields.lights[i].outercutoffUniform = glGetUniformLocation(programId, ("u_lights[" + std::to_string(i) + "].outer_cutoff").c_str());
+		fields.lights[i].associatedObjectPositionUniform = glGetUniformLocation(programId, ("u_lights[" + std::to_string(i) + "].associated_object_pos").c_str());
 	}
 
 	fields.ambientalLightUniform = glGetUniformLocation(programId, "u_c_amb");

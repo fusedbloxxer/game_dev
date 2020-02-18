@@ -10,6 +10,13 @@ SpotLight::SpotLight(const GLint id, const GLint aObj, const Vector3& diffuseCol
 	setAObj(aObj); setInnerCutoff(in); setOuterCutoff(out);
 }
 
+void SpotLight::print(std::ostream& os) const
+{
+	std::cout << "SpotLight: [";
+	NormalLight::print(os);
+	std::cout << "]";
+}
+
 const GLint SpotLight::getAObj() const
 {
 	return aObj;

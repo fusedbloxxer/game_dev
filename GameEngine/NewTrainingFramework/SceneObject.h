@@ -22,8 +22,7 @@ public:
 		NORMAL,
 		TERRAIN,
 		SKYBOX,
-		FIRE,
-		LIGHT
+		FIRE
 	};
 
 protected:
@@ -57,14 +56,18 @@ protected:
 	// Vector3 object properties
 	Vector3 position, rotation, scale, color, followingCamera, offset;
 
-	// Pointer to its trajectory
-	std::shared_ptr<Trajectory> trajectory;
-
 	// Pointer to its textures
 	std::vector<std::shared_ptr<Texture>> textures;
 
+	// Pointer to its trajectory
+	std::shared_ptr<Trajectory> trajectory;
+
 	// Light elements
 	GLfloat kdif = 1.0f, kspec = 1.0f;
+
+	virtual void sendSpecificData(const Fields& fields);
+
+	virtual void callDrawFunctions();
 
 	void drawVertexNormals();
 
@@ -82,9 +85,6 @@ public:
 
 	// Draws the object on screen
 	virtual void draw() override;
-
-	// Common data to all scene objects
-	virtual void sendCommonData();
 
 	// Update objects
 	virtual void update() override;
@@ -143,5 +143,9 @@ public:
 	void setTrajectory(const std::shared_ptr<Trajectory> trajectory);
 
 private:
+	// Common data to all scene objects
+	void sendCommonData();
+
+	// Send data to be drawn as lines(normals, axis, aabbs, ...)
 	void sendLineData(const std::shared_ptr<Shader>& shader);
 };

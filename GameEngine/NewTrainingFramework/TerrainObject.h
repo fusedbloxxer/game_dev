@@ -39,9 +39,6 @@ public:
 	virtual ~TerrainObject();
 
 	// Iherited via SceneObject
-	virtual void draw() override;
-
-	// Iherited via SceneObject
 	virtual void update() override;
 
 	virtual Matrix& getModelMatrix() override;
@@ -64,6 +61,9 @@ public:
 
 	void setColorBind(GLuint r, GLuint g, GLuint b, GLuint blend);
 	const GLuint* getColorBind() const;
+
+protected:
+	virtual void sendSpecificData(const Fields& fields) override;
 
 private:
 	template<typename Fun>

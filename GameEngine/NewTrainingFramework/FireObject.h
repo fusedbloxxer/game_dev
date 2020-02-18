@@ -19,8 +19,6 @@ public:
 	// Inherited via SceneObject
 	virtual void update() override;
 
-	virtual void draw() override;
-
 	// Virtual destructor
 	virtual ~FireObject();
 
@@ -30,5 +28,8 @@ public:
 
 	GLfloat getDispMax() const;
 	void setDispMax(GLfloat dispMax);
+
+protected:
+	virtual void sendSpecificData(const Fields& fields) override;
 };
 

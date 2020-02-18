@@ -11,13 +11,13 @@ public:
 
 	virtual void print(std::ostream& os) const override;
 
-	virtual ~AmbientLight() = default;
-
 	// Getters and setters
 	Vector3 getColor() const;
 	void setColor(const Vector3& color);
 
 	GLfloat getRatio() const;
 	void setRatio(GLfloat ratio);
+
+	virtual ~AmbientLight() = default;
 };
 

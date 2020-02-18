@@ -10,6 +10,8 @@ class SpotLight : public NormalLight
 public:
 	SpotLight(const GLint id, const GLint aObj, const Vector3& diffuseColor = { 0.0f, 0.0f, 0.0f }, const Vector3& specularColor = { 0.0f, 0.0f, 0.0f }, const GLfloat specPower = 0, const Vector3 & direction = { 0.0f, 0.0f, 0.0f }, const GLfloat in = 0.9, const GLfloat out = 0.81);
 	
+	virtual void print(std::ostream& os) const override;
+
 	const GLint getAObj() const;
 	void setAObj(const GLint aObj);
 
