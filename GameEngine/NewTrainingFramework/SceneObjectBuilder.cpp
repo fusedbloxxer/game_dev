@@ -10,6 +10,7 @@ void SceneObjectBuilder::sendCommonProperties(SceneObject* base) const
 	base->setWiredFormat(wiredFormat);
 	base->setTrajectory(trajectory);
 	base->setReflection(reflection);
+	base->setNormalMap(normalMap);
 	base->setRotation(rotation);
 	base->setPosition(position);
 	base->setTextures(textures);
@@ -17,9 +18,9 @@ void SceneObjectBuilder::sendCommonProperties(SceneObject* base) const
 	base->setModel(model);
 	base->setScale(scale);
 	base->setColor(color);
-	base->setName(name);
-	base->setKDif(kdif);
 	base->setKSpec(kspec);
+	base->setKDif(kdif);
+	base->setName(name);
 }
 
 SceneObject* SceneObjectBuilder::build() const
@@ -78,6 +79,12 @@ SceneObjectBuilder& SceneObjectBuilder::setShader(std::shared_ptr<Shader> shader
 SceneObjectBuilder& SceneObjectBuilder::setFollowingCamera(const Vector3& followingCamera)
 {
 	this->followingCamera = followingCamera;
+	return *this;
+}
+
+SceneObjectBuilder& SceneObjectBuilder::setNormalMap(const std::shared_ptr<Texture>& normalMap)
+{
+	this->normalMap = normalMap;
 	return *this;
 }
 

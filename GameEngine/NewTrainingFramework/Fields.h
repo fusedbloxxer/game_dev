@@ -4,7 +4,11 @@
 struct Fields {
 	// The maximum number of available textures
 	static constexpr GLuint MAX_LIGHT_SOURCES = 8;
-	static constexpr GLuint MAX_TEXTURES = 5;
+
+	// From 0 to MAX_TEXTURES - 1
+	static constexpr GLuint MAX_TEXTURES = 5; 
+
+	static constexpr GLuint NORMAL_MAP_TEXTURE = MAX_TEXTURES;
 
 	GLint positionAttribute;
 	GLint binormAttribute;
@@ -46,6 +50,10 @@ struct Fields {
 
 	GLint kdifUniform;
 	GLint kspecUniform;
+
+	// Normal Mapping
+	GLint normalMapUniform;
+	GLint hasNormalMapUniform;
 
 	// MVP
 	GLint modelUniform;

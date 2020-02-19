@@ -76,6 +76,11 @@ void Shader::load()
 	fields.kdifUniform = glGetUniformLocation(programId, "u_kdif");
 	fields.kspecUniform = glGetUniformLocation(programId, "u_kspec");
 
+	// Normal Mapping
+	fields.normalMapUniform = glGetUniformLocation(programId, "u_normal_map");
+	fields.hasNormalMapUniform = glGetUniformLocation(programId, "u_has_normal_map");
+
+	// Textures
 	for (GLuint i = 0; i < Fields::MAX_TEXTURES; ++i)
 	{
 		fields.textureUniform[i] = glGetUniformLocation(programId, ("u_texture_" + std::to_string(i)).c_str());

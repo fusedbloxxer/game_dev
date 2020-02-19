@@ -260,6 +260,19 @@ std::vector<std::shared_ptr<Texture>> RapidSceneAdapter::loadTextures(rapidxml::
 	return texturesPtrs;
 }
 
+std::shared_ptr<Texture> RapidSceneAdapter::loadNormalMap(rapidxml::xml_node<>* object) const
+{
+	if (auto normalMap = object->first_node("normalMap"))
+	{
+		return ResourceManager::getInstance()->load<Texture>(::atoi(normalMap->value()));
+	}
+	else
+	{
+		Logger::d("An object does not have a normal map.");
+		return nullptr;
+	}
+}
+
 std::vector<std::shared_ptr<SceneObject>> RapidSceneAdapter::getSceneObjects(const Vector3& activeCamera) const
 {
 	auto objects = root->first_node("objects"); if (!objects) { throw std::runtime_error{ "Could not find objects in file." }; }
@@ -297,6 +310,7 @@ std::vector<std::shared_ptr<SceneObject>> RapidSceneAdapter::getSceneObjects(con
 			.setReflection(object->first_node("reflection") != nullptr)
 			.setWiredFormat(object->first_node("wired") != nullptr)
 			.setFollowingCamera(loadFollowingCamera(object))
+			.setNormalMap(loadNormalMap(object))
 			.setTextures(loadTextures(object))
 			.setName(name->value());
 
@@ -410,7 +424,7 @@ std::vector<std::shared_ptr<Light>> RapidSceneAdapter::getLights() const
 	}
 	else
 	{
-		throw std::runtime_error{ "Could not find ambientalLight in sceneManager." };
+		throw std::runtime_error{ "Could not find lights tag in sceneManager." };
 	}
 }
 

@@ -1,7 +1,7 @@
 precision highp float;
 
+varying vec2 v_uv;
 varying vec4 v_pos;
-varying vec4 v_Wnorm;
 varying vec3 v_color;
 
 uniform vec3 u_camera;
@@ -38,6 +38,16 @@ struct LightSource
 const int MAX_LIGHT_SOURCES = 8;
 uniform LightSource u_lights[MAX_LIGHT_SOURCES];
 
+// ---- Normal Mapping ----
+vec3 v_normal;
+
+varying vec3 v_tgt;
+varying vec3 v_Wnorm;
+varying vec3 v_binorm;
+
+uniform float u_has_normal_map;
+uniform sampler2D u_normal_map;
+
 void main()
 {
 	vec4 obj_color = vec4(v_color, 1.0);
@@ -46,12 +56,30 @@ void main()
 	if (u_is_reflected != 0.0)
 	{
 		vec3 vec_camera = v_pos.xyz - u_camera;
-		vec3 dirReflect = reflect(normalize(-vec_camera), normalize(v_Wnorm.xyz));
+		vec3 dirReflect = reflect(normalize(-vec_camera), normalize(v_Wnorm));
 		obj_color = textureCube(u_texture_0, dirReflect);
 	}
 
+	// ---- Normal Mapping ----
+	if (u_has_normal_map == 1.0)
+	{
+		v_normal = texture2D(u_normal_map, v_uv).rgb;
+		v_normal = normalize(v_normal * 2.0 - 1.0);
+
+		vec3 T = normalize(v_tgt);
+		vec3 B = normalize(v_binorm);
+		vec3 N = normalize(v_Wnorm);
+		mat3 TBN = mat3(T, B, N);
+
+		v_normal = normalize(TBN * v_normal);
+	}
+	else
+	{
+		v_normal = normalize(v_Wnorm);
+	}
+
 	// Apply ambiental light
-	vec3 comp_amb = obj_color.xyz * u_c_amb, v_normal = normalize(v_Wnorm.xyz), v_to_camera = normalize(u_camera - v_pos.xyz);
+	vec3 comp_amb = obj_color.xyz * u_c_amb, v_normal = normalize(v_normal), v_to_camera = normalize(u_camera - v_pos.xyz);
 	vec3 comp_diff_final, comp_spec_final;
 
 	for (int i = 0; i < MAX_LIGHT_SOURCES; ++i)

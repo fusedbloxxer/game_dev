@@ -220,6 +220,35 @@ void SceneObject::sendCommonData()
 			}
 		}
 	}
+
+	// Normal Mapping
+	if (fields.binormAttribute != -1)
+	{
+		glEnableVertexAttribArray(fields.binormAttribute);
+		glVertexAttribPointer(fields.binormAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexNfg), (void*)(1 * sizeof(Vector3)));
+	}
+
+	if (fields.tgtAttribute != -1)
+	{
+		glEnableVertexAttribArray(fields.tgtAttribute);
+		glVertexAttribPointer(fields.tgtAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexNfg), (void*)(3 + sizeof(Vector3)));
+	}
+
+	if (fields.normalMapUniform != -1 && normalMap != nullptr)
+	{
+		// Send boolean value
+		glUniform1f(fields.hasNormalMapUniform, 1.0f);
+
+		// Send normal map texture
+		glActiveTexture(Fields::NORMAL_MAP_TEXTURE + GL_TEXTURE0);
+		glBindTexture(normalMap->getTextureResources()->type, normalMap->getTextureId());
+		glUniform1i(fields.normalMapUniform, Fields::NORMAL_MAP_TEXTURE);
+	}
+	else
+	{
+		// Send boolean value
+		glUniform1f(fields.hasNormalMapUniform, 0.0f);
+	}
 }
 
 void SceneObject::sendSpecificData(const Fields& fields)
@@ -576,7 +605,17 @@ std::shared_ptr<Trajectory> SceneObject::getTrajectory()
 	return trajectory;
 }
 
-void SceneObject::setTrajectory(const std::shared_ptr<Trajectory> trajectory)
+std::shared_ptr<Texture> SceneObject::getNormalMap()
+{
+	return normalMap;
+}
+
+void SceneObject::setNormalMap(const std::shared_ptr<Texture>& normalMap)
+{
+	this->normalMap = normalMap;
+}
+
+void SceneObject::setTrajectory(const std::shared_ptr<Trajectory>& trajectory)
 {
 	this->trajectory = trajectory;
 }

@@ -59,6 +59,9 @@ protected:
 	// Pointer to its textures
 	std::vector<std::shared_ptr<Texture>> textures;
 
+	// Pointer to its normal map texture
+	std::shared_ptr<Texture> normalMap;
+
 	// Pointer to its trajectory
 	std::shared_ptr<Trajectory> trajectory;
 
@@ -140,7 +143,10 @@ public:
 	void setTextures(const std::vector<std::shared_ptr<Texture>>& textures);
 
 	std::shared_ptr<Trajectory> getTrajectory();
-	void setTrajectory(const std::shared_ptr<Trajectory> trajectory);
+	void setTrajectory(const std::shared_ptr<Trajectory>& trajectory);
+
+	std::shared_ptr<Texture> getNormalMap();
+	void setNormalMap(const std::shared_ptr<Texture>& normalMap);
 
 private:
 	// Common data to all scene objects

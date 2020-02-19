@@ -137,8 +137,8 @@
         <file>DisplacementMap.tga</file>
         <min_filter>LINEAR</min_filter>
         <mag_filter>LINEAR</mag_filter>
-        <wrap_s>GL_REPEAT</wrap_s>
-        <wrap_t>GL_REPEAT</wrap_t>
+        <wrap_s>REPEAT</wrap_s>
+        <wrap_t>REPEAT</wrap_t>
       </texture>
       <texture id="9" type="2d">
         <file>fire3.tga</file>
@@ -158,36 +158,36 @@
         <file>Rock.tga</file>
         <min_filter>LINEAR</min_filter>
         <mag_filter>LINEAR</mag_filter>
-        <wrap_s>GL_REPEAT</wrap_s>
-        <wrap_t>GL_REPEAT</wrap_t>
+        <wrap_s>REPEAT</wrap_s>
+        <wrap_t>REPEAT</wrap_t>
       </texture>
       <texture id="15" type="2d">
         <file>Dirt.tga</file>
         <min_filter>LINEAR</min_filter>
         <mag_filter>LINEAR</mag_filter>
-        <wrap_s>GL_REPEAT</wrap_s>
-        <wrap_t>GL_REPEAT</wrap_t>
+        <wrap_s>REPEAT</wrap_s>
+        <wrap_t>REPEAT</wrap_t>
       </texture>
       <texture id="16" type="2d">
         <file>Grass.tga</file>
         <min_filter>LINEAR</min_filter>
         <mag_filter>LINEAR</mag_filter>
-        <wrap_s>GL_REPEAT</wrap_s>
-        <wrap_t>GL_REPEAT</wrap_t>
+        <wrap_s>REPEAT</wrap_s>
+        <wrap_t>REPEAT</wrap_t>
       </texture>
       <texture id="17" type="2d">
         <file>Terrain_blend_map.tga</file>
         <min_filter>LINEAR</min_filter>
         <mag_filter>LINEAR</mag_filter>
-        <wrap_s>GL_REPEAT</wrap_s>
-        <wrap_t>GL_REPEAT</wrap_t>
+        <wrap_s>REPEAT</wrap_s>
+        <wrap_t>REPEAT</wrap_t>
       </texture>
       <texture id="18" type="2d">
         <file>WaterNormal.tga</file>
         <min_filter>LINEAR</min_filter>
         <mag_filter>LINEAR</mag_filter>
-        <wrap_s>GL_REPEAT</wrap_s>
-        <wrap_t>GL_REPEAT</wrap_t>
+        <wrap_s>REPEAT</wrap_s>
+        <wrap_t>REPEAT</wrap_t>
       </texture>
       <texture id="19" type="2d">
         <file>Marine.tga</file>
@@ -230,6 +230,27 @@
         <mag_filter>LINEAR</mag_filter>
         <wrap_s>CLAMP_TO_EDGE</wrap_s>
         <wrap_t>CLAMP_TO_EDGE</wrap_t>
+      </texture>
+      <texture id ="25" type = "2d">
+        <file>NormalMap.tga</file>
+        <min_filter>LINEAR</min_filter>
+        <mag_filter>LINEAR</mag_filter>
+        <wrap_s>REPEAT</wrap_s>
+        <wrap_t>REPEAT</wrap_t>
+      </texture>
+      <texture id ="26" type = "2d">
+        <file>Rock_NormalMap.tga</file>
+        <min_filter>LINEAR</min_filter>
+        <mag_filter>LINEAR</mag_filter>
+        <wrap_s>REPEAT</wrap_s>
+        <wrap_t>REPEAT</wrap_t>
+      </texture>
+      <texture id ="27" type = "2d">
+        <file>Train_NormalMap.tga</file>
+        <min_filter>LINEAR</min_filter>
+        <mag_filter>LINEAR</mag_filter>
+        <wrap_s>REPEAT</wrap_s>
+        <wrap_t>REPEAT</wrap_t>
       </texture>
     </folder>
   </textures>

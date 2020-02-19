@@ -38,6 +38,7 @@ public:
 
 private:
 	Vector3 loadFollowingCamera(rapidxml::xml_node<>* object) const;
+	std::shared_ptr<Texture> loadNormalMap(rapidxml::xml_node<>* object) const;
 	std::shared_ptr<Trajectory> loadTrajectory(rapidxml::xml_node<>* trajectory) const;
 	std::vector<std::shared_ptr<Texture>> loadTextures(rapidxml::xml_node<>* object) const;
 	Vector3 loadVector(rapidxml::xml_node<>* root, const char xP[2] = "x", const char yP[2] = "y", const char zP[2] = "z") const;

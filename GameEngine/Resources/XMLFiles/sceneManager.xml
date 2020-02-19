@@ -357,10 +357,10 @@
       <model>5</model>
       <shader>3</shader>
       <type>normal</type>
-      <name>Minge cu textura si reflexie</name>
-      <kdif>0.8</kdif>
-      <kspec>0.5</kspec>
-      <reflection/>
+      <name>Realistic brick-sphere</name>
+      <normalMap>25</normalMap>
+      <kspec>0.75</kspec>
+      <kdif>0.25</kdif>
       <textures>
         <texture id="14"/>
       </textures>
@@ -711,8 +711,9 @@
       <shader>3</shader>
       <type>normal</type>
       <name>Train</name>
-      <kdif>0.7</kdif>
-      <kspec>0.2</kspec>
+      <kdif>1.0</kdif>
+      <kspec>0.8</kspec>
+      <normalMap>25</normalMap>
       <textures>
         <texture id ="24"/>
       </textures>
@@ -745,6 +746,7 @@
       <name>Minge simpla colorata</name>
       <kdif>1.0</kdif>
       <kspec>1.0</kspec>
+      <normalMap>25</normalMap>
       <color>
         <r>1.0</r>
         <g>0.0</g>
@@ -772,7 +774,8 @@
       <shader>3</shader>
       <type>normal</type>
       <name>Waterball</name>
-      <kdif>0.5</kdif>
+      <reflection/>
+      <kdif>1</kdif>
       <kspec>0.2</kspec>
       <textures>
         <texture id="18"/>
@@ -874,7 +877,7 @@
         <g>1.0</g>
         <b>1.0</b>
       </color>
-      <ratio>0.5</ratio>
+      <ratio>0.7</ratio>
     </ambientalLight>
 
     <light id="1">
