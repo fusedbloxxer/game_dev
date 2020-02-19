@@ -116,7 +116,7 @@ public:
 	GLfloat Dot(Vector4 & vector);
 
 	//matrix multiplication
-	Vector4 operator * ( Matrix & m );
+	Vector4 operator * (const Matrix & m ) const;
 
 	//access to elements
 	GLfloat operator [] (unsigned int idx);
@@ -175,7 +175,7 @@ public:
 	Matrix operator * (GLfloat k);
 	Matrix & operator *= (GLfloat k);
 
-	Vector4 operator * (Vector4 & vec);
+	Vector4 operator * (Vector4 & vec) const;
 
 	Matrix & operator = (Matrix & mat);
 

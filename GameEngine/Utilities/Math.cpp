@@ -329,7 +329,7 @@ GLfloat Vector4::Dot(Vector4 & vector)
 }
 
 
-Vector4 Vector4::operator * ( Matrix & m )
+Vector4 Vector4::operator * (const Matrix & m ) const
 {
 	Vector4 res;
 	res.x = x * m.m[0][0] + y * m.m[1][0] + z * m.m[2][0] + w * m.m[3][0];
@@ -339,7 +339,6 @@ Vector4 Vector4::operator * ( Matrix & m )
 
 	return res;
 }
-
 
 //Matrix 4 X 4
 
@@ -688,7 +687,7 @@ Matrix & Matrix::operator *= (GLfloat k)
 }
 
 
-Vector4 Matrix::operator * (Vector4 & vec)
+Vector4 Matrix::operator * (Vector4 & vec) const
 {
 	Vector4 res;
 	res.x = vec.x * m[0][0] + vec.y * m[0][1] + vec.z * m[0][2] + vec.w * m[0][3];

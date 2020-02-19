@@ -15,8 +15,8 @@ SceneObject::SceneObject(GLint id, Type type)
 void SceneObject::draw()
 {
 	// Template Pattern
-	sendCommonData(); 
-	
+	sendCommonData();
+
 	sendSpecificData(shader->getFields());
 
 	callDrawFunctions();
@@ -202,7 +202,7 @@ void SceneObject::sendCommonData()
 					if (fields.lights[index].associatedObjectPositionUniform != -1)
 					{
 						const auto& objects = SceneManager::getInstance()->getSceneObjects();
-						const auto& [x, y, z, w] =  Vector4((*std::find_if(objects.cbegin(), objects.cend(),
+						const auto& [x, y, z, w] = Vector4((*std::find_if(objects.cbegin(), objects.cend(),
 							[&spotLight](const std::shared_ptr<SceneObject> o) { return o->getId() == spotLight->getAObj(); }))->getPosition());
 						glUniform3f(fields.lights[index].associatedObjectPositionUniform, x, y, z);
 					}
@@ -292,6 +292,12 @@ void SceneObject::callDrawFunctions()
 
 void SceneObject::drawCollisionBox()
 {
+	Matrix aux, collisionBox = Matrix().SetScale(scale);
+	collisionBox = collisionBox * aux.SetRotationX(rotation.x);
+	collisionBox = collisionBox * aux.SetRotationY(rotation.y);
+	collisionBox = collisionBox * aux.SetRotationZ(rotation.z);
+	model->updateCollisionBox(collisionBox);
+
 	// Use shader
 	glUseProgram(axisShader->getProgramId());
 
@@ -301,6 +307,11 @@ void SceneObject::drawCollisionBox()
 
 	// Select and send data from buffers
 	sendLineData(axisShader);
+
+	if (axisShader->getFields().modelUniform != -1)
+	{
+		glUniformMatrix4fv(axisShader->getFields().modelUniform, 1, GL_FALSE, (float*)(Matrix().SetTranslation(position)).m);
+	}
 
 	// Draw on screen
 	glDrawElements(GL_LINES, model->getNoCollisionIndices(), GL_UNSIGNED_SHORT, 0);
@@ -321,6 +332,11 @@ void SceneObject::drawAxis()
 	// Select and send data from buffers
 	sendLineData(axisShader);
 
+	if (axisShader->getFields().modelUniform != -1)
+	{
+		glUniformMatrix4fv(axisShader->getFields().modelUniform, 1, GL_FALSE, (float*)(getModelMatrix()).m);
+	}
+
 	// Draw on screen
 	glDrawArrays(GL_LINES, 0, 6);
 
@@ -338,6 +354,11 @@ void SceneObject::drawVertexNormals()
 
 	// Select and send data from buffers
 	sendLineData(axisShader);
+
+	if (axisShader->getFields().modelUniform != -1)
+	{
+		glUniformMatrix4fv(axisShader->getFields().modelUniform, 1, GL_FALSE, (float*)(getModelMatrix()).m);
+	}
 
 	// Draw on screen
 	glDrawArrays(GL_LINES, 0, model->getNoNormalInd());
@@ -361,11 +382,6 @@ void SceneObject::sendLineData(const std::shared_ptr<Shader>& shader)
 	{
 		glEnableVertexAttribArray(fields.colorAttribute);
 		glVertexAttribPointer(fields.colorAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexAxis), (void*)sizeof(Vector3));
-	}
-
-	if (fields.modelUniform != -1)
-	{
-		glUniformMatrix4fv(fields.modelUniform, 1, GL_FALSE, (float*)(getModelMatrix()).m);
 	}
 
 	if (fields.viewUniform != -1)
@@ -501,6 +517,7 @@ Matrix& SceneObject::getModelMatrix()
 		tran = tran * modelMatrix.SetRotationZ(rotation.z);
 		tran = tran * modelMatrix.SetTranslation(position);
 		modelMatrix = tran;
+
 		modified = false;
 	}
 	return modelMatrix;

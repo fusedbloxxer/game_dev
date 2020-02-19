@@ -185,18 +185,63 @@ void Model::loadCollisionBox(const std::vector<VertexType>& vertices)
 		noCollisionInd = 8;
 		noCollisionIndices = 24;
 
-		// Send box data
-		glBindBuffer(GL_ARRAY_BUFFER, collisionVboId);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(aabb), aabb, GL_STATIC_DRAW);
+		if (holdsResources)
+		{
+			// Send box data
+			glBindBuffer(GL_ARRAY_BUFFER, collisionVboId);
+			glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(aabb), aabb);
 
-		// Send indices
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, collisionIboId);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(order), order, GL_STATIC_DRAW);
+			// Send indices
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, collisionIboId);
+			glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, sizeof(order), order);
 
-		// Close buffers
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+			// Close buffers
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		}
+		else
+		{
+			// Store the vertices
+			for (const auto& v : aabb)
+			{
+				this->AABBs.push_back({ v.pos, v.color });
+			}
+
+			// Send box data
+			glBindBuffer(GL_ARRAY_BUFFER, collisionVboId);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(aabb), aabb, GL_STATIC_DRAW);
+
+			// Send indices
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, collisionIboId);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(order), order, GL_STATIC_DRAW);
+
+			// Close buffers
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		}
 	}
+}
+
+void Model::updateCollisionBox(const Matrix& worldMatrix)
+{
+	Vector4 auxiliary;
+	auto modifiedAABBs = AABBs;
+
+	for (auto& v : modifiedAABBs)
+	{
+		auxiliary.x = v.pos.x;
+		auxiliary.y = v.pos.y;
+		auxiliary.z = v.pos.z;
+		auxiliary.w = 1.0f;
+
+		auxiliary = auxiliary * worldMatrix;
+		
+		v.pos.x = auxiliary.x;
+		v.pos.y = auxiliary.y;
+		v.pos.z = auxiliary.z;
+	}
+
+	loadCollisionBox<VertexAxis>(modifiedAABBs);
 }
 
 std::pair<std::vector<VertexNfg>, std::vector<GLushort>> Model::parseFile(const char* const filePath)

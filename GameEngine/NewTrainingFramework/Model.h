@@ -1,5 +1,6 @@
 #pragma once
 #include "ModelResource.h"
+#include "VertexAxis.h"
 #include "VertexNfg.h"
 #include "AxisModel.h"
 #include <vector>
@@ -35,7 +36,10 @@ class Model : public Loadable
 	std::shared_ptr<ModelResource> mr;
 
 	// Get wired vector from indexes vector.
-	std::vector<GLushort> getWired(const std::vector<GLushort>& indexes);
+	std::vector<GLushort> getWired(const std::vector<GLushort>& indexes); 
+
+	// Represents the collision box vertices
+	std::vector<VertexAxis> AABBs;
 
 public:
 	// Constructor
@@ -97,15 +101,18 @@ public:
 	std::shared_ptr<ModelResource> getModelResource();
 	void setModelResource(std::shared_ptr<ModelResource> mr);
 
-private:
+public:
 	template<typename VertexType>
-	void loadNormals(const std::vector<VertexType>& vertices);
+	void loadCollisionBox(const std::vector<VertexType>& vertices);
 
+	void updateCollisionBox(const Matrix& worldMatrix);
+
+private:
 	template<typename VertexType>
 	void loadAxisModel(const std::vector<VertexType>& vertices);
 
 	template<typename VertexType>
-	void loadCollisionBox(const std::vector<VertexType>& vertices);
+	void loadNormals(const std::vector<VertexType>& vertices);
 };
 
 template<typename VertexType>
