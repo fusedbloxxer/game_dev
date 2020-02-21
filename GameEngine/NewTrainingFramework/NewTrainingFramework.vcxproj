@@ -220,6 +220,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraBuilder.h" />
     <ClInclude Include="CircleTrajectory.h" />
+    <ClInclude Include="Collidable.h" />
     <ClInclude Include="Controls.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="Drawable.h" />
@@ -238,6 +239,7 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelResource.h" />
     <ClInclude Include="NormalLight.h" />
+    <ClInclude Include="OnCollisionListener.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="Rapid.h" />
     <ClInclude Include="RapidResourceAdapter.h" />

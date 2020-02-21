@@ -422,6 +422,12 @@
     <ClInclude Include="SpotLight.h">
       <Filter>Header Files\SceneManager\Effects\Lights</Filter>
     </ClInclude>
+    <ClInclude Include="Collidable.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="OnCollisionListener.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Readme.doc" />

@@ -115,6 +115,12 @@ void SceneManager::update()
 	{
 		o->update();
 	}
+
+
+	for (const auto& object : sceneObjects)
+	{
+		cameraMap[activeCameraId]->collideWith(object.get());
+	}
 }
 
 void SceneManager::freeResources()

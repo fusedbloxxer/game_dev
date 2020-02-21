@@ -1,11 +1,13 @@
 #pragma once
 #include "stdafx.h"
 #include "../Utilities/utilities.h" 
+#include "SceneObject.h"
+#include "Collidable.h"
 #include "Controls.h"
 #include "Globals.h"
 #include <ostream>
 
-class Camera
+class Camera : public Collidable
 {
 public:
 	// Camera Type
@@ -89,4 +91,7 @@ public:
 
 private:
 	void refreshAxis();
+
+	// Inherited via Collidable
+	virtual bool collides(Collidable* object) const override;
 };

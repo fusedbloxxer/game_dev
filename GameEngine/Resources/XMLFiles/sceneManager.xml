@@ -922,6 +922,10 @@
       <name>Lightball</name>
       <kdif>0.95</kdif>
       <kspec>0.90</kspec>
+      <followingCamera>
+        <ox></ox>
+        <oz></oz>
+      </followingCamera>
       <color>
         <r>1.0</r>
         <g>1.0</g>
