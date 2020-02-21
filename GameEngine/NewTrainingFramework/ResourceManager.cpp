@@ -63,6 +63,21 @@ std::shared_ptr<Model> ResourceManager::load<Model>(GLint id) {
 	}
 }
 
+std::shared_ptr<Model> ResourceManager::load(GLint id, const Vector3& collisionBoxColor) {
+	if (modelMap.find(id) != modelMap.end()) {
+		return modelMap[id];
+	}
+	else if (modelResMap.find(id) != modelResMap.end()) {
+		std::shared_ptr<Model> model = std::make_shared<Model>(modelResMap[id], collisionBoxColor);
+		model->load();
+		modelMap[id] = model;
+		return model;
+	}
+	else {
+		throw std::runtime_error{ "Model invalid index was detected: " };
+	}
+}
+
 template<>
 std::shared_ptr<Shader> ResourceManager::load<Shader>(GLint id) {
 	if (shaderMap.find(id) != shaderMap.end()) {

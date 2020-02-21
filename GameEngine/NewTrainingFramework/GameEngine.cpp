@@ -32,8 +32,8 @@ void Update(ESContext* esContext, float deltaTime)
 	if (Globals::TIME <= Globals::FRAME_LIMIT)
 	{
 		SceneManager::getInstance()->getActiveCamera()->setDeltaTime(deltaTime);
-		Globals::TIME += deltaTime;
 		SceneManager::getInstance()->update();
+		Globals::TIME += deltaTime;
 	}
 	else
 	{
@@ -54,7 +54,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Logger::setMode(15);
 	Logger::v("Program started . . .");
 
-	//try
+	try
 	{
 		ESContext esContext;
 		esInitContext(&esContext);
@@ -75,7 +75,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		esMainLoop(&esContext);
 	}
-	/*catch (std::runtime_error& ex)
+	catch (std::runtime_error& ex)
 	{
 		Logger::e("An error took place:");
 		Logger::e(ex.what());
@@ -88,7 +88,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	catch (...)
 	{
 		Logger::wtf("An exception took place:");
-	}*/
+	}
 
 	Logger::d("Freeing scene manager memory.");
 	delete SceneManager::getInstance();

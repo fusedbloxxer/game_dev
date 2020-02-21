@@ -6,6 +6,7 @@ SceneObjectBuilder::SceneObjectBuilder(SceneObject::Type type, GLint id)
 
 void SceneObjectBuilder::sendCommonProperties(SceneObject* base) const
 {
+	base->setCollisionBoxColor(collisionBoxColor);
 	base->setFollowingCamera(followingCamera);
 	base->setWiredFormat(wiredFormat);
 	base->setTrajectory(trajectory);
@@ -82,6 +83,12 @@ SceneObjectBuilder& SceneObjectBuilder::setFollowingCamera(const Vector3& follow
 	return *this;
 }
 
+SceneObjectBuilder& SceneObjectBuilder::setCollisionBoxColor(const Vector3& collisionBoxColor)
+{
+	this->collisionBoxColor = collisionBoxColor;
+	return *this;
+}
+
 SceneObjectBuilder& SceneObjectBuilder::setNormalMap(const std::shared_ptr<Texture>& normalMap)
 {
 	this->normalMap = normalMap;
@@ -98,6 +105,11 @@ SceneObjectBuilder& SceneObjectBuilder::setTextures(const std::vector<std::share
 {
 	this->textures = textures;
 	return *this;
+}
+
+const Vector3& SceneObjectBuilder::getCollisionBoxColor() const
+{
+	return collisionBoxColor;
 }
 
 SceneObjectBuilder& SceneObjectBuilder::setKDif(GLfloat kdif)

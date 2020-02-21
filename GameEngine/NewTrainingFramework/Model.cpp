@@ -5,8 +5,8 @@
 #include <fstream>
 #include <string>
 
-Model::Model(std::shared_ptr<ModelResource> mr)
-	:mr{ mr }, iboId{}, noInd{}, noIndWired{}, vboId{}, wiredboId{}
+Model::Model(std::shared_ptr<ModelResource> mr, const Vector3& collisionBoxColor)
+	:mr{ mr }, iboId{}, noInd{}, noIndWired{}, vboId{}, wiredboId{}, collisionBoxColor{ collisionBoxColor }
 {
 	// Create buffer
 	glGenBuffers(6, &iboId);
@@ -114,10 +114,9 @@ void Model::loadCollisionBox(const std::vector<VertexType>& vertices)
 {
 	if (vertices.size() > 0)
 	{
-		GLfloat m[2][3] = {
-			vertices[0].pos.x, vertices[0].pos.y, vertices[0].pos.z,
-			vertices[0].pos.x, vertices[0].pos.y, vertices[0].pos.z
-		};
+		// Initialize the values
+		m[0][0] = vertices[0].pos.x; m[0][1] = vertices[0].pos.y; m[0][2] = vertices[0].pos.z;
+		m[1][0] = vertices[0].pos.x; m[1][1] = vertices[0].pos.y; m[1][2] = vertices[0].pos.z;
 
 		for (decltype(vertices.size()) i = 1; i < vertices.size(); ++i)
 		{
@@ -154,17 +153,15 @@ void Model::loadCollisionBox(const std::vector<VertexType>& vertices)
 			}
 		}
 
-		const Vector3& boxColor = { 1.0f, 1.0f, 0.0f };
-
 		VertexAxis aabb[8] = {
-			{ { m[0][0], m[0][1], m[0][2] }, boxColor },
-			{ { m[0][0], m[0][1], m[1][2] }, boxColor },
-			{ { m[0][0], m[1][1], m[1][2] }, boxColor },
-			{ { m[0][0], m[1][1], m[0][2] }, boxColor },
-			{ { m[1][0], m[0][1], m[0][2] }, boxColor },
-			{ { m[1][0], m[0][1], m[1][2] }, boxColor },
-			{ { m[1][0], m[1][1], m[1][2] }, boxColor },
-			{ { m[1][0], m[1][1], m[0][2] }, boxColor }
+			{ { m[0][0], m[0][1], m[0][2] }, collisionBoxColor },
+			{ { m[0][0], m[0][1], m[1][2] }, collisionBoxColor },
+			{ { m[0][0], m[1][1], m[1][2] }, collisionBoxColor },
+			{ { m[0][0], m[1][1], m[0][2] }, collisionBoxColor },
+			{ { m[1][0], m[0][1], m[0][2] }, collisionBoxColor },
+			{ { m[1][0], m[0][1], m[1][2] }, collisionBoxColor },
+			{ { m[1][0], m[1][1], m[1][2] }, collisionBoxColor },
+			{ { m[1][0], m[1][1], m[0][2] }, collisionBoxColor }
 		};
 
 		GLushort order[24] = {
@@ -404,6 +401,16 @@ void Model::setNoCollisionIndices(GLuint count)
 	this->noCollisionIndices = count;
 }
 
+const Vector3& Model::getCollisionBoxColor() const
+{
+	return collisionBoxColor;
+}
+
+void Model::setCollisionBoxColor(const Vector3& collisionBoxColor)
+{
+	this->collisionBoxColor = collisionBoxColor;
+}
+
 AxisModel& Model::getAxisModel()
 {
 	return axisModel;
@@ -417,4 +424,9 @@ std::shared_ptr<ModelResource> Model::getModelResource()
 void Model::setModelResource(std::shared_ptr<ModelResource> mr)
 {
 	this->mr = mr;
+}
+
+auto Model::getCollisionCoordinates() const -> const GLfloat(&)[2][3]
+{
+	return this->m;
 }

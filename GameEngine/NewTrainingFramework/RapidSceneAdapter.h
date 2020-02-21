@@ -21,13 +21,13 @@ public:
 
 	virtual std::shared_ptr<Shader> getAxis() const override;
 
+	virtual std::vector<std::shared_ptr<Light>> getLights() const override;
+
 	virtual std::shared_ptr<AmbientLight> getAmbientLight() const override;
 
 	virtual std::tuple<GLboolean, GLint, GLint> getScreenSize() const override;
 
 	virtual std::unordered_map<GLubyte, Controls::Type> getKeys() const override;
-
-	virtual std::vector<std::shared_ptr<Light>> getLights() const override;
 
 	virtual std::vector<std::shared_ptr<SceneObject>> getSceneObjects(const Vector3& camera) const override;
 
@@ -38,9 +38,14 @@ public:
 
 private:
 	Vector3 loadFollowingCamera(rapidxml::xml_node<>* object) const;
+
 	std::shared_ptr<Texture> loadNormalMap(rapidxml::xml_node<>* object) const;
+
 	std::shared_ptr<Trajectory> loadTrajectory(rapidxml::xml_node<>* trajectory) const;
+
 	std::vector<std::shared_ptr<Texture>> loadTextures(rapidxml::xml_node<>* object) const;
-	Vector3 loadVector(rapidxml::xml_node<>* root, const char xP[2] = "x", const char yP[2] = "y", const char zP[2] = "z") const;
+
+	Vector3 checkAndLoadVector(rapidxml::xml_node<>* root, const char xP[2] = "x", const char yP[2] = "y", const char zP[2] = "z") const;
+
 	void setSpecificProperties(std::unique_ptr<SceneObjectBuilder>& builder, rapidxml::xml_node<>* object, const Vector3& activeCamera) const;
 };

@@ -92,7 +92,7 @@
       <near>0.2</near>
       <far>250000</far>
     </camera>
-    
+
     <camera id="2">
       <comment>This camera illustrates various effects on spheres.</comment>
       <type>firstPerson</type>
@@ -193,6 +193,8 @@
 
   <activeCamera>1</activeCamera>
 
+  <axisShader id="7"/>
+
   <fog>
     <radius>
       <r>3000</r>
@@ -205,9 +207,14 @@
     </color>
   </fog>
 
-  <axisShader id="7"/>
-
   <objects>
+    
+    <defaultCollisionBoxColor>
+      <r>1.0</r>
+      <g>0.0</g>
+      <b>1.0</b>
+    </defaultCollisionBoxColor>
+
     <object id="1">
       <model>1</model>
       <shader>3</shader>
@@ -218,6 +225,16 @@
       <textures>
         <texture id="4"/>
       </textures>
+      <collisionBoxColor>
+        <r>1.0</r>
+        <g>0.0</g>
+        <b>0.0</b>
+      </collisionBoxColor>
+      <color>
+        <r>1.0</r>
+        <g>0.0</g>
+        <b>1.0</b>
+      </color>
       <position>
         <x>250.0</x>
         <y>350.0</y>
@@ -330,6 +347,8 @@
       <shader>5</shader>
       <type>normal</type>
       <name>Minge cu reflexie</name>
+      <kspec>0.0</kspec>
+      <kdif>1.0</kdif>
       <reflection/>
       <color>
         <r>1.0</r>
@@ -391,11 +410,16 @@
       <shader>3</shader>
       <type>normal</type>
       <name>Evil Witch</name>
-      <kdif>1.0</kdif>
       <kspec>0.0</kspec>
+      <kdif>1.0</kdif>
       <textures>
         <texture id="5"/>
       </textures>
+      <color>
+        <r>1.0</r>
+        <g>0.0</g>
+        <b>1.0</b>
+      </color>
       <position>
         <x>-500.0</x>
         <y>1500.0</y>
@@ -431,6 +455,13 @@
       <shader>6</shader>
       <type>skybox</type>
       <name>SkyBox Cube</name>
+      <kspec>0.0</kspec>
+      <kdif>1.0</kdif>
+      <color>
+        <r>1.0</r>
+        <g>0.0</g>
+        <b>1.0</b>
+      </color>
       <followingCamera>
         <ox/>
         <oz/>
@@ -462,6 +493,11 @@
       <name>Teren</name>
       <kdif>1.0</kdif>
       <kspec>0.0</kspec>
+      <color>
+        <r>1.0</r>
+        <g>0.0</g>
+        <b>1.0</b>
+      </color>
       <colorBind>
         <r>16</r>
         <g>15</g>
@@ -506,11 +542,23 @@
       <type>fire</type>
       <name>Fire</name>
       <dispMax>0.2</dispMax>
+      <kspec>0.0</kspec>
+      <kdif>1.0</kdif>
+      <collisionBoxColor>
+        <r>1.0</r>
+        <g>1.0</g>
+        <b>0.0</b>
+      </collisionBoxColor>
       <textures>
         <texture id="8"/>
         <texture id="9"/>
         <texture id="10"/>
       </textures>
+      <color>
+        <r>1.0</r>
+        <g>0.0</g>
+        <b>1.0</b>
+      </color>
       <position>
         <x>-2250.0</x>
         <y>-375.0</y>
@@ -533,8 +581,8 @@
       <shader>3</shader>
       <type>normal</type>
       <name>Cool Woman</name>
-      <kdif>1.0</kdif>
       <kspec>0.0</kspec>
+      <kdif>1.0</kdif>
       <textures>
         <texture id="2" type="2d"/>
       </textures>
@@ -594,11 +642,16 @@
       <shader>3</shader>
       <type>normal</type>
       <name>Marine Warrior</name>
+      <kspec>0.0</kspec>
       <kdif>1.0</kdif>
-      <kspec>0.85</kspec>
       <textures>
         <texture id="19" type="2d"/>
       </textures>
+      <collisionBoxColor>
+        <r>0.0</r>
+        <g>0.0</g>
+        <b>1.0</b>
+      </collisionBoxColor>
       <color>
         <r>1.0</r>
         <g>0.0</g>
@@ -660,6 +713,16 @@
       <textures>
         <texture id="19"/>
       </textures>
+      <collisionBoxColor>
+        <r>0.0</r>
+        <g>0.0</g>
+        <b>1.0</b>
+      </collisionBoxColor>
+      <color>
+        <r>1.0</r>
+        <g>0.0</g>
+        <b>1.0</b>
+      </color>
       <position>
         <x>0.0</x>
         <y>350.0</y>
@@ -717,6 +780,11 @@
       <textures>
         <texture id ="24"/>
       </textures>
+      <collisionBoxColor>
+        <r>0.0</r>
+        <g>1.0</g>
+        <b>0.0</b>
+      </collisionBoxColor>
       <color>
         <r>1.0</r>
         <g>1.0</g>
@@ -733,9 +801,9 @@
         <z>0</z>
       </rotation>
       <scale>
-        <x>5.0</x>
-        <y>5.0</y>
-        <z>5.0</z>
+        <x>6.0</x>
+        <y>6.0</y>
+        <z>6.0</z>
       </scale>
     </object>
 
@@ -780,6 +848,11 @@
       <textures>
         <texture id="18"/>
       </textures>
+      <color>
+        <r>1.0</r>
+        <g>0.0</g>
+        <b>1.0</b>
+      </color>
       <position>
         <x>-1750.0</x>
         <y>250.0</y>
@@ -807,13 +880,18 @@
       <textures>
         <texture id="23"/>
       </textures>
+      <color>
+        <r>1.0</r>
+        <g>0.0</g>
+        <b>1.0</b>
+      </color>
       <position>
         <x>-3000.0</x>
         <y>250.0</y>
         <z>0.0</z>
       </position>
       <rotation>
-        <x>0.0</x>
+        <x>45.0</x>
         <y>180.0</y>
         <z>0.0</z>
       </rotation>

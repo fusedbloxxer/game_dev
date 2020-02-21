@@ -10,6 +10,7 @@ SkyboxObject::SkyboxObject(GLint id)
 SkyboxObject::SkyboxObject(GLint id, Type type)
 	:SceneObject{ id, type }
 {
+	disableCollision();
 }
 
 SkyboxObject::~SkyboxObject()

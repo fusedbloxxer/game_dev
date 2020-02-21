@@ -32,7 +32,7 @@ class SceneObjectBuilder : public IBuilder<SceneObject>
 	std::vector<std::shared_ptr<Texture>> textures;
 
 	// Vector3 object properties
-	Vector3 position, rotation, scale, color, followingCamera, offset;
+	Vector3 position, rotation, scale, color, followingCamera, offset, collisionBoxColor;
 
 protected:
 	// Object id
@@ -63,9 +63,13 @@ public:
 	SceneObjectBuilder& setModel(std::shared_ptr<Model> model);
 	SceneObjectBuilder& setShader(std::shared_ptr<Shader> shader);
 	SceneObjectBuilder& setFollowingCamera(const Vector3& followingCamera);
+	SceneObjectBuilder& setCollisionBoxColor(const Vector3& collisionBoxColor);
 	SceneObjectBuilder& setNormalMap(const std::shared_ptr<Texture>& normalMap);
 	SceneObjectBuilder& setTrajectory(const std::shared_ptr<Trajectory> trajectory);
 	SceneObjectBuilder& setTextures(const std::vector<std::shared_ptr<Texture>>& textures);
+
+	// Getters, if necessary!
+	const Vector3& getCollisionBoxColor() const;
 
 	// Virtual destructor
 	virtual ~SceneObjectBuilder() = default;

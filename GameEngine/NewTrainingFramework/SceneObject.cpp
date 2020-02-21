@@ -10,7 +10,7 @@ SceneObject::SceneObject(GLint id)
 	:SceneObject{ id, Type::NORMAL } {}
 
 SceneObject::SceneObject(GLint id, Type type)
-	: id{ id }, name{}, model{ nullptr }, shader{ nullptr }, textures{}, wiredFormat{ false }, type{ type }, modified{ false }, followingCamera{}, offset{}, reflection{ false } {}
+	: Collidable{ true }, id{ id }, name{}, model{ nullptr }, shader{ nullptr }, textures{}, wiredFormat{ false }, type{ type }, modified{ false }, followingCamera{}, offset{}, reflection{ false } {}
 
 void SceneObject::draw()
 {
@@ -395,6 +395,53 @@ void SceneObject::sendLineData(const std::shared_ptr<Shader>& shader)
 	}
 }
 
+bool SceneObject::collides(Collidable* object) const
+{
+	if (const auto & sceneObject = dynamic_cast<SceneObject*>(object))
+	{
+		// Used in algebra
+		Vector4 auxiliaryVector;
+
+		// Extract extreme points
+		const auto& localCoordsOb1 = this->model->getCollisionCoordinates();
+		const auto& localCoordsOb2 = sceneObject->model->getCollisionCoordinates();
+
+		// Compute model matrix for the first object
+		Matrix matrix = Matrix().SetTranslation(const_cast<Vector3&>(position));
+
+		// Calculate new extreme points for the first object, in world space
+		auxiliaryVector = Vector4(localCoordsOb1[0][0], localCoordsOb1[0][1], localCoordsOb1[0][2], 1.0f) * matrix;
+		const Vector3& maxCoordsOb1 = { auxiliaryVector.x, auxiliaryVector.y, auxiliaryVector.z };
+		auxiliaryVector = Vector4(localCoordsOb1[1][0], localCoordsOb1[1][1], localCoordsOb1[1][2], 1.0f) * matrix;
+		const Vector3& minCoordsOb1 = { auxiliaryVector.x, auxiliaryVector.y, auxiliaryVector.z };
+
+		// Compute model matrix for the second object
+		matrix = Matrix().SetTranslation(const_cast<Vector3&>(sceneObject->position));
+
+		// Calculate new extreme points for the second object, in world space
+		auxiliaryVector = Vector4(localCoordsOb2[0][0], localCoordsOb2[0][1], localCoordsOb2[0][2], 1.0f) * matrix;
+		const Vector3& maxCoordsOb2 = { auxiliaryVector.x, auxiliaryVector.y, auxiliaryVector.z };
+		auxiliaryVector = Vector4(localCoordsOb2[1][0], localCoordsOb2[1][1], localCoordsOb2[1][2], 1.0f) * matrix;
+		const Vector3& minCoordsOb2 = { auxiliaryVector.x, auxiliaryVector.y, auxiliaryVector.z };
+
+		bool result = // max(ob1) >= min(ob2) && min(ob1) <= max(ob2)
+			maxCoordsOb1.x >= minCoordsOb2.x && maxCoordsOb1.y >= minCoordsOb2.y && maxCoordsOb1.z >= minCoordsOb2.z &&
+			minCoordsOb1.x <= maxCoordsOb2.x && minCoordsOb1.y <= maxCoordsOb2.y && minCoordsOb1.z <= maxCoordsOb2.z;
+
+		if (result)
+		{
+			static long long int counter = 0;
+			Logger::v(std::to_string(++counter) + ". " + this->name + " collided with " + sceneObject->name);
+			counter = counter < 0 ? counter : counter;
+			//std::cout << "Ob1: " << minCoordsOb1 << ", " << maxCoordsOb1 << '\n';
+			//std::cout << "Ob2: " << minCoordsOb2 << ", " << maxCoordsOb2 << '\n';
+		}
+
+		return result;
+	}
+	return false;
+}
+
 void SceneObject::update()
 {
 	auto camera = SceneManager::getInstance()->getActiveCamera();
@@ -420,6 +467,21 @@ void SceneObject::update()
 	if (trajectory != nullptr)
 	{
 		trajectory->move(this, camera->getDeltaTime());
+	}
+
+	Matrix aux, collisionBox = Matrix().SetScale(scale);
+	collisionBox = collisionBox * aux.SetRotationX(rotation.x);
+	collisionBox = collisionBox * aux.SetRotationY(rotation.y);
+	collisionBox = collisionBox * aux.SetRotationZ(rotation.z);
+	model->updateCollisionBox(collisionBox);
+
+	// Check if the object collides with something else
+	for (const auto& object : SceneManager::getInstance()->getSceneObjects())
+	{
+		if (this != object.get())
+		{
+			this->collideWith(object.get());
+		}
 	}
 }
 
@@ -635,4 +697,24 @@ void SceneObject::setNormalMap(const std::shared_ptr<Texture>& normalMap)
 void SceneObject::setTrajectory(const std::shared_ptr<Trajectory>& trajectory)
 {
 	this->trajectory = trajectory;
+}
+
+const Vector3& SceneObject::getCollisionBoxColor() const
+{
+	return collisionBoxColor;
+}
+
+void SceneObject::setCollisionBoxColor(const Vector3& collisionBoxColor)
+{
+	this->collisionBoxColor = collisionBoxColor;
+}
+
+const Vector3& SceneObject::getDefaultCollisionBoxColor()
+{
+	return SceneObject::defaultCollisionBoxColor;
+}
+
+void SceneObject::setDefaultCollisionBoxColor(const Vector3& collisionBoxColor)
+{
+	SceneObject::defaultCollisionBoxColor = collisionBoxColor;
 }

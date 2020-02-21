@@ -36,6 +36,9 @@ public:
 	template<typename Type>
 	std::shared_ptr<Type> load(GLint id);
 
+	// Load model with collision box color being specified
+	std::shared_ptr<Model> load(GLint id, const Vector3& collisionBoxColor);
+
 	// Get Singleton Instance
 	static ResourceManager* getInstance();
 

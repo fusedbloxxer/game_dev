@@ -4,6 +4,7 @@
 #include "Drawable.h"
 #include "Texture.h"
 #include "Shader.h"
+#include "Logger.h"
 #include "Model.h"
 #include <string>
 #include <vector>
@@ -11,7 +12,58 @@
 
 class Trajectory;
 
-class SceneObject : public Drawable
+class OnCollisionListener
+{
+public:
+	virtual void onCollision() const = 0;
+	virtual ~OnCollisionListener() = default;
+};
+
+class Collidable {
+	bool isCollisionEnabled;
+	std::unique_ptr<OnCollisionListener> collisionListener;
+
+protected:
+	Collidable(bool isCollisionEnabled = true, OnCollisionListener* collisionListener = nullptr)
+		: isCollisionEnabled{ isCollisionEnabled }, collisionListener{ collisionListener } {}
+
+public:
+	// Implement rule when two objects collide.
+	virtual bool collides(Collidable* object) const = 0;
+
+	// Uses template pattern to separate implementation details.
+	virtual bool collideWith(Collidable* object) const {
+		if (isCollisionEnabled && object->isCollisionEnabled && collides(object))
+		{
+			// We have a listener attached.
+			if (collisionListener != nullptr)
+			{
+				collisionListener->onCollision();
+			}
+			return true;
+		}
+		return false;
+	}
+
+	// Attach a listener to execute it when a collision appears.
+	void addOnCollisionListener(OnCollisionListener* onCollisionListener) {
+		this->collisionListener = std::unique_ptr<OnCollisionListener>(onCollisionListener);
+	}
+
+	void enableCollision()
+	{
+		this->isCollisionEnabled = true;
+	}
+
+	void disableCollision()
+	{
+		this->isCollisionEnabled = false;
+	}
+
+	virtual ~Collidable() = default;
+};
+
+class SceneObject : public Drawable, public Collidable
 {
 public:
 	// Axis Shader
@@ -26,6 +78,9 @@ public:
 	};
 
 protected:
+	// Collision Box Default Color
+	inline static Vector3 defaultCollisionBoxColor;
+
 	// Object id
 	GLint id;
 
@@ -54,7 +109,7 @@ protected:
 	GLboolean wiredFormat;
 
 	// Vector3 object properties
-	Vector3 position, rotation, scale, color, followingCamera, offset;
+	Vector3 position, rotation, scale, color, followingCamera, offset, collisionBoxColor;
 
 	// Pointer to its textures
 	std::vector<std::shared_ptr<Texture>> textures;
@@ -92,6 +147,9 @@ public:
 	// Update objects
 	virtual void update() override;
 
+	// Inherited via Collidable
+	virtual bool collides(Collidable* object) const override;
+
 	// Convert const char * to SceneObject::Type
 	static Type atot(const char* type);
 
@@ -120,6 +178,12 @@ public:
 
 	Vector3& getFollowingCamera();
 	void setFollowingCamera(const Vector3& followingCamera);
+
+	const Vector3& getCollisionBoxColor() const;
+	void setCollisionBoxColor(const Vector3& collisionBoxColor);
+
+	static const Vector3& getDefaultCollisionBoxColor();
+	static void setDefaultCollisionBoxColor(const Vector3& collisionBoxColor);
 
 	Vector3& getPosition();
 	void setPosition(const Vector3& position);

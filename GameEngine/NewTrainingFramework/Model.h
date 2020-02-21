@@ -41,9 +41,15 @@ class Model : public Loadable
 	// Represents the collision box vertices
 	std::vector<VertexAxis> AABBs;
 
+	// Collision Box Color
+	Vector3 collisionBoxColor;
+	
+	// Contains the maximum x, y, z values on the upper row and the min values on the lower row
+	GLfloat m[2][3];
+
 public:
 	// Constructor
-	Model(std::shared_ptr<ModelResource> mr = nullptr);
+	Model(std::shared_ptr<ModelResource> mr = nullptr, const Vector3& collisionBoxColor = { 0.0f, 0.0f, 0.0f });
 
 	// Initializer
 	Model& init(std::shared_ptr<ModelResource> mr);
@@ -95,6 +101,12 @@ public:
 
 	GLuint getNoCollisionIndices() const;
 	void setNoCollisionIndices(GLuint count);
+
+	const Vector3& getCollisionBoxColor() const;
+	void setCollisionBoxColor(const Vector3& collisionBoxColor);
+
+	// Use trailing return type to send a reference to the matrix
+	auto getCollisionCoordinates() const -> const GLfloat(&)[2][3];
 
 	AxisModel& getAxisModel();
 

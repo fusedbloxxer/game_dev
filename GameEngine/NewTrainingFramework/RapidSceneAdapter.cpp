@@ -11,7 +11,6 @@
 #include "SpotLight.h"
 #include <algorithm>
 #include "Logger.h"
-#include <sstream>
 #include <fstream>
 #include <numeric>
 #include <string>
@@ -23,13 +22,15 @@ Fog RapidSceneAdapter::getFog() const
 {
 	auto fog = root->first_node("fog"); if (!fog) { throw std::runtime_error{ "No fog was found !" }; }
 	auto radius = fog->first_node("radius"); if (!radius) { throw std::runtime_error{ "No radius was found." }; }
-	auto fogClarityRadius = radius->first_node("r"); if (!fogClarityRadius) { throw std::runtime_error{ "No r was found." }; }
 	auto fogTransiRadius = radius->first_node("R"); if (!fogTransiRadius) { throw std::runtime_error{ "No R was found." }; }
-	auto color = loadVector(fog->first_node("color"), "r", "g", "b");
+	auto fogClarityRadius = radius->first_node("r"); if (!fogClarityRadius) { throw std::runtime_error{ "No r was found." }; }
+	auto color = checkAndLoadVector(fog->first_node("color"), "r", "g", "b");
 
-	return { {color.x / 256.0f, color.y / 256.0f, color.z / 256.0f},
+	return {
+		{color.x / 256.0f, color.y / 256.0f, color.z / 256.0f},
 		static_cast<GLfloat>(atof(fogClarityRadius->value())),
-		static_cast<GLfloat>(atof(fogTransiRadius->value())) };
+		static_cast<GLfloat>(atof(fogTransiRadius->value()))
+	};
 }
 
 std::shared_ptr<Shader> RapidSceneAdapter::getAxis() const
@@ -50,7 +51,7 @@ GLint RapidSceneAdapter::getActiveCameraId() const
 
 Vector3 RapidSceneAdapter::getBackground() const
 {
-	return loadVector(root->first_node("backgroundColor"), "r", "g", "b");
+	return checkAndLoadVector(root->first_node("backgroundColor"), "r", "g", "b");
 }
 
 std::string RapidSceneAdapter::getGameTitle() const
@@ -179,7 +180,7 @@ std::shared_ptr<Trajectory> RapidSceneAdapter::loadTrajectory(rapidxml::xml_node
 				{
 					for (auto point = points->first_node("point"); point; point = point->next_sibling())
 					{
-						transport.push_back(loadVector(point));
+						transport.push_back(checkAndLoadVector(point));
 					}
 
 					lineTrajectory->setPoints(transport);
@@ -206,7 +207,9 @@ std::shared_ptr<Trajectory> RapidSceneAdapter::loadTrajectory(rapidxml::xml_node
 		case Trajectory::Type::CIRCLE:
 		{
 			auto circle = dynamic_cast<CircleTrajectory*>(trajectory.get());
-			circle->setCenter(loadVector(trajectoryXml->first_node("center")));
+
+			circle->setRotationPlane(checkAndLoadVector(trajectoryXml->first_node("rotationPlane")));
+			circle->setCenter(checkAndLoadVector(trajectoryXml->first_node("center")));
 
 			if (auto radius = trajectoryXml->first_node("radius"))
 			{
@@ -215,15 +218,6 @@ std::shared_ptr<Trajectory> RapidSceneAdapter::loadTrajectory(rapidxml::xml_node
 			else
 			{
 				throw std::runtime_error{ "No radius was found." };
-			}
-
-			if (auto rotationPlane = trajectoryXml->first_node("rotationPlane"))
-			{
-				circle->setRotationPlane(loadVector(rotationPlane));
-			}
-			else
-			{
-				throw std::runtime_error{ "No rotationPlane was found." };
 			}
 		}
 		break;
@@ -276,15 +270,22 @@ std::shared_ptr<Texture> RapidSceneAdapter::loadNormalMap(rapidxml::xml_node<>* 
 std::vector<std::shared_ptr<SceneObject>> RapidSceneAdapter::getSceneObjects(const Vector3& activeCamera) const
 {
 	auto objects = root->first_node("objects"); if (!objects) { throw std::runtime_error{ "Could not find objects in file." }; }
+	SceneObject::setDefaultCollisionBoxColor(checkAndLoadVector(objects->first_node("defaultCollisionBoxColor"), "r", "g", "b"));
 	std::vector<std::shared_ptr<SceneObject>> sceneObjects;
 
 	for (auto object = objects->first_node("object"); object; object = object->next_sibling())
 	{
+		auto cbb = object->first_node("collisionBoxColor");
+		
+		const auto& collisionBoxColor = cbb != nullptr ? checkAndLoadVector(object->first_node("collisionBoxColor"), "r", "g", "b")
+			: SceneObject::getDefaultCollisionBoxColor();
+		
 		auto shader = object->first_node("shader"); if (!shader) { throw std::runtime_error{ "Object doesn't have a shader in sceneManager." }; }
 		auto name = object->first_node("name"); if (!name) { throw std::runtime_error{ "Object doesn't have a name in sceneManager." }; }
 		auto type = object->first_node("type"); if (!type) { throw std::runtime_error{ "Object doesn't have a type in sceneManager." }; }
 		auto id = object->first_attribute("id"); if (!id) { throw std::runtime_error{ "Object doesn't have an id in sceneManager." }; }
-		auto kdif = object->first_node("kdif"), kspec = object->first_node("kspec");
+		auto kspec = object->first_node("kspec"); if (!kspec) { throw std::runtime_error{ "Object doesn't have a kspec value." }; }
+		auto kdif = object->first_node("kdif"); if (!kdif) { throw std::runtime_error{ "Object doesn't have a kdif value." }; }
 
 		const auto& idValue = atoi(id->value());
 
@@ -300,16 +301,17 @@ std::vector<std::shared_ptr<SceneObject>> RapidSceneAdapter::getSceneObjects(con
 		auto builder = std::unique_ptr<SceneObjectBuilder>(SceneObjectBuilderFactory::newBuilderInstance(SceneObject::atot(type->value()), idValue));
 
 		builder->setShader(ResourceManager::getInstance()->load<Shader>(atoi(shader->value())))
-			.setKSpec(kspec ? static_cast<GLfloat>(::atof(kspec->value())) : 1.0f)
-			.setKDif(kdif ? static_cast<GLfloat>(::atof(kdif->value())) : 1.0f)
-			.setPosition(loadVector(object->first_node("position")))
-			.setRotation(loadVector(object->first_node("rotation")))
-			.setScale(loadVector(object->first_node("scale")))
-			.setColor(loadVector(object->first_node("color"), "r", "g", "b"))
+			.setColor(checkAndLoadVector(object->first_node("color"), "r", "g", "b"))
 			.setTrajectory(loadTrajectory(object->first_node("trajectory")))
+			.setPosition(checkAndLoadVector(object->first_node("position")))
+			.setRotation(checkAndLoadVector(object->first_node("rotation")))
 			.setReflection(object->first_node("reflection") != nullptr)
+			.setScale(checkAndLoadVector(object->first_node("scale")))
 			.setWiredFormat(object->first_node("wired") != nullptr)
+			.setKSpec(static_cast<GLfloat>(::atof(kspec->value())))
+			.setKDif(static_cast<GLfloat>(::atof(kdif->value())))
 			.setFollowingCamera(loadFollowingCamera(object))
+			.setCollisionBoxColor(collisionBoxColor)
 			.setNormalMap(loadNormalMap(object))
 			.setTextures(loadTextures(object))
 			.setName(name->value());
@@ -325,7 +327,7 @@ void RapidSceneAdapter::setSpecificProperties(std::unique_ptr<SceneObjectBuilder
 {
 	if (auto terrain = dynamic_cast<TerrainObjectBuilder*>(builder.get()))
 	{
-		auto rgb = loadVector(object->first_node("colorBind"), "r", "g", "b");
+		auto rgb = checkAndLoadVector(object->first_node("colorBind"), "r", "g", "b");
 		auto cells = object->first_node("cells"); if (!cells) { throw std::runtime_error{ "Could not find cells for special object." }; }
 		auto size = cells->first_node("size"); if (!size) { throw std::runtime_error{ "Could not find cell-size for special object." }; }
 		auto count = cells->first_node("count"); if (!count) { throw std::runtime_error{ "Could not find cell-count for special object." }; }
@@ -335,13 +337,13 @@ void RapidSceneAdapter::setSpecificProperties(std::unique_ptr<SceneObjectBuilder
 		terrain->setCenter(activeCamera);
 		terrain->setSideCells(atoi(count->value()));
 		terrain->setCellSize(GLfloat(atof(size->value())));
-		terrain->setHeight(loadVector(object->first_node("height"), "r", "g", "b"));
+		terrain->setHeight(checkAndLoadVector(object->first_node("height"), "r", "g", "b"));
 		terrain->setColorBind((GLuint)rgb.x, (GLuint)rgb.y, (GLuint)rgb.z, atoi(blend->value()));
 	}
 	else
 	{
 		auto model = object->first_node("model"); if (!model) { throw std::runtime_error{ "Object doesn't have a model in sceneManager." }; }
-		builder->setModel(ResourceManager::getInstance()->load<Model>(atoi(model->value())));
+		builder->setModel(ResourceManager::getInstance()->load(::atoi(model->value()), builder->getCollisionBoxColor()));
 
 		if (auto fire = dynamic_cast<FireObjectBuilder*>(builder.get()))
 		{
@@ -359,8 +361,8 @@ std::shared_ptr<AmbientLight> RapidSceneAdapter::getAmbientLight() const
 	}
 	else if (auto ambientalLight = root->first_node("lights")->first_node("ambientalLight"))
 	{
-		auto ratio = ambientalLight->first_node("ratio");
-		auto color = loadVector(ambientalLight->first_node("color"), "r", "g", "b");
+		auto color = checkAndLoadVector(ambientalLight->first_node("color"), "r", "g", "b");
+		auto ratio = ambientalLight->first_node("ratio"); if (!ratio) { throw std::runtime_error{ "Ambiental light doesn't specify the ratio." }; }
 		return std::make_shared<AmbientLight>(color, static_cast<GLfloat>(ratio ? ::atof(ratio->value()) : 1.0f));
 	}
 	else
@@ -383,13 +385,14 @@ std::vector<std::shared_ptr<Light>> RapidSceneAdapter::getLights() const
 		for (auto light = lightsXml->first_node("light"); light; light = light->next_sibling())
 		{
 			// Send everything that is needed
-			auto specPower = light->first_node("specPower");
 			auto asObjId = light->first_node("associatedObj");
-			auto direction = loadVector(light->first_node("direction"), "x", "y", "z");
-			auto diffuseColor = loadVector(light->first_node("diffuseColor"), "r", "g", "b");
-			auto specularColor = loadVector(light->first_node("specularColor"), "r", "g", "b");
+			auto direction = checkAndLoadVector(light->first_node("direction"));
+			auto diffuseColor = checkAndLoadVector(light->first_node("diffuseColor"), "r", "g", "b");
+			auto specularColor = checkAndLoadVector(light->first_node("specularColor"), "r", "g", "b");
 			auto id = light->first_attribute("id"); if (!id) { throw std::runtime_error{ "Light doesn't have an id." }; }
 			auto type = light->first_node("type"); if (!type) { throw std::runtime_error{ "Light doesn't have a type." }; }
+			auto specPower = light->first_node("specPower");  if (!specPower) { throw std::runtime_error{ "Light doesn't specify a specPower." }; }
+
 			if (strcmp(type->value(), "spotlight") == 0 && !asObjId) { throw std::runtime_error("Spotlight doesn't have an associated obj id."); }
 
 			// Check if id doesn't already exist.
@@ -439,8 +442,8 @@ std::unordered_map<GLint, std::shared_ptr<Camera>> RapidSceneAdapter::getCameras
 		auto id = camera->first_attribute("id"); if (!id) { throw std::runtime_error{ "No camera id was detected for a camera in sceneManager." }; }
 		auto farP = camera->first_node("far"); if (!farP) { throw std::runtime_error{ "No camera far was detected for a camera in sceneManager." }; }
 		auto type = camera->first_node("type"); if (!type) { throw std::runtime_error{ "No camera type was detected for a camera in sceneManager." }; }
-		auto nearP = camera->first_node("near"); if (!nearP) { throw std::runtime_error{ "No camera near was detected for a camera in sceneManager." }; }
 		auto rotation = camera->first_node("rotationSpeed"); if (!rotation) { throw std::runtime_error{ "No camera rotationSpeed in sceneManager." }; }
+		auto nearP = camera->first_node("near"); if (!nearP) { throw std::runtime_error{ "No camera near was detected for a camera in sceneManager." }; }
 		auto translation = camera->first_node("translationSpeed"); if (!translation) { throw std::runtime_error{ "No camera translationSpeed in sceneManager." }; }
 
 		const auto& idValue = ::atoi(id->value());
@@ -455,11 +458,11 @@ std::unordered_map<GLint, std::shared_ptr<Camera>> RapidSceneAdapter::getCameras
 		}
 
 		auto cameraObject = CameraBuilder(idValue, static_cast<GLfloat>(width), static_cast<GLfloat>(height))
-			.setPosition(loadVector(camera->first_node("position")))
-			.setTarget(loadVector(camera->first_node("target")))
+			.setPosition(checkAndLoadVector(camera->first_node("position")))
+			.setTarget(checkAndLoadVector(camera->first_node("target")))
+			.setUp(checkAndLoadVector(camera->first_node("up")))
 			.setMoveSpeed(GLfloat(atof(translation->value())))
 			.setRotateSpeed(GLfloat(atof(rotation->value())))
-			.setUp(loadVector(camera->first_node("up")))
 			.setNear(GLfloat(atof(nearP->value())))
 			.setFar(GLfloat(atof(farP->value())))
 			.setType(Camera::atot(type->value()))
@@ -471,19 +474,17 @@ std::unordered_map<GLint, std::shared_ptr<Camera>> RapidSceneAdapter::getCameras
 	return cameraMap;
 }
 
-Vector3 RapidSceneAdapter::loadVector(rapidxml::xml_node<>* root, const char xP[2], const char yP[2], const char zP[2]) const
+Vector3 RapidSceneAdapter::checkAndLoadVector(rapidxml::xml_node<>* root, const char xP[2], const char yP[2], const char zP[2]) const
 {
-	GLfloat x = 0.0f, y = 0.0f, z = 0.0f;
-
 	if (root)
 	{
 		auto xPos = root->first_node(xP); if (!xPos) { throw std::runtime_error{ "X value is missing from file." }; }
 		auto yPos = root->first_node(yP); if (!yPos) { throw std::runtime_error{ "Y value is missing from file." }; }
 		auto zPos = root->first_node(zP); if (!zPos) { throw std::runtime_error{ "Z value is missing from file." }; }
-		x = GLfloat(atof(xPos->value()));
-		y = GLfloat(atof(yPos->value()));
-		z = GLfloat(atof(zPos->value()));
+		return { static_cast<GLfloat>(::atof(xPos->value())), static_cast<GLfloat>(::atof(yPos->value())), static_cast<GLfloat>(::atof(zPos->value())) };
 	}
-
-	return { x, y, z };
+	else
+	{
+		throw std::runtime_error{ "No values were found." };
+	}
 }
