@@ -5,9 +5,10 @@
 #include <numeric>
 
 SpotLight::SpotLight(const GLint id, const GLint aObj, const Vector3& diffuseColor, const Vector3& specularColor, const GLfloat specPower, const Vector3& direction, const GLfloat in, const GLfloat out)
-	:NormalLight{ SPOT_LIGHT, id, diffuseColor, specularColor, specPower, direction } 
+	:NormalLight{ SPOT_LIGHT, id, aObj, diffuseColor, specularColor, specPower, direction }
 {
-	setAObj(aObj); setInnerCutoff(in); setOuterCutoff(out);
+	setInnerCutoff(in);
+	setOuterCutoff(out);
 }
 
 void SpotLight::print(std::ostream& os) const
@@ -15,26 +16,6 @@ void SpotLight::print(std::ostream& os) const
 	std::cout << "SpotLight: [";
 	NormalLight::print(os);
 	std::cout << "]";
-}
-
-const GLint SpotLight::getAObj() const
-{
-	return aObj;
-}
-
-inline void SpotLight::setAObj(const GLint aObj)
-{
-	auto objs = SceneManager::getInstance()->getSceneObjects();
-	auto exists = std::count_if(objs.cbegin(), objs.cend(), [&aObj](const auto& o) { return aObj == o->getId(); }) != 0;
-
-	if (exists)
-	{
-		this->aObj = aObj;
-	}
-	else
-	{
-		throw std::runtime_error{ "Associated object id does not exist." };
-	}
 }
 
 inline constexpr const GLfloat& checkCutoff(const GLfloat& cutoff)

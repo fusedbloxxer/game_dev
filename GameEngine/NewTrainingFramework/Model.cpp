@@ -80,6 +80,52 @@ void Model::loadNormals(const std::vector<VertexType>& vertices)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+void Model::updateNormals(const Matrix& worldMatrix)
+{
+	// Used to calculate new coordinates
+	Vector4 aux; VertexAxis data;
+
+	// Red color
+	data.color.x = 1.0f;
+
+	// Container
+	std::vector<VertexAxis> normals;
+
+	// Populate vector
+	for (decltype(vertices.size()) it = 0; it < vertices.size(); ++it)
+	{
+		// Copy data
+		aux.x = vertices[it].x;
+		aux.y = vertices[it].y;
+		aux.z = vertices[it].z;
+		aux.w = 1.0f;
+
+		// Calculate world vertices
+		aux = aux * worldMatrix;
+
+		// Copy the new values
+		data.pos.x = aux.x;
+		data.pos.y = aux.y;
+		data.pos.z = aux.z;
+
+		// Send the vertex to the vector
+		normals.push_back(data);
+
+		// Calculate the new normal
+		data.pos += this->normals[it] * 5;
+
+		// And add the respective normal to the new vertex, making the pair complete
+		normals.push_back(data);
+	}
+
+	// Send the data to the buffer
+	glBindBuffer(GL_ARRAY_BUFFER, normalVboId);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, (noNormalInd = normals.size()) * sizeof(VertexAxis), normals.data());
+
+	// Close the buffer
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
 template<typename VertexType>
 inline void Model::loadAxisModel(const std::vector<VertexType>& vertices)
 {

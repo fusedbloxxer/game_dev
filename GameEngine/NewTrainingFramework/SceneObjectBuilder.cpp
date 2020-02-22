@@ -7,6 +7,7 @@ SceneObjectBuilder::SceneObjectBuilder(SceneObject::Type type, GLint id)
 void SceneObjectBuilder::sendCommonProperties(SceneObject* base) const
 {
 	base->setCollisionBoxColor(collisionBoxColor);
+	base->setAssociatedLight(associatedLight);
 	base->setFollowingCamera(followingCamera);
 	base->setWiredFormat(wiredFormat);
 	base->setTrajectory(trajectory);
@@ -98,6 +99,12 @@ SceneObjectBuilder& SceneObjectBuilder::setNormalMap(const std::shared_ptr<Textu
 SceneObjectBuilder& SceneObjectBuilder::setTrajectory(const std::shared_ptr<Trajectory> trajectory)
 {
 	this->trajectory = trajectory;
+	return *this;
+}
+
+SceneObjectBuilder& SceneObjectBuilder::setAssociatedLight(const GLint associatedLight)
+{
+	this->associatedLight = associatedLight;
 	return *this;
 }
 

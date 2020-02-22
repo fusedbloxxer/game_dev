@@ -3,7 +3,6 @@
 
 class SpotLight : public NormalLight
 {
-	GLint aObj;
 	GLfloat innerCutoff = 0.9f;
 	GLfloat outerCutoff = 0.81f;
 
@@ -12,9 +11,7 @@ public:
 	
 	virtual void print(std::ostream& os) const override;
 
-	const GLint getAObj() const;
-	void setAObj(const GLint aObj);
-
+	// Getters and setters
 	const GLfloat getInnerCutoff() const;
 	void setInnerCutoff(const GLfloat innerCutoff);
 
@@ -25,4 +22,3 @@ public:
 
 	virtual ~SpotLight() = default;
 };
-

@@ -84,7 +84,7 @@ void main()
 		vec3 N = normalize(v_Wnorm);
 		mat3 TBN = mat3(T, B, N);
 
-		v_normal = normalize(TBN * v_normal);
+		v_normal = normalize(v_Wnorm + TBN * v_normal);
 	}
 	else
 	{
@@ -125,5 +125,5 @@ void main()
 	// Apply fog
 	float distance  = distance(vec4(u_camera, 1.0), v_pos);
 	float alpha = (clamp(distance, u_fog_r, u_fog_R) - u_fog_r) / (u_fog_R - u_fog_r); 
-	gl_FragColor = alpha * vec4(u_fog_color, 1.0) + (1.0 - alpha) * obj_color;	
+	gl_FragColor = alpha * vec4(u_fog_color, 1.0) + (1.0 - alpha) * obj_color;
 }

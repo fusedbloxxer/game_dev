@@ -347,7 +347,8 @@
       <shader>5</shader>
       <type>normal</type>
       <name>Minge cu reflexie</name>
-      <kspec>0.0</kspec>
+      <associatedLight>2</associatedLight>
+      <kspec>1.0</kspec>
       <kdif>1.0</kdif>
       <reflection/>
       <color>
@@ -377,9 +378,9 @@
       <shader>3</shader>
       <type>normal</type>
       <name>Realistic brick-sphere</name>
-      <normalMap>25</normalMap>
-      <kspec>0.75</kspec>
-      <kdif>0.25</kdif>
+      <associatedLight>2</associatedLight>
+      <kspec>0.5</kspec>
+      <kdif>1.0</kdif>
       <textures>
         <texture id="14"/>
       </textures>
@@ -775,7 +776,7 @@
       <type>normal</type>
       <name>Train</name>
       <kdif>1.0</kdif>
-      <kspec>0.8</kspec>
+      <kspec>1.0</kspec>
       <normalMap>25</normalMap>
       <textures>
         <texture id ="24"/>
@@ -812,13 +813,13 @@
       <shader>5</shader>
       <type>normal</type>
       <name>Minge simpla colorata</name>
+      <normalMap>25</normalMap>
       <kdif>1.0</kdif>
       <kspec>1.0</kspec>
-      <normalMap>25</normalMap>
       <color>
         <r>1.0</r>
-        <g>0.0</g>
-        <b>0.0</b>
+        <g>1.0</g>
+        <b>1.0</b>
       </color>
       <position>
         <x>-1250.0</x>
@@ -844,7 +845,7 @@
       <name>Waterball</name>
       <reflection/>
       <kdif>1</kdif>
-      <kspec>0.2</kspec>
+      <kspec>0.1</kspec>
       <textures>
         <texture id="18"/>
       </textures>
@@ -875,8 +876,9 @@
       <shader>3</shader>
       <type>normal</type>
       <name>School bus</name>
+      <normalMap>25</normalMap>
       <kdif>1.0</kdif>
-      <kspec>0.5</kspec>
+      <kspec>1.0</kspec>
       <textures>
         <texture id="23"/>
       </textures>
@@ -922,10 +924,6 @@
       <name>Lightball</name>
       <kdif>0.95</kdif>
       <kspec>0.90</kspec>
-      <followingCamera>
-        <ox></ox>
-        <oz></oz>
-      </followingCamera>
       <color>
         <r>1.0</r>
         <g>1.0</g>
@@ -959,7 +957,7 @@
         <g>1.0</g>
         <b>1.0</b>
       </color>
-      <ratio>0.5</ratio>
+      <ratio>0.3</ratio>
     </ambientalLight>
 
     <light id="1">
@@ -1001,6 +999,7 @@
         <g>1.0</g>
         <b>1.0</b>
       </specularColor>
+      <associatedObj>1</associatedObj>
       <specPower>128</specPower>
       <type>point</type>
     </light>

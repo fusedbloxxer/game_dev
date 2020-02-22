@@ -9,7 +9,7 @@ std::shared_ptr<Light> LightFactory::newInstance(const char* lightType, const GL
 {
 	if (strcmp(lightType, "point") == 0)
 	{
-		return std::make_shared<PointLight>(id, diff, sp, spow, dir);
+		return std::make_shared<PointLight>(id, aObj, diff, sp, spow, dir);
 	} 
 	else if (strcmp(lightType, "directional") == 0)
 	{

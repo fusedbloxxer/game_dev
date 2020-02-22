@@ -8,6 +8,9 @@
 
 class NormalLight : public Light, public Drawable
 {
+public:
+	inline static constexpr GLint STATE_NOT_ASSOCIATED = -1;
+
 protected:
 	inline static std::shared_ptr<Shader> debugShader;
 	inline static std::shared_ptr<Model> debugModel;
@@ -21,9 +24,10 @@ protected:
 	Vector3 direction;
 	GLfloat specPower;
 	GLuint lightType;
-	GLint id;
+	GLint id, aObj;
 
-	NormalLight(const GLuint lightType, const GLint id, const Vector3& diffuseColor = { 0.0f, 0.0f, 0.0f }, const Vector3& specularColor = { 0.0f, 0.0f, 0.0f }, const GLfloat specPower = 0, const Vector3 & direction = { 0.0f, 0.0f, 0.0f });
+	NormalLight(const GLuint lightType, const GLint id, const GLint aObj, const Vector3& diffuseColor = { 0.0f, 0.0f, 0.0f }, const Vector3& specularColor = { 0.0f, 0.0f, 0.0f }, const GLfloat specPower = 0, const Vector3 & direction = { 0.0f, 0.0f, 0.0f });
+	NormalLight(const GLuint lightType, const GLint id, const Vector3& diffuseColor = { 0.0f, 0.0f, 0.0f }, const Vector3& specularColor = { 0.0f, 0.0f, 0.0f }, const GLfloat specPower = 0, const Vector3& direction = { 0.0f, 0.0f, 0.0f });
 
 public:
 	// Inherited via Drawable
@@ -55,6 +59,9 @@ public:
 	void setDirection(const Vector3& direction);
 
 	const Matrix& getDebugModelMatrix() const;
+
+	const GLint getAObj() const;
+	void setAObj(const GLint aObj);
 
 	virtual ~NormalLight() = 0;
 };

@@ -286,6 +286,7 @@ std::vector<std::shared_ptr<SceneObject>> RapidSceneAdapter::getSceneObjects(con
 		auto id = object->first_attribute("id"); if (!id) { throw std::runtime_error{ "Object doesn't have an id in sceneManager." }; }
 		auto kspec = object->first_node("kspec"); if (!kspec) { throw std::runtime_error{ "Object doesn't have a kspec value." }; }
 		auto kdif = object->first_node("kdif"); if (!kdif) { throw std::runtime_error{ "Object doesn't have a kdif value." }; }
+		auto aLight = object->first_node("associatedLight");
 
 		const auto& idValue = atoi(id->value());
 
@@ -301,6 +302,7 @@ std::vector<std::shared_ptr<SceneObject>> RapidSceneAdapter::getSceneObjects(con
 		auto builder = std::unique_ptr<SceneObjectBuilder>(SceneObjectBuilderFactory::newBuilderInstance(SceneObject::atot(type->value()), idValue));
 
 		builder->setShader(ResourceManager::getInstance()->load<Shader>(atoi(shader->value())))
+			.setAssociatedLight(aLight ? static_cast<GLint>(::atoi(aLight->value())) : SceneObject::STATE_NOT_ASSOCIATED)
 			.setColor(checkAndLoadVector(object->first_node("color"), "r", "g", "b"))
 			.setTrajectory(loadTrajectory(object->first_node("trajectory")))
 			.setPosition(checkAndLoadVector(object->first_node("position")))
@@ -393,7 +395,10 @@ std::vector<std::shared_ptr<Light>> RapidSceneAdapter::getLights() const
 			auto type = light->first_node("type"); if (!type) { throw std::runtime_error{ "Light doesn't have a type." }; }
 			auto specPower = light->first_node("specPower");  if (!specPower) { throw std::runtime_error{ "Light doesn't specify a specPower." }; }
 
-			if (strcmp(type->value(), "spotlight") == 0 && !asObjId) { throw std::runtime_error("Spotlight doesn't have an associated obj id."); }
+			if ((strcmp(type->value(), "spotlight") == 0) && !asObjId) 
+			{
+				throw std::runtime_error("SpotLight/PointLight doesn't have an associated obj id."); 
+			}
 
 			// Check if id doesn't already exist.
 			GLint lightId = static_cast<GLint>(::atoi(id->value()));
@@ -411,7 +416,7 @@ std::vector<std::shared_ptr<Light>> RapidSceneAdapter::getLights() const
 					specularColor,
 					specPower ? static_cast<GLfloat>(::atof(specPower->value())) : 0.0f,
 					direction,
-					asObjId ? static_cast<GLint>(::atoi(asObjId->value())) : 0
+					asObjId ? static_cast<GLint>(::atoi(asObjId->value())) : NormalLight::STATE_NOT_ASSOCIATED
 				)
 			);
 

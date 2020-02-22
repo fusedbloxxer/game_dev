@@ -1,3 +1,8 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(459,5): warning MSB8028: The intermediate directory (Debug-Nvidia\) contains files shared from another project (GameEngine.vcxproj, NewTrainingFramework.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Camera.cpp
+  SceneObject.cpp
+D:\Git\game_dev\GameEngine\NewTrainingFramework\SceneObject.cpp(168,30): warning C4018: '<': signed/unsigned mismatch
+D:\Git\game_dev\GameEngine\NewTrainingFramework\SceneObject.cpp(176,81): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+  Generating Code...
+AmbientLight.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
   NewTrainingFramework.vcxproj -> D:\Git\game_dev\GameEngine\\BIN-Nvidia\GameEngine.exe

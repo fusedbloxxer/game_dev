@@ -31,6 +31,9 @@ class SceneObjectBuilder : public IBuilder<SceneObject>
 	// Pointer to its textures
 	std::vector<std::shared_ptr<Texture>> textures;
 
+	// If !STATE_NOT_ASSOCIATED, then the object will be affected only by this light source
+	GLint associatedLight;
+
 	// Vector3 object properties
 	Vector3 position, rotation, scale, color, followingCamera, offset, collisionBoxColor;
 
@@ -62,6 +65,7 @@ public:
 	SceneObjectBuilder& setWiredFormat(GLboolean wiredFormat);
 	SceneObjectBuilder& setModel(std::shared_ptr<Model> model);
 	SceneObjectBuilder& setShader(std::shared_ptr<Shader> shader);
+	SceneObjectBuilder& setAssociatedLight(const GLint associatedLight);
 	SceneObjectBuilder& setFollowingCamera(const Vector3& followingCamera);
 	SceneObjectBuilder& setCollisionBoxColor(const Vector3& collisionBoxColor);
 	SceneObjectBuilder& setNormalMap(const std::shared_ptr<Texture>& normalMap);

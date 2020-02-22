@@ -71,7 +71,7 @@ void main()
 		vec3 N = normalize(v_Wnorm);
 		mat3 TBN = mat3(T, B, N);
 
-		v_normal = normalize(TBN * v_normal);
+		v_normal = normalize(v_Wnorm + TBN * v_normal);
 	}
 	else
 	{
@@ -79,7 +79,7 @@ void main()
 	}
 
 	// Apply ambiental light
-	vec3 comp_amb = obj_color.xyz * u_c_amb, v_normal = normalize(v_normal), v_to_camera = normalize(u_camera - v_pos.xyz);
+	vec3 comp_amb = obj_color.xyz * u_c_amb, v_to_camera = normalize(u_camera - v_pos.xyz);
 	vec3 comp_diff_final, comp_spec_final;
 
 	for (int i = 0; i < MAX_LIGHT_SOURCES; ++i)
@@ -109,8 +109,8 @@ void main()
 	// Final component = summing all light components
 	obj_color = vec4(u_r_amb * comp_amb + (1.0 - u_r_amb) * (u_kdif  * comp_diff_final + u_kspec * comp_spec_final), 1.0);
 
-	// Apply Fog
+	// Apply fog
 	float distance  = distance(vec4(u_camera, 1.0), v_pos);
 	float alpha = (clamp(distance, u_fog_r, u_fog_R) - u_fog_r) / (u_fog_R - u_fog_r); 
-	gl_FragColor = alpha * vec4(u_fog_color, 1.0) + (1.0 - alpha) * obj_color;	
+	gl_FragColor = alpha * vec4(u_fog_color, 1.0) + (1.0 - alpha) * obj_color;
 }

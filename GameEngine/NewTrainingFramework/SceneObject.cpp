@@ -167,54 +167,79 @@ void SceneObject::sendCommonData()
 		// Send first directional light source
 		for (auto index = 0; index < count; ++index)
 		{
-			if (const auto & normLight = dynamic_cast<NormalLight*>(lights.at(index).get()))
+			if (const auto& normLight = dynamic_cast<NormalLight*>(lights.at(index).get()))
 			{
-				if (fields.lights[index].lightTypeUniform != -1)
+				if (associatedLight == STATE_NOT_ASSOCIATED || normLight->getId() == associatedLight)
 				{
-					glUniform1f(fields.lights[index].lightTypeUniform, normLight->getLightType());
-				}
-
-				if (fields.lights[index].diffuseColorUniform != -1)
-				{
-					const auto& [x, y, z] = normLight->getDiffuseColor();
-					glUniform3f(fields.lights[index].diffuseColorUniform, x, y, z);
-				}
-
-				if (fields.lights[index].specularColorUniform != -1)
-				{
-					const auto& [x, y, z] = normLight->getSpecularColor();
-					glUniform3f(fields.lights[index].specularColorUniform, x, y, z);
-				}
-
-				if (fields.lights[index].specularPowerUniform != -1)
-				{
-					glUniform1f(fields.lights[index].specularPowerUniform, normLight->getSpecPower());
-				}
-
-				if (fields.lights[index].lightDirectionUniform != -1)
-				{
-					const auto& [x, y, z] = normLight->getDirection();
-					glUniform3f(fields.lights[index].lightDirectionUniform, x, y, z);
-				}
-
-				if (const auto & spotLight = dynamic_cast<SpotLight*>(lights.at(index).get()))
-				{
-					if (fields.lights[index].associatedObjectPositionUniform != -1)
+					if (fields.lights[index].lightTypeUniform != -1)
 					{
-						const auto& objects = SceneManager::getInstance()->getSceneObjects();
-						const auto& [x, y, z, w] = Vector4((*std::find_if(objects.cbegin(), objects.cend(),
-							[&spotLight](const std::shared_ptr<SceneObject> o) { return o->getId() == spotLight->getAObj(); }))->getPosition());
-						glUniform3f(fields.lights[index].associatedObjectPositionUniform, x, y, z);
+						glUniform1f(fields.lights[index].lightTypeUniform, normLight->getLightType());
 					}
 
-					if (fields.lights[index].innerCutoffUniform != -1)
+					if (fields.lights[index].diffuseColorUniform != -1)
 					{
-						glUniform1f(fields.lights[index].innerCutoffUniform, spotLight->getInnerCutoff());
+						const auto& [x, y, z] = normLight->getDiffuseColor();
+						glUniform3f(fields.lights[index].diffuseColorUniform, x, y, z);
 					}
 
-					if (fields.lights[index].outercutoffUniform != -1)
+					if (fields.lights[index].specularColorUniform != -1)
 					{
-						glUniform1f(fields.lights[index].innerCutoffUniform, spotLight->getOuterCutoff());
+						const auto& [x, y, z] = normLight->getSpecularColor();
+						glUniform3f(fields.lights[index].specularColorUniform, x, y, z);
+					}
+
+					if (fields.lights[index].specularPowerUniform != -1)
+					{
+						glUniform1f(fields.lights[index].specularPowerUniform, normLight->getSpecPower());
+					}
+
+					if (fields.lights[index].lightDirectionUniform != -1)
+					{
+						if (const auto& pointLight = dynamic_cast<PointLight*>(lights.at(index).get()); pointLight&& pointLight->getAObj() != NormalLight::STATE_NOT_ASSOCIATED)
+						{
+							const auto& objects = SceneManager::getInstance()->getSceneObjects();
+							const auto& [x, y, z] = (*std::find_if(objects.cbegin(), objects.cend(),
+								[&pointLight](const std::shared_ptr<SceneObject> o) { return o->getId() == pointLight->getAObj(); }))->getPosition();
+							glUniform3f(fields.lights[index].lightDirectionUniform, x, y, z);
+						}
+						else
+						{
+							const auto& [x, y, z] = normLight->getDirection();
+							glUniform3f(fields.lights[index].lightDirectionUniform, x, y, z);
+						}
+					}
+
+					if (const auto& spotLight = dynamic_cast<SpotLight*>(lights.at(index).get()))
+					{
+						if (fields.lights[index].associatedObjectPositionUniform != -1)
+						{
+							const auto& objects = SceneManager::getInstance()->getSceneObjects();
+							const auto& [x, y, z, w] = Vector4((*std::find_if(objects.cbegin(), objects.cend(),
+								[&spotLight](const std::shared_ptr<SceneObject> o) { return o->getId() == spotLight->getAObj(); }))->getPosition());
+							glUniform3f(fields.lights[index].associatedObjectPositionUniform, x, y, z);
+						}
+
+						if (fields.lights[index].innerCutoffUniform != -1)
+						{
+							glUniform1f(fields.lights[index].innerCutoffUniform, spotLight->getInnerCutoff());
+						}
+
+						if (fields.lights[index].outercutoffUniform != -1)
+						{
+							glUniform1f(fields.lights[index].innerCutoffUniform, spotLight->getOuterCutoff());
+						}
+					}
+				}
+				else
+				{
+					if (fields.lights[index].diffuseColorUniform != -1)
+					{
+						glUniform3f(fields.lights[index].diffuseColorUniform, 0.0f, 0.0f, 0.0f);
+					}
+
+					if (fields.lights[index].specularColorUniform != -1)
+					{
+						glUniform3f(fields.lights[index].specularColorUniform, 0.0f, 0.0f, 0.0f);
 					}
 				}
 			}
@@ -231,7 +256,7 @@ void SceneObject::sendCommonData()
 	if (fields.tgtAttribute != -1)
 	{
 		glEnableVertexAttribArray(fields.tgtAttribute);
-		glVertexAttribPointer(fields.tgtAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexNfg), (void*)(3 + sizeof(Vector3)));
+		glVertexAttribPointer(fields.tgtAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexNfg), (void*)(3 * sizeof(Vector3)));
 	}
 
 	if (fields.normalMapUniform != -1 && normalMap != nullptr)
@@ -248,6 +273,7 @@ void SceneObject::sendCommonData()
 	{
 		// Send boolean value
 		glUniform1f(fields.hasNormalMapUniform, 0.0f);
+		glUniform1i(fields.normalMapUniform, Fields::NORMAL_MAP_TEXTURE);
 	}
 }
 
@@ -267,11 +293,14 @@ void SceneObject::callDrawFunctions()
 
 		if (type != Type::SKYBOX)
 		{
-			// Draw collision box 
-			drawCollisionBox();
+			if (type != Type::TERRAIN)
+			{
+				// Draw collision box 
+				drawCollisionBox();
 
-			// Draw normals
-			drawVertexNormals();
+				// Draw normals
+				drawVertexNormals();
+			}
 
 			// Draw axis
 			drawAxis();
@@ -292,14 +321,15 @@ void SceneObject::callDrawFunctions()
 
 void SceneObject::drawCollisionBox()
 {
+	// Use shader
+	glUseProgram(axisShader->getProgramId());
+
+	// Calculate the collision box and update the buffer
 	Matrix aux, collisionBox = Matrix().SetScale(scale);
 	collisionBox = collisionBox * aux.SetRotationX(rotation.x);
 	collisionBox = collisionBox * aux.SetRotationY(rotation.y);
 	collisionBox = collisionBox * aux.SetRotationZ(rotation.z);
 	model->updateCollisionBox(collisionBox);
-
-	// Use shader
-	glUseProgram(axisShader->getProgramId());
 
 	// Open buffers
 	glBindBuffer(GL_ARRAY_BUFFER, model->getCollisionVboId());
@@ -349,6 +379,8 @@ void SceneObject::drawVertexNormals()
 	// Use the program
 	glUseProgram(axisShader->getProgramId());
 
+	model->updateNormals(getModelMatrix());
+
 	// Open the buffer
 	glBindBuffer(GL_ARRAY_BUFFER, model->getNormalVboId());
 
@@ -357,7 +389,7 @@ void SceneObject::drawVertexNormals()
 
 	if (axisShader->getFields().modelUniform != -1)
 	{
-		glUniformMatrix4fv(axisShader->getFields().modelUniform, 1, GL_FALSE, (float*)(getModelMatrix()).m);
+		glUniformMatrix4fv(axisShader->getFields().modelUniform, 1, GL_FALSE, (float*)(Matrix().SetIdentity()).m);
 	}
 
 	// Draw on screen
@@ -397,7 +429,7 @@ void SceneObject::sendLineData(const std::shared_ptr<Shader>& shader)
 
 bool SceneObject::collides(Collidable* object) const
 {
-	if (const auto & sceneObject = dynamic_cast<SceneObject*>(object))
+	if (const auto& sceneObject = dynamic_cast<SceneObject*>(object))
 	{
 		// Used in algebra
 		Vector4 auxiliaryVector;
@@ -424,20 +456,9 @@ bool SceneObject::collides(Collidable* object) const
 		auxiliaryVector = Vector4(localCoordsOb2[1][0], localCoordsOb2[1][1], localCoordsOb2[1][2], 1.0f) * matrix;
 		const Vector3& minCoordsOb2 = { auxiliaryVector.x, auxiliaryVector.y, auxiliaryVector.z };
 
-		bool result = // max(ob1) >= min(ob2) && min(ob1) <= max(ob2)
+		return // max(ob1) >= min(ob2) && min(ob1) <= max(ob2)
 			maxCoordsOb1.x >= minCoordsOb2.x && maxCoordsOb1.y >= minCoordsOb2.y && maxCoordsOb1.z >= minCoordsOb2.z &&
 			minCoordsOb1.x <= maxCoordsOb2.x && minCoordsOb1.y <= maxCoordsOb2.y && minCoordsOb1.z <= maxCoordsOb2.z;
-
-		if (result)
-		{
-			static long long int counter = 0;
-			Logger::v(std::to_string(++counter) + ". " + this->name + " collided with " + sceneObject->name);
-			counter = counter < 0 ? counter : counter;
-			//std::cout << "Ob1: " << minCoordsOb1 << ", " << maxCoordsOb1 << '\n';
-			//std::cout << "Ob2: " << minCoordsOb2 << ", " << maxCoordsOb2 << '\n';
-		}
-
-		return result;
 	}
 	return false;
 }
@@ -590,7 +611,7 @@ Vector3& SceneObject::getFollowingCamera()
 	return followingCamera;
 }
 
-void SceneObject::setFollowingCamera(const Vector3& followingCamera)
+void SceneObject::setFollowingCamera(const Vector3 & followingCamera)
 {
 	this->followingCamera = followingCamera;
 }
@@ -600,7 +621,7 @@ Vector3& SceneObject::getPosition()
 	return position;
 }
 
-void SceneObject::setPosition(const Vector3& position)
+void SceneObject::setPosition(const Vector3 & position)
 {
 	this->position = position;
 	offset = position;
@@ -612,7 +633,7 @@ Vector3& SceneObject::getRotation()
 	return rotation;
 }
 
-void SceneObject::setRotation(const Vector3& rotation)
+void SceneObject::setRotation(const Vector3 & rotation)
 {
 	this->rotation.x = GLfloat(TO_RAD(rotation.x));
 	this->rotation.y = GLfloat(TO_RAD(rotation.y));
@@ -625,7 +646,7 @@ Vector3& SceneObject::getScale()
 	return scale;
 }
 
-void SceneObject::setScale(const Vector3& scale)
+void SceneObject::setScale(const Vector3 & scale)
 {
 	this->scale = scale;
 	modified = true;
@@ -636,7 +657,7 @@ Vector3& SceneObject::getColor()
 	return color;
 }
 
-void SceneObject::setColor(const Vector3& color)
+void SceneObject::setColor(const Vector3 & color)
 {
 	this->color = color;
 }
@@ -674,7 +695,7 @@ std::vector<std::shared_ptr<Texture>>& SceneObject::getTextures()
 	return textures;
 }
 
-void SceneObject::setTextures(const std::vector<std::shared_ptr<Texture>>& textures)
+void SceneObject::setTextures(const std::vector<std::shared_ptr<Texture>> & textures)
 {
 	this->textures = textures;
 }
@@ -689,12 +710,22 @@ std::shared_ptr<Texture> SceneObject::getNormalMap()
 	return normalMap;
 }
 
-void SceneObject::setNormalMap(const std::shared_ptr<Texture>& normalMap)
+void SceneObject::setNormalMap(const std::shared_ptr<Texture> & normalMap)
 {
 	this->normalMap = normalMap;
 }
 
-void SceneObject::setTrajectory(const std::shared_ptr<Trajectory>& trajectory)
+void SceneObject::setAssociatedLight(const GLint associatedLight)
+{
+	this->associatedLight = associatedLight;
+}
+
+const GLint SceneObject::getAssociatedLight() const
+{
+	return associatedLight;
+}
+
+void SceneObject::setTrajectory(const std::shared_ptr<Trajectory> & trajectory)
 {
 	this->trajectory = trajectory;
 }
@@ -704,7 +735,7 @@ const Vector3& SceneObject::getCollisionBoxColor() const
 	return collisionBoxColor;
 }
 
-void SceneObject::setCollisionBoxColor(const Vector3& collisionBoxColor)
+void SceneObject::setCollisionBoxColor(const Vector3 & collisionBoxColor)
 {
 	this->collisionBoxColor = collisionBoxColor;
 }
@@ -714,7 +745,7 @@ const Vector3& SceneObject::getDefaultCollisionBoxColor()
 	return SceneObject::defaultCollisionBoxColor;
 }
 
-void SceneObject::setDefaultCollisionBoxColor(const Vector3& collisionBoxColor)
+void SceneObject::setDefaultCollisionBoxColor(const Vector3 & collisionBoxColor)
 {
 	SceneObject::defaultCollisionBoxColor = collisionBoxColor;
 }

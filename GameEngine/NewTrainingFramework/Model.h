@@ -38,6 +38,9 @@ class Model : public Loadable
 	// Get wired vector from indexes vector.
 	std::vector<GLushort> getWired(const std::vector<GLushort>& indexes); 
 
+	// Copy of vertices and normals used to draw properly scaled normals
+	std::vector<Vector3> vertices, normals;
+
 	// Represents the collision box vertices
 	std::vector<VertexAxis> AABBs;
 
@@ -119,6 +122,8 @@ public:
 
 	void updateCollisionBox(const Matrix& worldMatrix);
 
+	void updateNormals(const Matrix& worldMatrix);
+
 private:
 	template<typename VertexType>
 	void loadAxisModel(const std::vector<VertexType>& vertices);
@@ -153,6 +158,10 @@ void Model::load(const std::vector<VertexType>& vertices, const std::vector<GLus
 	}
 	else
 	{
+		// Store the vertices and the normals for later purposes
+		std::for_each(vertices.cbegin(), vertices.cend(),
+			[&](const auto& vertex) { this->vertices.push_back(vertex.pos); this->normals.push_back(vertex.norm); });
+
 		// Load AABBs 
 		loadCollisionBox<VertexType>(vertices);
 

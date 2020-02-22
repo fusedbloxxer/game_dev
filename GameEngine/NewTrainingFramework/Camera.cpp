@@ -313,17 +313,9 @@ bool Camera::collides(Collidable* object) const
 		auxiliaryVector = Vector4(localCoordsOb1[1][0], localCoordsOb1[1][1], localCoordsOb1[1][2], 1.0f) * matrix;
 		const Vector3& minCoordsOb1 = { auxiliaryVector.x, auxiliaryVector.y, auxiliaryVector.z };
 
-		bool result = // Camera Position >= min(ob1) && Camera Position <= max(ob1)
+		return // Camera Position >= min(ob1) && Camera Position <= max(ob1)
 			maxCoordsOb1.x >= position.x && maxCoordsOb1.y >= position.y && maxCoordsOb1.z >= position.z &&
 			minCoordsOb1.x <= position.x && minCoordsOb1.y <= position.y && minCoordsOb1.z <= position.z;
-
-		if (result)
-		{
-			static long long int camera_counter = 0;
-			Logger::v(std::to_string(--camera_counter) + ". " + " Camera with id " + std::to_string(id) + " collided with " + sceneObject->getName());
-		}
-
-		return result;
 	}
 	return false;
 }

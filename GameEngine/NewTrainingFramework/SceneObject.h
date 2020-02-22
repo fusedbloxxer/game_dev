@@ -7,6 +7,7 @@
 #include "Shader.h"
 #include "Logger.h"
 #include "Model.h"
+#include "Light.h"
 #include <string>
 #include <vector>
 #include <memory>
@@ -16,6 +17,9 @@ class Trajectory;
 class SceneObject : public Drawable, public Collidable
 {
 public:
+	// No light is associated with this object
+	inline static constexpr GLint STATE_NOT_ASSOCIATED = -1;
+
 	// Axis Shader
 	inline static std::shared_ptr<Shader> axisShader;
 
@@ -31,7 +35,7 @@ protected:
 	// Collision Box Default Color
 	inline static Vector3 defaultCollisionBoxColor;
 
-	// Object id
+	// Object id and an optional light association
 	GLint id;
 
 	// Object type
@@ -69,6 +73,9 @@ protected:
 
 	// Pointer to its trajectory
 	std::shared_ptr<Trajectory> trajectory;
+
+	// If not null, then the object will be affected only by this light source
+	GLint associatedLight; // TODO; Validate data
 
 	// Light elements
 	GLfloat kdif = 1.0f, kspec = 1.0f;
@@ -161,6 +168,9 @@ public:
 
 	std::shared_ptr<Texture> getNormalMap();
 	void setNormalMap(const std::shared_ptr<Texture>& normalMap);
+
+	const GLint getAssociatedLight() const;
+	void setAssociatedLight(const GLint associatedLight);
 
 private:
 	// Common data to all scene objects

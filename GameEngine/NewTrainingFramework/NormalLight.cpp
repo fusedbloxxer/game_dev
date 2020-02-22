@@ -2,15 +2,22 @@
 #include "SceneManager.h"
 #include "NormalLight.h"
 #include "VertexAxis.h"
+#include <algorithm>
 
-NormalLight::NormalLight(const GLuint lightType, const GLint id, const Vector3& diffuseColor, const Vector3& specularColor, const GLfloat specPower, const Vector3& direction)
-	:lightType{ lightType }, id{ id }, diffuseColor{ diffuseColor }, specularColor{ specularColor }, specPower{ specPower }, direction{ direction }, debugModelMatrix{ Matrix().SetTranslation(direction.x, direction.y, direction.z) }
+NormalLight::NormalLight(const GLuint lightType, const GLint id, const GLint aObj, const Vector3& diffuseColor, const Vector3& specularColor, const GLfloat specPower, const Vector3& direction)
+	:lightType{ lightType }, id{ id }, diffuseColor{ diffuseColor }, specularColor{ specularColor }, specPower{ specPower }, direction{ direction }
 {
 	if (lightType > 3 || lightType < 1)
 	{
 		throw std::runtime_error("Invalid light type.");
 	}
+
+	setDirection(direction);
+	setAObj(aObj);
 }
+
+NormalLight::NormalLight(const GLuint lightType, const GLint id, const Vector3& diffuseColor, const Vector3& specularColor, const GLfloat specPower, const Vector3& direction)
+	:NormalLight{ lightType, id, STATE_NOT_ASSOCIATED, diffuseColor, specularColor, specPower, direction } {}
 
 void NormalLight::draw()
 {
@@ -34,7 +41,17 @@ void NormalLight::draw()
 
 		if (fields.modelUniform != -1)
 		{
-			glUniformMatrix4fv(fields.modelUniform, 1, GL_FALSE, (float*)(debugModelMatrix).m);
+			if (const auto& pointLight = dynamic_cast<PointLight*>(this); pointLight&& pointLight->getAObj() != NormalLight::STATE_NOT_ASSOCIATED)
+			{
+				const auto& objects = SceneManager::getInstance()->getSceneObjects();
+				const auto& [x, y, z] = (*std::find_if(objects.begin(), objects.end(),
+					[&pointLight](const auto& object) { return object->getId() == pointLight->getAObj(); }))->getPosition();
+				glUniformMatrix4fv(fields.modelUniform, 1, GL_FALSE, (float*)(Matrix().SetTranslation(x, y, z)).m);
+			}
+			else
+			{
+				glUniformMatrix4fv(fields.modelUniform, 1, GL_FALSE, (float*)(debugModelMatrix).m);
+			}
 		}
 
 		if (fields.viewUniform != -1)
@@ -187,6 +204,27 @@ void NormalLight::setDirection(const Vector3& direction)
 const Matrix& NormalLight::getDebugModelMatrix() const
 {
 	return debugModelMatrix;
+}
+
+const GLint NormalLight::getAObj() const
+{
+	return aObj;
+}
+
+void NormalLight::setAObj(const GLint aObj)
+{
+	if (aObj != STATE_NOT_ASSOCIATED)
+	{
+		const auto& objects = SceneManager::getInstance()->getSceneObjects();
+		const auto& exists = std::find_if(objects.cbegin(), objects.cend(),
+			[=](const auto& object) { return object->getId() == aObj; }) != objects.cend();
+
+		if (!exists)
+		{
+			throw std::runtime_error{ "Light " + std::to_string(id) + " doesn't have a valid associated object." };
+		}
+	}
+	this->aObj = aObj;
 }
 
 NormalLight::~NormalLight() {}
