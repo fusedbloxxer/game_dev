@@ -80,9 +80,10 @@ void Model::loadNormals(const std::vector<VertexType>& vertices)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void Model::updateNormals(const Matrix& worldMatrix)
+void Model::updateNormals(const Vector3& scale)
 {
 	// Used to calculate new coordinates
+	const Matrix& worldMatrix = Matrix().SetScale(scale);
 	Vector4 aux; VertexAxis data;
 
 	// Red color

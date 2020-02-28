@@ -52,7 +52,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 	Logger::setMode(15);
-	Logger::v("Program started . . .");
 
 	try
 	{
@@ -60,18 +59,12 @@ int _tmain(int argc, _TCHAR* argv[])
 		esInitContext(&esContext);
 		esCreateWindow(&esContext, NULL, NULL, NULL, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
 
-		Logger::v("ESContext was initialized. Initializing data . . .");
-
 		if (init(&esContext) != 0)
 			return 0;
-
-		Logger::v("Everything was initialized. Binding Draw/Update/Key functions to esContext . . .");
 
 		esRegisterDrawFunc(&esContext, Draw);
 		esRegisterUpdateFunc(&esContext, Update);
 		esRegisterKeyFunc(&esContext, Key);
-
-		Logger::v("Functions are bound, executing MainLoop . . .");
 
 		esMainLoop(&esContext);
 	}
@@ -90,14 +83,9 @@ int _tmain(int argc, _TCHAR* argv[])
 		Logger::wtf("An exception took place:");
 	}
 
-	Logger::d("Freeing scene manager memory.");
 	delete SceneManager::getInstance();
-
-	Logger::d("Freeing resource manager memory.");
 	delete ResourceManager::getInstance();
 
-	Logger::v("Program is finished.");
 	printf("Press any key...\n");
-
 	return 0;
 }

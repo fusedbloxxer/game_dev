@@ -256,15 +256,11 @@ std::vector<std::shared_ptr<Texture>> RapidSceneAdapter::loadTextures(rapidxml::
 
 std::shared_ptr<Texture> RapidSceneAdapter::loadNormalMap(rapidxml::xml_node<>* object) const
 {
-	if (auto normalMap = object->first_node("normalMap"))
+	if (const auto& normalMap = object->first_node("normalMap"))
 	{
 		return ResourceManager::getInstance()->load<Texture>(::atoi(normalMap->value()));
 	}
-	else
-	{
-		Logger::d("An object does not have a normal map.");
-		return nullptr;
-	}
+	return nullptr;
 }
 
 std::vector<std::shared_ptr<SceneObject>> RapidSceneAdapter::getSceneObjects(const Vector3& activeCamera) const

@@ -21,107 +21,57 @@ NormalLight::NormalLight(const GLuint lightType, const GLint id, const Vector3& 
 
 void NormalLight::draw()
 {
-	if (SceneManager::getInstance()->debug())
+	// Binding program
+	glUseProgram(debugShader->getProgramId());
+
+	// Binding data and index buffers.
+	glBindBuffer(GL_ARRAY_BUFFER, debugModel->getVboId());
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, debugModel->getIboId());
+
+	// Send data to the shaders.
+	Fields fields = debugShader->getFields();
+
+	if (fields.colorAttribute != -1)
 	{
-		// Binding program
-		glUseProgram(debugShader->getProgramId());
-
-		// Binding data and index buffers.
-		glBindBuffer(GL_ARRAY_BUFFER, debugModel->getVboId());
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, debugModel->getIboId());
-
-		// Send data to the shaders.
-		Fields fields = debugShader->getFields();
-
-		if (fields.positionAttribute != -1)
-		{
-			glEnableVertexAttribArray(fields.positionAttribute);
-			glVertexAttribPointer(fields.positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexNfg), 0);
-		}
-
-		if (fields.modelUniform != -1)
-		{
-			if (const auto& pointLight = dynamic_cast<PointLight*>(this); pointLight&& pointLight->getAObj() != NormalLight::STATE_NOT_ASSOCIATED)
-			{
-				const auto& objects = SceneManager::getInstance()->getSceneObjects();
-				const auto& [x, y, z] = (*std::find_if(objects.begin(), objects.end(),
-					[&pointLight](const auto& object) { return object->getId() == pointLight->getAObj(); }))->getPosition();
-				glUniformMatrix4fv(fields.modelUniform, 1, GL_FALSE, (float*)(Matrix().SetTranslation(x, y, z)).m);
-			}
-			else
-			{
-				glUniformMatrix4fv(fields.modelUniform, 1, GL_FALSE, (float*)(debugModelMatrix).m);
-			}
-		}
-
-		if (fields.viewUniform != -1)
-		{
-			glUniformMatrix4fv(fields.viewUniform, 1, GL_FALSE, (float*)(SceneManager::getInstance()->getActiveCamera()->getViewMatrix()).m);
-		}
-
-		if (fields.projectionUniform != -1)
-		{
-			glUniformMatrix4fv(fields.projectionUniform, 1, GL_FALSE, (float*)(SceneManager::getInstance()->getActiveCamera()->getProjMatrix()).m);
-		}
-
-		if (fields.fogColorUniform != -1)
-		{
-			Vector3 fog = SceneManager::getInstance()->getFog().getFogColor();
-			glUniform3f(fields.fogColorUniform, fog.x, fog.y, fog.z);
-		}
-
-		if (fields.fogClarityUniform != -1)
-		{
-			GLfloat clarity = SceneManager::getInstance()->getFog().getFogClarityRadius();
-			glUniform1f(fields.fogClarityUniform, clarity);
-		}
-
-		if (fields.fogTransitionUniform != -1)
-		{
-			GLfloat transition = SceneManager::getInstance()->getFog().getFogTransitionRadius();
-			glUniform1f(fields.fogTransitionUniform, transition);
-		}
-
-		if (fields.cameraUniform != -1)
-		{
-			auto cameraPosition = SceneManager::getInstance()->getActiveCamera()->getPosition();
-			glUniform3f(fields.cameraUniform, cameraPosition.x, cameraPosition.y, cameraPosition.z);
-		}
-
-		if (fields.normAttribute != -1)
-		{
-			glEnableVertexAttribArray(fields.normAttribute);
-			glVertexAttribPointer(fields.normAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexNfg), (void*)(2 * sizeof(Vector3)));
-		}
-
-		if (fields.colorAttribute != -1)
-		{
-			glDisableVertexAttribArray(fields.colorAttribute);
-			glVertexAttrib3f(fields.colorAttribute, diffuseColor.x, diffuseColor.y, diffuseColor.z);
-		}
-
-		if (fields.ambientalRatioUniform != -1)
-		{
-			glUniform1f(fields.ambientalRatioUniform, 1.0f);
-		}
-
-		if (fields.kdifUniform != -1)
-		{
-			glUniform1f(fields.kdifUniform, 0.0f);
-		}
-
-		if (fields.kspecUniform != -1)
-		{
-			glUniform1f(fields.kspecUniform, 0.0f);
-		}
-
-		// Drawing selected data from buffers
-		glDrawElements(GL_TRIANGLES, debugModel->getNoInd(), GL_UNSIGNED_SHORT, 0);
-
-		// Closing data buffers
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		glDisableVertexAttribArray(fields.colorAttribute);
+		glVertexAttrib3f(fields.colorAttribute, diffuseColor.x, diffuseColor.y, diffuseColor.z);
 	}
+
+	if (fields.positionAttribute != -1)
+	{
+		glEnableVertexAttribArray(fields.positionAttribute);
+		glVertexAttribPointer(fields.positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(VertexNfg), 0);
+	}
+
+	if (fields.viewUniform != -1)
+	{
+		glUniformMatrix4fv(fields.viewUniform, 1, GL_FALSE, (float*)(SceneManager::getInstance()->getActiveCamera()->getViewMatrix()).m);
+	}
+
+	if (fields.projectionUniform != -1)
+	{
+		glUniformMatrix4fv(fields.projectionUniform, 1, GL_FALSE, (float*)(SceneManager::getInstance()->getActiveCamera()->getProjMatrix()).m);
+	}
+	
+	// If the light has an associated object set it's model in debug mode
+	if (const auto & pointLight = dynamic_cast<PointLight*>(this); fields.modelUniform != -1 && pointLight && pointLight->getAObj() != NormalLight::STATE_NOT_ASSOCIATED)
+	{
+		const auto& objects = SceneManager::getInstance()->getSceneObjects();
+		const auto& [x, y, z] = (*std::find_if(objects.begin(), objects.end(),
+			[&pointLight](const auto& object) { return object->getId() == pointLight->getAObj(); }))->getPosition();
+		glUniformMatrix4fv(fields.modelUniform, 1, GL_FALSE, (float*)(Matrix().SetTranslation(x, y, z)).m);
+	}
+	else
+	{
+		glUniformMatrix4fv(fields.modelUniform, 1, GL_FALSE, (float*)(debugModelMatrix).m);
+	}
+
+	// Drawing selected data from buffers
+	glDrawElements(GL_TRIANGLES, debugModel->getNoInd(), GL_UNSIGNED_SHORT, 0);
+
+	// Closing data buffers
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 void NormalLight::update()
@@ -227,4 +177,4 @@ void NormalLight::setAObj(const GLint aObj)
 	this->aObj = aObj;
 }
 
-NormalLight::~NormalLight() {}
+NormalLight::~NormalLight() = default;

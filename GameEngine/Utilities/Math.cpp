@@ -529,7 +529,7 @@ Matrix & Matrix::SetScale(GLfloat * pScale)
 	return *this;
 }
 
-Matrix & Matrix::SetScale(Vector3 & scaleVec)
+Matrix & Matrix::SetScale(const Vector3 & scaleVec)
 {
 	m[0][0] = scaleVec.x; m[0][1] = 0.0f;       m[0][2] = 0.0f;       m[0][3] = 0.0f;
 	m[1][0] = 0.0f;       m[1][1] = scaleVec.y; m[1][2] = 0.0f;       m[1][3] = 0.0f;

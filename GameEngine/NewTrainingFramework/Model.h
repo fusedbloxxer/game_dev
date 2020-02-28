@@ -122,7 +122,7 @@ public:
 
 	void updateCollisionBox(const Matrix& worldMatrix);
 
-	void updateNormals(const Matrix& worldMatrix);
+	void updateNormals(const Vector3& scale);
 
 private:
 	template<typename VertexType>

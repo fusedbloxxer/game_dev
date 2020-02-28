@@ -156,7 +156,7 @@ public:
 	Matrix & SetScale(GLfloat scale);
 	Matrix & SetScale(GLfloat scaleX, GLfloat scaleY, GLfloat scaleZ);
 	Matrix & SetScale(GLfloat * pScale);
-	Matrix & SetScale(Vector3 &scaleVec);
+	Matrix & SetScale(const Vector3 &scaleVec);
 
 	Matrix & SetTranslation(GLfloat x, GLfloat y, GLfloat z);
 	Matrix & SetTranslation(GLfloat *pTrans);

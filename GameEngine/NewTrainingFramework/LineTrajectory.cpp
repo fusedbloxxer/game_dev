@@ -43,15 +43,6 @@ Matrix skewSym(const Vector3& x)
 	return A;
 }
 
-Matrix rotation(Vector3& a, Vector3& b)
-// Rotation matrix from vector a to vector b
-{
-	auto x = a.Cross(b) / (a.Cross(b).Length());
-	auto u = ::acos(a.Dot(b) / (a.Length() * b.Length()));
-	auto A = skewSym(x);
-	return Matrix().SetIdentity() + A * ::sin(u) + A * A * (1 - ::cos(u));
-}
-
 void LineTrajectory::rotate(SceneObject* obj, GLfloat time)
 {
 	if (rotationValue > 0)
@@ -59,9 +50,8 @@ void LineTrajectory::rotate(SceneObject* obj, GLfloat time)
 		GLfloat step = (rotationValue <= rotationSpeed * time) ? rotationValue : rotationSpeed * time;
 		rotationValue = (rotationValue <= step) ? 0.0f : rotationValue - step;
 
-		auto objectRotation = obj->getRotation();
-
-		obj->setRotation({ TO_ANG(objectRotation.x), TO_ANG(objectRotation.y) + step, TO_ANG(objectRotation.z) });
+		const auto& [x, y, z] = obj->getRotation();
+		obj->setRotation({ TO_ANG(x), TO_ANG(y) + step, TO_ANG(z) });
 	}
 	else
 	{
@@ -94,7 +84,6 @@ void LineTrajectory::move(SceneObject* obj, GLfloat time)
 			}
 
 			Vector3 travel = calculateStep(time);
-
 			obj->setPosition(obj->getPosition() + ((distance <= travel.Length()) ? vecDirection * distance : travel));
 			(distance <= travel.Length()) ? calculateTravelProps(obj, time) : distance -= travel.Length();
 		}

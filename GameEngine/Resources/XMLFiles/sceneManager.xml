@@ -638,77 +638,11 @@
       </trajectory>
     </object>
 
-    <object id="11">
-      <model>10</model>
-      <shader>3</shader>
-      <type>normal</type>
-      <name>Marine Warrior</name>
-      <kspec>0.0</kspec>
-      <kdif>1.0</kdif>
-      <textures>
-        <texture id="19" type="2d"/>
-      </textures>
-      <collisionBoxColor>
-        <r>0.0</r>
-        <g>0.0</g>
-        <b>1.0</b>
-      </collisionBoxColor>
-      <color>
-        <r>1.0</r>
-        <g>0.0</g>
-        <b>1.0</b>
-      </color>
-      <position>
-        <x>0.0</x>
-        <y>350.0</y>
-        <z>0.0</z>
-      </position>
-      <rotation>
-        <x>0</x>
-        <y>270.0</y>
-        <z>0</z>
-      </rotation>
-      <scale>
-        <x>5.0</x>
-        <y>5.0</y>
-        <z>5.0</z>
-      </scale>
-      <trajectory type="line_strip" iteration-count="infinite" direction="alternate" speed="450" rotationSpeed="400">
-        <points>
-          <point>
-            <x>0.0</x>
-            <y>350.0</y>
-            <z>0.0</z>
-          </point>
-          <point>
-            <x>-500.0</x>
-            <y>350.0</y>
-            <z>0.0</z>
-          </point>
-          <point>
-            <x>-800.0</x>
-            <y>700.0</y>
-            <z>0.0</z>
-          </point>
-          <point>
-            <x>-800.0</x>
-            <y>1250.0</y>
-            <z>0.0</z>
-          </point>
-          <point>
-            <x>-1250.0</x>
-            <y>900.0</y>
-            <z>0.0</z>
-          </point>
-        </points>
-      </trajectory>
-    </object>
-
     <object id="12">
       <model>10</model>
       <shader>3</shader>
       <type>normal</type>
-      <name>Marine Warrior</name>
+      <name>My boi</name>
       <kdif>1.0</kdif>
       <kspec>0.85</kspec>
       <textures>
@@ -739,11 +673,11 @@
         <y>5.0</y>
         <z>5.0</z>
       </scale>
-      <trajectory type="line_loop" iteration-count="infinite" direction="normal" speed="450" rotationSpeed="400">
+      <trajectory type="line_loop" iteration-count="infinite" direction="normal" speed="500" rotationSpeed="400">
         <points>
           <point>
             <x>0.0</x>
-            <y>350.0</y>
+            <y>900.0</y>
             <z>500.0</z>
           </point>
           <point>
@@ -765,6 +699,62 @@
             <x>-1250.0</x>
             <y>900.0</y>
             <z>500.0</z>
+          </point>
+        </points>
+      </trajectory>
+    </object>
+
+    <object id="35">
+      <model>10</model>
+      <shader>3</shader>
+      <type>normal</type>
+      <name>Marine Warrior 3</name>
+      <kdif>1.0</kdif>
+      <kspec>0.85</kspec>
+      <textures>
+        <texture id="19"/>
+      </textures>
+      <collisionBoxColor>
+        <r>0.0</r>
+        <g>0.0</g>
+        <b>1.0</b>
+      </collisionBoxColor>
+      <color>
+        <r>1.0</r>
+        <g>0.0</g>
+        <b>1.0</b>
+      </color>
+      <position>
+        <x>0.0</x>
+        <y>350.0</y>
+        <z>500.0</z>
+      </position>
+      <rotation>
+        <x>0.0</x>
+        <y>270.0</y>
+        <z>0.0</z>
+      </rotation>
+      <scale>
+        <x>5.0</x>
+        <y>5.0</y>
+        <z>5.0</z>
+      </scale>
+      <trajectory type="line_loop" iteration-count="infinite" direction="normal" speed="500" rotationSpeed="400">
+        <points>
+          <point>
+            <x>-800.0</x>
+            <y>700.0</y>
+            <z>-400.0</z>
+          </point>
+          <point>
+            <x>-800.0</x>
+            <y>1250.0</y>
+            <z>-400.0</z>
+          </point>
+          <point>
+            <x>-1250.0</x>
+            <y>900.0</y>
+            <z>-400.0</z>
           </point>
         </points>
       </trajectory>
@@ -957,7 +947,7 @@
         <g>1.0</g>
         <b>1.0</b>
       </color>
-      <ratio>0.3</ratio>
+      <ratio>0.6</ratio>
     </ambientalLight>
 
     <light id="1">

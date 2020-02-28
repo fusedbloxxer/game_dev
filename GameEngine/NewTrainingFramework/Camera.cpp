@@ -299,23 +299,38 @@ bool Camera::collides(Collidable* object) const
 	if (auto sceneObject = dynamic_cast<SceneObject*>(object))
 	{
 		// Used in algebra
-		Vector4 auxiliaryVector;
+		Vector4 auxiliaryVector(0.0f, 0.0f, 0.0f, 1.0f);
 
 		// Extract extreme points
-		const auto& localCoordsOb1 = sceneObject->getModel()->getCollisionCoordinates();
+		const auto& localCoordsOb = sceneObject->getModel()->getCollisionCoordinates();
 
 		// Compute model matrix for the first object
-		Matrix matrix = Matrix().SetTranslation(const_cast<Vector3&>(sceneObject->getPosition()));
+		Matrix matrix; matrix.SetTranslation(sceneObject->getPosition());
 
 		// Calculate new extreme points for the first object, in world space
-		auxiliaryVector = Vector4(localCoordsOb1[0][0], localCoordsOb1[0][1], localCoordsOb1[0][2], 1.0f) * matrix;
-		const Vector3& maxCoordsOb1 = { auxiliaryVector.x, auxiliaryVector.y, auxiliaryVector.z };
-		auxiliaryVector = Vector4(localCoordsOb1[1][0], localCoordsOb1[1][1], localCoordsOb1[1][2], 1.0f) * matrix;
-		const Vector3& minCoordsOb1 = { auxiliaryVector.x, auxiliaryVector.y, auxiliaryVector.z };
+		// MAX(OBJECT)
+		auxiliaryVector.x = localCoordsOb[0][0];
+		auxiliaryVector.y = localCoordsOb[0][1];
+		auxiliaryVector.z = localCoordsOb[0][2];
+		auxiliaryVector = auxiliaryVector * matrix;
+		const Vector3& maxCoordsOb = { auxiliaryVector.x, auxiliaryVector.y, auxiliaryVector.z };
 
-		return // Camera Position >= min(ob1) && Camera Position <= max(ob1)
-			maxCoordsOb1.x >= position.x && maxCoordsOb1.y >= position.y && maxCoordsOb1.z >= position.z &&
-			minCoordsOb1.x <= position.x && minCoordsOb1.y <= position.y && minCoordsOb1.z <= position.z;
+		// MIN(OBJECT)
+		auxiliaryVector.x = localCoordsOb[1][0];
+		auxiliaryVector.y = localCoordsOb[1][1];
+		auxiliaryVector.z = localCoordsOb[1][2];
+		auxiliaryVector.w = 1.0f;
+		auxiliaryVector = auxiliaryVector * matrix;
+		const Vector3& minCoordsOb = { auxiliaryVector.x, auxiliaryVector.y, auxiliaryVector.z };
+
+		const auto& result =  // Camera Position >= min(ob1) && Camera Position <= max(ob1)
+			maxCoordsOb.x >= position.x && maxCoordsOb.y >= position.y && maxCoordsOb.z >= position.z &&
+			minCoordsOb.x <= position.x && minCoordsOb.y <= position.y && minCoordsOb.z <= position.z;
+		
+#ifndef NDEBUG
+		if (result) { Logger::v("Camera with id " + std::to_string(id) + " collided with " + sceneObject->getName()); }
+#endif
+
 	}
 	return false;
 }

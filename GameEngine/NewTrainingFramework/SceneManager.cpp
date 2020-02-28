@@ -21,52 +21,39 @@ void SceneManager::init(ESContext* esContext, SceneAdapter* adapter)
 
 	// Get game title
 	gameName = adapter->getGameTitle();
-	Logger::d("Fetched game title.");
 
 	setUpWindow(esContext, adapter);
-	Logger::d("Game window was configured.");
 
 	// Get vector3 containing background colors
 	backgroundColor = adapter->getBackground();
-	Logger::d("Fetched glClear background color.");
 
 	// Load key-binds to map
 	keyMap = adapter->getKeys();
-	Logger::d("Loaded keys configurations.");
 
 	// Load cameras
 	cameraMap = adapter->getCameras(width, height);
-	Logger::d("Fetched cameras from file.");
 
 	// Get active camera id
 	activeCameraId = adapter->getActiveCameraId();
-	Logger::d("Fetched active camera id.");
 
 	// Load SceneObjects
 	sceneObjects = adapter->getSceneObjects(getActiveCamera()->getPosition());
-	Logger::d("Loaded all scene objects into memory.");
 
 	// Load the Axis Shader
 	SceneObject::axisShader = adapter->getAxis();
-	Logger::d("Loaded axis shader.");
 
 	// Load fog
 	fog = adapter->getFog();
-	Logger::d("Fetched fog data.");
 
 	// Load ambiental light
 	ambientalLight = adapter->getAmbientLight();
-	Logger::d("Fetched ambiental light data.");
 
 	// Load other lights
 	lights = adapter->getLights();
-	Logger::d("Fetched other light sources.");
 
 	// Set clear background color
 	glClearColor(backgroundColor.x, backgroundColor.y, backgroundColor.z, 0.0f);
-	Logger::d("Cleaned background.");
 
-	// The adapter did its job :)
 	delete adapter;
 }
 
@@ -93,9 +80,13 @@ void SceneManager::draw()
 		o->draw();
 	}
 
-	for (const auto& li : lights)
+	if (debug())
 	{
-		dynamic_cast<Drawable*>(li.get())->draw();
+		for (const auto& li : lights)
+		{
+			// Draw light sources if debug mode is activated
+			dynamic_cast<Drawable*>(li.get())->draw();
+		}
 	}
 }
 
@@ -116,17 +107,16 @@ void SceneManager::update()
 		o->update();
 	}
 
-
 	for (const auto& object : sceneObjects)
 	{
-		cameraMap[activeCameraId]->collideWith(object.get());
+		camera->collideWith(object.get());
 	}
 }
 
 void SceneManager::freeResources()
 {
-	pressed.clear();
 	keyMap.clear();
+	pressed.clear();
 	cameraMap.clear();
 	sceneObjects.clear();
 }

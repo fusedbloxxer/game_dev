@@ -167,7 +167,7 @@ void SceneObject::sendCommonData()
 		// Send first directional light source
 		for (auto index = 0; index < count; ++index)
 		{
-			if (const auto& normLight = dynamic_cast<NormalLight*>(lights.at(index).get()))
+			if (const auto & normLight = dynamic_cast<NormalLight*>(lights.at(index).get()))
 			{
 				if (associatedLight == STATE_NOT_ASSOCIATED || normLight->getId() == associatedLight)
 				{
@@ -195,7 +195,7 @@ void SceneObject::sendCommonData()
 
 					if (fields.lights[index].lightDirectionUniform != -1)
 					{
-						if (const auto& pointLight = dynamic_cast<PointLight*>(lights.at(index).get()); pointLight&& pointLight->getAObj() != NormalLight::STATE_NOT_ASSOCIATED)
+						if (const auto & pointLight = dynamic_cast<PointLight*>(lights.at(index).get()); pointLight && pointLight->getAObj() != NormalLight::STATE_NOT_ASSOCIATED)
 						{
 							const auto& objects = SceneManager::getInstance()->getSceneObjects();
 							const auto& [x, y, z] = (*std::find_if(objects.cbegin(), objects.cend(),
@@ -209,7 +209,7 @@ void SceneObject::sendCommonData()
 						}
 					}
 
-					if (const auto& spotLight = dynamic_cast<SpotLight*>(lights.at(index).get()))
+					if (const auto & spotLight = dynamic_cast<SpotLight*>(lights.at(index).get()))
 					{
 						if (fields.lights[index].associatedObjectPositionUniform != -1)
 						{
@@ -321,15 +321,15 @@ void SceneObject::callDrawFunctions()
 
 void SceneObject::drawCollisionBox()
 {
-	// Use shader
-	glUseProgram(axisShader->getProgramId());
-
-	// Calculate the collision box and update the buffer
-	Matrix aux, collisionBox = Matrix().SetScale(scale);
+	// Update collision boxes
+	Matrix aux, & collisionBox = Matrix().SetScale(scale);
 	collisionBox = collisionBox * aux.SetRotationX(rotation.x);
 	collisionBox = collisionBox * aux.SetRotationY(rotation.y);
 	collisionBox = collisionBox * aux.SetRotationZ(rotation.z);
 	model->updateCollisionBox(collisionBox);
+
+	// Use shader
+	glUseProgram(axisShader->getProgramId());
 
 	// Open buffers
 	glBindBuffer(GL_ARRAY_BUFFER, model->getCollisionVboId());
@@ -340,7 +340,7 @@ void SceneObject::drawCollisionBox()
 
 	if (axisShader->getFields().modelUniform != -1)
 	{
-		glUniformMatrix4fv(axisShader->getFields().modelUniform, 1, GL_FALSE, (float*)(Matrix().SetTranslation(position)).m);
+		glUniformMatrix4fv(axisShader->getFields().modelUniform, 1, GL_FALSE, (float*)(aux.SetTranslation(position)).m);
 	}
 
 	// Draw on screen
@@ -379,8 +379,6 @@ void SceneObject::drawVertexNormals()
 	// Use the program
 	glUseProgram(axisShader->getProgramId());
 
-	model->updateNormals(getModelMatrix());
-
 	// Open the buffer
 	glBindBuffer(GL_ARRAY_BUFFER, model->getNormalVboId());
 
@@ -389,7 +387,12 @@ void SceneObject::drawVertexNormals()
 
 	if (axisShader->getFields().modelUniform != -1)
 	{
-		glUniformMatrix4fv(axisShader->getFields().modelUniform, 1, GL_FALSE, (float*)(Matrix().SetIdentity()).m);
+		Matrix aux, & worldMatrix = Matrix().SetRotationX(rotation.x);
+		worldMatrix = worldMatrix * aux.SetRotationY(rotation.y);
+		worldMatrix = worldMatrix * aux.SetRotationZ(rotation.z);
+		worldMatrix = worldMatrix * aux.SetTranslation(position);
+
+		glUniformMatrix4fv(axisShader->getFields().modelUniform, 1, GL_FALSE, (float*)(worldMatrix).m);
 	}
 
 	// Draw on screen
@@ -429,36 +432,62 @@ void SceneObject::sendLineData(const std::shared_ptr<Shader>& shader)
 
 bool SceneObject::collides(Collidable* object) const
 {
-	if (const auto& sceneObject = dynamic_cast<SceneObject*>(object))
+	if (const auto & sceneObject = dynamic_cast<SceneObject*>(object))
 	{
 		// Used in algebra
-		Vector4 auxiliaryVector;
+		Vector4 auxiliaryVector{ 0.0f, 0.0f, 0.0f, 1.0f };
 
 		// Extract extreme points
 		const auto& localCoordsOb1 = this->model->getCollisionCoordinates();
 		const auto& localCoordsOb2 = sceneObject->model->getCollisionCoordinates();
 
 		// Compute model matrix for the first object
-		Matrix matrix = Matrix().SetTranslation(const_cast<Vector3&>(position));
+		Matrix matrix; matrix.SetTranslation(const_cast<Vector3&>(position));
 
 		// Calculate new extreme points for the first object, in world space
-		auxiliaryVector = Vector4(localCoordsOb1[0][0], localCoordsOb1[0][1], localCoordsOb1[0][2], 1.0f) * matrix;
+		// MAX(OBJECT_1)
+		auxiliaryVector.x = localCoordsOb1[0][0];
+		auxiliaryVector.y = localCoordsOb1[0][1];
+		auxiliaryVector.z = localCoordsOb1[0][2];
+		auxiliaryVector = auxiliaryVector * matrix;
 		const Vector3& maxCoordsOb1 = { auxiliaryVector.x, auxiliaryVector.y, auxiliaryVector.z };
-		auxiliaryVector = Vector4(localCoordsOb1[1][0], localCoordsOb1[1][1], localCoordsOb1[1][2], 1.0f) * matrix;
+
+		// MIN(OBJECT_1)
+		auxiliaryVector.x = localCoordsOb1[1][0];
+		auxiliaryVector.y = localCoordsOb1[1][1];
+		auxiliaryVector.z = localCoordsOb1[1][2];
+		auxiliaryVector.w = 1.0f;
+		auxiliaryVector = auxiliaryVector * matrix;
 		const Vector3& minCoordsOb1 = { auxiliaryVector.x, auxiliaryVector.y, auxiliaryVector.z };
 
 		// Compute model matrix for the second object
-		matrix = Matrix().SetTranslation(const_cast<Vector3&>(sceneObject->position));
+		matrix.SetTranslation(const_cast<Vector3&>(sceneObject->position));
 
 		// Calculate new extreme points for the second object, in world space
-		auxiliaryVector = Vector4(localCoordsOb2[0][0], localCoordsOb2[0][1], localCoordsOb2[0][2], 1.0f) * matrix;
+		// MAX(OBJECT_2)
+		auxiliaryVector.x = localCoordsOb2[0][0];
+		auxiliaryVector.y = localCoordsOb2[0][1];
+		auxiliaryVector.z = localCoordsOb2[0][2];
+		auxiliaryVector.w = 1.0f;
+		auxiliaryVector = auxiliaryVector * matrix;
 		const Vector3& maxCoordsOb2 = { auxiliaryVector.x, auxiliaryVector.y, auxiliaryVector.z };
-		auxiliaryVector = Vector4(localCoordsOb2[1][0], localCoordsOb2[1][1], localCoordsOb2[1][2], 1.0f) * matrix;
+
+		// MIN(OBJECT_2)
+		auxiliaryVector.x = localCoordsOb2[1][0];
+		auxiliaryVector.y = localCoordsOb2[1][1];
+		auxiliaryVector.z = localCoordsOb2[1][2];
+		auxiliaryVector.w = 1.0f;
+		auxiliaryVector = auxiliaryVector * matrix;
 		const Vector3& minCoordsOb2 = { auxiliaryVector.x, auxiliaryVector.y, auxiliaryVector.z };
 
-		return // max(ob1) >= min(ob2) && min(ob1) <= max(ob2)
+		const auto& result = // max(ob1) >= min(ob2) && min(ob1) <= max(ob2)
 			maxCoordsOb1.x >= minCoordsOb2.x && maxCoordsOb1.y >= minCoordsOb2.y && maxCoordsOb1.z >= minCoordsOb2.z &&
 			minCoordsOb1.x <= maxCoordsOb2.x && minCoordsOb1.y <= maxCoordsOb2.y && minCoordsOb1.z <= maxCoordsOb2.z;
+
+#ifndef NDEBUG
+		if (result) { Logger::v(this->name + " collided with " + sceneObject->name); }
+#endif
+
 	}
 	return false;
 }
@@ -490,7 +519,8 @@ void SceneObject::update()
 		trajectory->move(this, camera->getDeltaTime());
 	}
 
-	Matrix aux, collisionBox = Matrix().SetScale(scale);
+	// Update collision boxes
+	Matrix aux, & collisionBox = Matrix().SetScale(scale);
 	collisionBox = collisionBox * aux.SetRotationX(rotation.x);
 	collisionBox = collisionBox * aux.SetRotationY(rotation.y);
 	collisionBox = collisionBox * aux.SetRotationZ(rotation.z);
@@ -611,7 +641,7 @@ Vector3& SceneObject::getFollowingCamera()
 	return followingCamera;
 }
 
-void SceneObject::setFollowingCamera(const Vector3 & followingCamera)
+void SceneObject::setFollowingCamera(const Vector3& followingCamera)
 {
 	this->followingCamera = followingCamera;
 }
@@ -621,7 +651,7 @@ Vector3& SceneObject::getPosition()
 	return position;
 }
 
-void SceneObject::setPosition(const Vector3 & position)
+void SceneObject::setPosition(const Vector3& position)
 {
 	this->position = position;
 	offset = position;
@@ -633,11 +663,11 @@ Vector3& SceneObject::getRotation()
 	return rotation;
 }
 
-void SceneObject::setRotation(const Vector3 & rotation)
+void SceneObject::setRotation(const Vector3& rotation)
 {
-	this->rotation.x = GLfloat(TO_RAD(rotation.x));
-	this->rotation.y = GLfloat(TO_RAD(rotation.y));
-	this->rotation.z = GLfloat(TO_RAD(rotation.z));
+	this->rotation.x = static_cast<GLfloat>(TO_RAD(rotation.x));
+	this->rotation.y = static_cast<GLfloat>(TO_RAD(rotation.y));
+	this->rotation.z = static_cast<GLfloat>(TO_RAD(rotation.z));
 	modified = true;
 }
 
@@ -646,8 +676,13 @@ Vector3& SceneObject::getScale()
 	return scale;
 }
 
-void SceneObject::setScale(const Vector3 & scale)
+void SceneObject::setScale(const Vector3& scale)
 {
+	if (model != nullptr)
+	{
+		model->updateNormals(scale);
+	}
+
 	this->scale = scale;
 	modified = true;
 }
@@ -657,7 +692,7 @@ Vector3& SceneObject::getColor()
 	return color;
 }
 
-void SceneObject::setColor(const Vector3 & color)
+void SceneObject::setColor(const Vector3& color)
 {
 	this->color = color;
 }
@@ -695,7 +730,7 @@ std::vector<std::shared_ptr<Texture>>& SceneObject::getTextures()
 	return textures;
 }
 
-void SceneObject::setTextures(const std::vector<std::shared_ptr<Texture>> & textures)
+void SceneObject::setTextures(const std::vector<std::shared_ptr<Texture>>& textures)
 {
 	this->textures = textures;
 }
@@ -710,7 +745,7 @@ std::shared_ptr<Texture> SceneObject::getNormalMap()
 	return normalMap;
 }
 
-void SceneObject::setNormalMap(const std::shared_ptr<Texture> & normalMap)
+void SceneObject::setNormalMap(const std::shared_ptr<Texture>& normalMap)
 {
 	this->normalMap = normalMap;
 }
@@ -725,7 +760,7 @@ const GLint SceneObject::getAssociatedLight() const
 	return associatedLight;
 }
 
-void SceneObject::setTrajectory(const std::shared_ptr<Trajectory> & trajectory)
+void SceneObject::setTrajectory(const std::shared_ptr<Trajectory>& trajectory)
 {
 	this->trajectory = trajectory;
 }
@@ -735,7 +770,7 @@ const Vector3& SceneObject::getCollisionBoxColor() const
 	return collisionBoxColor;
 }
 
-void SceneObject::setCollisionBoxColor(const Vector3 & collisionBoxColor)
+void SceneObject::setCollisionBoxColor(const Vector3& collisionBoxColor)
 {
 	this->collisionBoxColor = collisionBoxColor;
 }
@@ -745,7 +780,7 @@ const Vector3& SceneObject::getDefaultCollisionBoxColor()
 	return SceneObject::defaultCollisionBoxColor;
 }
 
-void SceneObject::setDefaultCollisionBoxColor(const Vector3 & collisionBoxColor)
+void SceneObject::setDefaultCollisionBoxColor(const Vector3& collisionBoxColor)
 {
 	SceneObject::defaultCollisionBoxColor = collisionBoxColor;
 }

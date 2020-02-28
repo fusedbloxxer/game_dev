@@ -53,7 +53,7 @@ std::unordered_map<GLint, std::shared_ptr<TextureResource>> RapidResourceAdapter
 template<typename Fun>
 void RapidResourceAdapter::loadHelper(rapidxml::xml_node<>* root, const char* first, const char* second, Fun fun) const
 {
-	auto objects = root->first_node(first); if (!objects) { throw std::runtime_error{ std::string{ "No " } +first + " were detected." }; }
+	const auto& objects = root->first_node(first); if (!objects) { throw std::runtime_error{ std::string{ "No " } + first + " were detected." }; }
 
 	for (auto folder = objects->first_node("folder"); folder; folder = folder->next_sibling())
 	{

@@ -84,7 +84,7 @@ void CircleTrajectory::setRotationPlane(const Vector3& rotationPlane)
 {
 	this->rotationPlane = { TO_RAD(rotationPlane.x), TO_RAD(rotationPlane.y), TO_RAD(rotationPlane.z) };
 
-	auto rotation = Matrix();
+	auto& rotation = Matrix();
 	rotationMatrix = rotationMatrix * rotation.SetRotationX(this->rotationPlane.x);
 	rotationMatrix = rotationMatrix * rotation.SetRotationY(this->rotationPlane.y);
 	rotationMatrix = rotationMatrix * rotation.SetRotationZ(this->rotationPlane.z);
