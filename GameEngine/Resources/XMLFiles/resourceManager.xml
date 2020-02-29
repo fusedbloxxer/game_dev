@@ -255,4 +255,49 @@
     </folder>
   </textures>
 
+  <sounds>
+    <folder path="..\Resources\Packet\SoundEffects\">
+      <sound id = "0">Ffh_boss_theme.wav</sound>
+      <sound id = "1">Ff_area_51.5.wav</sound>
+      <sound id = "2">Ff_boneyard.wav</sound>
+      <sound id = "3">Ff_character_creation.wav</sound>
+      <sound id = "4">Ff_charles_darwin.wav</sound>
+      <sound id = "5">Ff_codename_training.wav</sound>
+      <sound id = "6">Ff_construction_site.wav</sound>
+      <sound id = "7">Ff_darklands.wav</sound>
+      <sound id = "8">Ff_dark_tree_clearing.wav</sound>
+      <sound id = "9">Ff_delightful_developments.wav</sound>
+      <sound id = "10">Ff_dexlabs_carrier.wav</sound>
+      <sound id = "11">Ff_dinosaur_graveyard.wav</sound>
+      <sound id = "12">Ff_dizzy_world.wav</sound>
+      <sound id = "13">Ff_fall_tech_square.wav</sound>
+      <sound id = "14">Ff_fighting_monsters.wav</sound>
+      <sound id = "15">Ff_fireswamp.wav</sound>
+      <sound id = "16">Ff_forgotten_forest.wav</sound>
+      <sound id = "17">Ff_fusion_buttercup.wav</sound>
+      <sound id = "18">Ff_future.wav</sound>
+      <sound id = "19">Ff_green_gullet.wav</sound>
+      <sound id = "20">Ff_hani_baba_temple.wav</sound>
+      <sound id = "21">Ff_heavy_petting.wav</sound>
+      <sound id = "22">Ff_into_the_void.wav</sound>
+      <sound id = "23">Ff_introduction.wav</sound>
+      <sound id = "24">Ff_jungle_training.wav</sound>
+      <sound id = "25">Ff_main_theme.wav</sound>
+      <sound id = "26">Ff_mandark's_house.wav</sound>
+      <sound id = "27">Ff_midtown.wav</sound>
+      <sound id = "28">Ff_midtown_v1.wav</sound>
+      <sound id = "29">Ff_monster_island.wav</sound>
+      <sound id = "30">Ff_never_say_never.wav</sound>
+      <sound id = "31">Ff_nowhere.wav</sound>
+      <sound id = "32">Ff_stickybeard_candy_pirate_v1.wav</sound>
+      <sound id = "33">Ff_suburbia.wav</sound>
+      <sound id = "34">Ff_summerland.wav</sound>
+      <sound id = "35">Ff_sunny_bridges.wav</sound>
+      <sound id = "36">Ff_tech_square_future.wav</sound>
+      <sound id = "37">Ff_tech_square_infected_zone.wav</sound>
+      <sound id = "38">Ff_tech_square_intro.wav</sound>
+      <sound id = "39">Ff_toxic_race.wav</sound>
+      <sound id = "40">Ff_woods.wav</sound>
+    </folder>
+  </sounds>
 </resourceManager>

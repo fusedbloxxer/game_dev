@@ -4,6 +4,17 @@
 RapidResourceAdapter::RapidResourceAdapter(const char* resourceManagerPath)
 	:Rapid{ resourceManagerPath } {}
 
+std::unordered_map<GLint, std::shared_ptr<SoundResource>> RapidResourceAdapter::getSoundResources() const
+{
+	std::unordered_map<GLint, std::shared_ptr<SoundResource>> soundResMap;
+
+	loadHelper(root, "sounds", "sound", [&](rapidxml::xml_node<>* sound, const char* path, GLint id) -> void {
+		soundResMap[id] = std::make_shared<SoundResource>(id, path + std::string{ sound->value() });
+		});
+
+	return soundResMap;
+}
+
 std::unordered_map<GLint, std::shared_ptr<ModelResource>> RapidResourceAdapter::getModelResources() const
 {
 	std::unordered_map<GLint, std::shared_ptr<ModelResource>> modelResMap;
@@ -50,10 +61,17 @@ std::unordered_map<GLint, std::shared_ptr<TextureResource>> RapidResourceAdapter
 	return textureResMap;
 }
 
+/*
+	@param root   - the xml root
+	@param first  - the first  <tag/> - specifies the dataType
+	@param second - the second <tag/> - specifies the folderPath
+	@param fun	  - function pointer/functor/lambda which receives the folder node, path value and id
+				  - specify how it should proceed with addinional data
+*/
 template<typename Fun>
 void RapidResourceAdapter::loadHelper(rapidxml::xml_node<>* root, const char* first, const char* second, Fun fun) const
 {
-	const auto& objects = root->first_node(first); if (!objects) { throw std::runtime_error{ std::string{ "No " } + first + " were detected." }; }
+	const auto& objects = root->first_node(first); if (!objects) { throw std::runtime_error{ std::string{ "No " } +first + " were detected." }; }
 
 	for (auto folder = objects->first_node("folder"); folder; folder = folder->next_sibling())
 	{

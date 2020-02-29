@@ -4,6 +4,7 @@
 #include "Texture.h"
 #include "Shader.h"
 #include "Model.h"
+#include "Sound.h"
 #include <vector>
 #include <memory>
 
@@ -16,11 +17,13 @@ class ResourceManager final
 	static ResourceManager* resManInstance;
 
 	// C++ - OpenGL binding maps.
+	std::unordered_map<GLint, std::shared_ptr<Sound>> soundMap;
 	std::unordered_map<GLint, std::shared_ptr<Model>> modelMap;
 	std::unordered_map<GLint, std::shared_ptr<Shader>> shaderMap;
 	std::unordered_map<GLint, std::shared_ptr<Texture>> textureMap;
 
 	// Configuration maps.
+	std::unordered_map<GLint, std::shared_ptr<SoundResource>> soundResMap;
 	std::unordered_map<GLint, std::shared_ptr<ModelResource>> modelResMap;
 	std::unordered_map<GLint, std::shared_ptr<ShaderResource>> shaderResMap;
 	std::unordered_map<GLint, std::shared_ptr<TextureResource>> textureResMap;
@@ -44,4 +47,9 @@ public:
 
 	// Destructor
 	~ResourceManager();
+
+private:
+	// Load helper
+	template<typename Loader, typename Resource>
+	auto loadHelper(GLint id, std::unordered_map<GLint, std::shared_ptr<Loader>>& loadMap, std::unordered_map<GLint, std::shared_ptr<Resource>>& resMap)->std::shared_ptr<Loader>;
 };

@@ -16,6 +16,9 @@
     <Filter Include="Header Files\rapidxml-1.13">
       <UniqueIdentifier>{b4ae6a6b-1341-4c4c-bee4-58a10c60cd7b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\fmod-2.00.07">
+      <UniqueIdentifier>{00ac9b41-20b4-4de4-9fb2-5a4c7c4ac58d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="esShader.cpp">
@@ -73,6 +76,45 @@
     </ClInclude>
     <ClInclude Include="rapidxml-1.13\rapidxml_utils.hpp">
       <Filter>Header Files\rapidxml-1.13</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod-2.00.07\core\inc\fmod.h">
+      <Filter>Header Files\fmod-2.00.07</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod-2.00.07\core\inc\fmod.hpp">
+      <Filter>Header Files\fmod-2.00.07</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod-2.00.07\core\inc\fmod_codec.h">
+      <Filter>Header Files\fmod-2.00.07</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod-2.00.07\core\inc\fmod_common.h">
+      <Filter>Header Files\fmod-2.00.07</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod-2.00.07\core\inc\fmod_dsp.h">
+      <Filter>Header Files\fmod-2.00.07</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod-2.00.07\core\inc\fmod_dsp_effects.h">
+      <Filter>Header Files\fmod-2.00.07</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod-2.00.07\core\inc\fmod_errors.h">
+      <Filter>Header Files\fmod-2.00.07</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod-2.00.07\core\inc\fmod_output.h">
+      <Filter>Header Files\fmod-2.00.07</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod-2.00.07\studio\inc\fmod_studio.h">
+      <Filter>Header Files\fmod-2.00.07</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod-2.00.07\studio\inc\fmod_studio.hpp">
+      <Filter>Header Files\fmod-2.00.07</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod-2.00.07\studio\inc\fmod_studio_common.h">
+      <Filter>Header Files\fmod-2.00.07</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod-2.00.07\fsbank\inc\fsbank.h">
+      <Filter>Header Files\fmod-2.00.07</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod-2.00.07\fsbank\inc\fsbank_errors.h">
+      <Filter>Header Files\fmod-2.00.07</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

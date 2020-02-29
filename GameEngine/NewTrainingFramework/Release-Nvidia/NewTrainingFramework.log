@@ -1,14 +1,141 @@
-﻿  stdafx.cpp
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(452,5): warning MSB8028: The intermediate directory (Release-Nvidia\) contains files shared from another project (NewTrainingFramework.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  stdafx.cpp
+  AmbientLight.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  AxisModel.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  AxisResource.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
   Camera.cpp
-C:\Users\AnonymousClass\WorkFolder\Gameloft\NewTrainingFramework_2015\NewTrainingFramework\Camera.cpp(19,36): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
-C:\Users\AnonymousClass\WorkFolder\Gameloft\NewTrainingFramework_2015\NewTrainingFramework\Camera.cpp(27,36): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
-  Globals.cpp
-  NewTrainingFramework.cpp
-  Shaders.cpp
-  Shaders1.cpp
-C:\Users\AnonymousClass\WorkFolder\Gameloft\NewTrainingFramework_2015\NewTrainingFramework\Camera.cpp(35,36): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
-  Generating code
-  Previous IPDB not found, fall back to full compilation.
-  All 74 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Finished generating code
-  NewTrainingFramework.vcxproj -> C:\Users\AnonymousClass\WorkFolder\Gameloft\NewTrainingFramework_2015\\BIN-Nvidia\NewTrainingFramework.exe
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  CameraBuilder.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  CircleTrajectory.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  Controls.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  DirectionalLight.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  FireObject.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  FireObjectBuilder.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  Fog.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  I_Printable.cpp
+  Light.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  LightFactory.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  LineTrajectory.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  Logger.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  Model.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  ModelResource.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  GameEngine.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\GameEngine.cpp(44,27): warning C4129:  'R': unrecognized character escape sequence
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\GameEngine.cpp(44,27): warning C4129:  'P': unrecognized character escape sequence
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\GameEngine.cpp(44,27): warning C4129:  'S': unrecognized character escape sequence
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\GameEngine.cpp(44,27): warning C4129:  'F': unrecognized character escape sequence
+  NormalLight.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\GameEngine.cpp(45,54): warning C4305:  'argument': truncation from 'int' to 'bool'
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  Compiling...
+  PointLight.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  Rapid.cpp
+  RapidResourceAdapter.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  RapidSceneAdapter.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  Resource.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  ResourceManager.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  SceneManager.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  SceneObject.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\SceneObject.cpp(168,30): warning C4018:  '<': signed/unsigned mismatch
+  SceneObjectBuilder.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\NewTrainingFramework\SceneObject.cpp(176,81): warning C4244:  'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  SceneObjectBuilderFactory.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  Shader.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  ShaderResource.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  SkyboxObject.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  SkyboxObjectBuilder.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  SpotLight.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  TerrainObject.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  TerrainObjectBuilder.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  Texture.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  TextureResource.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  Trajectory.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  Compiling...
+  TrajectoryFactory.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  VertexAxis.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+  Vertex_NFG.cpp
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
+GameEngine.obj : error LNK2001: unresolved external symbol _FMOD_System_Create@4
+GameEngine.obj : error LNK2001: unresolved external symbol "public: enum FMOD_RESULT __stdcall FMOD::System::init(int,unsigned int,void *)" (?init@System@FMOD@@QAG?AW4FMOD_RESULT@@HIPAX@Z)
+GameEngine.obj : error LNK2001: unresolved external symbol "public: enum FMOD_RESULT __stdcall FMOD::System::createSound(char const *,unsigned int,struct FMOD_CREATESOUNDEXINFO *,class FMOD::Sound * *)" (?createSound@System@FMOD@@QAG?AW4FMOD_RESULT@@PBDIPAUFMOD_CREATESOUNDEXINFO@@PAPAVSound@2@@Z)
+GameEngine.obj : error LNK2001: unresolved external symbol "public: enum FMOD_RESULT __stdcall FMOD::System::playSound(class FMOD::Sound *,class FMOD::ChannelGroup *,bool,class FMOD::Channel * *)" (?playSound@System@FMOD@@QAG?AW4FMOD_RESULT@@PAVSound@2@PAVChannelGroup@2@_NPAPAVChannel@2@@Z)
+C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\\BIN-Nvidia\GameEngine.exe : fatal error LNK1120: 4 unresolved externals

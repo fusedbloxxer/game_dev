@@ -91,7 +91,7 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;fmod_vc.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\Lib\Nvidia;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
@@ -109,6 +109,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libEGL.lib;libGLESv2.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -197,6 +198,8 @@
     <ClCompile Include="ShaderResource.cpp" />
     <ClCompile Include="SkyboxObject.cpp" />
     <ClCompile Include="SkyboxObjectBuilder.cpp" />
+    <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SoundResource.cpp" />
     <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-ATI|Win32'">Create</PrecompiledHeader>
@@ -258,6 +261,8 @@
     <ClInclude Include="ShaderResource.h" />
     <ClInclude Include="SkyboxObject.h" />
     <ClInclude Include="SkyboxObjectBuilder.h" />
+    <ClInclude Include="Sound.h" />
+    <ClInclude Include="SoundResource.h" />
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -337,6 +342,49 @@
     <Image Include="..\Resources\Packet\Textures\Witch.tga" />
     <Image Include="..\Resources\Packet\Textures\Woman1.tga" />
     <Image Include="..\Resources\Packet\Textures\Woman2.tga" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\Resources\Packet\SoundEffects\Ffh_boss_theme.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_area_51.5.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_boneyard.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_character_creation.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_charles_darwin.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_codename_training.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_construction_site.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_darklands.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_dark_tree_clearing.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_delightful_developments.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_dexlabs_carrier.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_dinosaur_graveyard.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_dizzy_world.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_fall_tech_square.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_fighting_monsters.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_fireswamp.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_forgotten_forest.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_fusion_buttercup.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_future.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_green_gullet.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_hani_baba_temple.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_heavy_petting.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_into_the_void.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_introduction.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_jungle_training.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_main_theme.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_mandark%27s_house.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_midtown.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_midtown_v1.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_monster_island.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_never_say_never.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_nowhere.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_stickybeard_candy_pirate_v1.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_suburbia.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_summerland.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_sunny_bridges.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_tech_square_future.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_tech_square_infected_zone.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_tech_square_intro.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_toxic_race.wav" />
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_woods.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -43,12 +43,6 @@
     <Filter Include="Source Files\SceneManager\Objects">
       <UniqueIdentifier>{06d0e453-fcff-4d12-8376-551f77fb384f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\Models">
-      <UniqueIdentifier>{0b7d20e8-c3a7-4f75-b312-7c7262ffa62d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Textures">
-      <UniqueIdentifier>{e4d06a39-238d-4b72-a81b-c11c4ff93c58}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\ResourceManager">
       <UniqueIdentifier>{c6e63a36-0970-45fd-b3b2-c9614b95b51b}</UniqueIdentifier>
     </Filter>
@@ -124,6 +118,30 @@
     <Filter Include="Source Files\SceneManager\Effects\Fog">
       <UniqueIdentifier>{4ab3d837-fec8-48e0-8337-b575ca6d8394}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\Packet">
+      <UniqueIdentifier>{6876e804-6088-4634-b027-7256b6daa730}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Packet\Models">
+      <UniqueIdentifier>{0b7d20e8-c3a7-4f75-b312-7c7262ffa62d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Packet\Textures">
+      <UniqueIdentifier>{e4d06a39-238d-4b72-a81b-c11c4ff93c58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Packet\SoundEffects">
+      <UniqueIdentifier>{92a2a543-d10b-400c-b996-eebb5c37655c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ResourceManager\Resources\FileData">
+      <UniqueIdentifier>{1c66a80c-90e1-4a98-b53f-3ad9339b3623}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ResourceManager\Resources\Vertices">
+      <UniqueIdentifier>{d15445af-93cc-4c4e-b63c-7e387f148422}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ResourceManager\Resources\FileData">
+      <UniqueIdentifier>{25d17dba-4914-4213-9a89-b7e84e44e73d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ResourceManager\Resources\Vertices">
+      <UniqueIdentifier>{63588b59-f910-4413-9c32-4b8454d460e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp">
@@ -135,12 +153,6 @@
     <ClCompile Include="Model.cpp">
       <Filter>Source Files\ResourceManager\Loaders</Filter>
     </ClCompile>
-    <ClCompile Include="ModelResource.cpp">
-      <Filter>Source Files\ResourceManager\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource.cpp">
-      <Filter>Source Files\ResourceManager\Resources</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
@@ -150,26 +162,11 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\ResourceManager\Loaders</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderResource.cpp">
-      <Filter>Source Files\ResourceManager\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Vertex_NFG.cpp">
-      <Filter>Source Files\ResourceManager\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureResource.cpp">
-      <Filter>Source Files\ResourceManager\Resources</Filter>
-    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\ResourceManager\Loaders</Filter>
     </ClCompile>
     <ClCompile Include="AxisModel.cpp">
       <Filter>Source Files\ResourceManager\Loaders</Filter>
-    </ClCompile>
-    <ClCompile Include="AxisResource.cpp">
-      <Filter>Source Files\ResourceManager\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexAxis.cpp">
-      <Filter>Source Files\ResourceManager\Resources</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine.cpp">
       <Filter>Source Files</Filter>
@@ -258,6 +255,33 @@
     <ClCompile Include="Fog.cpp">
       <Filter>Source Files\SceneManager\Effects\Fog</Filter>
     </ClCompile>
+    <ClCompile Include="ModelResource.cpp">
+      <Filter>Source Files\ResourceManager\Resources\FileData</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderResource.cpp">
+      <Filter>Source Files\ResourceManager\Resources\FileData</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundResource.cpp">
+      <Filter>Source Files\ResourceManager\Resources\FileData</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureResource.cpp">
+      <Filter>Source Files\ResourceManager\Resources\FileData</Filter>
+    </ClCompile>
+    <ClCompile Include="AxisResource.cpp">
+      <Filter>Source Files\ResourceManager\Resources\Vertices</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex_NFG.cpp">
+      <Filter>Source Files\ResourceManager\Resources\Vertices</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexAxis.cpp">
+      <Filter>Source Files\ResourceManager\Resources\Vertices</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>Source Files\ResourceManager\Resources\FileData</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files\ResourceManager\Loaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Drawable.h">
@@ -274,18 +298,6 @@
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Header Files\ResourceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelResource.h">
-      <Filter>Header Files\ResourceManager\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderResource.h">
-      <Filter>Header Files\ResourceManager\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureResource.h">
-      <Filter>Header Files\ResourceManager\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Header Files\ResourceManager\Resources</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Header Files\ResourceManager\Loaders</Filter>
@@ -310,15 +322,6 @@
     </ClInclude>
     <ClInclude Include="AxisModel.h">
       <Filter>Header Files\ResourceManager\Loaders</Filter>
-    </ClInclude>
-    <ClInclude Include="AxisResource.h">
-      <Filter>Header Files\ResourceManager\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexAxis.h">
-      <Filter>Header Files\ResourceManager\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexNfg.h">
-      <Filter>Header Files\ResourceManager\Resources</Filter>
     </ClInclude>
     <ClInclude Include="SceneAdapter.h">
       <Filter>Header Files\Interfaces</Filter>
@@ -428,62 +431,89 @@
     <ClInclude Include="OnCollisionListener.h">
       <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
+    <ClInclude Include="ModelResource.h">
+      <Filter>Header Files\ResourceManager\Resources\FileData</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderResource.h">
+      <Filter>Header Files\ResourceManager\Resources\FileData</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureResource.h">
+      <Filter>Header Files\ResourceManager\Resources\FileData</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexAxis.h">
+      <Filter>Header Files\ResourceManager\Resources\Vertices</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexNfg.h">
+      <Filter>Header Files\ResourceManager\Resources\Vertices</Filter>
+    </ClInclude>
+    <ClInclude Include="AxisResource.h">
+      <Filter>Header Files\ResourceManager\Resources\Vertices</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files\ResourceManager\Resources\FileData</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundResource.h">
+      <Filter>Header Files\ResourceManager\Resources\FileData</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files\ResourceManager\Loaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Readme.doc" />
     <None Include="..\Resources\NewResourcesPacket\Models\Bila.nfg">
-      <Filter>Resources\Models</Filter>
+      <Filter>Resources\Packet\Models</Filter>
     </None>
     <None Include="..\Resources\NewResourcesPacket\Models\bus.nfg">
-      <Filter>Resources\Models</Filter>
+      <Filter>Resources\Packet\Models</Filter>
     </None>
     <None Include="..\Resources\NewResourcesPacket\Models\Croco.nfg">
-      <Filter>Resources\Models</Filter>
+      <Filter>Resources\Packet\Models</Filter>
     </None>
     <None Include="..\Resources\NewResourcesPacket\Models\fire.nfg">
-      <Filter>Resources\Models</Filter>
+      <Filter>Resources\Packet\Models</Filter>
     </None>
     <None Include="..\Resources\NewResourcesPacket\Models\Goliath.nfg">
-      <Filter>Resources\Models</Filter>
+      <Filter>Resources\Packet\Models</Filter>
     </None>
     <None Include="..\Resources\NewResourcesPacket\Models\House.nfg">
-      <Filter>Resources\Models</Filter>
+      <Filter>Resources\Packet\Models</Filter>
     </None>
     <None Include="..\Resources\NewResourcesPacket\Models\Marine.nfg">
-      <Filter>Resources\Models</Filter>
+      <Filter>Resources\Packet\Models</Filter>
     </None>
     <None Include="..\Resources\NewResourcesPacket\Models\Radar.nfg">
-      <Filter>Resources\Models</Filter>
+      <Filter>Resources\Packet\Models</Filter>
     </None>
     <None Include="..\Resources\NewResourcesPacket\Models\SCV.nfg">
-      <Filter>Resources\Models</Filter>
+      <Filter>Resources\Packet\Models</Filter>
     </None>
     <None Include="..\Resources\NewResourcesPacket\Models\SkyBox.nfg">
-      <Filter>Resources\Models</Filter>
+      <Filter>Resources\Packet\Models</Filter>
     </None>
     <None Include="..\Resources\NewResourcesPacket\Models\Teran_Command_Center.nfg">
-      <Filter>Resources\Models</Filter>
+      <Filter>Resources\Packet\Models</Filter>
     </None>
     <None Include="..\Resources\NewResourcesPacket\Models\Terrain.nfg">
-      <Filter>Resources\Models</Filter>
+      <Filter>Resources\Packet\Models</Filter>
     </None>
     <None Include="..\Resources\NewResourcesPacket\Models\train.nfg">
-      <Filter>Resources\Models</Filter>
+      <Filter>Resources\Packet\Models</Filter>
     </None>
     <None Include="..\Resources\NewResourcesPacket\Models\water.nfg">
-      <Filter>Resources\Models</Filter>
+      <Filter>Resources\Packet\Models</Filter>
     </None>
     <None Include="..\Resources\NewResourcesPacket\Models\witch.nfg">
-      <Filter>Resources\Models</Filter>
+      <Filter>Resources\Packet\Models</Filter>
     </None>
     <None Include="..\Resources\NewResourcesPacket\Models\Woman1.nfg">
-      <Filter>Resources\Models</Filter>
+      <Filter>Resources\Packet\Models</Filter>
     </None>
     <None Include="..\Resources\NewResourcesPacket\Models\Woman2.nfg">
-      <Filter>Resources\Models</Filter>
+      <Filter>Resources\Packet\Models</Filter>
     </None>
     <None Include="..\Resources\Packet\Textures\heightmap.raw">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </None>
     <None Include="..\Resources\Shaders\AxisShaderFS.fs">
       <Filter>Resources\Shaders</Filter>
@@ -532,70 +562,195 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Resources\Packet\Textures\Bus.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\Croco.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\Dirt.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\DisplacementMap.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\envMap.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\fire_mask.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\fire3.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\Golitah.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\Grass.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\House.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\Marine.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\NormalMap.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\radar.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\Rock.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\SCV.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\Terrain_blend_map.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\Terran_Command_Center.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\Train.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\WaterNormal.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\Witch.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\Woman1.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Packet\Textures\Woman2.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Resources\Packet\Textures</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_area_51.5.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_boneyard.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_character_creation.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_charles_darwin.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_codename_training.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_construction_site.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_dark_tree_clearing.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_darklands.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_delightful_developments.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_dexlabs_carrier.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_dinosaur_graveyard.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_dizzy_world.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_fall_tech_square.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_fighting_monsters.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_fireswamp.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_forgotten_forest.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_fusion_buttercup.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_future.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_green_gullet.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_hani_baba_temple.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_heavy_petting.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_into_the_void.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_introduction.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_jungle_training.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_main_theme.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_mandark%27s_house.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_midtown.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_midtown_v1.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_monster_island.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_never_say_never.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_nowhere.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_stickybeard_candy_pirate_v1.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_suburbia.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_summerland.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_sunny_bridges.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_tech_square_future.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_tech_square_infected_zone.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_tech_square_intro.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_toxic_race.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ff_woods.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
+    <Media Include="..\Resources\Packet\SoundEffects\Ffh_boss_theme.wav">
+      <Filter>Resources\Packet\SoundEffects</Filter>
+    </Media>
   </ItemGroup>
 </Project>

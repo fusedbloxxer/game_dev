@@ -9,6 +9,7 @@ public:
 	RapidResourceAdapter(const char* resourceManagerPath);
 
 	// Inherited via ResourceAdapter
+	virtual std::unordered_map<GLint, std::shared_ptr<SoundResource>> getSoundResources() const override;
 	virtual std::unordered_map<GLint, std::shared_ptr<ModelResource>> getModelResources() const override;
 	virtual std::unordered_map<GLint, std::shared_ptr<ShaderResource>> getShaderResources() const override;
 	virtual std::unordered_map<GLint, std::shared_ptr<TextureResource>> getTextureResources() const override;

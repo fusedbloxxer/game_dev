@@ -1,4 +1,1 @@
-﻿  Math.cpp
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
-  Utilities.vcxproj -> C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\\BIN-Nvidia\Utilities.lib
+﻿  Utilities.vcxproj -> C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\\BIN-Nvidia\Utilities.lib

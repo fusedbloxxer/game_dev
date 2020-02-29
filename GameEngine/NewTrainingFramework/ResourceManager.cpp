@@ -17,6 +17,8 @@ ResourceManager* ResourceManager::getInstance()
 void ResourceManager::init(ResourceAdapter* adapter)
 {
 	// Get resources from adapter
+	soundResMap = adapter->getSoundResources();
+
 	modelResMap = adapter->getModelResources();
 
 	shaderResMap = adapter->getShaderResources();
@@ -28,9 +30,10 @@ void ResourceManager::init(ResourceAdapter* adapter)
 
 void ResourceManager::freeResources()
 {
-	modelResMap.clear();
-	shaderResMap.clear();
-	textureResMap.clear();
+	soundMap.clear();
+	modelMap.clear();
+	shaderMap.clear();
+	textureMap.clear();
 }
 
 ResourceManager::~ResourceManager()
@@ -44,19 +47,23 @@ std::shared_ptr<Type> ResourceManager::load(GLint id) {
 }
 
 template<>
+std::shared_ptr<Sound> ResourceManager::load<Sound>(GLint id) {
+	return loadHelper<Sound, SoundResource>(id, soundMap, soundResMap);
+}
+
+template<>
 std::shared_ptr<Model> ResourceManager::load<Model>(GLint id) {
-	if (modelMap.find(id) != modelMap.end()) {
-		return modelMap[id];
-	}
-	else if (modelResMap.find(id) != modelResMap.end()) {
-		std::shared_ptr<Model> model = std::make_shared<Model>(modelResMap[id]);
-		model->load();
-		modelMap[id] = model;
-		return model;
-	}
-	else {
-		throw std::runtime_error{ "Model invalid index was detected: " };
-	}
+	return loadHelper<Model, ModelResource>(id, modelMap, modelResMap);
+}
+
+template<>
+std::shared_ptr<Shader> ResourceManager::load<Shader>(GLint id) {
+	return loadHelper<Shader, ShaderResource>(id, shaderMap, shaderResMap);
+}
+
+template<>
+std::shared_ptr<Texture> ResourceManager::load<Texture>(GLint id) {
+	return loadHelper<Texture, TextureResource>(id, textureMap, textureResMap);
 }
 
 std::shared_ptr<Model> ResourceManager::load(GLint id, const Vector3& collisionBoxColor) {
@@ -74,34 +81,19 @@ std::shared_ptr<Model> ResourceManager::load(GLint id, const Vector3& collisionB
 	}
 }
 
-template<>
-std::shared_ptr<Shader> ResourceManager::load<Shader>(GLint id) {
-	if (shaderMap.find(id) != shaderMap.end()) {
-		return shaderMap[id];
+template<typename Loader, typename Resource>
+auto ResourceManager::loadHelper(GLint id, std::unordered_map<GLint, std::shared_ptr<Loader>>& loadMap, std::unordered_map<GLint, std::shared_ptr<Resource>>& resMap) -> std::shared_ptr<Loader>
+{
+	if (loadMap.find(id) != loadMap.end()) {
+		return loadMap[id];
 	}
-	else if (shaderResMap.find(id) != shaderResMap.end()) {
-		std::shared_ptr<Shader> shader = std::make_shared<Shader>(shaderResMap[id]);
-		shader->load();
-		shaderMap[id] = shader;
-		return shader;
-	}
-	else {
-		throw std::runtime_error{ "Shader invalid index was detected: " };
-	}
-}
-
-template<>
-std::shared_ptr<Texture> ResourceManager::load<Texture>(GLint id) {
-	if (textureMap.find(id) != textureMap.end()) {
-		return textureMap[id];
-	}
-	else if (textureResMap.find(id) != textureResMap.end()) {
-		std::shared_ptr<Texture> texture = std::make_shared<Texture>(textureResMap[id]);
-		texture->load();
-		textureMap[id] = texture;
-		return texture;
+	else if (resMap.find(id) != resMap.end()) {
+		std::shared_ptr<Loader> loader = std::make_shared<Loader>(resMap[id]);
+		loader->load();
+		loadMap[id] = loader;
+		return loader;
 	}
 	else {
-		throw std::runtime_error{ "Texture invalid index was detected: " };
+		throw std::runtime_error{ "Loader invalid index was detected." };
 	}
 }
