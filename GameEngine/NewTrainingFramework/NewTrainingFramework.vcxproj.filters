@@ -142,6 +142,36 @@
     <Filter Include="Source Files\ResourceManager\Resources\Vertices">
       <UniqueIdentifier>{63588b59-f910-4413-9c32-4b8454d460e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\EventManager">
+      <UniqueIdentifier>{ea5fa3a0-993a-41a7-af6e-c95f8f48073d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EventManager">
+      <UniqueIdentifier>{accd0cbe-d4f9-4609-90d3-f4780caa7b24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EventManager\Triggers">
+      <UniqueIdentifier>{35e13ed5-00db-4f50-9920-6b2b48d5abd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EventManager\Actions">
+      <UniqueIdentifier>{2dc25d3d-adc5-4d3b-968a-a6d8fb851d56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EventManager\Events">
+      <UniqueIdentifier>{490b8cd9-046f-435b-b535-e81ac69769c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EventManager\Adapters">
+      <UniqueIdentifier>{1910b623-45f4-49b3-8580-4ba3c7b0866d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EventManager\Actions">
+      <UniqueIdentifier>{07ba033d-ae7a-4bec-93e4-246562628b33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EventManager\Events">
+      <UniqueIdentifier>{3030aca4-2677-46fe-8f3c-3aedf51fcc7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EventManager\Triggers">
+      <UniqueIdentifier>{acfb1807-995b-4a3c-9789-aca6626ab499}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EventManager\Adapter">
+      <UniqueIdentifier>{c07eebee-d1fd-48ab-99d5-7b3c9d22510e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp">
@@ -282,6 +312,33 @@
     <ClCompile Include="Sound.cpp">
       <Filter>Source Files\ResourceManager\Loaders</Filter>
     </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Source Files\EventManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Source Files\EventManager\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Source Files\EventManager\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Trigger.cpp">
+      <Filter>Source Files\EventManager\Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="RapidEventAdapter.cpp">
+      <Filter>Source Files\EventManager\Adapter</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundAction.cpp">
+      <Filter>Source Files\EventManager\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="EventAdapter.cpp">
+      <Filter>Source Files\EventManager\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraCollisionListener.cpp">
+      <Filter>Source Files\SceneManager\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneObjectCollisionListener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Drawable.h">
@@ -322,9 +379,6 @@
     </ClInclude>
     <ClInclude Include="AxisModel.h">
       <Filter>Header Files\ResourceManager\Loaders</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneAdapter.h">
-      <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="IBuilder.h">
       <Filter>Header Files\Interfaces</Filter>
@@ -379,9 +433,6 @@
     </ClInclude>
     <ClInclude Include="CameraBuilder.h">
       <Filter>Header Files\SceneManager\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceAdapter.h">
-      <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="RapidResourceAdapter.h">
       <Filter>Header Files\ResourceManager\Adapters</Filter>
@@ -457,6 +508,45 @@
     </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>Header Files\ResourceManager\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Header Files\EventManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Header Files\EventManager\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Trigger.h">
+      <Filter>Header Files\EventManager\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectConverter.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Header Files\EventManager\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundAction.h">
+      <Filter>Header Files\EventManager\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Updatable.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneAdapter.h">
+      <Filter>Header Files\SceneManager\Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceAdapter.h">
+      <Filter>Header Files\ResourceManager\Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="RapidEventAdapter.h">
+      <Filter>Header Files\EventManager\Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="EventAdapter.h">
+      <Filter>Header Files\EventManager\Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraCollisionListener.h">
+      <Filter>Header Files\SceneManager\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneObjectCollisionListener.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -557,6 +647,9 @@
       <Filter>Resources\XMLFiles</Filter>
     </Xml>
     <Xml Include="..\Resources\XMLFiles\resourceManager.xml">
+      <Filter>Resources\XMLFiles</Filter>
+    </Xml>
+    <Xml Include="..\Resources\XMLFiles\eventManager.xml">
       <Filter>Resources\XMLFiles</Filter>
     </Xml>
   </ItemGroup>

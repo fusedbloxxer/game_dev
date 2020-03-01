@@ -1,9 +1,15 @@
 #pragma once
 #include "OnCollisionListener.h"
+#include "EventManager.h"
+#include <unordered_map>
+#include "Logger.h"
 #include <memory>
 
 class Collidable {
 	bool isCollisionEnabled;
+
+	std::unordered_map<Collidable*, bool> collisionMap;
+
 	std::unique_ptr<OnCollisionListener> collisionListener;
 
 protected:
@@ -15,16 +21,29 @@ public:
 	virtual bool collides(Collidable* object) const = 0;
 
 	// Uses template pattern to separate implementation details.
-	virtual bool collideWith(Collidable* object) const {
-		if (isCollisionEnabled && object->isCollisionEnabled && collides(object))
+	virtual bool collideWith(Collidable* object)
+	{
+		if (isCollisionEnabled && object->isCollisionEnabled)
 		{
-			// We have a listener attached.
-			if (collisionListener != nullptr)
+			const auto& collision = this->collides(object);
+
+			if (!collisionMap[object] && collision)
 			{
-				collisionListener->onCollision();
+				collisionMap[object] = true;
+
+				if (collisionListener != nullptr)
+				{
+					collisionListener->onCollision();
+				}
+
+				return true;
 			}
-			return true;
+			else if (!collision)
+			{
+				collisionMap[object] = false;
+			}
 		}
+
 		return false;
 	}
 

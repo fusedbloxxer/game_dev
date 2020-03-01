@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eventManager>
+  <events>
+    <event type = "EVENT_MOVE">
+      <triggers>
+        <trigger>MOVE_UP</trigger>
+        <trigger>MOVE_DOWN</trigger>
+        <trigger>MOVE_LEFT</trigger>
+        <trigger>MOVE_RIGHT</trigger>
+      </triggers>
+      <actions>
+        <action type="sound" loop = "off" overlap = "false">
+          <sound>44</sound>
+          <sound>45</sound>
+          <sound>46</sound>
+          <sound>47</sound>
+        </action>
+      </actions>
+    </event>
+
+    <event type = "EVENT_COLLISION">
+      <triggers>
+        <trigger>OBJECT_COLLISION</trigger>
+      </triggers>
+      <actions>
+        <action type = "sound" loop = "off" overlap = "false">
+          <sound>48</sound>
+          <sound>49</sound>
+          <sound>50</sound>
+          <sound>51</sound>
+        </action>
+      </actions>
+    </event>
+
+    <event type = "EVENT_PASSIVE">
+      <triggers>
+        <trigger>MAIN_AREA_BACKGROUND</trigger>
+      </triggers>
+      <actions>
+        <action type = "sound" loop = "on" overlap = "false">
+          <sound>40</sound>
+          <sound>33</sound>
+          <sound>16</sound>
+        </action>
+      </actions>
+    </event>
+
+    <event type = "EVENT_CAMERA_COLLISION">
+      <triggers>
+        <trigger>OBJECT_COLLISION</trigger>
+      </triggers>
+      <actions>
+        <action type = "sound" loop = "off" overlap = "false">
+          <sound>48</sound>
+          <sound>49</sound>
+          <sound>50</sound>
+          <sound>51</sound>
+        </action>
+        <action type = "sound" loop = "off" overlap = "false">
+          <sound>52</sound>
+          <sound>53</sound>
+          <sound>54</sound>
+          <sound>55</sound>
+          <sound>56</sound>
+          <sound>57</sound>
+        </action>
+      </actions>
+    </event>
+  </events>
+</eventManager>

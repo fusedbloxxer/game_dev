@@ -45,7 +45,12 @@ std::shared_ptr<Shader> RapidSceneAdapter::getAxis() const
 
 GLint RapidSceneAdapter::getActiveCameraId() const
 {
-	auto activeCamera = root->first_node("activeCamera"); if (!activeCamera) { throw std::runtime_error{ "No activeCamera was detected for in sceneManager." }; }
+	const auto& cameras = root->first_node("cameras");
+	if (!cameras) { throw std::runtime_error{ "No cameras tag was detected for in sceneManager." }; }
+	
+	const auto& activeCamera = cameras->first_node("activeCamera");
+	if (!activeCamera) { throw std::runtime_error{ "No activeCamera was detected for in sceneManager." }; }
+	
 	return atoi(activeCamera->value());
 }
 
@@ -272,10 +277,10 @@ std::vector<std::shared_ptr<SceneObject>> RapidSceneAdapter::getSceneObjects(con
 	for (auto object = objects->first_node("object"); object; object = object->next_sibling())
 	{
 		auto cbb = object->first_node("collisionBoxColor");
-		
+
 		const auto& collisionBoxColor = cbb != nullptr ? checkAndLoadVector(object->first_node("collisionBoxColor"), "r", "g", "b")
 			: SceneObject::getDefaultCollisionBoxColor();
-		
+
 		auto shader = object->first_node("shader"); if (!shader) { throw std::runtime_error{ "Object doesn't have a shader in sceneManager." }; }
 		auto name = object->first_node("name"); if (!name) { throw std::runtime_error{ "Object doesn't have a name in sceneManager." }; }
 		auto type = object->first_node("type"); if (!type) { throw std::runtime_error{ "Object doesn't have a type in sceneManager." }; }
@@ -391,9 +396,9 @@ std::vector<std::shared_ptr<Light>> RapidSceneAdapter::getLights() const
 			auto type = light->first_node("type"); if (!type) { throw std::runtime_error{ "Light doesn't have a type." }; }
 			auto specPower = light->first_node("specPower");  if (!specPower) { throw std::runtime_error{ "Light doesn't specify a specPower." }; }
 
-			if ((strcmp(type->value(), "spotlight") == 0) && !asObjId) 
+			if ((strcmp(type->value(), "spotlight") == 0) && !asObjId)
 			{
-				throw std::runtime_error("SpotLight/PointLight doesn't have an associated obj id."); 
+				throw std::runtime_error("SpotLight/PointLight doesn't have an associated obj id.");
 			}
 
 			// Check if id doesn't already exist.

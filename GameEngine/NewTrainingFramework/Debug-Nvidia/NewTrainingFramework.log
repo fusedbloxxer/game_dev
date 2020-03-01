@@ -1,5 +1,32 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(452,5): warning MSB8028: The intermediate directory (Debug-Nvidia\) contains files shared from another project (GameEngine.vcxproj, NewTrainingFramework.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  ResourceManager.cpp
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4521:  'Matrix': multiple copy constructors specified
-C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\Utilities\Math.h(184,1): warning C4522:  'Matrix': multiple assignment operators specified
-  NewTrainingFramework.vcxproj -> C:\Users\AnonymousClass\WorkFolder\GIT\game_dev\GameEngine\\BIN-Nvidia\GameEngine.exe
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(459,5): warning MSB8028: The intermediate directory (Debug-Nvidia\) contains files shared from another project (GameEngine.vcxproj, NewTrainingFramework.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Camera.cpp
+  CameraBuilder.cpp
+  CameraCollisionListener.cpp
+  CircleTrajectory.cpp
+  FireObject.cpp
+  FireObjectBuilder.cpp
+  GameEngine.cpp
+  LineTrajectory.cpp
+  NormalLight.cpp
+  RapidSceneAdapter.cpp
+  SceneManager.cpp
+D:\Git\game_dev\GameEngine\NewTrainingFramework\SceneManager.cpp(117,21): warning C4018: '<': signed/unsigned mismatch
+D:\Git\game_dev\GameEngine\NewTrainingFramework\SceneManager.cpp(119,26): warning C4018: '<': signed/unsigned mismatch
+  SceneObject.cpp
+D:\Git\game_dev\GameEngine\NewTrainingFramework\SceneObject.cpp(169,30): warning C4018: '<': signed/unsigned mismatch
+D:\Git\game_dev\GameEngine\NewTrainingFramework\SceneObject.cpp(177,81): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
+  SceneObjectBuilder.cpp
+  SceneObjectBuilderFactory.cpp
+  SceneObjectCollisionListener.cpp
+  SkyboxObject.cpp
+  SkyboxObjectBuilder.cpp
+  SpotLight.cpp
+  TerrainObject.cpp
+  TerrainObjectBuilder.cpp
+  Generating Code...
+  Compiling...
+  Trajectory.cpp
+  TrajectoryFactory.cpp
+  Generating Code...
+Action.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+  NewTrainingFramework.vcxproj -> D:\Git\game_dev\GameEngine\\BIN-Nvidia\GameEngine.exe

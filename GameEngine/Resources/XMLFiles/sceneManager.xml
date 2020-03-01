@@ -3,8 +3,7 @@
   <gameName>FusedBloxxer's Game Engine</gameName>
 
   <defaultScreenSize>
-    <width>960</width>
-    <height>720</height>
+    <fullscreen/>
   </defaultScreenSize>
 
   <backgroundColor>
@@ -12,6 +11,20 @@
     <g>0.0</g>
     <b>0.0</b>
   </backgroundColor>
+
+  <axisShader id="7"/>
+
+  <fog>
+    <radius>
+      <r>3000</r>
+      <R>5000</R>
+    </radius>
+    <color>
+      <r>60</r>
+      <g>68</g>
+      <b>85</b>
+    </color>
+  </fog>
 
   <controls>
     <control>
@@ -69,6 +82,8 @@
   </controls>
 
   <cameras>
+    <activeCamera>1</activeCamera>
+
     <camera id="1">
       <type>firstPerson</type>
       <position>
@@ -191,24 +206,8 @@
     </camera>
   </cameras>
 
-  <activeCamera>1</activeCamera>
-
-  <axisShader id="7"/>
-
-  <fog>
-    <radius>
-      <r>3000</r>
-      <R>5000</R>
-    </radius>
-    <color>
-      <r>60</r>
-      <g>68</g>
-      <b>85</b>
-    </color>
-  </fog>
-
   <objects>
-    
+
     <defaultCollisionBoxColor>
       <r>1.0</r>
       <g>0.0</g>
@@ -742,18 +741,18 @@
       <trajectory type="line_loop" iteration-count="infinite" direction="normal" speed="500" rotationSpeed="400">
         <points>
           <point>
-            <x>-800.0</x>
-            <y>700.0</y>
+            <x>-1600.0</x>
+            <y>1400.0</y>
             <z>-400.0</z>
           </point>
           <point>
-            <x>-800.0</x>
-            <y>1250.0</y>
+            <x>-3000.0</x>
+            <y>2000.0</y>
             <z>-400.0</z>
           </point>
           <point>
-            <x>-1250.0</x>
-            <y>900.0</y>
+            <x>-20123.0</x>
+            <y>1300.0</y>
             <z>-400.0</z>
           </point>
         </points>
@@ -920,9 +919,9 @@
         <b>1.0</b>
       </color>
       <position>
-        <x>-3250.0</x>
-        <y>250.0</y>
-        <z>500.0</z>
+        <x>-3000.0</x>
+        <y>1500.0</y>
+        <z>250.0</z>
       </position>
       <rotation>
         <x>0</x>
@@ -1037,5 +1036,4 @@
       <type>spotlight</type>
     </light>
   </lights>
-
 </sceneManager>

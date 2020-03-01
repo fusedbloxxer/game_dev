@@ -107,9 +107,19 @@ void SceneManager::update()
 		o->update();
 	}
 
+	// Check if the camera collides with the objects
 	for (const auto& object : sceneObjects)
 	{
 		camera->collideWith(object.get());
+	}
+
+	// Check if the object collides with something else
+	for (auto i = 0; i < sceneObjects.size() - 1; ++i)
+	{
+		for (auto j = i + 1; j < sceneObjects.size(); ++j)
+		{
+			sceneObjects[i]->collideWith(sceneObjects[j].get());
+		}
 	}
 }
 
@@ -119,12 +129,10 @@ void SceneManager::freeResources()
 	pressed.clear();
 	cameraMap.clear();
 	sceneObjects.clear();
+	holdsResources = false;
 }
 
-SceneManager::~SceneManager()
-{
-	freeResources();
-}
+SceneManager::~SceneManager() = default;
 
 void SceneManager::pressKey(GLubyte key, GLboolean isPressed)
 {

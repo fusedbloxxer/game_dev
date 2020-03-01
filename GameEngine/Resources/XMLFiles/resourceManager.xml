@@ -298,6 +298,23 @@
       <sound id = "38">Ff_tech_square_intro.wav</sound>
       <sound id = "39">Ff_toxic_race.wav</sound>
       <sound id = "40">Ff_woods.wav</sound>
+      <sound id = "41">frying_pan_hit.wav</sound>
+      <sound id = "42">click_x.wav</sound>
+      <sound id = "43">short_walk_concrete.wav</sound>
+      <sound id = "44">grass_walk_1.wav</sound>
+      <sound id = "45">grass_walk_2.wav</sound>
+      <sound id = "46">grass_walk_3.wav</sound>
+      <sound id = "47">grass_walk_4.wav</sound>
+      <sound id = "48">collision_1.wav</sound>
+      <sound id = "49">collision_2.flac</sound>
+      <sound id = "50">collision_3.wav</sound>
+      <sound id = "51">collision_4.wav</sound>
+      <sound id = "52">ouch_1.wav</sound>
+      <sound id = "53">ouch_2.wav</sound>
+      <sound id = "54">ouch_3.wav</sound>
+      <sound id = "55">ouch_4.mp3</sound>
+      <sound id = "56">ouch_5.mp3</sound>
+      <sound id = "57">ouch_6.wav</sound>
     </folder>
   </sounds>
 </resourceManager>

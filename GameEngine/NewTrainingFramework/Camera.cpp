@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "CameraCollisionListener.h"
 #include "Controls.h"
 #include "Camera.h"
 #include <iostream>
@@ -28,7 +29,7 @@ const char* Camera::ttoa(const Type& type)
 
 Camera::Camera(GLfloat width, GLfloat height, GLint id, const Vector3& position, const Vector3& target, const Vector3& up, GLfloat moveSpeed, GLfloat rotateSpeed, GLfloat nearP, GLfloat farP, GLfloat fov, GLfloat deltaTime, Type type)
 	:width{ width }, height{ height }, id{ id }, target{ target }, position{ position }, up{ up }, moveSpeed{ moveSpeed }, rotateSpeed{ rotateSpeed }, nearP{ nearP }, farP{ farP }, fov{ fov }, deltaTime{ deltaTime }, type{ type },
-	perspModified{ true }
+	perspModified{ true }, Collidable{ true, new CameraCollisionListener() }
 {
 	refreshAxis();
 }
@@ -246,9 +247,11 @@ void Camera::execute(Controls::Type key)
 	switch (key)
 	{
 	case Controls::Type::MOVE_CAMERA_POSITIVE_X:
+		EventManager::getInstance()->event(Event::Type::EVENT_MOVE)->trigger(Trigger::Type::MOVE_LEFT);
 		this->moveOx(1);
 		break;
 	case Controls::Type::MOVE_CAMERA_NEGATIVE_X:
+		EventManager::getInstance()->event(Event::Type::EVENT_MOVE)->trigger(Trigger::Type::MOVE_RIGHT);
 		this->moveOx(-1);
 		break;
 	case Controls::Type::MOVE_CAMERA_POSITIVE_Y:
@@ -258,9 +261,11 @@ void Camera::execute(Controls::Type key)
 		this->moveOy(-1);
 		break;
 	case Controls::Type::MOVE_CAMERA_POSITIVE_Z:
+		EventManager::getInstance()->event(Event::Type::EVENT_MOVE)->trigger(Trigger::Type::MOVE_UP);
 		this->moveOz(-1);
 		break;
 	case Controls::Type::MOVE_CAMERA_NEGATIVE_Z:
+		EventManager::getInstance()->event(Event::Type::EVENT_MOVE)->trigger(Trigger::Type::MOVE_DOWN);
 		this->moveOz(1);
 		break;
 	case Controls::Type::ROTATE_CAMERA_POSITIVE_X:
@@ -328,9 +333,13 @@ bool Camera::collides(Collidable* object) const
 			minCoordsOb.x <= position.x && minCoordsOb.y <= position.y && minCoordsOb.z <= position.z;
 		
 #ifndef NDEBUG
-		if (result) { Logger::v("Camera with id " + std::to_string(id) + " collided with " + sceneObject->getName()); }
+		if (result) 
+		{ 
+			Logger::v("Camera with id " + std::to_string(id) + " collided with " + sceneObject->getName()); 
+		}
 #endif
 
+		return result;
 	}
 	return false;
 }

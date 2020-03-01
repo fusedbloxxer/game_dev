@@ -1,16 +1,17 @@
 #include "stdafx.h"
-#include "SceneManager.h"
-#include "VertexNfg.h"
-#include "AxisResource.h"
-#include <algorithm>
+#include "SceneObjectCollisionListener.h"
 #include "DirectionalLight.h"
+#include "SceneManager.h"
+#include "AxisResource.h"
 #include "SpotLight.h"
+#include "VertexNfg.h"
+#include <algorithm>
 
 SceneObject::SceneObject(GLint id)
 	:SceneObject{ id, Type::NORMAL } {}
 
 SceneObject::SceneObject(GLint id, Type type)
-	: Collidable{ true }, id{ id }, name{}, model{ nullptr }, shader{ nullptr }, textures{}, wiredFormat{ false }, type{ type }, modified{ false }, followingCamera{}, offset{}, reflection{ false } {}
+	: Collidable{ true, new SceneObjectCollisionListener() }, id{ id }, name{}, model{ nullptr }, shader{ nullptr }, textures{}, wiredFormat{ false }, type{ type }, modified{ false }, followingCamera{}, offset{}, reflection{ false } {}
 
 void SceneObject::draw()
 {
@@ -487,7 +488,7 @@ bool SceneObject::collides(Collidable* object) const
 #ifndef NDEBUG
 		if (result) { Logger::v(this->name + " collided with " + sceneObject->name); }
 #endif
-
+		return result;
 	}
 	return false;
 }
@@ -525,15 +526,6 @@ void SceneObject::update()
 	collisionBox = collisionBox * aux.SetRotationY(rotation.y);
 	collisionBox = collisionBox * aux.SetRotationZ(rotation.z);
 	model->updateCollisionBox(collisionBox);
-
-	// Check if the object collides with something else
-	for (const auto& object : SceneManager::getInstance()->getSceneObjects())
-	{
-		if (this != object.get())
-		{
-			this->collideWith(object.get());
-		}
-	}
 }
 
 SceneObject::~SceneObject() = default;

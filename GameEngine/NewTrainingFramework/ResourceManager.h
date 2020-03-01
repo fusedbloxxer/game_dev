@@ -1,6 +1,7 @@
 #pragma once
 #include "ResourceAdapter.h"
 #include <unordered_map>
+#include "Releaser.h"
 #include "Texture.h"
 #include "Shader.h"
 #include "Model.h"
@@ -8,7 +9,7 @@
 #include <vector>
 #include <memory>
 
-class ResourceManager final
+class ResourceManager final : public Releaser
 {
 	// Private Constructor.
 	ResourceManager();
@@ -42,11 +43,14 @@ public:
 	// Load model with collision box color being specified
 	std::shared_ptr<Model> load(GLint id, const Vector3& collisionBoxColor);
 
+	// Load sound with specific properties
+	std::shared_ptr<Sound> load(GLint id, const FMOD_MODE loopMode, const bool isOverlapping);
+
 	// Get Singleton Instance
 	static ResourceManager* getInstance();
 
 	// Destructor
-	~ResourceManager();
+	virtual ~ResourceManager();
 
 private:
 	// Load helper

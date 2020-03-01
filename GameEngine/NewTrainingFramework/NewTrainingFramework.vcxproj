@@ -164,14 +164,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
     <ClCompile Include="AmbientLight.cpp" />
     <ClCompile Include="AxisModel.cpp" />
     <ClCompile Include="AxisResource.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraBuilder.cpp" />
+    <ClCompile Include="CameraCollisionListener.cpp" />
     <ClCompile Include="CircleTrajectory.cpp" />
     <ClCompile Include="Controls.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventAdapter.cpp" />
+    <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FireObject.cpp" />
     <ClCompile Include="FireObjectBuilder.cpp" />
     <ClCompile Include="Fog.cpp" />
@@ -186,6 +191,7 @@
     <ClCompile Include="NormalLight.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Rapid.cpp" />
+    <ClCompile Include="RapidEventAdapter.cpp" />
     <ClCompile Include="RapidResourceAdapter.cpp" />
     <ClCompile Include="RapidSceneAdapter.cpp" />
     <ClCompile Include="Resource.cpp" />
@@ -194,11 +200,13 @@
     <ClCompile Include="SceneObject.cpp" />
     <ClCompile Include="SceneObjectBuilder.cpp" />
     <ClCompile Include="SceneObjectBuilderFactory.cpp" />
+    <ClCompile Include="SceneObjectCollisionListener.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderResource.cpp" />
     <ClCompile Include="SkyboxObject.cpp" />
     <ClCompile Include="SkyboxObjectBuilder.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SoundAction.cpp" />
     <ClCompile Include="SoundResource.cpp" />
     <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -213,20 +221,26 @@
     <ClCompile Include="TextureResource.cpp" />
     <ClCompile Include="Trajectory.cpp" />
     <ClCompile Include="TrajectoryFactory.cpp" />
+    <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="VertexAxis.cpp" />
     <ClCompile Include="Vertex_NFG.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
     <ClInclude Include="AmbientLight.h" />
     <ClInclude Include="AxisModel.h" />
     <ClInclude Include="AxisResource.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraBuilder.h" />
+    <ClInclude Include="CameraCollisionListener.h" />
     <ClInclude Include="CircleTrajectory.h" />
     <ClInclude Include="Collidable.h" />
     <ClInclude Include="Controls.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="Drawable.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="EventAdapter.h" />
+    <ClInclude Include="EventManager.h" />
     <ClInclude Include="FireObject.h" />
     <ClInclude Include="FireObjectBuilder.h" />
     <ClInclude Include="Fog.h" />
@@ -242,9 +256,11 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelResource.h" />
     <ClInclude Include="NormalLight.h" />
+    <ClInclude Include="ObjectConverter.h" />
     <ClInclude Include="OnCollisionListener.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="Rapid.h" />
+    <ClInclude Include="RapidEventAdapter.h" />
     <ClInclude Include="RapidResourceAdapter.h" />
     <ClInclude Include="RapidSceneAdapter.h" />
     <ClInclude Include="Releaser.h" />
@@ -256,12 +272,14 @@
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="SceneObjectBuilder.h" />
     <ClInclude Include="SceneObjectBuilderFactory.h" />
+    <ClInclude Include="SceneObjectCollisionListener.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Fields.h" />
     <ClInclude Include="ShaderResource.h" />
     <ClInclude Include="SkyboxObject.h" />
     <ClInclude Include="SkyboxObjectBuilder.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="SoundAction.h" />
     <ClInclude Include="SoundResource.h" />
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="stdafx.h" />
@@ -272,6 +290,8 @@
     <ClInclude Include="TextureResource.h" />
     <ClInclude Include="Trajectory.h" />
     <ClInclude Include="TrajectoryFactory.h" />
+    <ClInclude Include="Trigger.h" />
+    <ClInclude Include="Updatable.h" />
     <ClInclude Include="UTools.h" />
     <ClInclude Include="VertexAxis.h" />
     <ClInclude Include="VertexNfg.h" />
@@ -316,6 +336,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="..\Resources\XMLFiles\eventManager.xml" />
     <Xml Include="..\Resources\XMLFiles\resourceManager.xml" />
     <Xml Include="..\Resources\XMLFiles\sceneManager.xml" />
   </ItemGroup>

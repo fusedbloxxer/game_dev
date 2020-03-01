@@ -2,9 +2,13 @@
 #include "stdafx.h"
 #include "RapidResourceAdapter.h"
 #include "RapidSceneAdapter.h"
+#include "RapidEventAdapter.h"
 #include "ResourceManager.h"
+#include "EventManager.h"
 #include "SceneManager.h"
 #include "Logger.h"
+#include <future>
+
 int init(ESContext* esContext)
 {
 	glEnable(GL_BLEND);
@@ -15,6 +19,8 @@ int init(ESContext* esContext)
 
 	ResourceManager::getInstance()->init(new RapidResourceAdapter("..\\Resources\\XMLFiles\\resourceManager.xml"));
 	SceneManager::getInstance()->init(esContext, new RapidSceneAdapter("..\\Resources\\XMLFiles\\sceneManager.xml"));
+	EventManager::getInstance()->init(new RapidEventAdapter("..\\Resources\\XMLFiles\\eventManager.xml"));
+	EventManager::getInstance()->event(Event::Type::EVENT_PASSIVE)->trigger(Trigger::Type::MAIN_AREA_BACKGROUND);
 
 	return 0;
 }
@@ -52,25 +58,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	Logger::setMode(15);
 
-	FMOD_RESULT result;
-
-	FMOD::System* system = nullptr;
-
-	// Create the sound.
-	FMOD::Sound* sound1 = nullptr, *sound2 = nullptr;
-
-	if (FMOD::System_Create(&system) != FMOD_OK)
-	{
-
-	}
-	else
-	{
-		// Initialize FMOD.
-		result = system->init(36, FMOD_INIT_NORMAL, NULL);
-		system->createSound("../Resources/Packet/SoundEffects/Ff_woods.wav", FMOD_LOOP_NORMAL, 0, &sound1);
-		system->playSound(sound1, 0, false, 0);
-	}
-
 	try
 	{
 		ESContext esContext;
@@ -83,7 +70,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		esRegisterDrawFunc(&esContext, Draw);
 		esRegisterUpdateFunc(&esContext, Update);
 		esRegisterKeyFunc(&esContext, Key);
-
 
 		esMainLoop(&esContext);
 	}
@@ -102,13 +88,9 @@ int _tmain(int argc, _TCHAR* argv[])
 		Logger::wtf("An exception took place:");
 	}
 
+	delete EventManager::getInstance();
 	delete SceneManager::getInstance();
 	delete ResourceManager::getInstance();
-
-	// Clean up.
-	sound1->release();
-	sound2->release();
-	system->release();
 
 	printf("Press any key...\n");
 	return 0;
