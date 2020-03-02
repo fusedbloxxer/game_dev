@@ -28,6 +28,9 @@ private:
 	Matrix viewMatrix, worldMatrix, projectionMatrix;
 	GLfloat moveSpeed, rotateSpeed, nearP, farP, fov, deltaTime;
 
+	GLfloat triggerDistance = 500.0f; // !TODO; read from file
+	GLfloat currentDistance = 0.0f;
+
 	friend std::ostream& operator<<(std::ostream& os, const Camera& camera);
 
 public:
@@ -90,6 +93,8 @@ public:
 	GLint getCameraId() const;
 
 private:
+	void triggerEvent(GLfloat& current, const GLfloat step, const Event::Type event, const Trigger::Type trigger);
+
 	void refreshAxis();
 
 	// Inherited via Collidable

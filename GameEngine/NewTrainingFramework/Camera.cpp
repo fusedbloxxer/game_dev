@@ -34,12 +34,34 @@ Camera::Camera(GLfloat width, GLfloat height, GLint id, const Vector3& position,
 	refreshAxis();
 }
 
+inline void Camera::triggerEvent(GLfloat& current, const GLfloat step, const Event::Type event, const Trigger::Type trigger)
+{
+	if (current + step >= triggerDistance)
+	{
+		current = current + step - triggerDistance;
+		EventManager::getInstance()->event(event)->trigger(trigger);
+	}
+	else
+	{
+		current += step;
+	}
+}
+
 void Camera::moveOz(GLfloat directie)
 {
 	Vector3 vectorDeplasare = zAxis * directie * moveSpeed * deltaTime;
 	position += vectorDeplasare;
 	target += vectorDeplasare;
 	refreshAxis();
+
+	if (directie < 0)
+	{
+		triggerEvent(currentDistance, vectorDeplasare.Length(), Event::Type::EVENT_MOVE, Trigger::Type::MOVE_UP);
+	}
+	else if (directie > 0)
+	{
+		triggerEvent(currentDistance, vectorDeplasare.Length(), Event::Type::EVENT_MOVE, Trigger::Type::MOVE_DOWN);
+	}
 }
 
 void Camera::moveOx(GLfloat directie)
@@ -48,6 +70,15 @@ void Camera::moveOx(GLfloat directie)
 	position += vectorDeplasare;
 	target += vectorDeplasare;
 	refreshAxis();
+
+	if (directie < 0)
+	{
+		triggerEvent(currentDistance, vectorDeplasare.Length(), Event::Type::EVENT_MOVE, Trigger::Type::MOVE_RIGHT);
+	}
+	else if (directie > 0)
+	{
+		triggerEvent(currentDistance, vectorDeplasare.Length(), Event::Type::EVENT_MOVE, Trigger::Type::MOVE_LEFT);
+	}
 }
 
 void Camera::moveOy(GLfloat directie)
@@ -247,11 +278,9 @@ void Camera::execute(Controls::Type key)
 	switch (key)
 	{
 	case Controls::Type::MOVE_CAMERA_POSITIVE_X:
-		EventManager::getInstance()->event(Event::Type::EVENT_MOVE)->trigger(Trigger::Type::MOVE_LEFT);
 		this->moveOx(1);
 		break;
 	case Controls::Type::MOVE_CAMERA_NEGATIVE_X:
-		EventManager::getInstance()->event(Event::Type::EVENT_MOVE)->trigger(Trigger::Type::MOVE_RIGHT);
 		this->moveOx(-1);
 		break;
 	case Controls::Type::MOVE_CAMERA_POSITIVE_Y:
@@ -261,11 +290,9 @@ void Camera::execute(Controls::Type key)
 		this->moveOy(-1);
 		break;
 	case Controls::Type::MOVE_CAMERA_POSITIVE_Z:
-		EventManager::getInstance()->event(Event::Type::EVENT_MOVE)->trigger(Trigger::Type::MOVE_UP);
 		this->moveOz(-1);
 		break;
 	case Controls::Type::MOVE_CAMERA_NEGATIVE_Z:
-		EventManager::getInstance()->event(Event::Type::EVENT_MOVE)->trigger(Trigger::Type::MOVE_DOWN);
 		this->moveOz(1);
 		break;
 	case Controls::Type::ROTATE_CAMERA_POSITIVE_X:
@@ -331,18 +358,18 @@ bool Camera::collides(Collidable* object) const
 		const auto& result =  // Camera Position >= min(ob1) && Camera Position <= max(ob1)
 			maxCoordsOb.x >= position.x && maxCoordsOb.y >= position.y && maxCoordsOb.z >= position.z &&
 			minCoordsOb.x <= position.x && minCoordsOb.y <= position.y && minCoordsOb.z <= position.z;
-		
+
 #ifndef NDEBUG
-		if (result) 
-		{ 
-			Logger::v("Camera with id " + std::to_string(id) + " collided with " + sceneObject->getName()); 
-		}
+		if (result)
+		{
+			Logger::v("Camera with id " + std::to_string(id) + " collided with " + sceneObject->getName());
+	}
 #endif
 
 		return result;
-	}
-	return false;
 }
+	return false;
+	}
 
 std::ostream& operator<<(std::ostream& os, const Camera& camera)
 {

@@ -39,8 +39,6 @@
       <actions>
         <action type = "sound" loop = "on" overlap = "false">
           <sound>40</sound>
-          <sound>33</sound>
-          <sound>16</sound>
         </action>
       </actions>
     </event>
