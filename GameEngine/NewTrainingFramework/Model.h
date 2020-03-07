@@ -46,7 +46,7 @@ class Model : public Loadable
 
 	// Collision Box Color
 	Vector3 collisionBoxColor;
-	
+
 	// Contains the maximum x, y, z values on the upper row and the min values on the lower row
 	GLfloat m[2][3];
 
@@ -118,9 +118,9 @@ public:
 
 public:
 	template<typename VertexType>
-	void loadCollisionBox(const std::vector<VertexType>& vertices);
+	void loadCollisionBox(const std::vector<VertexType>& vertices, GLfloat(&m)[2][3]);
 
-	void updateCollisionBox(const Matrix& worldMatrix);
+	void updateCollisionBox(const Matrix& worldMatrix, GLfloat(&m)[2][3]);
 
 	void updateNormals(const Vector3& scale);
 
@@ -163,7 +163,7 @@ void Model::load(const std::vector<VertexType>& vertices, const std::vector<GLus
 			[&](const auto& vertex) { this->vertices.push_back(vertex.pos); this->normals.push_back(vertex.norm); });
 
 		// Load AABBs 
-		loadCollisionBox<VertexType>(vertices);
+		loadCollisionBox<VertexType>(vertices, m);
 
 		// Load axis 
 		loadAxisModel<VertexType>(vertices);

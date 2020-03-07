@@ -3,7 +3,8 @@
   <gameName>FusedBloxxer's Game Engine</gameName>
 
   <defaultScreenSize>
-    <fullscreen/>
+    <width>720</width>
+    <height>640</height>
   </defaultScreenSize>
 
   <backgroundColor>
@@ -738,22 +739,32 @@
         <y>5.0</y>
         <z>5.0</z>
       </scale>
-      <trajectory type="line_loop" iteration-count="infinite" direction="normal" speed="500" rotationSpeed="400">
+      <trajectory type="line_loop" iteration-count="infinite" direction="normal" speed="325" rotationSpeed="100">
         <points>
           <point>
-            <x>-1600.0</x>
-            <y>1400.0</y>
-            <z>-400.0</z>
+            <x>-250.0</x>
+            <y>900.0</y>
+            <z>1000.0</z>
           </point>
           <point>
-            <x>-3000.0</x>
-            <y>2000.0</y>
-            <z>-400.0</z>
+            <x>-750.0</x>
+            <y>350.0</y>
+            <z>1000.0</z>
           </point>
           <point>
-            <x>-20123.0</x>
-            <y>1300.0</y>
-            <z>-400.0</z>
+            <x>-1050.0</x>
+            <y>700.0</y>
+            <z>1000.0</z>
+          </point>
+          <point>
+            <x>-1300.0</x>
+            <y>1250.0</y>
+            <z>1000.0</z>
+          </point>
+          <point>
+            <x>-1550.0</x>
+            <y>900.0</y>
+            <z>1000.0</z>
           </point>
         </points>
       </trajectory>
@@ -766,7 +777,6 @@
       <name>Train</name>
       <kdif>1.0</kdif>
       <kspec>1.0</kspec>
-      <normalMap>25</normalMap>
       <textures>
         <texture id ="24"/>
       </textures>
@@ -854,9 +864,9 @@
         <z>0</z>
       </rotation>
       <scale>
-        <x>5.0</x>
-        <y>5.0</y>
-        <z>5.0</z>
+        <x>2.5</x>
+        <y>2.5</y>
+        <z>2.5</z>
       </scale>
     </object>
 
@@ -891,7 +901,7 @@
         <y>3.0</y>
         <z>3.0</z>
       </scale>
-      <trajectory type="circle" iteration-count="infinite" speed="75">
+      <trajectory type="circle" iteration-count="infinite" speed="10">
         <center>
           <x>-3000.0</x>
           <y>250.0</y>

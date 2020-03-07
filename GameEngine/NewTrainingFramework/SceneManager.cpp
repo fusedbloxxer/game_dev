@@ -116,9 +116,12 @@ void SceneManager::update()
 	// Check if the object collides with something else
 	for (auto i = 0; i < sceneObjects.size() - 1; ++i)
 	{
-		for (auto j = i + 1; j < sceneObjects.size(); ++j)
+		if (sceneObjects[i]->isCollisionActivated())
 		{
-			sceneObjects[i]->collideWith(sceneObjects[j].get());
+			for (auto j = i + 1; j < sceneObjects.size(); ++j)
+			{
+				sceneObjects[i]->collideWith(sceneObjects[j].get());
+			}
 		}
 	}
 }
@@ -217,7 +220,7 @@ Vector3& SceneManager::getBackgroundColor()
 	return backgroundColor;
 }
 
-void SceneManager::setBackgroundColor(Vector3& backColor)
+void SceneManager::setBackgroundColor(Vector3 & backColor)
 {
 	this->backgroundColor = backColor;
 }
@@ -236,7 +239,7 @@ std::shared_ptr<AmbientLight> SceneManager::getAmbientalLight()
 	return ambientalLight;
 }
 
-void SceneManager::setAmbientalLight(const std::shared_ptr<AmbientLight>& ambientalLight)
+void SceneManager::setAmbientalLight(const std::shared_ptr<AmbientLight> & ambientalLight)
 {
 	this->ambientalLight = ambientalLight;
 }
@@ -246,7 +249,7 @@ const std::vector<std::shared_ptr<Light>>& SceneManager::getLights()
 	return lights;
 }
 
-void SceneManager::setLights(const std::vector<std::shared_ptr<Light>>& lights)
+void SceneManager::setLights(const std::vector<std::shared_ptr<Light>> & lights)
 {
 	this->lights = lights;
 }
@@ -256,7 +259,7 @@ std::unordered_map<Controls::Type, GLboolean>& SceneManager::getPressedButtons()
 	return pressed;
 }
 
-void SceneManager::setPressedButtons(std::unordered_map<Controls::Type, GLboolean>& pressed)
+void SceneManager::setPressedButtons(std::unordered_map<Controls::Type, GLboolean> & pressed)
 {
 	this->pressed = pressed;
 }
@@ -266,7 +269,7 @@ std::unordered_map<unsigned char, Controls::Type>& SceneManager::getControls()
 	return keyMap;
 }
 
-void SceneManager::setControls(std::unordered_map<unsigned char, Controls::Type>& controls)
+void SceneManager::setControls(std::unordered_map<unsigned char, Controls::Type> & controls)
 {
 	this->keyMap = controls;
 }
@@ -276,7 +279,7 @@ std::unordered_map<GLint, std::shared_ptr<Camera>>& SceneManager::getCameras()
 	return cameraMap;
 }
 
-void SceneManager::setCameras(std::unordered_map<GLint, std::shared_ptr<Camera>>& cameras)
+void SceneManager::setCameras(std::unordered_map<GLint, std::shared_ptr<Camera>> & cameras)
 {
 	this->cameraMap = cameras;
 }
@@ -286,7 +289,7 @@ std::vector<std::shared_ptr<SceneObject>>& SceneManager::getSceneObjects()
 	return sceneObjects;
 }
 
-void SceneManager::setSceneObjects(std::vector<std::shared_ptr<SceneObject>>& sceneObjects)
+void SceneManager::setSceneObjects(std::vector<std::shared_ptr<SceneObject>> & sceneObjects)
 {
 	this->sceneObjects = sceneObjects;
 }
@@ -296,7 +299,7 @@ ESContext* SceneManager::getESContext()
 	return esContext;
 }
 
-void SceneManager::setESContext(ESContext* esContext)
+void SceneManager::setESContext(ESContext * esContext)
 {
 	this->esContext = esContext;
 }
@@ -311,12 +314,12 @@ Fog SceneManager::getFog() const
 	return fog;
 }
 
-void SceneManager::setFog(const Fog& fog)
+void SceneManager::setFog(const Fog & fog)
 {
 	this->fog = fog;
 }
 
-std::ostream& operator<<(std::ostream& os, const SceneManager& sceneManager)
+std::ostream& operator<<(std::ostream & os, const SceneManager & sceneManager)
 {
 	os << "Game Name:\n\t" << sceneManager.gameName << '\n'
 		<< "\tDefault Screen Size: " << (sceneManager.fullscreen ? "FULLSCREEN" : "FALSE") << ", (" << sceneManager.width << ", " << sceneManager.height << ")\n"

@@ -6,13 +6,13 @@
 #include <memory>
 
 class Collidable {
-	bool isCollisionEnabled;
-
 	std::unordered_map<Collidable*, bool> collisionMap;
 
 	std::unique_ptr<OnCollisionListener> collisionListener;
 
 protected:
+	bool isCollisionEnabled;
+
 	Collidable(bool isCollisionEnabled = true, OnCollisionListener* collisionListener = nullptr)
 		: isCollisionEnabled{ isCollisionEnabled }, collisionListener{ collisionListener } {}
 
@@ -50,6 +50,16 @@ public:
 	// Attach a listener to execute it when a collision appears.
 	void addOnCollisionListener(OnCollisionListener* onCollisionListener) {
 		this->collisionListener = std::unique_ptr<OnCollisionListener>(onCollisionListener);
+	}
+
+	void setCollisionProperty(bool isEnabled)
+	{
+		this->isCollisionEnabled = isEnabled;
+	}
+
+	const bool isCollisionActivated() const
+	{
+		return isCollisionEnabled;
 	}
 
 	void enableCollision()

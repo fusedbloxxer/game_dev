@@ -1,5 +1,6 @@
 #pragma once
 #define NDEBUG
+#undef NDEBUG
 
 class OnCollisionListener
 {

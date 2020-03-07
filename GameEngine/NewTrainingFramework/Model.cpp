@@ -157,7 +157,7 @@ inline void Model::loadAxisModel(const std::vector<VertexType>& vertices)
 }
 
 template<typename VertexType>
-void Model::loadCollisionBox(const std::vector<VertexType>& vertices)
+void Model::loadCollisionBox(const std::vector<VertexType>& vertices, GLfloat(&m)[2][3])
 {
 	if (vertices.size() > 0)
 	{
@@ -246,9 +246,9 @@ void Model::loadCollisionBox(const std::vector<VertexType>& vertices)
 		else
 		{
 			// Store the vertices
-			for (const auto& v : aabb)
+			for (const auto& v : vertices)
 			{
-				this->AABBs.push_back({ v.pos, v.color });
+				this->AABBs.push_back({ v.pos, collisionBoxColor });
 			}
 
 			// Send box data
@@ -266,7 +266,7 @@ void Model::loadCollisionBox(const std::vector<VertexType>& vertices)
 	}
 }
 
-void Model::updateCollisionBox(const Matrix& worldMatrix)
+void Model::updateCollisionBox(const Matrix& worldMatrix, GLfloat (&m)[2][3])
 {
 	Vector4 auxiliary;
 	auto modifiedAABBs = AABBs;
@@ -285,7 +285,7 @@ void Model::updateCollisionBox(const Matrix& worldMatrix)
 		v.pos.z = auxiliary.z;
 	}
 
-	loadCollisionBox<VertexAxis>(modifiedAABBs);
+	loadCollisionBox<VertexAxis>(modifiedAABBs, m);
 }
 
 std::pair<std::vector<VertexNfg>, std::vector<GLushort>> Model::parseFile(const char* const filePath)

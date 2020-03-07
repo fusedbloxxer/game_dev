@@ -320,14 +320,19 @@ void SceneObject::callDrawFunctions()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-void SceneObject::drawCollisionBox()
+void SceneObject::updateCollisionBox()
 {
 	// Update collision boxes
 	Matrix aux, & collisionBox = Matrix().SetScale(scale);
 	collisionBox = collisionBox * aux.SetRotationX(rotation.x);
 	collisionBox = collisionBox * aux.SetRotationY(rotation.y);
 	collisionBox = collisionBox * aux.SetRotationZ(rotation.z);
-	model->updateCollisionBox(collisionBox);
+	model->updateCollisionBox(collisionBox, m);
+}
+
+void SceneObject::drawCollisionBox()
+{
+	updateCollisionBox();
 
 	// Use shader
 	glUseProgram(axisShader->getProgramId());
@@ -341,7 +346,7 @@ void SceneObject::drawCollisionBox()
 
 	if (axisShader->getFields().modelUniform != -1)
 	{
-		glUniformMatrix4fv(axisShader->getFields().modelUniform, 1, GL_FALSE, (float*)(aux.SetTranslation(position)).m);
+		glUniformMatrix4fv(axisShader->getFields().modelUniform, 1, GL_FALSE, (float*)(Matrix().SetTranslation(position)).m);
 	}
 
 	// Draw on screen
@@ -377,6 +382,8 @@ void SceneObject::drawAxis()
 
 void SceneObject::drawVertexNormals()
 {
+	model->updateNormals(scale);
+
 	// Use the program
 	glUseProgram(axisShader->getProgramId());
 
@@ -439,8 +446,8 @@ bool SceneObject::collides(Collidable* object) const
 		Vector4 auxiliaryVector{ 0.0f, 0.0f, 0.0f, 1.0f };
 
 		// Extract extreme points
-		const auto& localCoordsOb1 = this->model->getCollisionCoordinates();
-		const auto& localCoordsOb2 = sceneObject->model->getCollisionCoordinates();
+		const auto& localCoordsOb1 = this->m;
+		const auto& localCoordsOb2 = sceneObject->m;
 
 		// Compute model matrix for the first object
 		Matrix matrix; matrix.SetTranslation(const_cast<Vector3&>(position));
@@ -520,12 +527,11 @@ void SceneObject::update()
 		trajectory->move(this, camera->getDeltaTime());
 	}
 
-	// Update collision boxes
-	Matrix aux, & collisionBox = Matrix().SetScale(scale);
-	collisionBox = collisionBox * aux.SetRotationX(rotation.x);
-	collisionBox = collisionBox * aux.SetRotationY(rotation.y);
-	collisionBox = collisionBox * aux.SetRotationZ(rotation.z);
-	model->updateCollisionBox(collisionBox);
+	if (initCollisionBox || trajectory != nullptr)
+	{
+		initCollisionBox = false;
+		updateCollisionBox();
+	}
 }
 
 SceneObject::~SceneObject() = default;
@@ -622,7 +628,6 @@ Matrix& SceneObject::getModelMatrix()
 		tran = tran * modelMatrix.SetRotationZ(rotation.z);
 		tran = tran * modelMatrix.SetTranslation(position);
 		modelMatrix = tran;
-
 		modified = false;
 	}
 	return modelMatrix;
@@ -660,6 +665,7 @@ void SceneObject::setRotation(const Vector3& rotation)
 	this->rotation.x = static_cast<GLfloat>(TO_RAD(rotation.x));
 	this->rotation.y = static_cast<GLfloat>(TO_RAD(rotation.y));
 	this->rotation.z = static_cast<GLfloat>(TO_RAD(rotation.z));
+	
 	modified = true;
 }
 
@@ -775,4 +781,9 @@ const Vector3& SceneObject::getDefaultCollisionBoxColor()
 void SceneObject::setDefaultCollisionBoxColor(const Vector3& collisionBoxColor)
 {
 	SceneObject::defaultCollisionBoxColor = collisionBoxColor;
+}
+
+auto SceneObject::getCollisionCoordinates() const -> const GLfloat(&)[2][3]
+{
+	return this->m;
 }

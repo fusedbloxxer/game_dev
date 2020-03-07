@@ -80,9 +80,14 @@ protected:
 	// Light elements
 	GLfloat kdif = 1.0f, kspec = 1.0f;
 
+	// Contains the maximum x, y, z values on the upper row and the min values on the lower row
+	GLfloat m[2][3]; GLboolean initCollisionBox = true;
+
 	virtual void sendSpecificData(const Fields& fields);
 
 	virtual void callDrawFunctions();
+
+	void updateCollisionBox();
 
 	void drawVertexNormals();
 
@@ -141,6 +146,9 @@ public:
 
 	static const Vector3& getDefaultCollisionBoxColor();
 	static void setDefaultCollisionBoxColor(const Vector3& collisionBoxColor);
+
+	// Use trailing return type to send a reference to the matrix
+	auto getCollisionCoordinates() const -> const GLfloat(&)[2][3];
 
 	Vector3& getPosition();
 	void setPosition(const Vector3& position);

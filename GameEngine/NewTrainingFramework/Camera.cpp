@@ -334,7 +334,7 @@ bool Camera::collides(Collidable* object) const
 		Vector4 auxiliaryVector(0.0f, 0.0f, 0.0f, 1.0f);
 
 		// Extract extreme points
-		const auto& localCoordsOb = sceneObject->getModel()->getCollisionCoordinates();
+		const auto& localCoordsOb = sceneObject->getCollisionCoordinates();
 
 		// Compute model matrix for the first object
 		Matrix matrix; matrix.SetTranslation(sceneObject->getPosition());
