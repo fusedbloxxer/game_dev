@@ -236,8 +236,8 @@ void Model::loadCollisionBox(const std::vector<VertexType>& vertices, GLfloat(&m
 			glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(aabb), aabb);
 
 			// Send indices
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, collisionIboId);
-			glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, sizeof(order), order);
+			//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, collisionIboId);
+			//glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, sizeof(order), order);
 
 			// Close buffers
 			glBindBuffer(GL_ARRAY_BUFFER, 0);

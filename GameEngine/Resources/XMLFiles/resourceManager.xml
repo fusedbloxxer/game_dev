@@ -79,6 +79,10 @@
         <vs>FireShaderVS.vs</vs>
         <fs>FireShaderFS.fs</fs>
       </shader>
+      <shader id="9">
+        <vs>PostProcessingVS.vs</vs>
+        <fs>PostProcessingFS.fs</fs>
+      </shader>
     </folder>
   </shaders>
 

@@ -155,7 +155,7 @@ void ESUTIL_API esMainLoop ( ESContext *esContext )
 
 //  esRegisterDrawFunc()
 
-void ESUTIL_API esRegisterDrawFunc ( ESContext *esContext, void (ESCALLBACK *drawFunc) (ESContext* ) )
+void ESUTIL_API esRegisterDrawFunc ( ESContext *esContext, void (ESCALLBACK *drawFunc) (ESContext*) )
 {
    esContext->drawFunc = drawFunc;
 }

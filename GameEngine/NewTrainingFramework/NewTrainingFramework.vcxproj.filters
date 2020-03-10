@@ -337,7 +337,7 @@
       <Filter>Source Files\SceneManager\Camera</Filter>
     </ClCompile>
     <ClCompile Include="SceneObjectCollisionListener.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\SceneManager\Objects\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -548,6 +548,9 @@
     <ClInclude Include="SceneObjectCollisionListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Readme.doc" />
@@ -639,6 +642,12 @@
       <Filter>Resources\Shaders</Filter>
     </None>
     <None Include="..\Resources\Shaders\FireShaderVS.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\PostProcessingFS.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\PostProcessingVS.vs">
       <Filter>Resources\Shaders</Filter>
     </None>
   </ItemGroup>
